@@ -1,0 +1,279 @@
+/* Global Typography and Core Settings */
+:root {
+  --font-sans: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+
+  /* Theme color palette - Light Mode */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f7;
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --bg-navbar: rgba(255, 255, 255, 0.72);
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-muted: #86868b;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --grid-dot-color: rgba(0, 0, 0, 0.08);
+
+  /* Brand Accents */
+  --klein-blue: #002FA7;
+  --klein-blue-glow: rgba(0, 47, 167, 0.18);
+  --klein-blue-glow-hover: rgba(0, 47, 167, 0.35);
+
+  color-scheme: light dark;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-primary: #0B0B0C;
+  --bg-secondary: #161617;
+  --bg-card: rgba(20, 20, 22, 0.6);
+  --bg-navbar: rgba(11, 11, 12, 0.72);
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-muted: #86868b;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --grid-dot-color: rgba(255, 255, 255, 0.08);
+
+  --klein-blue-glow: rgba(0, 47, 167, 0.25);
+  --klein-blue-glow-hover: rgba(0, 47, 167, 0.45);
+}
+
+/* Base Document Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Static fallback grid for performance/mobile styling */
+.static-grid-bg {
+  background-image: radial-gradient(var(--grid-dot-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center center;
+}
+
+/* Glassmorphism utility */
+.glassmorphism {
+  background-color: var(--bg-navbar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.glassmorphism-card {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+/* Custom layout utilities */
+.container-custom {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* Apple-style typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.title-hero {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--klein-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #002FA7 0%, #0056B3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p.description {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-secondary);
+  line-height: 1.47;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  font-weight: 400;
+}
+
+/* Grid layout for featured cards */
+.grid-featured {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+.grid-col-4 {
+  grid-column: span 4;
+}
+
+.grid-col-6 {
+  grid-column: span 6;
+}
+
+.grid-col-12 {
+  grid-column: span 12;
+}
+
+@media (max-width: 1024px) {
+  .grid-col-4 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-col-4, .grid-col-6 {
+    grid-column: span 12;
+  }
+}
+
+/* Interactive Card Styles */
+.profabx-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+
+.profabx-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1.5px;
+  background: linear-gradient(to bottom, var(--border-color), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+.profabx-card:hover {
+  transform: scale(1.1);
+  border-color: var(--klein-blue);
+  box-shadow: 0 20px 40px var(--klein-blue-glow-hover), 
+              0 0 25px var(--klein-blue-glow);
+}
+
+.profabx-card:hover::before {
+  background: linear-gradient(135deg, var(--klein-blue) 0%, transparent 100%);
+}
+
+.profabx-card-media {
+  width: 100%;
+  height: 60%;
+  overflow: hidden;
+  position: relative;
+}
+
+.profabx-card-media img,
+.profabx-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profabx-card:hover .profabx-card-media img,
+.profabx-card:hover .profabx-card-media video {
+  transform: scale(1.08);
+}
+
+.profabx-card-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: var(--bg-card);
+  z-index: 1;
+}
+
+/* Elegant minimalist buttons */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--text-primary);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn-cta:hover {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--klein-blue);
+  box-shadow: 0 0 15px var(--klein-blue-glow);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  border-color: var(--text-muted);
+}
