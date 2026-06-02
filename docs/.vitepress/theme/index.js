@@ -1,58 +1,55 @@
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
-import { h, onMounted, nextTick } from 'vue'
+import { h, onMounted, nextTick, watch } from 'vue'
+import { useRoute } from 'vitepress'
 
 export default {
   extends: DefaultTheme,
   Layout() {
+    const route = useRoute()
     return h(DefaultTheme.Layout, null, {
-      // We can insert elements if needed
+      'nav-bar-title-after': () => {
+        const path = route.path
+        let suffix = ''
+        if (path.includes('/courses/fab-course/')) suffix = 'Fab 课程'
+        else if (path.includes('/courses/ai-basics/')) suffix = 'AI 基础应用'
+        else if (path.includes('/courses/mobile-robot/')) suffix = '移动机器人'
+        else if (path.includes('/courses/cmf/')) suffix = 'CMF 应用'
+        
+        if (!suffix) return null
+        
+        return h('span', {
+          style: {
+            fontSize: '0.9rem',
+            fontWeight: '600',
+            color: 'var(--vp-c-brand-1)',
+            marginLeft: '8px',
+            paddingLeft: '8px',
+            borderLeft: '1px solid var(--vp-c-border)',
+            display: 'inline-block',
+            verticalAlign: 'middle'
+          }
+        }, suffix)
+      }
     })
   },
   enhanceApp({ app, router, siteData }) {
     // Custom enhancements
   },
   setup() {
+    const route = useRoute()
     onMounted(() => {
-      // 1. Configure Hypothesis Client dynamic integration
-      window.hypothesisConfig = function () {
-        const token = localStorage.getItem('token');
-        const config = {
-          showSidebar: false,
-          theme: 'clean',
-          branding: {
-            appBackgroundColor: '#0B0B0C',
-            ctaBackgroundColor: '#002FA7',
-            ctaTextColor: '#ffffff',
-            selectionNoticeBorderColor: '#002FA7'
-          },
-          onLoginRequest: function() {
-            // Redirect to landing page to sign in, with redirect back URL
-            const currentUrl = window.location.href;
-            window.location.href = `/?login=1&redirect=${encodeURIComponent(currentUrl)}`;
-          }
-        };
-
-        if (token) {
-          // In a production setup, we would append the publisher grant token here:
-          // config.services = [{
-          //   authority: 'profabx.com',
-          //   grant_token: 'SIGNED_JWT_FROM_BACKEND'
-          // }];
-        }
-
-        return config;
-      };
-
-      // Load Hypothesis client script
-      const script = document.createElement('script');
-      script.src = 'https://hypothes.is/embed.js';
-      script.async = true;
-      document.body.appendChild(script);
-
-      // 2. Initialize Local High-Fidelity Highlight & Commenting System
+      // Initialize Local High-Fidelity Highlight & Commenting System
       nextTick(() => {
         setupLocalComments();
+        setupSidebarLinks();
+        setupHomeLinks();
+        fixProductionLinks();
+      });
+    });
+    watch(() => route.path, () => {
+      nextTick(() => {
+        fixProductionLinks();
       });
     });
   }
@@ -239,4 +236,119 @@ function setupLocalComments() {
       console.warn('Failed to load highlights:', e);
     }
   }
+}
+
+// Ensure collapsible group headers also navigate to their links and vice-versa
+function setupSidebarLinks() {
+  let isHandling = false;
+  document.addEventListener('click', (event) => {
+    if (isHandling) return;
+
+    // Find the item container inside a collapsible sidebar item
+    const item = event.target.closest('.VPSidebarItem.collapsible > .item');
+    if (!item) return;
+
+    const link = item.querySelector('.link');
+    const caret = item.querySelector('.caret');
+    if (!link || !caret) return;
+
+    // We clicked somewhere in the collapsible folder header
+    isHandling = true;
+    
+    // Check if the click target was the caret or inside it
+    if (caret.contains(event.target)) {
+      // Vue handles caret click (toggles collapse). We need to trigger navigation.
+      link.click();
+    } else {
+      // We clicked on the link or on the empty space of the item.
+      // Trigger caret click to toggle the collapse.
+      caret.click();
+      
+      // If we didn't click inside the link itself (e.g. clicked on empty space of .item),
+      // we also need to trigger link click to navigate.
+      if (!link.contains(event.target)) {
+        link.click();
+      }
+    }
+
+    isHandling = false;
+  });
+}
+
+// Get dynamic homepage URL based on host, port, and environment settings
+function getHomepageUrl() {
+  const hostname = window.location.hostname;
+  const port = window.location.port;
+
+  // Case 1: Local development with separate dev ports (VitePress running on port 5174)
+  if ((hostname === 'localhost' || hostname === '127.0.0.1') && port === '5174') {
+    return 'http://localhost:5173/';
+  }
+
+  // Case 2: Local preview mode (running on port 4173 or other local ports besides 5174)
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return `http://${hostname}:${port || '4173'}/`;
+  }
+
+  // Case 3: Production deployment (GitHub Pages, custom domain, etc.)
+  return 'https://sophigo.com/';
+}
+
+// Intercept clicks on homepage links (Logo, "首页", and "返回主站" button)
+// in the capture phase to override default VitePress routing.
+function setupHomeLinks() {
+  document.addEventListener('click', (event) => {
+    const anchor = event.target.closest('a');
+    if (!anchor) return;
+
+    const isLogo = anchor.classList.contains('title') && anchor.closest('.VPNavBarTitle');
+    const isHomeNav = (anchor.classList.contains('VPNavBarMenuLink') || anchor.classList.contains('VPNavScreenMenuLink')) && anchor.textContent.trim() === '首页';
+    const isBackButton = anchor.classList.contains('VPButton') && anchor.textContent.includes('返回主站');
+
+    if (isLogo || isHomeNav || isBackButton) {
+      event.preventDefault();
+      event.stopPropagation();
+      window.location.href = getHomepageUrl();
+    }
+  }, true); // useCapture = true to execute before Vue router intercepts the click
+}
+
+// Adjust links dynamically in the document to point to the correct main site homepage
+function fixProductionLinks() {
+  const targetHome = getHomepageUrl();
+
+  nextTick(() => {
+    // 1. Rewrite any hardcoded local dev links to the correct homepage target
+    document.querySelectorAll('a').forEach(a => {
+      if (a.href && (
+        a.href.startsWith('http://localhost:5173') || 
+        a.href.startsWith('http://127.0.0.1:5173') ||
+        a.href.startsWith('http://localhost:4173') ||
+        a.href.startsWith('http://127.0.0.1:4173')
+      )) {
+        try {
+          const urlPath = new URL(a.href).pathname;
+          if (urlPath === '/' || urlPath === '' || urlPath === '/docs' || urlPath === '/docs/') {
+            if (urlPath === '/' || urlPath === '') {
+              a.href = targetHome;
+            }
+          } else {
+            a.href = urlPath;
+          }
+        } catch (e) {}
+      }
+    });
+
+    // 2. Force logo + "首页" links + "返回主站" links to go to the correct homepage (targetHome)
+    document.querySelectorAll('.VPNavBarMenuLink, .VPNavScreenMenuLink, .VPNavBarTitle a, .VPNavBarTitle a.title, a.logo, a.VPButton').forEach(link => {
+      const text = link.textContent.trim();
+      if (text === '首页' || 
+          text.includes('返回主站') || 
+          link.classList.contains('title') || 
+          link.classList.contains('logo') || 
+          link.querySelector('.logo')) {
+        link.setAttribute('href', targetHome);
+      }
+    });
+  });
 }

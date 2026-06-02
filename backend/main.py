@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 
-app = FastAPI(title="ProFabX Backend API")
+app = FastAPI(title="Sophigo Backend API")
 
 # Setup CORS to support local development on separate ports
 app.add_middleware(
@@ -16,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-SECRET_KEY = "profabx_secret_key_123456"
+SECRET_KEY = "sophigo_secret_key_123456"
 ALGORITHM = "HS256"
 
 # In-memory "databases" for users and comments

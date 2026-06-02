@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leap71 与 Articraft 深度对比技术分析报告</title>
+  <meta name="description" content="全面深入的 Leap71 计算工程与 Articraft 智能体关节资产生成对比报告。涵盖技术方案、核心竞争力、应用群体、商业应用、资料库、案例及生态项目。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="view-state-all">
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="#" class="navbar-logo">TECH<span>ANALYSIS</span></a>
+      <ul class="navbar-links">
+        <li><a href="#hero">概述</a></li>
+        <li><a href="#showcase">核心平台</a></li>
+        <li><a href="#bento">深度剖析</a></li>
+        <li><a href="#compare-table">规格参数</a></li>
+        <li><a href="#resources">资料库</a></li>
+        <li><a href="#cases">案例</a></li>
+        <li><a href="#ecosystem">生态探索</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="container">
+      <div class="hero-tag">Computational Design Paradigm · 2026</div>
+      <h1 class="hero-title">
+        代码构筑物理实体<br>
+        <span class="gradient-text metal">智能体解锁关节仿真</span>
+      </h1>
+      <p class="hero-subtitle">
+        Leap71 与 Articraft 深度技术对比分析报告 —— 从物理世界增材制造到虚拟场景具身智能的革命性演进。
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number gradient-text leap">7+</div>
+          <div class="stat-label">GitHub 仓库</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text arti">10K+</div>
+          <div class="stat-label">关节模型</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text metal">200kN</div>
+          <div class="stat-label">推力验证</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text metal">15+</div>
+          <div class="stat-label">相关项目</div>
+        </div>
+      </div>
+      <div class="view-tabs-container">
+        <div class="view-tabs">
+          <button class="tab-btn active" id="tab-all">双雄对比</button>
+          <button class="tab-btn" id="tab-leap">Leap71 专栏</button>
+          <button class="tab-btn" id="tab-arti">Articraft 专栏</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Platform Showcase -->
+    <section class="container" id="showcase">
+      <div class="platform-showcase">
+        <div class="platform-grid">
+          <article class="platform-card leap-card leap-only">
+            <div class="card-image-wrapper">
+              <img src="assets/leap71.png" alt="Leap71 Computational Design" class="card-image" loading="eager">
+            </div>
+            <div class="card-content">
+              <div class="card-header-badge gradient-text leap">Physical Computational Engineering</div>
+              <h2 class="card-title">Leap71</h2>
+              <p class="card-desc">
+                Leap71 致力于推动"计算工程"范式。通过编写算法代码（C#）表达物理物体的"几何与逻辑 DNA"，完美适配高精度金属 3D 打印，可在几分钟内自主生成航空级喷气引擎或高能热交换器。
+              </p>
+              <ul class="card-bullets">
+                <li><strong>代码即设计 DNA</strong>：物理方程式、热力学参数和制造约束编写为代码</li>
+                <li><strong>PicoGK 体素内核</strong>：高精度体素技术，支撑无限复杂的网格格栅结构</li>
+                <li><strong>Noyron CEM</strong>：确定性物理驱动的大计算工程模型，非神经网络</li>
+                <li><strong>无缝增材制造</strong>：直接生成金属打印切片路径及 G-code</li>
+              </ul>
+            </div>
+          </article>
+          <article class="platform-card arti-card arti-only">
+            <div class="card-image-wrapper">
+              <img src="assets/articraft.png" alt="Articraft Agentic Design" class="card-image" loading="eager">
+            </div>
+            <div class="card-content">
+              <div class="card-header-badge gradient-text arti">Agentic Articulated 3D Generation</div>
+              <h2 class="card-title">Articraft</h2>
+              <p class="card-desc">
+                开源"智能体 3D 关节资产生成系统"，通过"代理—沙箱执行—验证反馈"闭环迭代，让 AI 自动编写 Python CAD 脚本，创造出具备物理关节、碰撞体积且能够移动的"活资产"。
+              </p>
+              <ul class="card-bullets">
+                <li><strong>LLM 智能体闭环</strong>：AI 编写脚本并在受限 Harness 内执行与自我修正</li>
+                <li><strong>CadQuery 参数化</strong>：LLM 友好的 Python 接口进行语义级构筑</li>
+                <li><strong>仿真就绪关节</strong>：自动解算铰链极限角度与位移，输出 URDF</li>
+                <li><strong>Articraft-10K</strong>：超 10,000 个带真实物理运动属性的 3D 模型</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Deep Dive -->
+    <section class="container bento-section" id="bento">
+      <h2 class="section-title">技术架构与壁垒剖析</h2>
+      <div class="bento-grid">
+        <div class="bento-card wide">
+          <div class="bento-badge">技术方案对比</div>
+          <h3 class="bento-title">两条截然不同的算法与几何构筑路径</h3>
+          <p class="bento-desc">尽管两者均倡导"代码生成 3D 资产"的理念，底层引擎与架构逻辑服务于不同的终极目标：</p>
+          <div class="bento-comparison-row">
+            <div class="comparison-col leap-focus">
+              <div class="comparison-header gradient-text leap">Leap71: 物理密度与体素流</div>
+              <div class="comparison-body">采用 <strong>PicoGK</strong> 体素引擎（窄带有符号距离场 SDF），将三维空间表示为海量网格标量场。Noyron 是确定性引擎，基于第一性原理物理，非统计概率模型。输出直接适配增材制造。</div>
+            </div>
+            <div class="comparison-col arti-focus">
+              <div class="comparison-header gradient-text arti">Articraft: 智能体沙箱与运动解算</div>
+              <div class="comparison-body">基于 <strong>LLM Agent</strong> 编写 <strong>CadQuery</strong> 脚本。LLM 编写高级几何组合逻辑，通过受限沙箱编译器进行几何正确性、重叠度、关节自由度的验证与微调，最终合成物理模型（URDF）。</div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-card leap-only">
+          <div class="bento-badge">Leap71 核心竞争力</div>
+          <h3 class="bento-title">击碎传统 CAD 复杂度天花板</h3>
+          <p class="bento-desc">传统 CAD 基于 B-Rep，设计含数百万微小散热胞腔时崩溃。Leap71 采用体素核心 + 窄带 SDF，使计算速度与复杂度脱钩。Noyron 编码了工程启发式规则和物理约束，输出的是生产就绪设计——无需人工清理后处理。</p>
+        </div>
+        <div class="bento-card arti-only">
+          <div class="bento-badge">Articraft 核心竞争力</div>
+          <h3 class="bento-title">赋予 3D 模型真实的"运动灵魂"</h3>
+          <p class="bento-desc">当今 3D 生成 AI 产出的是"静止雕像"。Articraft 生成可活动的装配体（可拉开的抽屉、能回弹的剪刀），自动编写 URDF 关节逻辑，让机器人在 Isaac Gym 或 MuJoCo 中立刻操作。比通用编码代理和先前最先进方法生成更高质量资产。</p>
+        </div>
+        <div class="bento-card tall">
+          <div class="bento-badge">应用群体画像</div>
+          <h3 class="bento-title">重度工业制造 vs. 前沿机器人AI</h3>
+          <p class="bento-desc" style="margin-bottom: 16px;">两者应用群体清晰展现了物理工业和虚拟AI之间的跨界互补。</p>
+          <div class="leap-only" style="margin-bottom: 20px;">
+            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--leap-orange)">Leap71 用户</h4>
+            <p class="bento-desc" style="font-size: 0.85rem;">航天推进工程师、热力学专家、金属增材制造企业、航空级部件供应商（已签约客户：The Exploration Company, Aspire Space）、骨科医学实验室</p>
+          </div>
+          <div class="arti-only">
+            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--arti-blue)">Articraft 用户</h4>
+            <p class="bento-desc" style="font-size: 0.85rem;">具身智能与强化学习研究员、机器人 Sim-to-Real 工程师、虚拟世界合成云服务商、程序化游戏交互道具制作者</p>
+          </div>
+        </div>
+        <div class="bento-card wide">
+          <div class="bento-badge">商业应用与变现路径</div>
+          <h3 class="bento-title">赋能高端实体制造与大规模数字资产合成</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+            <div class="leap-only" style="padding-left: 15px; border-left: 2px solid var(--leap-orange);">
+              <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: var(--text-primary);">Leap71 商业落地</h4>
+              <p class="bento-desc" style="font-size: 0.82rem;">CDaaS 计算设计即服务 · Noyron 工业许可证（五年期，已签约 TEC）· 战略制造伙伴网络（HBD/Farsoon/Sindan）· 开源 PicoGK 生态引流</p>
+            </div>
+            <div class="arti-only" style="padding-left: 15px; border-left: 2px solid var(--arti-blue);">
+              <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: var(--text-primary);">Articraft 商业落地</h4>
+              <p class="bento-desc" style="font-size: 0.82rem;">开源数据集（Articraft-10K）生态建设 · 机器人仿真场景大批量生成 SaaS · 具身智能物理环境定制合成</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="container comparison-table-section" id="compare-table">
+      <h2 class="section-title">双雄核心规格对比</h2>
+      <div class="table-wrapper">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>规格特征</th>
+              <th class="col-header-leap">Leap71 (计算工程)</th>
+              <th class="col-header-arti">Articraft (关节模型智能体)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="feature-name">设计哲学</td><td class="val-leap">确定性物理驱动，第一性原理解算<br><span class="tag-highlight leap">物理极限</span></td><td class="val-arti">LLM 逻辑及反馈驱动，沙箱调试<br><span class="tag-highlight arti">智能体解算</span></td></tr>
+            <tr><td class="feature-name">底层内核</td><td class="val-leap"><strong>PicoGK</strong> — 体素/SDF引擎 (Apache 2.0)</td><td class="val-arti"><strong>CadQuery</strong> — Open Cascade BREP (LGPL)</td></tr>
+            <tr><td class="feature-name">编程语言</td><td class="val-leap">C# (PicoGK SDK) + C++ (Runtime)</td><td class="val-arti">Python (CadQuery + Articraft SDK)</td></tr>
+            <tr><td class="feature-name">核心模型</td><td class="val-leap">Noyron CEM — 确定性、非神经网络</td><td class="val-arti">LLM Agent (Gemini/Claude/GPT) 闭环</td></tr>
+            <tr><td class="feature-name">物理复杂度</td><td class="val-leap">散热微通道、内部晶格点阵、流体网格</td><td class="val-arti">运动链、铰链旋转、直线滑动、防重叠</td></tr>
+            <tr><td class="feature-name">核心输出</td><td class="val-leap">体素场 · STL/OBJ · G-code · 打印切片</td><td class="val-arti">URDF · OBJ/GLTF · 关节运动定义</td></tr>
+            <tr><td class="feature-name">商业模型</td><td class="val-leap">CDaaS + Noyron 五年许可证 + 制造合作</td><td class="val-arti">开源生态 + SaaS 场景生成 + 数据集</td></tr>
+            <tr><td class="feature-name">开源程度</td><td class="val-leap">PicoGK 开源 · Noyron 高度闭源</td><td class="val-arti">全栈开源 · 含 10K 数据集</td></tr>
+            <tr><td class="feature-name">已签约客户</td><td class="val-leap">TEC · Aspire Space · HBD · Sindan · Farsoon · MIMO</td><td class="val-arti">学术研究社区 · 具身智能实验室</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION: Resources (资料库) -->
+    <!-- ============================================================ -->
+    <section class="container resources-section" id="resources">
+      <h2 class="section-title">全面资料库</h2>
+      <p class="section-subtitle">所有仓库、论文、视频、链接的完整集合</p>
+
+      <!-- Filter Tabs -->
+      <div class="resource-filter">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="leap71">Leap71</button>
+        <button class="filter-btn" data-filter="picogk">PicoGK</button>
+        <button class="filter-btn" data-filter="noyron">Noyron</button>
+        <button class="filter-btn" data-filter="articraft">Articraft</button>
+      </div>
+
+      <!-- Leap71 GitHub Repos -->
+      <div class="resource-group" data-category="leap71">
+        <h3 class="resource-group-title"><span class="dot leap-dot"></span>Leap71 GitHub 仓库</h3>
+        <div class="resource-cards">
+          <a href="https://github.com/leap71/PicoGK" target="_blank" rel="noopener" class="resource-card" data-category="leap71 picogk">
+            <div class="rc-icon">📦</div>
+            <div class="rc-body">
+              <div class="rc-name">PicoGK</div>
+              <div class="rc-desc">核心体素几何引擎 — Compact Geometry Kernel for Computational Engineering</div>
+              <div class="rc-meta"><span class="rc-lang">C#</span><span class="rc-license">Apache 2.0</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/PicoGKRuntime" target="_blank" rel="noopener" class="resource-card" data-category="leap71 picogk">
+            <div class="rc-icon">⚙️</div>
+            <div class="rc-body">
+              <div class="rc-name">PicoGKRuntime</div>
+              <div class="rc-desc">PicoGK C++ 性能核心框架，集成 OpenVDB 和 GLFW</div>
+              <div class="rc-meta"><span class="rc-lang">C++</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/LEAP71_ShapeKernel" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">🔷</div>
+            <div class="rc-body">
+              <div class="rc-name">LEAP71_ShapeKernel</div>
+              <div class="rc-desc">高层级几何图元框架 — 连接 PicoGK 底层操作与高级工程设计</div>
+              <div class="rc-meta"><span class="rc-lang">C#</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/LEAP71_LatticeLibrary" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">🕸️</div>
+            <div class="rc-body">
+              <div class="rc-name">LEAP71_LatticeLibrary</div>
+              <div class="rc-desc">晶格结构与多孔超材料库 — 基于 PicoGK 和 ShapeKernel</div>
+              <div class="rc-meta"><span class="rc-lang">C#</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/LEAP71_HelixHeatX" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">🌀</div>
+            <div class="rc-body">
+              <div class="rc-name">LEAP71_HelixHeatX</div>
+              <div class="rc-desc">螺旋热交换器示例项目 — 展示 ShapeKernel + PicoGK 设计流程</div>
+              <div class="rc-meta"><span class="rc-lang">C#</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/LEAP71_RoverWheel" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">🛞</div>
+            <div class="rc-body">
+              <div class="rc-name">LEAP71_RoverWheel</div>
+              <div class="rc-desc">月球车轮几何生成库 — 特种车辆轮毂参数化设计</div>
+              <div class="rc-meta"><span class="rc-lang">C#</span></div>
+            </div>
+          </a>
+          <a href="https://github.com/leap71/PicoGKInstaller" target="_blank" rel="noopener" class="resource-card" data-category="leap71 picogk">
+            <div class="rc-icon">💾</div>
+            <div class="rc-body">
+              <div class="rc-name">PicoGKInstaller</div>
+              <div class="rc-desc">PicoGK Runtime 安装包构建项目</div>
+              <div class="rc-meta"><span class="rc-lang">C++</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PicoGK Documentation -->
+      <div class="resource-group" data-category="picogk">
+        <h3 class="resource-group-title"><span class="dot picogk-dot"></span>PicoGK 文档与资源</h3>
+        <div class="resource-cards">
+          <a href="https://picogk.org" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">📖</div>
+            <div class="rc-body">
+              <div class="rc-name">PicoGK 官方文档</div>
+              <div class="rc-desc">API 参考、入门指南、代码示例 — picogk.org</div>
+              <div class="rc-meta"><span class="rc-type">文档站</span></div>
+            </div>
+          </a>
+          <a href="https://leap71.com" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">🌐</div>
+            <div class="rc-body">
+              <div class="rc-name">Leap71 官方网站</div>
+              <div class="rc-desc">公司介绍、技术博客、项目展示</div>
+              <div class="rc-meta"><span class="rc-type">官网</span></div>
+            </div>
+          </a>
+          <a href="https://leap71.com/downloads/" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">⬇️</div>
+            <div class="rc-body">
+              <div class="rc-name">Noyron 生成模型下载</div>
+              <div class="rc-desc">叶轮、热交换器、Tesla 阀等 3D 模型 (CC BY-SA)</div>
+              <div class="rc-meta"><span class="rc-license">CC BY-SA</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Noyron Resources -->
+      <div class="resource-group" data-category="noyron">
+        <h3 class="resource-group-title"><span class="dot noyron-dot"></span>Noyron CEM 资源</h3>
+        <div class="resource-cards">
+          <a href="https://leap71.com/noyron/" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">🧠</div>
+            <div class="rc-body">
+              <div class="rc-name">Noyron 产品页面</div>
+              <div class="rc-desc">大计算工程模型 — 确定性物理驱动，非神经网络</div>
+              <div class="rc-meta"><span class="rc-type">产品</span></div>
+            </div>
+          </a>
+          <a href="https://jlk.ae" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">👤</div>
+            <div class="rc-body">
+              <div class="rc-name">Lin Kayser (CTO) 个人站</div>
+              <div class="rc-desc">播客出演、技术文章、行业洞察 — jlk.ae</div>
+              <div class="rc-meta"><span class="rc-type">个人</span></div>
+            </div>
+          </a>
+        </div>
+        <h4 class="sub-group-title">📡 Noyron 专属模块</h4>
+        <div class="module-list">
+          <div class="module-chip leap-chip">Noyron RP — 火箭推进</div>
+          <div class="module-chip leap-chip">Noyron HX — 热交换器</div>
+          <div class="module-chip leap-chip">Noyron EA — 电磁驱动与运动</div>
+        </div>
+      </div>
+
+      <!-- Articraft Resources -->
+      <div class="resource-group" data-category="articraft">
+        <h3 class="resource-group-title"><span class="dot arti-dot"></span>Articraft 仓库与资源</h3>
+        <div class="resource-cards">
+          <a href="https://github.com/mattzh72/articraft" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">📦</div>
+            <div class="rc-body">
+              <div class="rc-name">mattzh72/articraft</div>
+              <div class="rc-desc">核心仓库 — 智能体关节资产生成系统 (Python 3.12, uv, just)</div>
+              <div class="rc-meta"><span class="rc-lang">Python</span><span class="rc-license">开源</span></div>
+            </div>
+          </a>
+          <a href="https://articraft3d.github.io/" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">🌐</div>
+            <div class="rc-body">
+              <div class="rc-name">Articraft 官方项目主页</div>
+              <div class="rc-desc">项目介绍、在线 3D 查看器、数据集浏览</div>
+              <div class="rc-meta"><span class="rc-type">项目页</span></div>
+            </div>
+          </a>
+          <a href="https://articraft3d.github.io/#viewer" target="_blank" rel="noopener" class="resource-card">
+            <div class="rc-icon">👁️</div>
+            <div class="rc-body">
+              <div class="rc-name">Articraft 在线 3D 查看器</div>
+              <div class="rc-desc">基于 Three.js 的交互式关节模型查看器 (React + TypeScript)</div>
+              <div class="rc-meta"><span class="rc-type">Web App</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Papers -->
+      <div class="resource-group" data-category="all">
+        <h3 class="resource-group-title"><span class="dot paper-dot"></span>学术论文与出版物</h3>
+        <div class="resource-cards">
+          <a href="https://arxiv.org/abs/2505.07945" target="_blank" rel="noopener" class="resource-card" data-category="articraft">
+            <div class="rc-icon">📄</div>
+            <div class="rc-body">
+              <div class="rc-name">Articraft: An Agentic System for Scalable Articulated 3D Asset Generation</div>
+              <div class="rc-desc">核心论文 — LLM 驱动的关节 3D 资产自动生成系统</div>
+              <div class="rc-meta"><span class="rc-type">arXiv</span><span class="rc-tag arti">Articraft</span></div>
+            </div>
+          </a>
+          <a href="https://leap71.com/computational-engineering" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">📄</div>
+            <div class="rc-body">
+              <div class="rc-name">Computational Engineering 概念书</div>
+              <div class="rc-desc">Lin Kayser 阐述计算工程范式的核心理论框架</div>
+              <div class="rc-meta"><span class="rc-type">白皮书</span><span class="rc-tag leap">Leap71</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Videos -->
+      <div class="resource-group" data-category="all">
+        <h3 class="resource-group-title"><span class="dot video-dot"></span>视频与演讲</h3>
+        <div class="resource-cards video-cards">
+          <a href="https://www.youtube.com/@leap71" target="_blank" rel="noopener" class="resource-card" data-category="leap71">
+            <div class="rc-icon">🎬</div>
+            <div class="rc-body">
+              <div class="rc-name">LEAP 71 官方 YouTube 频道</div>
+              <div class="rc-desc">超音速预冷器、引擎热试车、歧管演化等技术短片</div>
+              <div class="rc-meta"><span class="rc-type">YouTube</span><span class="rc-tag leap">官方</span></div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=Lin+Kayser+LEAP+71+Noyron" target="_blank" rel="noopener" class="resource-card" data-category="noyron">
+            <div class="rc-icon">🎙️</div>
+            <div class="rc-body">
+              <div class="rc-name">Lin Kayser 深度访谈集</div>
+              <div class="rc-desc">Tim Ventura 专访 · "The End of CAD" · SpaceLab Noyron 特辑 · Beat the Often Path</div>
+              <div class="rc-meta"><span class="rc-type">访谈</span><span class="rc-tag leap">2024-2026</span></div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=Articraft+articulated+3D+asset+generation" target="_blank" rel="noopener" class="resource-card" data-category="articraft">
+            <div class="rc-icon">🎬</div>
+            <div class="rc-body">
+              <div class="rc-name">Articraft 演示视频</div>
+              <div class="rc-desc">关节模型生成过程演示、Articraft-10K 数据集展示</div>
+              <div class="rc-meta"><span class="rc-type">YouTube</span><span class="rc-tag arti">Demo</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Media Coverage -->
+      <div class="resource-group" data-category="all">
+        <h3 class="resource-group-title"><span class="dot media-dot"></span>媒体报道与文章</h3>
+        <div class="media-grid">
+          <div class="media-item" data-category="leap71 noyron"><span class="media-source">Fast Company</span><span class="media-topic">自主太空引擎设计 · LCEM 概念</span></div>
+          <div class="media-item" data-category="leap71 noyron"><span class="media-source">TCT Magazine</span><span class="media-topic">热试车 · 气尖引擎 · TEC 授权 · HBD</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">Metal AM</span><span class="media-topic">Lin Kayser: 为什么工程必须超越 CAD</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">3D Printing Industry</span><span class="media-topic">CEO Josefine Lissner 专访 (2025.07)</span></div>
+          <div class="media-item" data-category="leap71 noyron"><span class="media-source">VoxelMatters</span><span class="media-topic">全尺寸制造拓展 · 播客 S3E1</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">DEVELOP3D</span><span class="media-topic">Noyron 演进与大引擎扩展</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">3DPrint.com</span><span class="media-topic">甲烷引擎热试车 · 超音速预冷器</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">Medium</span><span class="media-topic">"How LEAP 71 Turned Code Into a Rocket Engine"</span></div>
+          <div class="media-item" data-category="leap71"><span class="media-source">Arabian Business</span><span class="media-topic">创始人档案 · 迪拜创业生态</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION: Cases (案例) -->
+    <!-- ============================================================ -->
+    <section class="container cases-section" id="cases">
+      <h2 class="section-title">实战案例全景</h2>
+      <p class="section-subtitle">从火箭引擎热试车到万级关节模型数据集</p>
+
+      <div class="cases-grid">
+        <!-- Leap71 Cases -->
+        <div class="case-card featured" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron RP</span>
+            <span class="case-date">2024.06</span>
+          </div>
+          <h3 class="case-title">首次热试车 — 5kN 煤油/液氧火箭引擎</h3>
+          <p class="case-desc">Noyron 首次真实世界验证。从设计到 3D 打印铜质引擎并完成热试车，全程不到两周。在 Airborne Engineering (英国) 完成长时间稳态燃烧测试。</p>
+          <div class="case-tags">
+            <span class="case-tag">热试车</span><span class="case-tag">铜质3D打印</span><span class="case-tag">LOX/Kerosene</span><span class="case-tag">2周完成</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron RP</span>
+            <span class="case-date">2024.12</span>
+          </div>
+          <h3 class="case-title">气尖引擎 (Aerospike) — 5kN 单体结构</h3>
+          <p class="case-desc">历史上极其难以设计的"内翻外"架构。Noyron 生成了中央尖锥的复杂冷却通道，验证了处理非传统几何的能力。</p>
+          <div class="case-tags">
+            <span class="case-tag">Aerospike</span><span class="case-tag">单体铜</span><span class="case-tag">复杂冷却</span>
+          </div>
+        </div>
+
+        <div class="case-card featured" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron RP</span>
+            <span class="case-date">2025.12</span>
+          </div>
+          <h3 class="case-title">轨道级双引擎 — 20kN 甲烷/液氧</h3>
+          <p class="case-desc">三周内从规格到测试。钟形喷管：稳态室压，>93% 燃烧效率。全尺寸气尖：50bar 室压达成。平均四周一次热试车节奏，持续18个月。</p>
+          <div class="case-tags">
+            <span class="case-tag">20kN</span><span class="case-tag">Methalox</span><span class="case-tag">>93%效率</span><span class="case-tag">50bar</span><span class="case-tag">3周</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron RP + HBD</span>
+            <span class="case-date">2026.03</span>
+          </div>
+          <h3 class="case-title">XRA-2E5 — 200kN (20吨) 气尖引擎</h3>
+          <p class="case-desc">世界最大 3D 打印气尖引擎。Inconel 718 材质，HBD 800 打印机一体成型。设计用于 Aspire Space 的 Oryx 可复用飞行器上面级。</p>
+          <div class="case-tags">
+            <span class="case-tag">200kN</span><span class="case-tag">Inconel 718</span><span class="case-tag">世界最大</span><span class="case-tag">Oryx</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron HX + Farsoon</span>
+            <span class="case-date">2025.11</span>
+          </div>
+          <h3 class="case-title">超音速预冷器 — 1.5米高</h3>
+          <p class="case-desc">分形折叠算法最大化换热面积。液氢冷却剂管理超高温进气。面向单级入轨 (SSTO) 吸气式飞行器设计。</p>
+          <div class="case-tags">
+            <span class="case-tag">1.5m</span><span class="case-tag">分形折叠</span><span class="case-tag">SSTO</span><span class="case-tag">液氢</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="leap71">
+          <div class="case-header">
+            <span class="case-badge leap-badge">Leap71 · Noyron + TEC</span>
+            <span class="case-date">2026.03</span>
+          </div>
+          <h3 class="case-title">TEC 五年授权 — Nyx 太空舱 Typhoon 引擎</h3>
+          <p class="case-desc">The Exploration Company 签署五年可续约协议，授权 Noyron RP 开发 Nyx 太空舱和 Typhoon 发动机。首个重大商业许可里程碑。</p>
+          <div class="case-tags">
+            <span class="case-tag">五年授权</span><span class="case-tag">TEC</span><span class="case-tag">Nyx</span><span class="case-tag">Typhoon</span>
+          </div>
+        </div>
+
+        <!-- Articraft Cases -->
+        <div class="case-card featured" data-category="articraft">
+          <div class="case-header">
+            <span class="case-badge arti-badge">Articraft · 数据集</span>
+            <span class="case-date">2025</span>
+          </div>
+          <h3 class="case-title">Articraft-10K — 万级关节模型数据集</h3>
+          <p class="case-desc">自主生成超过 10,000 个关节 3D 模型，覆盖 245 个类别（家具、工具、机械装置）。含源程序、语义部件结构、URDF 配置。质量超越通用编码代理和先前最先进方法。</p>
+          <div class="case-tags">
+            <span class="case-tag">10,000+模型</span><span class="case-tag">245类别</span><span class="case-tag">URDF</span><span class="case-tag">开源</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="articraft">
+          <div class="case-header">
+            <span class="case-badge arti-badge">Articraft · Web Viewer</span>
+            <span class="case-date">2025</span>
+          </div>
+          <h3 class="case-title">交互式 3D 查看器</h3>
+          <p class="case-desc">基于 React + TypeScript + Three.js 的在线查看器，可实时检视生成的关节模型几何与运动结构。支持关节高亮和运动范围预览。</p>
+          <div class="case-tags">
+            <span class="case-tag">Three.js</span><span class="case-tag">React</span><span class="case-tag">在线查看</span>
+          </div>
+        </div>
+
+        <div class="case-card" data-category="articraft">
+          <div class="case-header">
+            <span class="case-badge arti-badge">Articraft · SDK</span>
+            <span class="case-date">2025</span>
+          </div>
+          <h3 class="case-title">LLM-Friendly CAD SDK</h3>
+          <p class="case-desc">封装 CadQuery 的 Python SDK，让 LLM 通过定义部件、组合几何、指定关节和编写验证测试来构建 3D 资产，无需管理复杂软件环境。</p>
+          <div class="case-tags">
+            <span class="case-tag">Python SDK</span><span class="case-tag">CadQuery</span><span class="case-tag">LLM友好</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION: Ecosystem (生态探索) -->
+    <!-- ============================================================ -->
+    <section class="container ecosystem-section" id="ecosystem">
+      <h2 class="section-title">生态探索</h2>
+      <p class="section-subtitle">发现计算工程与 AI 3D 生成领域的前沿项目</p>
+
+      <div class="eco-category">
+        <h3 class="eco-cat-title">🔧 计算工程 / 代码化 CAD</h3>
+        <div class="eco-grid">
+          <a href="https://github.com/CadQuery/cadquery" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">CadQuery</div>
+            <div class="eco-desc">Python 参数化 CAD 库，基于 Open Cascade BREP 内核。Articraft 的底层几何引擎。</div>
+            <div class="eco-meta"><span>Python</span><span>开源</span><span>BREP</span></div>
+          </a>
+          <a href="https://github.com/gumyr/build123d" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">Build123d</div>
+            <div class="eco-desc">CadQuery 的进化版——更直观的 API，面向传统 CAD 用户的 Python BREP 建模。</div>
+            <div class="eco-meta"><span>Python</span><span>开源</span><span>BREP</span></div>
+          </a>
+          <a href="https://openscad.org/" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">OpenSCAD</div>
+            <div class="eco-desc">经典"程序员 CAD"——声明式 DSL + CGAL CSG。适合简单高度参数化零件。</div>
+            <div class="eco-meta"><span>DSL</span><span>开源</span><span>CSG</span></div>
+          </a>
+          <a href="https://github.com/Haskell-Things/ImplicitCAD" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">ImplicitCAD</div>
+            <div class="eco-desc">隐式建模实现——数学函数定义几何，擅长有机形态和生成式结构。</div>
+            <div class="eco-meta"><span>Haskell</span><span>开源</span><span>Implicit</span></div>
+          </a>
+          <a href="https://www.ntop.com/" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">nTopology (nTop)</div>
+            <div class="eco-desc">商业计算设计平台——隐式建模引擎，场驱动设计，海量晶格结构。非开源。</div>
+            <div class="eco-meta"><span>商业</span><span>Implicit</span><span>AM</span></div>
+          </a>
+          <a href="https://www.hyperganic.com/" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">Hyperganic</div>
+            <div class="eco-desc">算法工程平台——体素内核，自然启发几何。Leap71 创始人的前公司。</div>
+            <div class="eco-meta"><span>商业</span><span>Voxel</span><span>AM</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="eco-category">
+        <h3 class="eco-cat-title">🤖 AI 驱动 3D 资产生成 / 机器人仿真</h3>
+        <div class="eco-grid">
+          <a href="https://arxiv.org/search/?query=ArtiCAD&searchtype=all" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">ArtiCAD</div>
+            <div class="eco-desc">多智能体系统——生成可编辑的关节 CAD 装配体。Articraft 的学术竞品。</div>
+            <div class="eco-meta"><span>论文</span><span>Multi-Agent</span><span>CAD</span></div>
+          </a>
+          <a href="https://sapien.ucsd.edu/browse" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">PartNet-Mobility</div>
+            <div class="eco-desc">大规模关节物体数据集——手动标注的零件级 3D 模型，机器人操作基准。</div>
+            <div class="eco-meta"><span>数据集</span><span>SAPIEN</span><span>关节</span></div>
+          </a>
+          <a href="https://arxiv.org/search/?query=URDFormer&searchtype=all" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">URDFormer</div>
+            <div class="eco-desc">从单张图片生成 URDF 的 Transformer 模型——自动将真实物体转化为仿真模型。</div>
+            <div class="eco-meta"><span>论文</span><span>Transformer</span><span>URDF</span></div>
+          </a>
+          <a href="https://arxiv.org/search/?query=RoboGen+generative+robot&searchtype=all" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">RoboGen</div>
+            <div class="eco-desc">自动生成机器人形态和控制策略——LLM 驱动的机器人联合设计系统。</div>
+            <div class="eco-meta"><span>论文</span><span>LLM</span><span>机器人</span></div>
+          </a>
+          <a href="https://arxiv.org/search/?query=GenSim+simulation+robot&searchtype=all" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">GenSim</div>
+            <div class="eco-desc">自动生成机器人仿真任务和训练环境——大规模 Sim-to-Real 数据合成。</div>
+            <div class="eco-meta"><span>论文</span><span>仿真</span><span>Sim2Real</span></div>
+          </a>
+          <a href="https://objaverse.allenai.org/" target="_blank" rel="noopener" class="eco-card">
+            <div class="eco-name">Objaverse</div>
+            <div class="eco-desc">800K+ 3D 模型宇宙——Allen AI 的大规模 3D 资产数据集，用于训练和基准测试。</div>
+            <div class="eco-meta"><span>数据集</span><span>800K+</span><span>Allen AI</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Strategic Partnerships -->
+      <div class="eco-category">
+        <h3 class="eco-cat-title">🤝 Leap71 战略伙伴网络</h3>
+        <div class="partner-grid">
+          <div class="partner-item">
+            <div class="partner-name">The Exploration Company</div>
+            <div class="partner-role">五年 Noyron RP 许可证 · Nyx 太空舱</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">Aspire Space</div>
+            <div class="partner-role">Oryx 可复用飞行器推进系统</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">HBD (上海汉邦联合)</div>
+            <div class="partner-role">大型金属3D打印 · 200kN 气尖引擎制造</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">Sindan</div>
+            <div class="partner-role">UAE 航天工业化 · 40+ 金属 AM 系统</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">Farsoon Technologies</div>
+            <div class="partner-role">1.5m 超音速预冷器生产</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">MIMO Technik</div>
+            <div class="partner-role">设计到鉴定全流程合作</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">Airborne Engineering (UK)</div>
+            <div class="partner-role">热试车测试基地</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-name">ASTRO Test Lab</div>
+            <div class="partner-role">硬件鉴定测试</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h5>免责声明</h5>
+          <p>本报告基于 2026 年最新公开披露信息。Leap71 和 Articraft 分别代表计算工程与机器人仿真的前沿方向，不构成投资建议。</p>
+        </div>
+        <div class="footer-column">
+          <h5>官方资源</h5>
+          <ul class="footer-links">
+            <li><a href="https://leap71.com/" target="_blank" rel="noopener">Leap71 官网</a></li>
+            <li><a href="https://picogk.org" target="_blank" rel="noopener">PicoGK 文档</a></li>
+            <li><a href="https://leap71.com/noyron/" target="_blank" rel="noopener">Noyron 产品页</a></li>
+            <li><a href="https://github.com/leap71" target="_blank" rel="noopener">Leap71 GitHub</a></li>
+            <li><a href="https://articraft3d.github.io/" target="_blank" rel="noopener">Articraft 项目页</a></li>
+            <li><a href="https://github.com/mattzh72/articraft" target="_blank" rel="noopener">Articraft GitHub</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>关键人物</h5>
+          <ul class="footer-links">
+            <li><a href="https://jlk.ae" target="_blank" rel="noopener">Lin Kayser (CTO)</a></li>
+            <li><a href="https://leap71.com" target="_blank" rel="noopener">Josefine Lissner (CEO)</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TechAnalysis Report. 深度对比分析 · 灵感源自 Apple 设计系统</p>
+        <div class="footer-legal"><a href="#">隐私政策</a><a href="#">使用条款</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

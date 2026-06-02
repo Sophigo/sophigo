@@ -18,6 +18,10 @@
 }
 
 .dark {
+  --vp-c-brand-1: #4C7BFE; /* Vibrant royal blue with high contrast in dark mode */
+  --vp-c-brand-2: #7097FF;
+  --vp-c-brand-3: #96B3FF;
+
   --vp-c-bg: #0B0B0C; /* Geek Deep Black */
   --vp-c-bg-soft: #161617;
   --vp-c-bg-mute: #161617;

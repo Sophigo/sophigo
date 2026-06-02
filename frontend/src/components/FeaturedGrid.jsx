@@ -1,14 +1,63 @@
 import React from 'react';
 import { ArrowRight, Bot, Hammer, Palette } from 'lucide-react';
 
-export default function FeaturedGrid() {
+export default function FeaturedGrid({ lang = 'zh' }) {
+  const t = {
+    zh: {
+      subtitle: "Featured Areas",
+      title: "探索核心创新板块",
+      desc: "Sophigo 围绕智能硬件原型构建完整的数字化生态，为 AI 时代的软硬件创造者量身打造。",
+      cta: "浏览文档与案例",
+      cards: [
+        {
+          title: '移动机器人 (Mobile Robots)',
+          description: '掌握基于 ROS2 与双轮差速/麦克纳姆轮底盘的软硬件集成设计。提供 Sophicar 硬件级车体仿真及底盘运动学控制算法文档。',
+          tag: 'Hardware & Control',
+        },
+        {
+          title: 'Fab 课程 (Fab Courses)',
+          description: '贯通数字化制造与快速原型工艺。从 3D 打印、激光切割到数控雕刻，用先进设备将你的 AI 奇思妙想具象为实体原型。',
+          tag: 'Rapid Prototyping',
+        },
+        {
+          title: 'CMF 规范 (Color, Material, Finish)',
+          description: '探索高端工业设计的物理触觉美学。构建系统的色彩配方、复合材料配比与阳极氧化、喷砂等精细表面处理工艺规范。',
+          tag: 'Industrial Aesthetics',
+        }
+      ]
+    },
+    en: {
+      subtitle: "Featured Areas",
+      title: "Explore Core Innovation Areas",
+      desc: "Sophigo builds a complete digital ecosystem around intelligent hardware prototypes, custom-tailored for software and hardware creators in the AI R&D era.",
+      cta: "Browse Docs & Cases",
+      cards: [
+        {
+          title: 'Mobile Robots (AI & ROS2)',
+          description: 'Master hardware-software integration based on ROS2 and dual-wheel differential/Mecanum chassis. Access Sophicar simulation and kinematics control algorithm documents.',
+          tag: 'Hardware & Control',
+        },
+        {
+          title: 'Fab Labs (Rapid Prototyping)',
+          description: 'Bridge digital fabrication and rapid prototyping. Turn your AI-generated design concepts into physical reality using 3D printing, laser cutting, and CNC milling.',
+          tag: 'Rapid Prototyping',
+        },
+        {
+          title: 'CMF Standards (Colors & Materials)',
+          description: 'Study industrial design aesthetics and surface finishes. Define precise standards for anodizing thickness, sandblasting grains, and environmental materials.',
+          tag: 'Industrial Aesthetics',
+        }
+      ]
+    }
+  }[lang] || t.zh;
+
   const cardsData = [
     {
-      title: '移动机器人 (Mobile Robots)',
-      description: '掌握基于 ROS2 与双轮差速/麦克纳姆轮底盘的软硬件集成设计。提供 Sophicar 硬件级车体仿真及底盘运动学控制算法文档。',
-      tag: 'Hardware & Control',
+      title: t.cards[0].title,
+      description: t.cards[0].description,
+      tag: t.cards[0].tag,
       icon: <Bot size={20} className="card-icon" />,
-      link: '/docs/courses/mobile-robot.html',
+      link: '#/courses/mobile-robot',
       // SVG graphic matching Mobile Robots
       svg: (
         <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg" style={svgStyle}>
@@ -32,11 +81,11 @@ export default function FeaturedGrid() {
       )
     },
     {
-      title: 'Fab 课程 (Fab Courses)',
-      description: '贯通数字化制造与快速原型工艺。从 3D 打印、激光切割到数控雕刻，用先进设备将你的 AI 奇思妙想具象为实体原型。',
-      tag: 'Rapid Prototyping',
+      title: t.cards[1].title,
+      description: t.cards[1].description,
+      tag: t.cards[1].tag,
       icon: <Hammer size={20} className="card-icon" />,
-      link: '/docs/courses/fab-course.html',
+      link: '/docs/courses/fab-course/',
       // SVG graphic matching Fab lab fabrication
       svg: (
         <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg" style={svgStyle}>
@@ -58,11 +107,11 @@ export default function FeaturedGrid() {
       )
     },
     {
-      title: 'CMF 规范 (Color, Material, Finish)',
-      description: '探索高端工业设计的物理触觉美学。构建系统的色彩配方、复合材料配比与阳极氧化、喷砂等精细表面处理工艺规范。',
-      tag: 'Industrial Aesthetics',
+      title: t.cards[2].title,
+      description: t.cards[2].description,
+      tag: t.cards[2].tag,
       icon: <Palette size={20} className="card-icon" />,
-      link: '/docs/courses/cmf.html',
+      link: '/docs/courses/cmf/',
       // SVG graphic matching CMF design guides
       svg: (
         <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg" style={svgStyle}>
@@ -95,7 +144,7 @@ export default function FeaturedGrid() {
           display: 'block',
           marginBottom: '0.75rem'
         }}>
-          Featured Areas
+          {t.subtitle}
         </span>
         <h2 style={{
           fontSize: '2.25rem',
@@ -103,7 +152,7 @@ export default function FeaturedGrid() {
           marginBottom: '1rem',
           letterSpacing: '-0.02em'
         }}>
-          探索核心创新板块
+          {t.title}
         </h2>
         <p style={{
           color: 'var(--text-secondary)',
@@ -112,7 +161,7 @@ export default function FeaturedGrid() {
           fontSize: '1rem',
           lineHeight: '1.5'
         }}>
-          ProFabX 围绕智能硬件原型构建完整的数字化生态，为 AI 时代的软硬件创造者量身打造。
+          {t.desc}
         </p>
       </div>
 
@@ -120,10 +169,10 @@ export default function FeaturedGrid() {
         {cardsData.map((card, idx) => (
           <div 
             key={idx} 
-            className="grid-col-4 glassmorphism-card profabx-card"
+            className="grid-col-4 glassmorphism-card sophigo-card"
           >
             {/* SVG Media container */}
-            <div className="profabx-card-media">
+            <div className="sophigo-card-media">
               {card.svg}
               <span style={{
                 position: 'absolute',
@@ -144,7 +193,7 @@ export default function FeaturedGrid() {
             </div>
 
             {/* Info contents */}
-            <div className="profabx-card-content">
+            <div className="sophigo-card-content">
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -185,7 +234,7 @@ export default function FeaturedGrid() {
                 }}
                 className="card-cta-link"
               >
-                浏览文档与案例
+                {t.cta}
                 <ArrowRight size={16} style={{ transition: 'transform 0.2s' }} className="arrow-icon" />
               </a>
             </div>
@@ -194,10 +243,10 @@ export default function FeaturedGrid() {
       </div>
 
       <style>{`
-        .profabx-card:hover .arrow-icon {
+        .sophigo-card:hover .arrow-icon {
           transform: translateX(4px);
         }
-        .profabx-card:hover .card-cta-link {
+        .sophigo-card:hover .card-cta-link {
           color: var(--klein-blue) !important;
         }
       `}</style>

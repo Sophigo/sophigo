@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平台资讯 · Sophigo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked (Markdown 解析器，用于渲染 AI 回答) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        /* ===== Sophigo Dark Theme ===== */
+        :root {
+            --bg-primary: #0B0B0C;
+            --bg-secondary: #161617;
+            --bg-card: #1a1a1c;
+            --bg-card-hover: #1f1f22;
+            --bg-surface: #111113;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --text-muted: #86868b;
+            --klein-blue: #002FA7;
+            --klein-blue-glow: rgba(0, 47, 167, 0.15);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 24px 24px, 48px 48px;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .glassmorphism {
+            background: rgba(11, 11, 12, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .glassmorphism-card {
+            background: rgba(26, 26, 28, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 30%, #4a80ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dropdown menus hover effect */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--klein-blue);
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2c;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a3c;
+        }
+
+        /* AI Output Markdown styles */
+        .ai-response-box p { margin-bottom: 0.75rem; }
+        .ai-response-box ul, .ai-response-box ol { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+        .ai-response-box ul { list-style-type: disc; }
+        .ai-response-box ol { list-style-type: decimal; }
+        .ai-response-box li { margin-bottom: 0.25rem; }
+        .ai-response-box code { font-family: monospace; background: rgba(255,255,255,0.08); padding: 0.1rem 0.3rem; border-radius: 4px; }
+        .ai-response-box pre { background: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); overflow-x: auto; margin-bottom: 0.75rem; }
+        .ai-response-box pre code { background: none; padding: 0; }
+    </style>
+</head>
+<body class="pt-[64px]">
+
+    <!-- Navbar -->
+    <nav class="glassmorphism fixed top-0 left-0 w-full h-[64px] z-[100] transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--text-primary)] hover:opacity-90">
+                <img src="/docs/logo.png" alt="Sophigo Logo" class="w-6 h-6 object-contain" />
+                Sophigo
+            </a>
+
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center gap-10">
+                <a href="/" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">首页</a>
+
+                <!-- Courses Dropdown -->
+                <div class="dropdown relative">
+                    <button class="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-2">
+                        课程 <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                    </button>
+                    <div class="dropdown-menu hidden absolute top-[100%] left-0 w-[200px] rounded-xl glassmorphism-card p-2 mt-1 shadow-2xl z-[110]">
+                        <a href="/docs/courses/fab-course/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">Fab课程</a>
+                        <a href="/docs/courses/ai-basics/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">AI应用基础</a>
+                        <a href="/#\/courses\/mobile-robot" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">AI移动机器人</a>
+                        <a href="/docs/courses/cmf/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">CMF应用</a>
+                    </div>
+                </div>
+
+                <!-- Tools Dropdown -->
+                <div class="dropdown relative">
+                    <button class="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-2">
+                        工具 <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="dropdown-menu hidden absolute top-[100%] left-0 w-[200px] rounded-xl glassmorphism-card p-2 mt-1 shadow-2xl z-[110]">
+                        <a href="/docs/tools/threejs-generator/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">threejs生成器</a>
+                        <a href="/docs/tools/stl-quote/stlquote.html" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">stl 报价</a>
+                        <a href="/docs/tools/mods/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">Mods</a>
+                        <a href="/docs/tools/video-generation/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">视频生成</a>
+                        <a href="/docs/tools/matting/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">抠图</a>
+                    </div>
+                </div>
+
+                <a href="/docs/news/" class="text-sm font-medium text-[var(--text-primary)] transition-colors">资讯</a>
+                <a href="/#about" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">关于我们</a>
+            </div>
+
+            <!-- Action Area -->
+            <div class="flex items-center gap-4">
+                <a href="/docs/index.html" class="border border-[var(--border-color)] text-xs font-semibold px-4 py-2 rounded-full text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">
+                    进入文档系统
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-16 w-full flex flex-col items-center">
+        
+        <!-- Hero Title -->
+        <div class="text-center mb-10">
+            <span class="inline-flex items-center gap-1.5 bg-[var(--klein-blue-glow)] text-[var(--text-primary)] border border-[var(--border-color)] text-[11px] font-medium px-4 py-1.5 rounded-full mb-6">
+                <i class="fa-solid fa-sparkles text-[var(--klein-blue)]"></i> Sophigo Platform News
+            </span>
+            <h1 class="text-5xl font-extrabold tracking-tight text-gradient mb-4">
+                发现未知
+            </h1>
+            <p class="text-[var(--text-secondary)] text-sm max-w-lg mx-auto">
+                关注 Sophigo 的最新动态，这里为您提供关于数字制造、快速原型工艺、AI 算法迭代以及社区创客项目的最新行业资讯与平台升级日志。
+            </p>
+        </div>
+
+        <!-- DeepSeek Search Box -->
+        <div class="w-full max-w-[640px] p-6 rounded-2xl glassmorphism-card border border-[var(--border-color)] shadow-xl mb-16">
+            <label class="block text-xs font-semibold text-[var(--klein-blue)] mb-3 tracking-widest uppercase">
+                ✨ DeepSeek 智能搜索助理
+            </label>
+            <form id="ai-search-form" class="flex gap-3">
+                <input 
+                    type="text" 
+                    id="ai-search-input" 
+                    placeholder="输入你想了解的移动底盘控制、CMF 工艺、3D 打印参数..."
+                    class="flex-1 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-primary)] text-sm outline-none focus:border-[var(--klein-blue)] transition-colors"
+                />
+                <button 
+                    type="submit" 
+                    id="ai-search-btn"
+                    class="px-6 py-3 rounded-xl bg-[var(--klein-blue)] text-white font-semibold text-sm hover:opacity-90 active:scale-[0.98] transition-all flex items-center gap-2 shadow-[0_4px_12px_var(--klein-blue-glow)]"
+                >
+                    <span>AI 搜索</span>
+                </button>
+            </form>
+
+            <!-- Search Output Response -->
+            <div id="ai-response-container" class="hidden mt-5 p-5 rounded-xl bg-[rgba(0,0,0,0.1)] border border-dashed border-[var(--border-color)] text-sm leading-relaxed text-[var(--text-primary)] max-h-[300px] overflow-y-auto">
+                <div id="ai-loading-state" class="hidden flex items-center gap-2 text-[var(--text-secondary)]">
+                    <div class="search-spinner"></div>
+                    <span>AI 正在分析并生成解答...</span>
+                </div>
+                <div id="ai-error-state" class="hidden text-[#ff453a]"></div>
+                <div id="ai-response-text" class="ai-response-box whitespace-pre-wrap"></div>
+                
+                <button 
+                    id="ai-reset-btn"
+                    class="hidden mt-3 px-3 py-1 text-xs rounded-md border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                >
+                    清空
+                </button>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="w-full h-[1px] bg-[var(--border-color)] mb-12"></div>
+
+        <!-- Cards Section -->
+        <div class="w-full">
+            <h2 class="text-xl font-bold tracking-tight mb-8">
+                深度技术报告
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                <!-- Card 1 (Leap71 & Articraft) -->
+                <a href="/docs/news/techanalysis/index.html" target="_blank" class="group relative flex flex-col bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--klein-blue)] hover:shadow-2xl hover:shadow-[var(--klein-blue-glow)] overflow-hidden cursor-pointer">
+                    <!-- Card Image -->
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-[var(--border-color)] relative">
+                        <img src="/docs/news/techanalysis/assets/leap71.png" alt="Leap71 Rocket Engine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div class="absolute top-3 left-3 text-[10px] font-bold text-[var(--text-primary)] bg-[rgba(0,0,0,0.65)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                            深度分析
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-[16px] font-semibold mb-2.5 text-[var(--text-primary)] group-hover:text-[var(--klein-blue)] leading-snug transition-colors">
+                        Leap71 与 Articraft 深度技术分析报告
+                    </h3>
+                    
+                    <!-- Core Summary -->
+                    <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed mb-4">
+                        全维度深度对比两大前沿技术平台：探索从第一性原理物理公式（Leap71）到 LLM 智能体沙箱闭环（Articraft）的 3D 生成新范式。
+                    </p>
+
+                    <!-- Key Bullet Points (核心摘要列表) -->
+                    <div class="mt-2 pt-3 border-t border-[var(--border-color)] text-[12px] text-[var(--text-secondary)] space-y-2 mb-4 flex-grow">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-nodes text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>设计内核</strong>：PicoGK 体素引擎 vs CadQuery 参数化装配</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-rocket text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>物理实证</strong>：算法生成 20-200kN 级火箭引擎，顺利完成热试车</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-robot text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>智能运动</strong>：自动解算万级模型物理关节，输出 URDF 仿真</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 mt-auto">
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Computational Eng.</span>
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Agentic 3D</span>
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Interactive</span>
+                    </div>
+                </a>
+
+                <!-- Card 2 (Placeholder/Future Reports) -->
+                <div class="flex flex-col bg-[var(--bg-secondary)] border border-dashed border-[var(--border-color)] rounded-2xl p-6 justify-center items-center text-center opacity-60 min-h-[220px]">
+                    <i class="fa-solid fa-plus-circle text-2xl text-[var(--text-muted)] mb-3"></i>
+                    <h3 class="text-sm font-semibold text-[var(--text-primary)] mb-1">
+                        更多深度报告筹备中
+                    </h3>
+                    <p class="text-xs text-[var(--text-muted)] max-w-[240px]">
+                        如果您有优秀的创客项目或者 CMF 行业标准分享，欢迎划词联系我们提交报告！
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[var(--border-color)] py-8 bg-[var(--bg-secondary)] text-[var(--text-secondary)] text-xs mt-16 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2026 Sophigo Platform. Built for the next-generation engineers.</p>
+            <div class="flex gap-6">
+                <a href="/docs/" class="hover:text-[var(--text-primary)] transition-colors">开发文档</a>
+                <a href="/#showcase" class="hover:text-[var(--text-primary)] transition-colors">课程分类</a>
+                <a href="/#tools" class="hover:text-[var(--text-primary)] transition-colors">工具箱</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Script -->
+    <script>
+        const searchForm = document.getElementById('ai-search-form');
+        const searchInput = document.getElementById('ai-search-input');
+        const searchBtn = document.getElementById('ai-search-btn');
+        const container = document.getElementById('ai-response-container');
+        const loadingState = document.getElementById('ai-loading-state');
+        const errorState = document.getElementById('ai-error-state');
+        const responseText = document.getElementById('ai-response-text');
+        const resetBtn = document.getElementById('ai-reset-btn');
+
+        searchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (!query) return;
+
+            // UI State setup
+            container.classList.remove('hidden');
+            loadingState.classList.remove('hidden');
+            errorState.classList.add('hidden');
+            responseText.innerHTML = '';
+            resetBtn.classList.add('hidden');
+            searchBtn.disabled = true;
+            searchBtn.style.opacity = '0.7';
+
+            try {
+                const response = await fetch('https://api.deepseek.com/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer sk-0f161a2d08ef49c0beaaf54952054990'
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: `You are Sophigo AI Assistant, a helpful assistant for Sophigo - a next-generation engineering education and digital prototyping platform. 
+                                Sophigo integrates:
+                                - Mobile Robots (ROS2, motion control, physical vehicle simulation)
+                                - Fab digital manufacturing (3D printing, laser cutting, CNC milling)
+                                - CMF industrial aesthetics (anodizing thickness 8μm-12μm, sandblasting #120/#180, Klein Blue #002FA7)
+                                Answer the user's question in a professional, concise, and helpful tone in Chinese.`
+                            },
+                            { role: 'user', content: query }
+                        ],
+                        stream: true
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+
+                loadingState.classList.add('hidden');
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let rawMarkdown = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        const cleanedLine = line.trim();
+                        if (cleanedLine.startsWith('data: ')) {
+                            const dataStr = cleanedLine.slice(6).trim();
+                            if (dataStr === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(dataStr);
+                                const delta = parsed.choices[0].delta.content || '';
+                                rawMarkdown += delta;
+                                // 使用 marked 进行实时解析渲染
+                                responseText.innerHTML = marked.parse(rawMarkdown);
+                                container.scrollTop = container.scrollHeight;
+                            } catch (e) {
+                                // ignore
+                            }
+                        }
+                    }
+                }
+
+                resetBtn.classList.remove('hidden');
+
+            } catch (err) {
+                console.error(err);
+                loadingState.classList.add('hidden');
+                errorState.classList.remove('hidden');
+                errorState.innerText = 'AI 搜索失败，请检查网络或稍后再试。';
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.style.opacity = '1';
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            responseText.innerHTML = '';
+            container.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

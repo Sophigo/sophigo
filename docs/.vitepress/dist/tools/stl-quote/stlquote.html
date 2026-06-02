@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL 报价 · Sophigo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js (核心3D库) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- STLLoader (用于加载STL文件) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <!-- SheetJS (用于导出Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        /* ===== Sophigo Dark Theme ===== */
+        :root {
+            --bg-primary: #0B0B0C;
+            --bg-secondary: #161617;
+            --bg-card: #1a1a1c;
+            --bg-card-hover: #1f1f22;
+            --bg-surface: #111113;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --text-muted: #6e6e73;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --klein-blue: #002FA7;
+            --accent-blue: #3b82f6;
+            --accent-blue-glow: rgba(59, 130, 246, 0.2);
+            --grid-dot-color: rgba(255, 255, 255, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-primary);
+            background-image: radial-gradient(var(--grid-dot-color) 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        /* 隐藏的Canvas用于生成截图 */
+        #snapshot-canvas {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            visibility: hidden;
+        }
+        .loader {
+            border-top-color: var(--accent-blue);
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+        /* 卡片大框 */
+        .section-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .section-header {
+            background-color: var(--bg-surface);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /* 批量行 */
+        .batch-row {
+            background: var(--bg-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+        .batch-row:hover {
+            border-color: var(--border-hover) !important;
+            box-shadow: 0 0 0 1px var(--border-hover) !important;
+        }
+        /* Select & Input overrides */
+        select, input[type="number"] {
+            background-color: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+        select option { background-color: var(--bg-secondary); color: var(--text-primary); }
+        input[type="file"] {
+            background-color: var(--bg-surface) !important;
+            color: var(--text-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+        /* Table */
+        thead { background-color: var(--bg-surface) !important; }
+        th { color: var(--text-muted) !important; }
+        tbody tr { border-color: var(--border-color) !important; }
+        tbody tr:hover { background-color: rgba(255,255,255,0.03) !important; }
+        td { color: var(--text-secondary); }
+        td:nth-child(2) { color: var(--text-primary) !important; font-weight: 500; }
+        /* Stats panel */
+        #stats-panel { background-color: var(--bg-card) !important; border-color: var(--border-color) !important; }
+        /* Status bar */
+        #status-bar { background-color: rgba(59,130,246,0.1) !important; border-color: rgba(59,130,246,0.2) !important; color: #93c5fd !important; }
+        /* Tailwind color overrides for dark mode */
+        .bg-white { background-color: var(--bg-card) !important; }
+        .bg-gray-50 { background-color: var(--bg-secondary) !important; }
+        .bg-gray-100 { background-color: var(--bg-surface) !important; }
+        .bg-gray-50\/50 { background-color: rgba(22,22,23,0.5) !important; }
+        .text-gray-800 { color: var(--text-primary) !important; }
+        .text-gray-700 { color: var(--text-secondary) !important; }
+        .text-gray-500 { color: var(--text-muted) !important; }
+        .text-gray-400 { color: #555559 !important; }
+        .text-gray-300 { color: #3a3a3e !important; }
+        .text-gray-900 { color: var(--text-primary) !important; }
+        .border-gray-200 { border-color: var(--border-color) !important; }
+        .border-gray-300 { border-color: var(--border-color) !important; }
+        .border-gray-100 { border-color: var(--border-color) !important; }
+        .shadow-sm { box-shadow: 0 1px 6px rgba(0,0,0,0.4) !important; }
+        .shadow-md { box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important; }
+        /* Header bar */
+        header.bg-white { 
+            background-color: rgba(11,11,12,0.85) !important; 
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            box-shadow: none !important;
+        }
+        /* Buttons */
+        button.bg-white { background-color: var(--bg-secondary) !important; color: var(--text-primary) !important; }
+        button.bg-white:hover { background-color: var(--bg-card-hover) !important; }
+        .hover\:border-indigo-300:hover { border-color: rgba(99,102,241,0.4) !important; }
+        .hover\:text-indigo-600:hover { color: #818cf8 !important; }
+        /* Group header in table */
+        .bg-gray-100 { background-color: rgba(255,255,255,0.04) !important; }
+        /* Yellow bg cells (工艺/后处理) */
+        .bg-yellow-50\/50 { background-color: rgba(234,179,8,0.05) !important; }
+        /* Stats cards */
+        .bg-indigo-50 { background-color: rgba(99,102,241,0.1) !important; }
+        .bg-green-50 { background-color: rgba(34,197,94,0.08) !important; }
+        .border-indigo-100 { border-color: rgba(99,102,241,0.2) !important; }
+        .border-green-100 { border-color: rgba(34,197,94,0.2) !important; }
+        .ring-indigo-200 { --tw-ring-color: rgba(99,102,241,0.25) !important; }
+        .ring-green-200 { --tw-ring-color: rgba(34,197,94,0.2) !important; }
+        .text-indigo-500 { color: #818cf8 !important; }
+        .text-indigo-700 { color: #a5b4fc !important; }
+        .text-green-600 { color: #4ade80 !important; }
+        .text-green-700 { color: #86efac !important; }
+        /* 移除数字输入框的箭头 */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-sm z-20 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-lg shadow-md">
+                    <i class="fa-solid fa-weight-scale text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-gray-900">工程零件重量计算器</h1>
+                    <p class="text-xs text-gray-400">仅支持 STL 格式 (STP请转存为STL)</p>
+                </div>
+            </div>
+            <div class="text-xs text-gray-400">v3.3 智能提示版</div>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="flex-grow container mx-auto px-4 py-4 flex flex-col gap-4 overflow-hidden">
+        
+        <!-- 上方大框：动态行配置区 -->
+        <div class="section-box flex-shrink-0 flex flex-col max-h-[45vh]">
+            <div class="section-header justify-between sticky top-0 z-10">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-indigo-500"></i>
+                    <span>1. 材质与工艺配置</span>
+                </div>
+                <div class="text-xs text-orange-500 font-normal hidden md:block">
+                    <i class="fa-solid fa-circle-exclamation mr-1"></i>STP/STEP 文件请先另存为 STL 格式
+                </div>
+            </div>
+            
+            <!-- 动态行容器 -->
+            <div id="batch-container" class="p-4 overflow-y-auto custom-scrollbar flex flex-col gap-3 bg-gray-50/50">
+                <!-- 这里的内容将由 JS 生成 -->
+            </div>
+        </div>
+
+        <!-- 中间操作区：主要按钮放在这里 -->
+        <div class="flex justify-center gap-4 py-1 flex-shrink-0">
+            <button onclick="addBatchRow()" class="px-6 py-2.5 bg-white border border-gray-300 hover:border-indigo-300 text-gray-700 hover:text-indigo-600 hover:shadow-md rounded-lg shadow-sm transition flex items-center gap-2 font-medium">
+                <i class="fa-solid fa-plus-circle text-lg"></i> 添加材质行
+            </button>
+            <button onclick="calculateAll()" id="btn-calculate-all" class="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 font-bold text-base transform active:scale-95">
+                <i class="fa-solid fa-calculator"></i>
+                开始全部计算
+            </button>
+        </div>
+
+        <!-- 下方大框：结果输出区 -->
+        <div class="section-box flex-grow flex flex-col min-h-0">
+            <div class="section-header justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-green-600"></i>
+                    <span>2. 计算结果</span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="clearTable()" class="text-xs px-2 py-1 text-gray-500 hover:text-red-600 border border-transparent hover:border-red-200 rounded transition">
+                        清空
+                    </button>
+                    <button id="exportBtn" onclick="exportToExcel()" disabled class="text-xs px-3 py-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white rounded shadow-sm transition flex items-center gap-1">
+                        <i class="fa-solid fa-download"></i> 导出 Excel
+                    </button>
+                </div>
+            </div>
+
+            <!-- 统计面板 -->
+            <div id="stats-panel" class="hidden bg-white border-b border-gray-100 p-4 flex gap-4 text-sm flex-shrink-0 overflow-x-auto">
+                <div class="bg-indigo-50 rounded p-2 px-4 text-center border border-indigo-100 ring-1 ring-indigo-200 shadow-sm min-w-[120px]">
+                    <div class="text-xs text-indigo-500 mb-1">项目总重</div>
+                    <div class="font-bold text-indigo-700 text-base" id="stat-total">0.00 g</div>
+                </div>
+                <div class="bg-green-50 rounded p-2 px-4 text-center border border-green-100 ring-1 ring-green-200 shadow-sm min-w-[120px]">
+                    <div class="text-xs text-green-600 mb-1">总预估费用</div>
+                    <div class="font-bold text-green-700 text-base" id="stat-cost">¥0.00</div>
+                </div>
+                <!-- 动态统计将追加在这里 -->
+                <div id="dynamic-stats" class="flex gap-3"></div>
+            </div>
+            
+            <!-- 状态提示 -->
+            <div id="status-bar" class="hidden bg-indigo-50 text-indigo-800 px-4 py-2 flex items-center gap-3 border-b border-indigo-100 flex-shrink-0">
+                <div class="loader ease-linear rounded-full border-2 border-t-2 border-gray-300 h-4 w-4"></div>
+                <span id="status-text" class="text-xs font-medium">处理中...</span>
+            </div>
+
+            <!-- 表格区域 -->
+            <div class="flex-grow overflow-auto custom-scrollbar p-0 bg-white relative">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50 sticky top-0 z-10 shadow-sm text-xs">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase w-10">#</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">文件名</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">预览</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">材质</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase bg-yellow-50">加工</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase bg-yellow-50">后处理</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">密度</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">体积(cm³)</th>
+                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase">重量(g)</th>
+                            <th class="px-4 py-3 text-left font-medium text-green-600 uppercase bg-green-50">费用(¥)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultBody" class="bg-white text-sm">
+                        <tr id="empty-row">
+                            <td colspan="10" class="px-6 py-20 text-center text-gray-300">
+                                <div class="flex flex-col items-center gap-2">
+                                    <i class="fa-regular fa-clipboard text-3xl"></i>
+                                    <p>请点击上方“添加材质行”开始计算</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <canvas id="snapshot-canvas" width="200" height="150"></canvas>
+
+    <script>
+        // --- 初始化 ---
+        const canvas = document.getElementById('snapshot-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, preserveDrawingBuffer: true });
+        renderer.setSize(200, 150);
+        const scene = new THREE.Scene();
+        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(1, 1, 2);
+        scene.add(dirLight);
+        const camera = new THREE.PerspectiveCamera(45, 200 / 150, 0.1, 10000);
+        const loader = new THREE.STLLoader();
+
+        let tableData = []; 
+        let rowCounter = 0; // 用于生成唯一ID
+
+        // 材质预设数据
+        const MATERIAL_PRESETS = {
+            'plastic': { name: '塑料', density: 1.3, color: 'blue' },
+            'aluminum': { name: '铝合金', density: 2.7, color: 'gray' },
+            'steel': { name: '不锈钢', density: 8.0, color: 'slate' },
+            'resin': { name: '树脂', density: 1.15, color: 'amber' }, 
+            'custom': { name: '自定义', density: 1.0, color: 'purple' }
+        };
+
+        // 页面加载完成后初始化一行
+        window.onload = function() {
+            addBatchRow('plastic');
+        };
+
+        // --- 动态行管理 ---
+
+        function addBatchRow(defaultType = 'plastic') {
+            rowCounter++;
+            const container = document.getElementById('batch-container');
+            const rowId = `row-${rowCounter}`;
+            
+            const div = document.createElement('div');
+            div.className = "batch-row bg-white p-3 rounded-lg border border-gray-200 shadow-sm transition hover:shadow-md flex flex-col md:flex-row gap-4 items-center animate-[fadeIn_0.3s_ease-out]";
+            div.id = rowId;
+            div.dataset.rowId = rowCounter;
+
+            div.innerHTML = `
+                <!-- 1. 材质与密度 (固定宽度) -->
+                <div class="flex flex-col gap-2 w-full md:w-48 flex-shrink-0">
+                    <label class="text-xs text-gray-500 font-medium">材质选择</label>
+                    <div class="flex gap-2">
+                        <select onchange="onMaterialChange(this)" class="row-material w-full text-sm border border-gray-300 rounded px-2 py-1.5 focus:border-indigo-500 outline-none bg-gray-50">
+                            <option value="plastic" ${defaultType === 'plastic' ? 'selected' : ''}>塑料</option>
+                            <option value="aluminum" ${defaultType === 'aluminum' ? 'selected' : ''}>铝合金</option>
+                            <option value="steel" ${defaultType === 'steel' ? 'selected' : ''}>不锈钢</option>
+                            <option value="resin">树脂</option>
+                            <option value="custom">自定义</option>
+                        </select>
+                        <div class="relative w-20 flex-shrink-0" title="密度 g/cm³">
+                            <input type="number" step="0.01" value="${MATERIAL_PRESETS[defaultType].density}" 
+                                class="row-density w-full text-sm border border-gray-300 rounded px-1 py-1.5 text-center focus:border-indigo-500 outline-none font-mono font-bold text-gray-700">
+                            <span class="absolute right-0 top-0 h-full flex items-center pr-1 text-[10px] text-gray-400 pointer-events-none">g/cm³</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 工艺与后处理 (固定宽度) -->
+                <div class="flex flex-col gap-2 w-full md:w-64 flex-shrink-0">
+                    <label class="text-xs text-gray-500 font-medium">工艺配置</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <select class="row-process w-full text-xs border border-gray-300 rounded px-2 py-1.5 focus:border-indigo-500 outline-none bg-white">
+                            <option value="" disabled selected>加工方式</option>
+                            <option value="SLA">SLA</option>
+                            <option value="FDM">FDM</option>
+                            <option value="SLM">SLM</option>
+                            <option value="CNC">CNC</option>
+                            <option value="注塑">注塑</option>
+                            <option value="硅胶复模">硅胶复模</option>
+                        </select>
+                        <select class="row-post w-full text-xs border border-gray-300 rounded px-2 py-1.5 focus:border-indigo-500 outline-none bg-white">
+                            <option value="" disabled selected>后处理</option>
+                            <option value="无">无</option>
+                            <option value="打磨">打磨</option>
+                            <option value="喷砂">喷砂</option>
+                            <option value="喷漆">喷漆</option>
+                            <option value="阳极氧化">阳极氧化</option>
+                            <option value="电镀">电镀</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 3. 文件上传 (自适应) -->
+                <div class="flex-grow w-full min-w-0">
+                    <label class="text-xs text-gray-500 font-medium mb-2 block">导入 STL 文件 <span class="text-gray-400 text-[10px]">(STP请先转STL)</span></label>
+                    <input type="file" multiple accept=".stl,.STL" class="row-file block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer border border-gray-200 rounded bg-gray-50"/>
+                </div>
+
+                <!-- 4. 操作按钮 -->
+                <div class="flex items-end gap-2 w-full md:w-auto mt-2 md:mt-0 pt-6">
+                    <button onclick="calculateRow('${rowId}')" class="flex-grow md:flex-none px-3 py-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 rounded text-sm transition" title="仅计算此行">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button onclick="deleteRow('${rowId}')" class="px-3 py-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition" title="删除行">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(div);
+            
+            // 滚动到底部
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function deleteRow(rowId) {
+            const row = document.getElementById(rowId);
+            if (row) {
+                row.remove();
+            }
+        }
+
+        function onMaterialChange(selectEl) {
+            const row = selectEl.closest('.batch-row');
+            const densityInput = row.querySelector('.row-density');
+            const materialKey = selectEl.value;
+            
+            if (MATERIAL_PRESETS[materialKey]) {
+                densityInput.value = MATERIAL_PRESETS[materialKey].density;
+            }
+        }
+
+        // --- 核心计算逻辑 ---
+
+        // 计算单行
+        async function calculateRow(rowId) {
+            const row = document.getElementById(rowId);
+            if (!row) return;
+            const config = extractRowConfig(row);
+            
+            if (config.files.length === 0) {
+                alert("请选择文件");
+                return;
+            }
+            if (!validateDensity(config.density)) return;
+
+            await runBatchCalculation([config]);
+        }
+
+        // 计算所有行
+        async function calculateAll() {
+            const rows = document.querySelectorAll('.batch-row');
+            const configs = [];
+            let hasFiles = false;
+
+            rows.forEach(row => {
+                const config = extractRowConfig(row);
+                if (config.files.length > 0) {
+                    hasFiles = true;
+                    if (validateDensity(config.density)) {
+                        configs.push(config);
+                    }
+                }
+            });
+
+            if (!hasFiles) {
+                alert("请至少在一行中选择文件！");
+                return;
+            }
+
+            if (configs.length > 0) {
+                await runBatchCalculation(configs);
+            }
+        }
+
+        // 从 DOM 提取配置数据
+        function extractRowConfig(rowElement) {
+            const materialSelect = rowElement.querySelector('.row-material');
+            const densityInput = rowElement.querySelector('.row-density');
+            const processSelect = rowElement.querySelector('.row-process');
+            const postSelect = rowElement.querySelector('.row-post');
+            const fileInput = rowElement.querySelector('.row-file');
+            
+            const materialKey = materialSelect.value;
+            const materialName = MATERIAL_PRESETS[materialKey] ? MATERIAL_PRESETS[materialKey].name : '未知';
+
+            return {
+                materialKey: materialKey,
+                materialName: materialName, // 后面可以用于显示
+                density: parseFloat(densityInput.value),
+                process: processSelect.value || '-',
+                postProcess: postSelect.value || '-',
+                files: Array.from(fileInput.files),
+                fileInput: fileInput
+            };
+        }
+
+        function validateDensity(val) {
+            if (isNaN(val) || val <= 0) {
+                alert("密度值必须大于0");
+                return false;
+            }
+            return true;
+        }
+
+        // 批量执行器
+        async function runBatchCalculation(configs) {
+            toggleLoading(true, `正在处理...`);
+            
+            const emptyRow = document.getElementById('empty-row');
+            if (emptyRow) emptyRow.remove();
+
+            for (const config of configs) {
+                updateStatusText(`正在处理 ${config.materialName} (${config.files.length} 个文件)...`);
+                
+                for (let i = 0; i < config.files.length; i++) {
+                    const file = config.files[i];
+                    
+                    // STP 拦截逻辑
+                    const fileNameLower = file.name.toLowerCase();
+                    if (fileNameLower.endsWith('.stp') || fileNameLower.endsWith('.step')) {
+                        alert(`【不支持 STP 格式】\n\n文件 "${file.name}" 为 STP/STEP 格式，Web 端无法直接分析。\n\n请在 CAD 软件（如 SolidWorks/UG/Rhino）中将文件【另存为 STL】格式后重新上传。`);
+                        continue;
+                    }
+
+                    if (!fileNameLower.endsWith('.stl')) {
+                        // 忽略其他格式
+                        continue;
+                    }
+
+                    try {
+                        const geometry = await loadSTL(file);
+                        const volumeCm3 = calculateVolume(geometry);
+                        const weightG = volumeCm3 * config.density;
+                        
+                        // 费用计算逻辑：重量 * 0.9
+                        const cost = weightG * 0.9;
+                        
+                        const imgData = renderThumbnail(geometry); 
+
+                        tableData.push({
+                            id: Date.now() + Math.random(), 
+                            filename: file.name,
+                            image: imgData,
+                            material: config.materialName,
+                            materialKey: config.materialKey, 
+                            process: config.process,
+                            postProcess: config.postProcess,
+                            density: config.density,
+                            volume: volumeCm3,
+                            weight: weightG,
+                            cost: cost // 存储费用
+                        });
+
+                        geometry.dispose();
+                    } catch (err) {
+                        console.error(`Failed to process ${file.name}`, err);
+                    }
+                }
+                // 清空输入框防止重复提交
+                config.fileInput.value = '';
+            }
+
+            updateUI();
+            toggleLoading(false);
+            document.getElementById('exportBtn').disabled = false;
+        }
+
+        // --- 界面更新 ---
+
+        function toggleLoading(isLoading, text) {
+            const bar = document.getElementById('status-bar');
+            const statusText = document.getElementById('status-text');
+            const mainBtn = document.getElementById('btn-calculate-all');
+            
+            if (isLoading) {
+                bar.classList.remove('hidden');
+                statusText.innerText = text || '处理中...';
+                mainBtn.disabled = true;
+                mainBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                mainBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 计算中...';
+            } else {
+                bar.classList.add('hidden');
+                mainBtn.disabled = false;
+                mainBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                mainBtn.innerHTML = '<i class="fa-solid fa-calculator"></i> 开始全部计算';
+            }
+        }
+
+        function updateStatusText(text) {
+            document.getElementById('status-text').innerText = text;
+        }
+
+        function updateUI() {
+            renderTable();
+            updateStatistics();
+        }
+
+        function updateStatistics() {
+            const panel = document.getElementById('stats-panel');
+            const dynamicStatsDiv = document.getElementById('dynamic-stats');
+            
+            if (tableData.length > 0) panel.classList.remove('hidden');
+            else panel.classList.add('hidden');
+
+            const stats = {}; 
+            let totalWeight = 0;
+            let totalCost = 0;
+
+            // 聚合数据
+            tableData.forEach(item => {
+                if (!stats[item.material]) {
+                    stats[item.material] = 0;
+                }
+                stats[item.material] += item.weight;
+                totalWeight += item.weight;
+                totalCost += item.cost;
+            });
+
+            // 更新总计
+            document.getElementById('stat-total').innerText = totalWeight.toFixed(2) + ' g';
+            document.getElementById('stat-cost').innerText = '¥' + totalCost.toFixed(2);
+
+            // 动态生成分项统计
+            dynamicStatsDiv.innerHTML = '';
+            for (const [materialName, weight] of Object.entries(stats)) {
+                const div = document.createElement('div');
+                div.className = "bg-gray-50 rounded p-2 px-3 text-center border border-gray-200 min-w-[100px]";
+                div.innerHTML = `
+                    <div class="text-xs text-gray-500 mb-1">${materialName}</div>
+                    <div class="font-bold text-gray-700">${weight.toFixed(1)}g</div>
+                `;
+                dynamicStatsDiv.appendChild(div);
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('resultBody');
+            tbody.innerHTML = '';
+
+            if (tableData.length === 0) {
+                tbody.innerHTML = `<tr id="empty-row"><td colspan="10" class="px-6 py-20 text-center text-gray-300"><div class="flex flex-col items-center gap-2"><i class="fa-regular fa-clipboard text-3xl"></i><p>暂无数据，请点击上方“添加材质行”开始计算</p></div></td></tr>`;
+                return;
+            }
+
+            // 按材质分组显示
+            const groups = {};
+            tableData.forEach(item => {
+                if(!groups[item.material]) groups[item.material] = [];
+                groups[item.material].push(item);
+            });
+
+            let index = 1;
+            for (const [materialName, items] of Object.entries(groups)) {
+                // 组头
+                const headerRow = document.createElement('tr');
+                headerRow.innerHTML = `<td colspan="10" class="px-4 py-2 text-xs font-bold bg-gray-100 text-gray-700 border-t border-b border-gray-200"><i class="fa-solid fa-layer-group mr-1"></i> ${materialName} (${items.length})</td>`;
+                tbody.appendChild(headerRow);
+
+                items.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-50 border-b border-gray-100 transition";
+                    tr.innerHTML = `
+                        <td class="px-4 py-2 text-gray-400">${index++}</td>
+                        <td class="px-4 py-2 font-medium text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]" title="${item.filename}">${item.filename}</td>
+                        <td class="px-4 py-2"><div class="h-8 w-12 bg-white border border-gray-200 rounded flex items-center justify-center p-0.5"><img src="${item.image}" class="max-h-full max-w-full object-contain"></div></td>
+                        <td class="px-4 py-2 text-gray-500 text-xs">${item.material}</td>
+                        <td class="px-4 py-2 text-gray-700 text-xs bg-yellow-50/50">${item.process}</td>
+                        <td class="px-4 py-2 text-gray-700 text-xs bg-yellow-50/50">${item.postProcess}</td>
+                        <td class="px-4 py-2 text-gray-500 font-mono text-xs">${item.density}</td>
+                        <td class="px-4 py-2 text-gray-500 font-mono text-xs">${item.volume.toFixed(2)}</td>
+                        <td class="px-4 py-2 font-bold text-gray-900 font-mono">${item.weight.toFixed(2)}</td>
+                        <td class="px-4 py-2 font-bold text-green-600 font-mono">¥${item.cost.toFixed(2)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        // --- 3D & Util ---
+        function loadSTL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try { resolve(loader.parse(e.target.result)); } catch (err) { reject(err); }
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function calculateVolume(geometry) {
+            if (!geometry.attributes.position) return 0;
+            let signedVolume = 0;
+            const pos = geometry.attributes.position;
+            const p1 = new THREE.Vector3(), p2 = new THREE.Vector3(), p3 = new THREE.Vector3();
+            for (let i = 0; i < pos.count; i += 3) {
+                p1.fromBufferAttribute(pos, i); p2.fromBufferAttribute(pos, i + 1); p3.fromBufferAttribute(pos, i + 2);
+                signedVolume += p1.dot(p2.cross(p3)) / 6.0;
+            }
+            return Math.abs(signedVolume) / 1000.0;
+        }
+
+        function renderThumbnail(geometry) {
+            geometry.computeBoundingBox(); geometry.center();
+            const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: 0x3b82f6, specular: 0x111111, shininess: 200 }));
+            scene.add(mesh);
+            
+            const box = geometry.boundingBox; const size = new THREE.Vector3(); box.getSize(size);
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 * Math.tan(fov * 2)) * 1.5;
+            
+            camera.position.set(cameraZ, cameraZ, cameraZ); camera.lookAt(0, 0, 0);
+            renderer.render(scene, camera);
+            const dataURL = canvas.toDataURL('image/png');
+            scene.remove(mesh);
+            return dataURL;
+        }
+
+        function clearTable() {
+            if (tableData.length > 0 && confirm('确定要清空所有数据吗？')) {
+                tableData = [];
+                updateUI();
+                document.getElementById('exportBtn').disabled = true;
+            }
+        }
+
+        function exportToExcel() {
+            if (tableData.length === 0) return;
+            const aoa = [['ID', '文件名', '材质', '加工方式', '后处理', '密度', '体积(cm3)', '重量(g)', '费用(¥)']];
+            // 按材质名称排序
+            tableData.sort((a,b) => a.material.localeCompare(b.material)); 
+            tableData.forEach((item, i) => {
+                aoa.push([i+1, item.filename, item.material, item.process, item.postProcess, item.density, item.volume.toFixed(2), item.weight.toFixed(2), item.cost.toFixed(2)]);
+            });
+            const ws = XLSX.utils.aoa_to_sheet(aoa);
+            ws['!cols'] = [{wch:5}, {wch:30}, {wch:10}, {wch:12}, {wch:12}, {wch:8}, {wch:12}, {wch:12}, {wch:12}];
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "重量清单");
+            XLSX.writeFile(wb, `重量清单_${new Date().toISOString().slice(0,10)}.xlsx`);
+        }
+    </script>
+</body>
+</html>

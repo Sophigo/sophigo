@@ -1,11 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, ChevronDown, User, LogOut, FileText } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sun, Moon, Menu, X, ChevronDown, User, LogOut, FileText, Globe } from 'lucide-react';
 
-export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, onToggleTheme }) {
+export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, onToggleTheme, lang = 'zh', onToggleLang }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCoursesDropdownOpen, setIsCoursesDropdownOpen] = useState(false);
+  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [username, setUsername] = useState('User');
+
+  // Refs for delayed close timers (prevents flicker when moving to dropdown)
+  const coursesCloseTimer = useRef(null);
+  const toolsCloseTimer = useRef(null);
+
+  const openCourses = () => { clearTimeout(coursesCloseTimer.current); setIsCoursesDropdownOpen(true); };
+  const closeCourses = () => { coursesCloseTimer.current = setTimeout(() => setIsCoursesDropdownOpen(false), 150); };
+  const openTools = () => { clearTimeout(toolsCloseTimer.current); setIsToolsDropdownOpen(true); };
+  const closeTools = () => { toolsCloseTimer.current = setTimeout(() => setIsToolsDropdownOpen(false), 150); };
 
   useEffect(() => {
     if (userToken) {
@@ -18,6 +28,68 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
       }
     }
   }, [userToken]);
+
+  const t = {
+    zh: {
+      home: '首页',
+      courses: '课程',
+      fabCourse: 'Fab课程',
+      aiBasics: 'AI应用基础',
+      mobileRobot: 'AI移动机器人',
+      cmf: 'CMF应用',
+      tools: '工具',
+      threejs: 'threejs生成器',
+      stlQuote: 'stl 报价',
+      mods: 'Mods',
+      videoGen: '视频生成',
+      matting: '抠图',
+      news: '资讯',
+      aboutUs: '关于我们',
+      register: '注册',
+      enterDocs: '进入文档系统',
+      logout: '退出登录',
+      profile: '个人中心'
+    },
+    en: {
+      home: 'Home',
+      courses: 'Courses',
+      fabCourse: 'Fab Course',
+      aiBasics: 'AI Basics',
+      mobileRobot: 'AI Mobile Robot',
+      cmf: 'CMF Application',
+      tools: 'Tools',
+      threejs: 'Three.js Generator',
+      stlQuote: 'STL Quote',
+      mods: 'Mods',
+      videoGen: 'Video Gen',
+      matting: 'Matting',
+      news: 'News',
+      aboutUs: 'About Us',
+      register: 'Register',
+      enterDocs: 'Docs System',
+      logout: 'Logout',
+      profile: 'Profile'
+    }
+  }[lang] || {
+    home: '首页',
+    courses: '课程',
+    fabCourse: 'Fab课程',
+    aiBasics: 'AI应用基础',
+    mobileRobot: 'AI移动机器人',
+    cmf: 'CMF应用',
+    tools: '工具',
+    threejs: 'threejs生成器',
+    stlQuote: 'stl 报价',
+    mods: 'Mods',
+    videoGen: '视频生成',
+    matting: '抠图',
+    news: '资讯',
+    aboutUs: '关于我们',
+    register: '注册',
+    enterDocs: '进入文档系统',
+    logout: '退出登录',
+    profile: '个人中心'
+  };
 
   return (
     <nav className="glassmorphism" style={{
@@ -45,15 +117,12 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           alignItems: 'center',
           gap: '0.5rem'
         }}>
-          <span style={{
-            display: 'inline-block',
-            width: '12px',
-            height: '12px',
-            borderRadius: '2px',
-            backgroundColor: 'var(--klein-blue)',
-            boxShadow: '0 0 8px var(--klein-blue)'
-          }}></span>
-          ProFabX
+          <img src="/logo.png" alt="Sophigo Logo" style={{
+            width: '24px',
+            height: '24px',
+            objectFit: 'contain'
+          }} />
+          Sophigo
         </a>
 
         {/* Desktop Nav Items */}
@@ -63,11 +132,13 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           alignItems: 'center',
           gap: '2.5rem'
         }} className="desktop-nav">
+          <a href="/" style={navLinkStyle}>{t.home}</a>
+
           {/* Courses Dropdown */}
           <div 
             style={{ position: 'relative' }}
-            onMouseEnter={() => setIsCoursesDropdownOpen(true)}
-            onMouseLeave={() => setIsCoursesDropdownOpen(false)}
+            onMouseEnter={openCourses}
+            onMouseLeave={closeCourses}
           >
             <button style={{
               background: 'none',
@@ -85,7 +156,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
             onClick={() => setIsCoursesDropdownOpen(!isCoursesDropdownOpen)}
             className="hover-link"
             >
-              课程 (Courses)
+              {t.courses}
               <ChevronDown size={14} style={{
                 transform: isCoursesDropdownOpen ? 'rotate(180deg)' : 'none',
                 transition: 'transform 0.2s ease'
@@ -94,7 +165,10 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
 
             {/* Dropdown Box */}
             {isCoursesDropdownOpen && (
-              <div className="glassmorphism-card" style={{
+              <div className="glassmorphism-card"
+                onMouseEnter={openCourses}
+                onMouseLeave={closeCourses}
+                style={{
                 position: 'absolute',
                 top: '100%',
                 left: '0',
@@ -107,17 +181,73 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 zIndex: 110,
                 animation: 'fadeIn 0.2s ease'
               }}>
-                <a href="/docs/courses/mobile-robot.html" style={dropdownItemStyle}>移动机器人</a>
-                <a href="/docs/courses/fab-course.html" style={dropdownItemStyle}>Fab 课程</a>
-                <a href="/docs/courses/cmf.html" style={dropdownItemStyle}>CMF 规范</a>
+                <a href="/docs/courses/fab-course/" style={dropdownItemStyle}>{t.fabCourse}</a>
+                <a href="/docs/courses/ai-basics/" style={dropdownItemStyle}>{t.aiBasics}</a>
+                <a href="#/courses/mobile-robot" style={dropdownItemStyle}>{t.mobileRobot}</a>
+                <a href="/docs/courses/cmf/" style={dropdownItemStyle}>{t.cmf}</a>
               </div>
             )}
           </div>
 
-          <a href="#ai-innovation" style={navLinkStyle}>AI 创新与应用</a>
-          <a href="#showcase" style={navLinkStyle}>应用案例</a>
-          <a href="#tools" style={navLinkStyle}>社区工具</a>
-          <a href="#about" style={navLinkStyle}>关于我们</a>
+          {/* Tools Dropdown */}
+          <div 
+            style={{ position: 'relative' }}
+            onMouseEnter={openTools}
+            onMouseLeave={closeTools}
+          >
+            <button style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--text-secondary)',
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.25rem',
+              transition: 'color 0.2s ease',
+              padding: '0.5rem 0'
+            }}
+            onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
+            className="hover-link"
+            >
+              {t.tools}
+              <ChevronDown size={14} style={{
+                transform: isToolsDropdownOpen ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.2s ease'
+              }} />
+            </button>
+
+            {/* Dropdown Box */}
+            {isToolsDropdownOpen && (
+              <div className="glassmorphism-card"
+                onMouseEnter={openTools}
+                onMouseLeave={closeTools}
+                style={{
+                position: 'absolute',
+                top: '100%',
+                left: '0',
+                width: '200px',
+                borderRadius: '12px',
+                padding: '0.5rem 0',
+                marginTop: '4px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                border: '1px solid var(--border-color)',
+                zIndex: 110,
+                animation: 'fadeIn 0.2s ease'
+              }}>
+                <a href="/docs/tools/threejs-generator/" style={dropdownItemStyle}>{t.threejs}</a>
+                <a href="/docs/tools/stl-quote/stlquote.html" style={dropdownItemStyle}>{t.stlQuote}</a>
+                <a href="/docs/tools/mods/" style={dropdownItemStyle}>{t.mods}</a>
+                <a href="/docs/tools/video-generation/" style={dropdownItemStyle}>{t.videoGen}</a>
+                <a href="/docs/tools/matting/" style={dropdownItemStyle}>{t.matting}</a>
+              </div>
+            )}
+          </div>
+
+          <a href="/docs/news/" style={navLinkStyle}>{t.news}</a>
+
+          <a href="#about" style={navLinkStyle}>{t.aboutUs}</a>
         </div>
 
         {/* Right Action controls */}
@@ -203,7 +333,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 }}>
                   <a href="/docs/index.html" style={{...dropdownItemStyle, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
                     <FileText size={14} />
-                    进入文档系统
+                    {t.enterDocs}
                   </a>
                   <button 
                     onClick={onLogout}
@@ -221,7 +351,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                     }}
                   >
                     <LogOut size={14} />
-                    退出登录
+                    {t.logout}
                   </button>
                 </div>
               )}
@@ -236,9 +366,34 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 fontWeight: 500
               }}
             >
-              Sign In
+              {t.register}
             </button>
           )}
+
+          {/* Language Toggle Button */}
+          <button 
+            onClick={onToggleLang}
+            style={{
+              background: 'none',
+              border: '1px solid var(--border-color)',
+              cursor: 'pointer',
+              color: 'var(--text-primary)',
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'background-color 0.2s ease',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              gap: '0.25rem'
+            }}
+            title={lang === 'zh' ? 'Switch to English' : '切换为中文'}
+            className="lang-toggle-btn"
+          >
+            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{lang === 'zh' ? 'EN' : '中'}</span>
+          </button>
 
           {/* Mobile Menu Icon */}
           <button 
@@ -269,24 +424,45 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           padding: '2rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
+          gap: '1.25rem',
           borderTop: '1px solid var(--border-color)',
           zIndex: 99,
+          overflowY: 'auto',
           animation: 'slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
+          <a href="/" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.home}</a>
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
+          
           <div>
-            <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>课程 (Courses)</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingLeft: '0.5rem' }}>
-              <a href="/docs/courses/mobile-robot.html" style={mobileNavLinkStyle}>移动机器人</a>
-              <a href="/docs/courses/fab-course.html" style={mobileNavLinkStyle}>Fab 课程</a>
-              <a href="/docs/courses/cmf.html" style={mobileNavLinkStyle}>CMF 规范</a>
+            <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.courses}</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
+              <a href="/docs/courses/fab-course/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.fabCourse}</a>
+              <a href="/docs/courses/ai-basics/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.aiBasics}</a>
+              <a href="#/courses/mobile-robot" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mobileRobot}</a>
+              <a href="/docs/courses/cmf/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.cmf}</a>
             </div>
           </div>
-          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)' }} />
-          <a href="#ai-innovation" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>AI 创新与应用</a>
-          <a href="#showcase" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>应用案例</a>
-          <a href="#tools" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>社区工具</a>
-          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>关于我们</a>
+          
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
+
+          <div>
+            <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.tools}</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
+              <a href="/docs/tools/threejs-generator/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
+              <a href="/docs/tools/stl-quote/stlquote.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.stlQuote}</a>
+              <a href="/docs/tools/mods/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>
+              <a href="/docs/tools/video-generation/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.videoGen}</a>
+              <a href="/docs/tools/matting/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.matting}</a>
+            </div>
+          </div>
+
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
+
+          <a href="/docs/news/" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.news}</a>
+
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
+          
+          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.aboutUs}</a>
         </div>
       )}
 
@@ -343,6 +519,14 @@ const mobileNavLinkStyle = {
   textDecoration: 'none',
   color: 'var(--text-primary)',
   fontSize: '1.1rem',
+  fontWeight: 500,
+  cursor: 'pointer'
+};
+
+const mobileSubNavLinkStyle = {
+  textDecoration: 'none',
+  color: 'var(--text-secondary)',
+  fontSize: '0.95rem',
   fontWeight: 500,
   cursor: 'pointer'
 };

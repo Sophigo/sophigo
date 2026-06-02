@@ -1,5 +1,5 @@
 {
-  "name": "profabx-workspace",
+  "name": "sophigo-workspace",
   "private": true,
   "scripts": {
     "install:all": "npm install --prefix frontend --legacy-peer-deps && npm install --prefix docs --legacy-peer-deps",
@@ -7,7 +7,8 @@
     "dev:docs": "npm run dev --prefix docs",
     "dev:backend": "cd backend && python3 -m uvicorn main:app --reload --port 8000",
     "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:docs\"",
-    "build": "npm run build --prefix docs && npm run build --prefix frontend && rm -rf frontend/dist/docs && cp -r docs/.vitepress/dist frontend/dist/docs && touch frontend/dist/.nojekyll"
+    "build": "npm run build --prefix docs && npm run build --prefix frontend && rm -rf frontend/dist/docs && cp -r docs/.vitepress/dist frontend/dist/docs && touch frontend/dist/.nojekyll",
+    "preview": "npm run preview --prefix frontend"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
