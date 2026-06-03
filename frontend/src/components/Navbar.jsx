@@ -238,14 +238,14 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
               }}>
                 <a href="/docs/tools/threejs-generator/" style={dropdownItemStyle}>{t.threejs}</a>
                 <a href="/docs/tools/stl-quote/stlquote.html" style={dropdownItemStyle}>{t.stlQuote}</a>
-                <a href="/docs/tools/mods/" style={dropdownItemStyle}>{t.mods}</a>
+                <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.mods}</a>
                 <a href="/docs/tools/video-generation/" style={dropdownItemStyle}>{t.videoGen}</a>
                 <a href="/docs/tools/matting/" style={dropdownItemStyle}>{t.matting}</a>
               </div>
             )}
           </div>
 
-          <a href="/docs/news/" style={navLinkStyle}>{t.news}</a>
+          <a href="/docs/news/index.html" style={navLinkStyle}>{t.news}</a>
 
           <a href="#about" style={navLinkStyle}>{t.aboutUs}</a>
         </div>
@@ -450,7 +450,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
               <a href="/docs/tools/threejs-generator/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
               <a href="/docs/tools/stl-quote/stlquote.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.stlQuote}</a>
-              <a href="/docs/tools/mods/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>
+              <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>
               <a href="/docs/tools/video-generation/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.videoGen}</a>
               <a href="/docs/tools/matting/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.matting}</a>
             </div>
@@ -458,7 +458,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
 
-          <a href="/docs/news/" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.news}</a>
+          <a href="/docs/news/index.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.news}</a>
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
           

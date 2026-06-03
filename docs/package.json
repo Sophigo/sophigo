@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node courses/fab-course/parse_summary.cjs",
+    "prebuild": "node courses/fab-course/parse_summary.cjs",
     "dev": "vitepress dev --port 5174",
     "build": "vitepress build",
     "preview": "vitepress preview"

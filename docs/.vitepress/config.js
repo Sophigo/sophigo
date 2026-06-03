@@ -17,7 +17,7 @@ export default defineConfig({
       { text: 'AI 基础应用', link: '/courses/ai-basics/' },
       { text: '移动机器人', link: '/courses/mobile-robot/' },
       { text: 'CMF 应用', link: '/courses/cmf/' },
-      { text: '探讨', link: '/news/' }
+      { text: '探讨', link: '/news/index.html' }
     ],
 
     sidebar: {
@@ -56,18 +56,9 @@ export default defineConfig({
           items: [
             { text: 'threejs 生成器', link: '/tools/threejs-generator/' },
                         { text: 'stl 报价', link: '/tools/stl-quote/stlquote.html' },
-            { text: 'Mods', link: '/tools/mods/' },
+            { text: 'Mods', link: 'https://modsproject.org/' },
             { text: '视频生成', link: '/tools/video-generation/' },
             { text: '抠图', link: '/tools/matting/' }
-          ]
-        }
-      ],
-      '/news/': [
-        {
-          text: '平台资讯',
-          items: [
-            { text: '最新动态与公告', link: '/news/' },
-            { text: 'Leap71 与 Articraft 技术分析', link: '/news/techanalysis' }
           ]
         }
       ]

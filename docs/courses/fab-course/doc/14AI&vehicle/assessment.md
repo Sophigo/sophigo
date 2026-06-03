@@ -1,5 +1,6 @@
-## Assessment
-1. Build a vehicle 
-2. Input：sensor to checking environment
-3. Output：driving（forward，back，turning），Operation feedback
-4. Control：wireless/wire control, AI method to run some operation
+# 智能小车开发评估指标
+
+本章节评估体系已全面整合至全新的 **AI 移动机器人课程**。
+
+请访问以下内容了解详细的实验考核与项目交付标准：
+* [AI 移动机器人课程主页](/courses/mobile-robot/) - 包含初中组产品体验营与高中组具身智能工程营的详细里程碑考核与作品集产出指标。
