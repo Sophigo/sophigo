@@ -1,8 +1,7 @@
 # sophigo
 
 ## 20260602
-
-
+change position
 
 
 # navbar
