@@ -38,6 +38,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
       mobileRobot: 'AI移动机器人',
       cmf: 'CMF应用',
       tools: '工具',
+      sophicar: '参数化设计车辆',
       threejs: 'threejs生成器',
       stlQuote: 'stl 报价',
       mods: 'Mods',
@@ -58,6 +59,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
       mobileRobot: 'AI Mobile Robot',
       cmf: 'CMF Application',
       tools: 'Tools',
+      sophicar: 'Parametric Vehicle Design',
       threejs: 'Three.js Generator',
       stlQuote: 'STL Quote',
       mods: 'Mods',
@@ -78,6 +80,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
     mobileRobot: 'AI移动机器人',
     cmf: 'CMF应用',
     tools: '工具',
+    sophicar: '参数化设计车辆',
     threejs: 'threejs生成器',
     stlQuote: 'stl 报价',
     mods: 'Mods',
@@ -236,6 +239,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 zIndex: 110,
                 animation: 'fadeIn 0.2s ease'
               }}>
+                <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.sophicar}</a>
                 <a href="/docs/tools/threejs-generator/" style={dropdownItemStyle}>{t.threejs}</a>
                 <a href="/docs/tools/stl-quote/stlquote.html" style={dropdownItemStyle}>{t.stlQuote}</a>
                 <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.mods}</a>
@@ -448,6 +452,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           <div>
             <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.tools}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
+              <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.sophicar}</a>
               <a href="/docs/tools/threejs-generator/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
               <a href="/docs/tools/stl-quote/stlquote.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.stlQuote}</a>
               <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>

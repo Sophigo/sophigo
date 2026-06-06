@@ -54,6 +54,7 @@ export default defineConfig({
         {
           text: '数字化辅助工具',
           items: [
+            { text: '参数化设计车辆', link: 'https://sophicar.com/' },
             { text: 'threejs 生成器', link: '/tools/threejs-generator/' },
                         { text: 'stl 报价', link: '/tools/stl-quote/stlquote.html' },
             { text: 'Mods', link: 'https://modsproject.org/' },

@@ -38,8 +38,8 @@ export default function AntiGravityBackground() {
     container.appendChild(renderer.domElement);
 
     // 2. Create Grid of Points
-    const cols = 55;
-    const rows = 35;
+    const cols = 100;
+    const rows = 50;
     const spacingX = 1.4;
     const spacingY = 1.4;
 
@@ -140,8 +140,15 @@ export default function AntiGravityBackground() {
       mouse.x += (mouse.targetX - mouse.x) * 0.1;
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
-      // Project mouse into 3D plane
-      const mouse3D = new THREE.Vector3(mouse.x * 25, mouse.y * 18, 0);
+      // Project mouse into 3D plane dynamically based on viewport aspect ratio
+      const vFOV = (camera.fov * Math.PI) / 180;
+      const visibleHeight = 2 * Math.tan(vFOV / 2) * camera.position.z;
+      const visibleWidth = visibleHeight * camera.aspect;
+      const mouse3D = new THREE.Vector3(
+        (mouse.x * visibleWidth) / 2,
+        (mouse.y * visibleHeight) / 2,
+        0
+      );
 
       // Mutate geometry vertices
       const posAttr = geometry.attributes.position;
@@ -155,23 +162,27 @@ export default function AntiGravityBackground() {
         const waveX = Math.sin(elapsedTime * 1.5 + init.x * 0.2) * 0.35;
         const waveY = Math.cos(elapsedTime * 1.2 + init.y * 0.2) * 0.35;
 
-        // 2. Mouse perturbation / 3D distorts
+        // 2. Mouse perturbation / 3D distorts (magnetic attraction following the mouse)
         const dx = init.x - mouse3D.x;
         const dy = init.y - mouse3D.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
+        let xOffset = 0;
+        let yOffset = 0;
         let zOffset = 0;
-        const maxDist = 8.0;
+        const maxDist = 12.0;
 
         if (dist < maxDist) {
-          // Closer points perturb more, creating a ripple/parallax bump
-          const force = (1.0 - dist / maxDist) ** 2;
-          zOffset = force * 4.5; // push towards camera
+          // Closer points are pulled more towards the mouse cursor
+          const force = (1.0 - dist / maxDist) ** 1.5;
+          xOffset = -dx * force * 0.35;
+          yOffset = -dy * force * 0.35;
+          zOffset = force * 4.0; // push towards camera
         }
 
         // Apply positions
-        posArray[i3] = init.x + waveX * (1 - zOffset*0.1);
-        posArray[i3 + 1] = init.y + waveY * (1 - zOffset*0.1);
+        posArray[i3] = init.x + waveX + xOffset;
+        posArray[i3 + 1] = init.y + waveY + yOffset;
         posArray[i3 + 2] = init.z + zOffset;
       }
 
@@ -181,6 +192,10 @@ export default function AntiGravityBackground() {
       camera.position.x += (mouse.x * 3 - camera.position.x) * 0.05;
       camera.position.y += (mouse.y * 3 - camera.position.y) * 0.05;
       camera.lookAt(scene.position);
+
+      // Subtle dynamic tilting of the entire particle system
+      pointCloud.rotation.y += (mouse.x * 0.15 - pointCloud.rotation.y) * 0.05;
+      pointCloud.rotation.x += (-mouse.y * 0.15 - pointCloud.rotation.x) * 0.05;
 
       renderer.render(scene, camera);
     };

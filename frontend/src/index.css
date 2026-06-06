@@ -139,6 +139,10 @@ p.description {
   width: 100%;
 }
 
+.grid-col-3 {
+  grid-column: span 3;
+}
+
 .grid-col-4 {
   grid-column: span 4;
 }
@@ -152,13 +156,13 @@ p.description {
 }
 
 @media (max-width: 1024px) {
-  .grid-col-4 {
+  .grid-col-3, .grid-col-4 {
     grid-column: span 6;
   }
 }
 
 @media (max-width: 768px) {
-  .grid-col-4, .grid-col-6 {
+  .grid-col-3, .grid-col-4, .grid-col-6 {
     grid-column: span 12;
   }
 }

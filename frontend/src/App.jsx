@@ -31,6 +31,8 @@ const contentTranslations = {
     toolsSubtitle: "Developer Tools",
     toolsTitle: "社区辅助设计工具箱",
     toolsDesc: "精简实用的 Web 工具，加速您的快速原型验证与 CMF 设计落地。",
+    tool0Title: "参数化设计车辆",
+    tool0Desc: "在线定制开发与模拟专属的参数化智能交通工具，打通从算法设计到物理原型的智能管线。",
     tool1Title: "CMF 配色卡生成器",
     tool1Desc: "快速预览并生成符合标准阳极氧化、喷砂表面处理工艺的 CMF 工业色卡代码。",
     tool2Title: "底盘运动学模拟器",
@@ -73,6 +75,8 @@ const contentTranslations = {
     toolsSubtitle: "Developer Tools",
     toolsTitle: "Community Design Toolbox",
     toolsDesc: "Clean and practical Web tools to accelerate your rapid prototype verification and CMF design landing.",
+    tool0Title: "Parametric Vehicle Design",
+    tool0Desc: "Online design and simulation of customized parametric smart vehicles, bridging algorithm design and physical prototypes.",
     tool1Title: "CMF Color Card Generator",
     tool1Desc: "Quickly preview and generate CMF industrial color codes matching standard anodizing and sandblasting surface treatments.",
     tool2Title: "Chassis Kinematics Simulator",
@@ -102,6 +106,7 @@ export default function App() {
   const [aiResponse, setAiResponse] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState('');
+  const [typedTitle, setTypedTitle] = useState('');
   const [currentRoute, setCurrentRoute] = useState(() => {
     const hash = window.location.hash;
     if (hash === '#/courses/mobile-robot') return 'mobile-robot-course';
@@ -256,6 +261,23 @@ export default function App() {
 
   const t = contentTranslations[lang] || contentTranslations.zh;
 
+  // Typewriter effect for the hero title
+  useEffect(() => {
+    let index = 0;
+    const fullText = t.heroTitle || '';
+    setTypedTitle('');
+    
+    const interval = setInterval(() => {
+      setTypedTitle(fullText.substring(0, index + 1));
+      index++;
+      if (index >= fullText.length) {
+        clearInterval(interval);
+      }
+    }, 75);
+
+    return () => clearInterval(interval);
+  }, [t.heroTitle]);
+
   return (
     <div style={{ minHeight: '100vh', position: 'relative' }}>
       {/* 3D Background */}
@@ -304,7 +326,8 @@ export default function App() {
             </span>
 
             <h1 className="title-hero text-gradient">
-              {t.heroTitle}
+              {typedTitle}
+              <span className="typewriter-cursor">|</span>
             </h1>
             
             <p className="description">
@@ -572,7 +595,34 @@ export default function App() {
             </div>
 
             <div className="grid-featured">
-              <div className="grid-col-4 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+              <a 
+                href="https://sophicar.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="grid-col-3 glassmorphism-card tool-card-link" 
+                style={{ 
+                  padding: '2rem', 
+                  borderRadius: '16px', 
+                  border: '1px solid var(--border-color)',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  cursor: 'pointer'
+                }}
+              >
+                <Sparkles size={24} style={{ color: 'var(--klein-blue)', marginBottom: '1rem' }} />
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  {t.tool0Title}
+                  <ArrowRight size={14} className="arrow-icon" style={{ transform: 'translateX(-4px)', opacity: 0, transition: 'all 0.2s' }} />
+                </h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', flexGrow: 1 }}>
+                  {t.tool0Desc}
+                </p>
+              </a>
+
+              <div className="grid-col-3 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 <Palette size={24} style={{ color: 'var(--klein-blue)', marginBottom: '1rem' }} />
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.75rem' }}>{t.tool1Title}</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
@@ -580,7 +630,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid-col-4 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+              <div className="grid-col-3 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 <Cpu size={24} style={{ color: 'var(--klein-blue)', marginBottom: '1rem' }} />
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.75rem' }}>{t.tool2Title}</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
@@ -588,7 +638,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid-col-4 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+              <div className="grid-col-3 glassmorphism-card" style={{ padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 <Terminal size={24} style={{ color: 'var(--klein-blue)', marginBottom: '1rem' }} />
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.75rem' }}>{t.tool3Title}</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
@@ -674,6 +724,22 @@ export default function App() {
         }
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+        .tool-card-link:hover {
+          border-color: var(--klein-blue) !important;
+          box-shadow: 0 10px 25px var(--klein-blue-glow-hover);
+          transform: translateY(-2px);
+        }
+        .tool-card-link:hover .arrow-icon {
+          opacity: 1 !important;
+          transform: translateX(0) !important;
+          color: var(--klein-blue);
+        }
+        .typewriter-cursor {
+          display: inline-block;
+          margin-left: 4px;
+          color: var(--klein-blue);
+          animation: blink 0.8s infinite;
         }
       `}</style>
     </div>

@@ -3,6 +3,37 @@ layout: false
 ---
 
 <div class="aibasic-brochure">
+  <!-- Nav Bar -->
+  <nav class="nav-bar">
+    <div class="nav-container">
+      <!-- Brand -->
+      <a class="nav-brand" :href="homeUrl">
+        <img class="logo" src="/logo.png" alt="Sophigo Logo"></img>
+        <span class="brand-title">Sophigo Docs</span>
+        <span class="brand-divider">|</span>
+        <span class="brand-subtitle">AI 基础应用</span>
+      </a>
+      <!-- Nav Links -->
+      <div class="nav-menu">
+        <a class="nav-menu-link" :href="homeUrl">首页 <span class="ext-icon">↗</span></a>
+        <a class="nav-menu-link" href="/docs/courses/fab-course/">Fab 课程</a>
+        <a class="nav-menu-link" href="/docs/courses/mobile-robot/">移动机器人</a>
+        <a class="nav-menu-link" href="/docs/courses/cmf/">CMF 应用</a>
+        <a class="nav-menu-link" href="/docs/news/index.html">探讨</a>
+        <span class="menu-divider">|</span>
+        <!-- Theme toggle simulation -->
+        <div class="theme-switch-btn" title="深色模式">
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
+        <span class="menu-divider">|</span>
+        <!-- Github link -->
+        <a class="github-link" href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub 仓库">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Hero Section -->
   <section class="hero-section">
   <div class="hero-overlay"></div>
@@ -210,9 +241,15 @@ layout: false
 </div>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
+const homeUrl = ref('/')
 
 onMounted(() => {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    homeUrl.value = 'http://localhost:5173'
+  }
+
   const buttons = document.querySelectorAll('.day-tab-btn');
   const panels = document.querySelectorAll('.day-panel');
 
@@ -260,10 +297,10 @@ onMounted(() => {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(11, 15, 25, 0.8);
+  background: rgba(11, 15, 25, 0.85);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  height: 56px;
   display: flex;
   align-items: center;
 }
@@ -278,53 +315,120 @@ onMounted(() => {
   align-items: center;
 }
 
-.back-home {
+.nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #9ca3af;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
-.back-home:hover {
-  color: #3b82f6;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-link {
-  color: #9ca3af;
   text-decoration: none !important;
-  font-size: 0.875rem;
+  transition: opacity 0.25s;
+}
+
+.nav-brand:hover {
+  opacity: 0.8;
+}
+
+.nav-brand .logo {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+}
+
+.brand-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+
+.brand-divider {
+  margin: 0 8px;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 14px;
+}
+
+.brand-subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3b82f6; /* Accent blue matching "Fab 课程" color */
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-menu-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none !important;
+  font-size: 13px;
   font-weight: 500;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
-.nav-link:hover {
+.nav-menu-link:hover {
   color: #ffffff;
 }
 
-.contact-btn {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: #ffffff !important;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
+.nav-menu-link.active {
+  color: #ffffff;
+  font-weight: 600;
 }
 
-.contact-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.4);
+.nav-menu-link .ext-icon {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.menu-divider {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 12px;
+  margin: 0 4px;
+}
+
+.theme-switch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.theme-switch-btn::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #000000;
+  border-radius: 50%;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.theme-switch-btn .moon-icon {
+  position: absolute;
+  left: 4px;
+  color: #e5e7eb;
+  width: 10px;
+  height: 10px;
+}
+
+.github-link {
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.github-link:hover {
+  color: #ffffff;
 }
 
 /* Hero Section */

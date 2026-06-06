@@ -142,12 +142,15 @@
                     </div>
                 </div>
 
+                <a href="https://sophicar.com" target="_blank" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Sophicar</a>
+
                 <!-- Tools Dropdown -->
                 <div class="dropdown relative">
                     <button class="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-2">
                         工具 <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </button>
                     <div class="dropdown-menu hidden absolute top-[100%] left-0 w-[200px] rounded-xl glassmorphism-card p-2 mt-1 shadow-2xl z-[110]">
+                        <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">参数化设计车辆</a>
                         <a href="/docs/tools/threejs-generator/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">threejs生成器</a>
                         <a href="/docs/tools/stl-quote/stlquote.html" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">stl 报价</a>
                         <a href="https://modsproject.org/" class="block px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[#ffffff05] transition-all">Mods</a>
@@ -276,16 +279,48 @@
                     </div>
                 </a>
 
-                <!-- Card 2 (Placeholder/Future Reports) -->
-                <div class="flex flex-col bg-[var(--bg-secondary)] border border-dashed border-[var(--border-color)] rounded-2xl p-6 justify-center items-center text-center opacity-60 min-h-[220px]">
-                    <i class="fa-solid fa-plus-circle text-2xl text-[var(--text-muted)] mb-3"></i>
-                    <h3 class="text-sm font-semibold text-[var(--text-primary)] mb-1">
-                        更多深度报告筹备中
+                <!-- Card 2 (SophiCar Technical Analysis) -->
+                <a href="/docs/news/sophicar/index.html" target="_blank" class="group relative flex flex-col bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--klein-blue)] hover:shadow-2xl hover:shadow-[var(--klein-blue-glow)] overflow-hidden cursor-pointer">
+                    <!-- Card Image -->
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-[var(--border-color)] relative">
+                        <img src="/docs/news/sophicar/assets/noyron.png" alt="Noyron Computational Engine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div class="absolute top-3 left-3 text-[10px] font-bold text-[var(--text-primary)] bg-[rgba(0,0,0,0.65)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                            参数化与 R&D
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-[16px] font-semibold mb-2.5 text-[var(--text-primary)] group-hover:text-[var(--klein-blue)] leading-snug transition-colors">
+                        SophiCar 智能交通工具设计与量产协同报告
                     </h3>
-                    <p class="text-xs text-[var(--text-muted)] max-w-[240px]">
-                        如果您有优秀的创客项目或者 CMF 行业标准分享，欢迎划词联系我们提交报告！
+                    
+                    <!-- Core Summary -->
+                    <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed mb-4">
+                        打通从第一性原理参数生成、AI 3D 隐式几何、DFM 工艺校验，到物理仿真 Sim-to-Real 闭环的数字协同研发流水线。
                     </p>
-                </div>
+
+                    <!-- Key Bullet Points (核心摘要列表) -->
+                    <div class="mt-2 pt-3 border-t border-[var(--border-color)] text-[12px] text-[var(--text-secondary)] space-y-2 mb-4 flex-grow">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-nodes text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>协作工作流</strong>：Obsidian 本地库 &rarr; Hermes 智能体 &rarr; OpenClaw &rarr; 飞书</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-gears text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>参数设计</strong>：PicoGK Voxel 几何 vs Microsoft Trellis.2 3D 生成</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-truck-ramp-box text-[var(--klein-blue)] mt-0.5 text-[10px]"></i>
+                            <span><strong>物理实训</strong>：NVIDIA Isaac Sim + Domain Randomization 训练与 Sim-to-Real</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 mt-auto">
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Parametric Design</span>
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Sim-to-Real</span>
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Toolchain</span>
+                        <span class="text-[10px] text-[var(--text-muted)] bg-[rgba(255,255,255,0.02)] border border-[var(--border-color)] px-2 py-0.5 rounded-md">Multi-Agent</span>
+                    </div>
+                </a>
             </div>
         </div>
 
