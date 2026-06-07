@@ -6,7 +6,9 @@
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:docs": "npm run dev --prefix docs",
     "dev:backend": "cd backend && python3 -m uvicorn main:app --reload --port 8000",
-    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:docs\"",
+    "build:docs": "npm run build --prefix docs",
+    "dev": "npm run build:docs && npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:split": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:docs\"",
     "build": "npm run build --prefix docs && npm run build --prefix frontend && rm -rf frontend/dist/docs && cp -r docs/.vitepress/dist frontend/dist/docs && touch frontend/dist/.nojekyll",
     "preview": "npm run preview --prefix frontend"
   },

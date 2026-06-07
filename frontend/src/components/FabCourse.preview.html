@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fab Course Preview — SophiGo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --klein-blue: #002FA7;
+    --klein-blue-glow: rgba(0, 47, 167, 0.25);
+    --bg-primary: #0B0B0C;
+    --bg-secondary: #0F0F12;
+    --bg-card: #141418;
+    --bg-navbar: rgba(11, 11, 12, 0.85);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: rgba(255,255,255,0.075);
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .container-custom {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #f1f5f9 0%, #7dd3fc 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .title-hero {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  /* Mock navbar */
+  .mock-nav {
+    position: fixed; top: 0; left: 0; width: 100%; height: 72px; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; border-bottom: 1px solid var(--border-color);
+    background: var(--bg-navbar); backdrop-filter: blur(12px);
+  }
+  .mock-nav .brand { font-size: 1.875rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem; }
+  .mock-nav .brand span { width: 36px; height: 36px; border-radius: 8px; background: var(--klein-blue); display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; }
+  .mock-nav .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .mock-nav .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; white-space: nowrap; }
+  .mock-nav .nav-links a.active { color: var(--klein-blue); font-weight: 600; }
+
+  /* Sticky tabs */
+  .sticky-tabs {
+    position: sticky; top: 72px; z-index: 50;
+    background: var(--bg-navbar); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    display: flex; gap: 0;
+  }
+  .sticky-tabs a {
+    padding: 0.75rem 1.25rem; font-size: 0.8rem; font-weight: 500;
+    color: var(--text-muted); text-decoration: none;
+    border-bottom: 2px solid transparent; cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .sticky-tabs a:hover { color: var(--text-primary); }
+
+  /* Section labeling */
+  .section-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    color: var(--klein-blue); text-transform: uppercase; display: block; margin-bottom: 0.5rem;
+  }
+  .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .section-desc { font-size: 0.85rem; color: var(--text-secondary); }
+
+  /* Cards */
+  .card-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .card-grid-tut { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 1.15rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+    min-height: 155px; cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .card:hover { border-color: rgba(0, 47, 167, 0.35); transform: translateY(-2px); }
+  .card-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.15rem; }
+  .card-num { font-size: 0.65rem; font-weight: 700; color: var(--klein-blue); letter-spacing: 0.08em; }
+  .card-icon { width: 20px; height: 20px; color: var(--border-color); }
+  .card-title { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+  .card-desc { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.15rem; }
+  .card-tag {
+    font-size: 0.64rem; color: var(--text-muted);
+    border: 1px solid var(--border-color); border-radius: 4px;
+    padding: 0.1rem 0.4rem; white-space: nowrap; cursor: pointer;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .card-tag:hover { color: var(--text-secondary); border-color: rgba(0, 47, 167, 0.3); }
+
+  /* Section panels */
+  .panel-section { padding: 3rem; border-radius: 20px; background: var(--bg-secondary); border: 1px solid var(--border-color); margin-bottom: 4rem; }
+
+  /* Lab cards (4-col) */
+  .lab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .lab-card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: border-color 0.15s;
+  }
+  .lab-card:hover { border-color: rgba(0, 47, 167, 0.3); }
+  .lab-card .icon { color: var(--klein-blue); width: 20px; }
+  .lab-card h3 { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem; }
+  .lab-card p { font-size: 0.74rem; color: var(--text-secondary); line-height: 1.5; }
+  .lab-card .actions {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding-top: 0.35rem; border-top: 1px solid var(--border-color);
+  }
+  .lab-card .actions .btn {
+    background: none; border: 1px solid var(--border-color); color: var(--text-secondary);
+    font-size: 0.7rem; font-weight: 500; padding: 0.25rem 0.6rem; border-radius: 6px;
+    cursor: pointer; font-family: inherit;
+  }
+  .lab-card .actions .btn:hover { border-color: var(--klein-blue); color: var(--text-primary); }
+
+  /* Cohort rows */
+  .cohort-row {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 1.25rem; padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .cohort-row:last-child { border-bottom: none; }
+  .cohort-inst { font-size: 0.7rem; font-weight: 600; color: var(--klein-blue); text-transform: uppercase; letter-spacing: 0.08em; }
+  .cohort-year { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; margin-top: 0.15rem; }
+  .cohort-name { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .team-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .team-link {
+    font-size: 0.74rem; color: var(--text-secondary);
+    text-decoration: none; border: 1px solid var(--border-color);
+    border-radius: 6px; padding: 0.25rem 0.7rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .team-link:hover { color: var(--text-primary); border-color: var(--klein-blue); background: rgba(0,47,167,0.04); }
+
+  /* Overview stats */
+  .stats-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-num { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+  .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.15rem; }
+
+  /* Placeholder pill badges */
+  .pills { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .pill { font-size: 0.72rem; font-weight: 500; color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 999px; padding: 0.25rem 0.75rem; }
+
+  /* Back button */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 20px;
+    cursor: pointer; margin-bottom: 2rem;
+    border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary);
+  }
+  .back-btn:hover { border-color: rgba(255,255,255,0.15); color: var(--text-primary); }
+
+  /* SVG icons inline */
+  .svg-icon { width: 20px; height: 20px; display: inline-block; }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .lab-grid, .card-grid-tut, .card-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .cohort-row { grid-template-columns: 1fr !important; gap: 0.5rem !important; }
+    .overview-grid { grid-template-columns: 1fr !important; }
+    .panel-section { padding: 1.5rem !important; }
+  }
+  @media (max-width: 600px) {
+    .lab-grid, .card-grid-tut, .card-grid-4 { grid-template-columns: 1fr !important; }
+    .mock-nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mock navbar -->
+<nav class="mock-nav">
+  <div class="brand">
+    <span>S</span>
+    Sophigo
+  </div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#" class="active">Courses</a>
+    <a href="#">Tools</a>
+    <a href="#">News</a>
+    <a href="#">Join Us</a>
+  </div>
+</nav>
+
+<div style="padding-top: 3rem; padding-bottom: 4rem;">
+
+  <div class="container-custom">
+
+    <!-- Back button -->
+    <button class="back-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </button>
+
+    <!-- Hero -->
+    <div style="text-align: center; max-width: 720px; margin: 0 auto 3rem;">
+      <span style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; color: var(--klein-blue); text-transform: uppercase; display: block; margin-bottom: 1rem;">
+        Fab Lab · Digital Fabrication
+      </span>
+      <h1 class="title-hero text-gradient" style="margin-bottom: 1rem;">
+        How to Make<br>Almost Everything
+      </h1>
+      <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">
+        Built on the MIT FabAcademy curriculum and the global Fab Lab network.
+        Learn full-stack engineering — from digital fabrication fundamentals to AI-integrated prototyping.
+      </p>
+      <div class="pills">
+        <span class="pill">14 Modules</span>
+        <span class="pill">MIT FabAcademy</span>
+        <span class="pill">400+ Students</span>
+        <span class="pill">UNNC · ZJU · ZWU</span>
+      </div>
+    </div>
+
+    <!-- Sticky tabs -->
+    <div class="sticky-tabs">
+      <a href="#">Overview</a>
+      <a href="#">Lab Manage</a>
+      <a href="#">Tutorials</a>
+      <a href="#">Course List</a>
+    </div>
+
+    <!-- ═══ Section 1: Overview ═══ -->
+    <section style="margin-bottom: 4rem; padding-top: 2rem;">
+      <div style="margin-bottom: 2rem;">
+        <span class="section-label">OVERVIEW</span>
+        <h2 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.5rem;">What is Fab Lab?</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 240px; gap: 2.5rem; align-items: start;" class="overview-grid">
+        <div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+            A <strong style="color: var(--text-primary);">Fab Lab</strong> (Fabrication Laboratory) is a digital fabrication workspace originally developed by MIT's Center for Bits and Atoms. Equipped with a standardized set of CNC machines, 3D printers, laser cutters, and electronics tools, participants can design and build almost anything — from custom circuit boards to IoT devices to structural prototypes.
+          </p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+            The <strong style="color: var(--text-primary);">FabAcademy</strong> is a distributed education program delivered globally via the Fab Lab network. Students complete weekly hands-on assignments — each producing a physical artifact — covering the full stack from design to fabrication to firmware.
+          </p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+            At <strong style="color: var(--text-primary);">UNNC-FabLab / NexMaker</strong>, we adapt this curriculum to build engineers who think in full-stack terms: combining mechanical design, electronics, AI tools, and product thinking into one coherent learning path.
+          </p>
+        </div>
+        <div style="border-left: 1px solid var(--border-color); padding-left: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+          <div><div class="stat-num">2000<sup style="font-size: 0.75rem; vertical-align: super;">+</sup></div><div class="stat-label">Fab Labs worldwide</div></div>
+          <div><div class="stat-num">14</div><div class="stat-label">Core modules</div></div>
+          <div><div class="stat-num">MIT</div><div class="stat-label">Curriculum origin</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 2: Lab Manage ═══ -->
+    <section style="margin-bottom: 4rem;">
+      <div class="panel-section">
+        <div style="margin-bottom: 1.5rem;">
+          <span class="section-label">LAB MANAGE</span>
+          <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 0.25rem;">Lab Operations</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">Essential documentation before entering and working in the Fab Lab.</p>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-card">
+            <div style="color: var(--klein-blue);" class="svg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div><h3>Lab Rules &amp; Guidelines</h3><p>Operating standards, attendance, and space maintenance procedures.</p></div>
+            <div class="actions"><button class="btn">Read</button><a style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none;">Full screen ↗</a></div>
+          </div>
+          <div class="lab-card">
+            <div style="color: var(--klein-blue);" class="svg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+            </div>
+            <div><h3>Fab Lab Network</h3><p>Global Fab Lab vision, MIT CBA origin, core machine inventory, and FabAcademy program.</p></div>
+            <div class="actions"><button class="btn">Read</button><a style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none;">Full screen ↗</a></div>
+          </div>
+          <div class="lab-card">
+            <div style="color: var(--klein-blue);" class="svg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div><h3>Access &amp; Safety</h3><p>Mandatory safety protocols for high-power equipment, CNC, and hazardous materials.</p></div>
+            <div class="actions"><button class="btn">Read</button><a style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none;">Full screen ↗</a></div>
+          </div>
+          <div class="lab-card">
+            <div style="color: var(--klein-blue);" class="svg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div><h3>Material &amp; Equipment</h3><p>Lab materials (acrylic, wood, resin) and equipment list with booking procedures.</p></div>
+            <div class="actions"><button class="btn">Read</button><a style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none;">Full screen ↗</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 3: Tutorials ═══ -->
+    <section style="margin-bottom: 4rem;">
+      <div style="margin-bottom: 2rem;">
+        <span class="section-label">TUTORIALS</span>
+        <h2 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.25rem;">14 Core Modules</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">From project documentation and CAD design to AI vehicle development. Click any card to open docs.</p>
+      </div>
+      <div class="card-grid-tut">
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">01</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div></div>
+          <h3 class="card-title">Project Management</h3>
+          <p class="card-desc">Git, Markdown, static site deployment with VitePress/GitHub Pages, and AIGC-assisted documentation workflows.</p>
+          <div class="card-tags"><span class="card-tag">Git basics</span><span class="card-tag">Markdown</span><span class="card-tag">VitePress</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">02</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div></div>
+          <h3 class="card-title">CAD Design</h3>
+          <p class="card-desc">Parametric 3D modeling in Fusion 360 &amp; SolidWorks. Sheet metal, generative design.</p>
+          <div class="card-tags"><span class="card-tag">Fusion 360</span><span class="card-tag">SolidWorks</span><span class="card-tag">Parametric</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">03</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6M6 14h12v8H6z"/></svg></div></div>
+          <h3 class="card-title">3D Printing</h3>
+          <p class="card-desc">FDM, SLA, HP-MJF processes. Slicing, design constraints, and post-processing.</p>
+          <div class="card-tags"><span class="card-tag">FDM design</span><span class="card-tag">FDM ops</span><span class="card-tag">SLA design</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">04</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v4M17 2v4M7 18v4M17 18v4M2 7h4M2 17h4M18 7h4M18 17h4"/></svg></div></div>
+          <h3 class="card-title">Electronic Design</h3>
+          <p class="card-desc">Component fundamentals, Ohm/Kirchhoff laws, schematic capture with KiCad or EasyEDA.</p>
+          <div class="card-tags"><span class="card-tag">Components</span><span class="card-tag">Basics</span><span class="card-tag">EDA tools</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">05</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-4M12 6V2M2 12h4M18 12h4"/><path d="M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/><circle cx="12" cy="12" r="6"/></svg></div></div>
+          <h3 class="card-title">Arduino Application</h3>
+          <p class="card-desc">Embedded C++ on open hardware. Sensor input, actuator control, physical computing.</p>
+          <div class="card-tags"><span class="card-tag">Basics</span><span class="card-tag">Code</span><span class="card-tag">Input</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">06</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg></div></div>
+          <h3 class="card-title">Laser Cutting</h3>
+          <p class="card-desc">Vector files, press-fit joints, engraving and cutting on acrylic, wood, and cardstock.</p>
+          <div class="card-tags"><span class="card-tag">Safety</span><span class="card-tag">AutoCAD</span><span class="card-tag">Design guide</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">07</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></div></div>
+          <h3 class="card-title">PCB Manufacture</h3>
+          <p class="card-desc">SMT assembly, reflow soldering, manual iron and hot-air rework and inspection.</p>
+          <div class="card-tags"><span class="card-tag">SMT assembly</span><span class="card-tag">Soldering</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">08</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6M14 2v20M2 14h12"/></svg></div></div>
+          <h3 class="card-title">CNC Manufacture</h3>
+          <p class="card-desc">G-code programming, toolpath planning, work offsets, and 3-axis subtractive milling.</p>
+          <div class="card-tags"><span class="card-tag">Types</span><span class="card-tag">Toolpath</span><span class="card-tag">Programming</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">09</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div></div>
+          <h3 class="card-title">Mold &amp; Casting</h3>
+          <p class="card-desc">Silicone mold making from 3D-printed masters, resin and liquid casting.</p>
+          <div class="card-tags"><span class="card-tag">Materials</span><span class="card-tag">Tools</span><span class="card-tag">Methods</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">10</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div></div>
+          <h3 class="card-title">IoT &amp; Interaction</h3>
+          <p class="card-desc">TCP/IP, MQTT, HTTP. ESP8266 to cloud platforms for sensor data and remote control.</p>
+          <div class="card-tags"><span class="card-tag">IoT basics</span><span class="card-tag">ESP8266+Cloud</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">11</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div></div>
+          <h3 class="card-title">Interface Application Programming</h3>
+          <p class="card-desc">Processing/Node.js UIs, serial-port data visualization, and interactive installations.</p>
+          <div class="card-tags"><span class="card-tag">Processing</span><span class="card-tag">Processing+Arduino</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">12</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div></div>
+          <h3 class="card-title">Material &amp; Tool</h3>
+          <p class="card-desc">Standard parts (fasteners, rails, couplings), sourcing from Misumi, Digi-Key, Mouser.</p>
+          <div class="card-tags"><span class="card-tag">Standard parts</span><span class="card-tag">Materials</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">13</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+          <h3 class="card-title">Business Plan Basics</h3>
+          <p class="card-desc">Market validation, product-user fit, cost estimation, and startup pitching.</p>
+          <div class="card-tags"><span class="card-tag">Guide</span></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-num">14</span><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div></div>
+          <h3 class="card-title">AI Vehicle</h3>
+          <p class="card-desc">Wheeled chassis kinematics, MCU firmware, and ROS2 with AI perception integration.</p>
+          <div class="card-tags"><span class="card-tag">Chassis</span><span class="card-tag">AI platform</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 4: Course List ═══ -->
+    <section style="margin-bottom: 4rem;">
+      <div class="panel-section">
+        <div style="margin-bottom: 2rem;">
+          <span class="section-label">COURSE LIST</span>
+          <h2 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.25rem;">Classes &amp; Teams</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">Student cohorts from UNNC FabLab, ZJU, ZWU, and NexMaker Academy. Click any team to view their project site.</p>
+        </div>
+
+        <div class="cohort-row">
+          <div><div class="cohort-inst">NexMaker Academy</div><div class="cohort-year">Session 1</div></div>
+          <div><div class="cohort-name">NexMaker Academy — Session 1</div><div class="team-links"><a class="team-link">Academy S1 ↗</a></div></div>
+        </div>
+        <div class="cohort-row">
+          <div><div class="cohort-inst">NexMaker Academy</div><div class="cohort-year">Session 2</div></div>
+          <div><div class="cohort-name">NexMaker Academy — Session 2</div><div class="team-links"><a class="team-link">Academy S2 ↗</a></div></div>
+        </div>
+        <div class="cohort-row">
+          <div><div class="cohort-inst">UNNC FabLab</div><div class="cohort-year">2023–2025</div></div>
+          <div><div class="cohort-name">Fab Academy UNNC</div><div class="team-links"><a class="team-link">FabAcademy 2025 ↗</a><a class="team-link">UNNC 2025-2 ↗</a><a class="team-link">FabAcademy 2023 ↗</a></div></div>
+        </div>
+        <div class="cohort-row">
+          <div><div class="cohort-inst">ZJU Design Engineering</div><div class="cohort-year">2023</div></div>
+          <div><div class="cohort-name">DE / DM 2023</div><div class="team-links"><a class="team-link">DE 2023 ↗</a><a class="team-link">DM 2023 ↗</a><a class="team-link">Mini 2023 ↗</a></div></div>
+        </div>
+        <div class="cohort-row">
+          <div><div class="cohort-inst">ZJU Design Engineering</div><div class="cohort-year">2022</div></div>
+          <div><div class="cohort-name">DE / DM 2022</div><div class="team-links"><a class="team-link">DE 2022 ↗</a><a class="team-link">DM 2022 ↗</a><a class="team-link">Mini 2022 ↗</a></div></div>
+        </div>
+        <div class="cohort-row">
+          <div><div class="cohort-inst">ZJU Design Engineering</div><div class="cohort-year">2020–2021</div></div>
+          <div><div class="cohort-name">DE / DM 2020–2021</div><div class="team-links"><a class="team-link">DE 2021 ↗</a><a class="team-link">DM 2021 ↗</a><a class="team-link">DE 2020 ↗</a></div></div>
+        </div>
+        <div class="cohort-row" style="border-bottom: none;">
+          <div><div class="cohort-inst">ZWU Interactive System</div><div class="cohort-year">2024–2026</div></div>
+          <div><div class="cohort-name">Interactive System Program</div><div class="team-links"><a class="team-link">IS 2026-A1 ↗</a><a class="team-link">IS 2024 ↗</a><a class="team-link">IS 2+2 2024 ↗</a></div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Footer mock -->
+<footer style="border-top: 1px solid var(--border-color); padding-block: 3rem; background: var(--bg-secondary); color: var(--text-secondary); font-size: 0.8rem;">
+  <div class="container-custom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+    <p>&copy; 2026 Sophigo Platform. Built for the next-generation engineers.</p>
+  </div>
+</footer>
+<div style="text-align: center; padding-bottom: 2.5rem; background: var(--bg-secondary); color: var(--text-muted); font-size: 0.75rem;">
+  Sophigo Platform v1.0.0 Alpha
+</div>
+
+</body>
+</html>

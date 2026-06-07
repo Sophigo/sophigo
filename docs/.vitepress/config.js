@@ -12,8 +12,10 @@ export default defineConfig({
   
   themeConfig: {
     logo: '/logo.png',
+    siteTitle: 'SophiGo',
     nav: [
-      { text: '首页', link: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:5173' },
+      { text: '首页', link: '/' },
+      { text: 'Fab 课程', link: '/courses/fab-course/' },
       { text: 'AI 基础应用', link: '/courses/ai-basics/' },
       { text: '移动机器人', link: '/courses/mobile-robot/' },
       { text: 'CMF 应用', link: '/courses/cmf/' },
@@ -24,9 +26,9 @@ export default defineConfig({
       '/courses/fab-course/': fabSidebar,
       '/courses/ai-basics/': [
         {
-          text: 'AI 应用基础',
+          text: 'AI 基础应用',
           items: [
-            { text: 'AI 应用基础课程', link: '/courses/ai-basics/' }
+            { text: 'AI 基础应用课程', link: '/courses/ai-basics/' }
           ]
         }
       ],
@@ -55,7 +57,7 @@ export default defineConfig({
           text: '数字化辅助工具',
           items: [
             { text: '参数化设计车辆', link: 'https://sophicar.com/' },
-            { text: 'threejs 生成器', link: '/tools/threejs-generator/' },
+            { text: '3D生成器', link: '/tools/threejs-generator/app.html' },
                         { text: 'stl 报价', link: '/tools/stl-quote/stlquote.html' },
             { text: 'Mods', link: 'https://modsproject.org/' },
             { text: '视频生成', link: '/tools/video-generation/' },

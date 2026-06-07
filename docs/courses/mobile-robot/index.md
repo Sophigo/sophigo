@@ -113,7 +113,7 @@
 
 本课程的核心特色是引入了工业级的多智能体（Multi-Agent）开发架构，将复杂的工程任务解耦，由不同的专家 Agent 协同学生完成研发：
 
-![SophiCar Multi-Agent System Architecture](/news/sophicar/assets/architecture.jpg)
+![SophiCar Multi-Agent System Architecture](/news/sophigo/assets/architecture.jpg)
 
 ### 3.1 专家智能体角色分工
 

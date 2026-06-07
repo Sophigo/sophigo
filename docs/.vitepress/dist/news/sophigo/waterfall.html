@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SophiGo — 全链路 AI Native 研发体系 · 瀑布叙事</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg: #0d0d0d; --card: rgba(32,33,36,0.65);
+            --border: rgba(255,255,255,0.05);
+            --cyan: #4285F4; --purple: #EA4335; --amber: #FBBC04;
+            --green: #34A853; --orange: #EA4335;
+            --text: #f8fafc; --sub: #9aa0a6; --muted: #5f6368;
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            background:var(--bg);color:var(--text);
+            font-family:Arial,sans-serif;
+            background-image:
+                radial-gradient(circle at 15% 5%,rgba(66,133,244,0.03) 0%,transparent 50%),
+                radial-gradient(circle at 85% 95%,rgba(234,67,53,0.03) 0%,transparent 50%);
+        }
+        /* Nav */
+        .nav{
+            position:sticky;top:0;z-index:1000;
+            background:rgba(1,1,3,0.92);backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);padding:0 1.5rem;height:48px;
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        .nav-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.85rem}
+        .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px rgba(66,133,244,.5)}
+        .nav-links{display:flex;gap:2px}
+        .nav-links a{
+            padding:4px 10px;border-radius:4px;font-size:.7rem;color:var(--sub);
+            text-decoration:none;transition:all .2s;font-weight:500;
+        }
+        .nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(66,133,244,.06)}
+
+        /* Sections */
+        section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+        .section-tag{
+            font-family:Arial,sans-serif;font-size:.65rem;
+            letter-spacing:.15em;text-transform:uppercase;color:var(--blue);
+            margin-bottom:.75rem;display:block;text-align:center;
+        }
+        h2{
+            font-family:Arial,sans-serif;font-size:2.4rem;font-weight:800;
+            text-align:center;margin-bottom:1rem;
+            background:linear-gradient(135deg,#fff 40%,var(--red));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        }
+        h3{
+            font-family:Arial,sans-serif;font-size:1.3rem;font-weight:700;
+            color:var(--blue);margin-bottom:1rem;
+        }
+        .section-desc{text-align:center;color:var(--sub);font-size:.95rem;max-width:650px;margin:0 auto 3rem;line-height:1.7}
+
+        /* Hero */
+        .hero{padding:7rem 2rem 4rem;text-align:center}
+        .hero h1{
+            font-family:Arial,sans-serif;font-size:3.5rem;font-weight:800;
+            background:linear-gradient(180deg,#fff 40%,var(--sub));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            max-width:800px;margin:0 auto 1.5rem;line-height:1.15;
+        }
+        .hero p{color:var(--sub);font-size:1.1rem;max-width:700px;margin:0 auto 2rem;line-height:1.7}
+        .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+        .hero-stats span{color:var(--sub);font-weight:600}
+
+        /* Mermaid */
+        .mermaid-box{
+            background:var(--card);border:1px solid var(--border);
+            border-radius:18px;padding:1.5rem;overflow-x:auto;
+            margin-bottom:2rem;backdrop-filter:blur(20px);
+        }
+        .mermaid svg{max-width:100%;height:auto;background:transparent!important}
+        .mermaid .node rect,.mermaid .node polygon{fill:rgba(28,28,30,.9)!important;stroke:rgba(66,133,244,.35)!important}
+        .mermaid .edgePath .path{stroke:rgba(66,133,244,.45)!important}
+        .mermaid .label,.mermaid text{fill:#f5f5f7!important}
+        .mermaid .cluster rect{fill:rgba(66,133,244,.03)!important;stroke:rgba(66,133,244,.18)!important}
+
+        /* Cards */
+        .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+        .card{
+            background:var(--card);border:1px solid var(--border);
+            border-radius:16px;padding:2rem;transition:all .3s;
+            backdrop-filter:blur(20px);position:relative;overflow:hidden;
+        }
+        .card:hover{transform:translateY(-4px);border-color:rgba(66,133,244,.2);box-shadow:0 0 30px rgba(66,133,244,.06)}
+        .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
+        .card:hover::before{opacity:1}
+        .card-icon{font-size:1.5rem;margin-bottom:1rem}
+        .card h4{font-family:Arial,sans-serif;font-size:1.1rem;margin-bottom:.5rem}
+        .card p{color:var(--sub);font-size:.85rem;line-height:1.6}
+        .card-attr{list-style:none;margin-top:1rem;border-top:1px solid rgba(255,255,255,.05);padding-top:1rem}
+        .card-attr li{font-size:.78rem;color:var(--sub);padding:4px 0;padding-left:1rem;position:relative}
+        .card-attr li::before{content:'•';color:var(--red);position:absolute;left:0}
+
+        /* Skill bars */
+        .skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        @media(max-width:768px){.skill-grid{grid-template-columns:1fr}}
+        .skill-item{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.03);border-radius:12px;padding:1.25rem}
+        .skill-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+        .skill-name{font-weight:600;font-size:.88rem}
+        .skill-tag{font-size:.6rem;padding:2px 6px;border-radius:3px;background:rgba(66,133,244,.08);color:var(--blue);font-family:Arial,sans-serif}
+        .skill-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+        .skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--red))}
+        .skill-desc{font-size:.75rem;color:var(--sub);margin-top:.5rem}
+
+        /* Flow columns */
+        .flow-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:768px){.flow-grid{grid-template-columns:1fr}}
+        .flow-card{
+            background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.03);
+            border-radius:14px;padding:1.75rem;
+        }
+        .flow-card ol{padding-left:1.2rem;color:var(--sub);font-size:.88rem}
+        .flow-card ol li{margin-bottom:.75rem;line-height:1.5}
+        .flow-card ol li strong{color:#fff}
+
+        /* Tool list */
+        .tool-list{display:flex;flex-direction:column;gap:.75rem}
+        .tool-row{
+            background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.03);
+            border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;
+            gap:1rem;transition:all .2s;
+        }
+        .tool-row:hover{border-color:rgba(234,67,53,.2);background:rgba(255,255,255,.025)}
+        .tool-icon{font-size:1.2rem;flex-shrink:0}
+        .tool-info{flex:1}
+        .tool-name{font-weight:600;font-size:.85rem}
+        .tool-desc{font-size:.72rem;color:var(--sub);margin-top:2px}
+        .tool-badge{font-size:.6rem;padding:2px 6px;border-radius:3px;background:rgba(66,133,244,.08);color:var(--blue);font-family:Arial,sans-serif}
+
+        /* 3D */
+        .three-wrap{max-width:600px;margin:0 auto}
+        .three-box{background:rgba(8,8,12,.6);border:1px solid var(--border);border-radius:14px;height:220px;overflow:hidden}
+        #c3d{width:100%;height:100%}
+        .sliders{display:flex;gap:1rem;justify-content:center;padding:1rem 0;flex-wrap:wrap}
+        .sliders label{font-size:.7rem;color:var(--sub)}
+        .sliders input{accent-color:var(--blue);width:80px}
+        .sliders span{font-family:'Courier New',monospace;font-size:.68rem;color:var(--blue);min-width:36px;text-align:right}
+
+        footer{text-align:center;padding:3rem;border-top:1px solid var(--border);color:var(--muted);font-size:.72rem}
+        footer a{color:var(--blue);text-decoration:none}
+    </style>
+</head>
+<body>
+
+<!-- ═══ Nav ═══ -->
+<nav class="nav">
+    <a class="nav-brand" href="/" aria-label="返回 Sophigo 首页" style="color:#fff;text-decoration:none"><span class="nav-dot"></span>SophiGo</a>
+    <div class="nav-links">
+        <a href="waterfall.html" class="active">首页</a>
+        <a href="background.html">综述</a>
+        <a href="workspace.html">工作台</a>
+    </div>
+</nav>
+
+<!-- ═══ 1. HERO ═══ -->
+<section class="hero">
+    <span class="section-tag">Physical AI · Multi-Agent System</span>
+    <h1>SophiGo 全链路<br>AI Native 研发体系</h1>
+    <p>以<strong>参数化计算设计</strong>、<strong>AI 生成式 3D 几何</strong>、<strong>DFM 量产校验</strong>与<strong>Sim-to-Real 物理闭环</strong>为核心，由 1 个总控 Orchestrator + 9 个专业 Subagent 组成的多智能体系统，加速从底座模型到工业级实物化产出的完整研发闭环。</p>
+    <div class="hero-stats">
+        <div>总控: <span>Orchestrator</span></div>
+        <div>技术专家: <span>6 Agents</span></div>
+        <div>产品化思维: <span>3 Agents</span></div>
+        <div>知识引擎: <span>Sophi-Omni</span></div>
+        <div>交付: <span>Sim-to-Real 闭环</span></div>
+    </div>
+</section>
+
+<!-- ═══ 2. ARCHITECTURE ═══ -->
+<section id="architecture">
+    <span class="section-tag">System Topology</span>
+    <h2>多智能体协同架构</h2>
+    <p class="section-desc">1 个 Orchestrator 总控编排 9 个专业 Subagent，通过 Sophi-Omni 知识引擎实现多模态 RAG 检索增强与 MCP 工具链调度。</p>
+
+    <div class="mermaid-box">
+        <div class="mermaid">
+graph TB
+    ORCH["🎯 Orchestrator 总控 Agent<br/>任务拆解 · 进度监控 · 质量评估"]
+    subgraph TECH["🔧 技术专家集群"]
+        T1["⚙️ 机械设计<br/>结构/CAE"];T2["🏭 机械制造<br/>BOM/工艺"]
+        T3["🔌 嵌入式硬件<br/>电路/元器件"];T4["💻 嵌入式软件<br/>驱动/RTOS"]
+        T5["🧠 算法专家<br/>控制/VLA"];T6["🔗 系统集成<br/>联调/诊断"]
+    end
+    subgraph PROD["💡 产品化思维集群"]
+        P1["📈 产品与市场"];P2["💰 商业与成本"];P3["🔬 研发与创新"]
+    end
+    ORCH --> T1 & T2 & T3 & T4 & T5 & T6
+    ORCH --> P1 & P2 & P3
+    TECH --> ORCH;PROD --> ORCH
+    TECH -.-> PROD
+    style ORCH fill:#4285F4,fill-opacity:0.22,stroke:#4285F4,stroke-width:3px,color:#fff
+        </div>
+    </div>
+
+    <div class="mermaid-box">
+        <div class="mermaid">
+graph LR
+    SOPHI["🧿 Sophi-Omni<br/>知识调度 · RAG · 路由"]
+    subgraph KB["📚 知识底座"]
+        K1["🐙 GitHub/ROS"];K2["📁 项目案例"];K3["🔩 元器件库"];K4["🧪 仿真数据集"]
+    end
+    subgraph MCP["🔧 MCP 工具链"]
+        M1["📐 CAD/CAE"];M2["🎮 Isaac Sim"];M3["🐛 IDE"];M4["🏗️ 智能制造"]
+    end
+    subgraph OUT["📦 交付"]
+        D1["📐 CAD文件"];D2["📋 BOM清单"];D3["💾 嵌入式"];D4["🧠 算法模型"];D5["🚗 实物平台"]
+    end
+    SOPHI <--> KB;SOPHI <--> MCP;SOPHI --> OUT;OUT -.->|"数据回流"| SOPHI
+    style SOPHI fill:#4285F4,fill-opacity:0.22,stroke:#4285F4,stroke-width:3px,color:#fff
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 2.5 系统状态 ═══ -->
+<section style="padding:0 2rem 2rem;max-width:1100px;margin:0 auto;">
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:flex;align-items:center;gap:8px;font-size:.72rem;">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,168,83,.4);"></span> Hermes: ACTIVE
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:flex;align-items:center;gap:8px;font-size:.72rem;">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 5px rgba(66,133,244,.4);"></span> DeepSeek V4 Pro: READY
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:flex;align-items:center;gap:8px;font-size:.72rem;">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 5px rgba(234,67,53,.4);"></span> OpenClaw→飞书: CONNECTED
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:flex;align-items:center;gap:8px;font-size:.72rem;">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 5px rgba(251,188,4,.4);"></span> Isaac Sim: STANDBY
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 2.6 快速入口 ═══ -->
+<section style="padding:0 2rem 3rem;max-width:1100px;margin:0 auto;">
+    <span class="section-tag">Quick Access</span>
+    <div class="card-grid">
+        <div class="card" onclick="location.href='basic.html'" style="cursor:pointer">
+            <div class="card-icon" style="font-size:1.2rem">🤖</div>
+            <h4 style="font-size:1rem">Agent 核心定义</h4>
+            <p style="font-size:.78rem;margin-bottom:.5rem">Soul/Memory/Skills 三层心智 + 8 项能力雷达 + 架构映射表</p>
+            <span style="font-size:.7rem;color:var(--red);font-weight:600">basic.html →</span>
+        </div>
+        <div class="card" onclick="location.href='tool.html'" style="cursor:pointer">
+            <div class="card-icon" style="font-size:1.2rem">⚙️</div>
+            <h4 style="font-size:1rem">工具链集成配置</h4>
+            <p style="font-size:.78rem;margin-bottom:.5rem">10+ 工具协同 · SVG 流程图 · 7 步集成教程 · 代码示例</p>
+            <span style="font-size:.7rem;color:var(--red);font-weight:600">tool.html →</span>
+        </div>
+        <div class="card" onclick="location.href='background.html'" style="cursor:pointer">
+            <div class="card-icon" style="font-size:1.2rem">📜</div>
+            <h4 style="font-size:1rem">前沿技术综述</h4>
+            <p style="font-size:.78rem;margin-bottom:.5rem">5 技术域 · 5 专家拍砖 · 57 篇参考文献 · Apple 黑丝风格</p>
+            <span style="font-size:.7rem;color:var(--red);font-weight:600">background.html →</span>
+        </div>
+        <div class="card" onclick="location.href='workflow.html'" style="cursor:pointer">
+            <div class="card-icon" style="font-size:1.2rem">🔷</div>
+            <h4 style="font-size:1rem">系统架构可视化</h4>
+            <p style="font-size:.78rem;margin-bottom:.5rem">克莱因蓝 Mermaid 拓扑 · RAG 路由 · Sim-to-Real 闭环</p>
+            <span style="font-size:.7rem;color:var(--red);font-weight:600">workflow.html →</span>
+        </div>
+        <div class="card" onclick="location.href='workspace.html'" style="cursor:pointer">
+            <div class="card-icon" style="font-size:1.2rem">💻</div>
+            <h4 style="font-size:1rem">三栏交互工作台</h4>
+            <p style="font-size:.78rem;margin-bottom:.5rem">Agent 状态面板 · Mermaid 拓扑 · Hermes 终端 · 三协议打通</p>
+            <span style="font-size:.7rem;color:var(--red);font-weight:600">workspace.html →</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 3. AGENT CORE ═══ -->
+<section id="agents">
+    <span class="section-tag">Agent Core</span>
+    <h2>SophiGo Agent 核心定义</h2>
+    <p class="section-desc">以计算工程确定性 + 量产经济性为双核心驱动，三层纵深记忆体系为知识底座，全链路自动化技能为执行手段。</p>
+
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🧬</div>
+            <h4>Soul · 智能之魂</h4>
+            <p>以"计算工程化确定性"与"量产经济性"为双核心驱动，将多维度物理约束转化为可编译的三维几何结构。</p>
+            <ul class="card-attr">
+                <li><strong>DFM 制造戒律对齐</strong> — 拔模斜度/钣金折弯/悬空角 ≤45° 内化为硬边界</li>
+                <li><strong>量产财务 ROI 约束</strong> — 实时评估模具投资 vs 单件成本的盈亏平衡</li>
+                <li><strong>结构安全优先级</strong> — C-NCAP 碰撞吸能 SF≥1.5 作为刚性过滤</li>
+                <li><strong>Sim-to-Real 一致性伦理</strong> — 仿真偏差 >5% 自动触发重校准</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧠</div>
+            <h4>Memory · 三层记忆体系</h4>
+            <p>纵深记忆架构保障即时信息转化为长期工程知识沉淀。</p>
+            <ul class="card-attr">
+                <li><strong>L1 瞬时工作记忆</strong> — 缓存最近 10 次 PicoGK 编译栈与错误日志</li>
+                <li><strong>L2 语义知识网格</strong> — Obsidian Graph RAG 图检索增强生成</li>
+                <li><strong>L3 过程经验记忆</strong> — 预存法兰生成/螺纹切削/晶格填充等动作链模板</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h4>Skills · 核心技能栈</h4>
+            <p>打通从创意草图到仿真就绪的 articulated 3D 模型，再到量产 BOM 输出的全链路。</p>
+            <ul class="card-attr">
+                <li><strong>PicoGK 几何编译</strong> — Python 直接读写 Voxel 缓存，输出 .glb/.stl</li>
+                <li><strong>TRELLIS.2 多模态 3D 重建</strong> — 文本/图像→PBR材质 Mesh</li>
+                <li><strong>Isaac Sim 域随机化</strong> — 车辆 articulated 关节 + DR 扰动</li>
+                <li><strong>飞书多维表格自动编排</strong> — OpenClaw 桥接 BOM ↔ IDE</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 style="text-align:center;margin-top:3rem">执行能力雷达</h3>
+    <div class="skill-grid">
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">PicoGK 几何编译</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div><div class="skill-desc">Voxel 几何生成、布尔运算、晶格填充、流道优化</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">TRELLIS.2 3D 生成</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div><div class="skill-desc">O-Voxel 稀疏表征，SLAT→Mesh/3DGS/NeRF</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">DFM 自动校验</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div><div class="skill-desc">拔模斜度/壁厚/悬空角检测，可制造性评分</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">Isaac Sim 仿真</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div><div class="skill-desc">Domain Randomization + Sim-to-Real 域迁移</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">VLA 蒸馏部署</span><span class="skill-tag">STANDBY</span></div><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div><div class="skill-desc">OpenVLA/RT-2→端侧 100Hz 轻量推理网络</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">Three.js 可视化</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div><div class="skill-desc">WebGL 实时 PBR 渲染，零安装设计评审</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">Obsidian Graph RAG</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div><div class="skill-desc">双链图谱遍历检索，设计约束智能提取</div></div>
+        <div class="skill-item"><div class="skill-head"><span class="skill-name">飞书 ↔ Hermes 编排</span><span class="skill-tag">ACTIVE</span></div><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div><div class="skill-desc">OpenClaw Webhook 监听，BOM 自动同步回写</div></div>
+    </div>
+</section>
+
+<!-- ═══ 4. TOOLCHAIN ═══ -->
+<section id="toolchain">
+    <span class="section-tag">R&D Pipeline</span>
+    <h2>研发工具链与数据闭环</h2>
+    <p class="section-desc">Obsidian → Hermes+IDE → OpenClaw → 飞书多维表格，10+ 工具协同的数字研发流水线。</p>
+
+    <div class="flow-grid">
+        <div class="flow-card">
+            <h3 style="font-size:1.05rem">📥 数据流向 · 参数到物体</h3>
+            <ol>
+                <li><strong>Obsidian Markdown + YAML</strong> — 输入底盘硬点/材料物性/安全系数</li>
+                <li><strong>飞书 Webhook 触发</strong> — 排产任务状态变更 → OpenClaw 推送 JSON</li>
+                <li><strong>Hermes Context 映射</strong> — 解包 Webhook + Graph RAG 检索设计约束</li>
+                <li><strong>DeepSeek V4 Pro 代码生成</strong> — PicoGK Python 脚本 + 编译自愈</li>
+                <li><strong>PicoGK → .glb 二进制资产</strong> — Voxel 编译为 PBR 材质网格</li>
+                <li><strong>Isaac Sim 遥测 → 飞书归档</strong> — 传感器数据 JSON 回写多维表格</li>
+            </ol>
+        </div>
+        <div class="flow-card">
+            <h3 style="font-size:1.05rem;color:var(--red)">🧭 决策流向 · 自适应纠错</h3>
+            <ol>
+                <li><strong>任务激活</strong> — 飞书行 Standby→ToBeDesigned，Hermes 生成目标树</li>
+                <li><strong>代码自愈回路</strong> — 编译失败→捕获 Traceback→DeepSeek 自动重试 (≤5次)</li>
+                <li><strong>物理校验回路</strong> — FEM SF&lt;1.5→加厚壁厚；悬空角>45°→修改拓扑</li>
+                <li><strong>人工门禁</strong> — Awaiting Review→浏览器 Three.js 交互审查</li>
+                <li><strong>批准/退回</strong> — Approve→BOM锁定量产；Reject→反馈回写 Obsidian</li>
+            </ol>
+        </div>
+    </div>
+
+    <h3 style="text-align:center;margin-top:3rem">工具链全景</h3>
+    <div class="tool-list">
+        <div class="tool-row"><span class="tool-icon">📓</span><div class="tool-info"><div class="tool-name">Obsidian 本地知识库</div><div class="tool-desc">Graph RAG 图检索 · YAML Frontmatter · 双链知识图谱</div></div><span class="tool-badge">Semantic</span></div>
+        <div class="tool-row"><span class="tool-icon">🤖</span><div class="tool-info"><div class="tool-name">Hermes + Antigravity IDE</div><div class="tool-desc">DeepSeek V4 Pro 调度 · PicoGK 沙箱编译 · 错误自愈</div></div><span class="tool-badge">Cognitive Hub</span></div>
+        <div class="tool-row"><span class="tool-icon">🌉</span><div class="tool-info"><div class="tool-name">OpenClaw 网关</div><div class="tool-desc">飞书 Bitable ↔ 本地 IDE 双向桥接 · Webhook 事件驱动</div></div><span class="tool-badge">Bridge</span></div>
+        <div class="tool-row"><span class="tool-icon">📊</span><div class="tool-info"><div class="tool-name">飞书多维表格 + 知识库</div><div class="tool-desc">BOM 管理 · 排产排程 · DFM 评审流转 · 团队协作</div></div><span class="tool-badge">Collaboration</span></div>
+        <div class="tool-row"><span class="tool-icon">🧠</span><div class="tool-info"><div class="tool-name">DeepSeek V4 Pro</div><div class="tool-desc">万亿参数 MoE · 代码生成 · DFM 规则推理 · 参数调优</div></div><span class="tool-badge">LLM</span></div>
+        <div class="tool-row"><span class="tool-icon">🎮</span><div class="tool-info"><div class="tool-name">NVIDIA Isaac Sim 4.0</div><div class="tool-desc">PhysX 5 物理引擎 · Domain Randomization · Sim-to-Real</div></div><span class="tool-badge">Simulation</span></div>
+    </div>
+</section>
+
+<!-- ═══ 5. 3D PREVIEW ═══ -->
+<section>
+    <span class="section-tag">Live Preview</span>
+    <h2>参数化车辆预览</h2>
+    <p class="section-desc">Three.js WebGL 实时渲染 · 拖动滑块调节轴距/轮距/轮胎半径</p>
+    <div class="three-wrap">
+        <div class="three-box"><canvas id="c3d"></canvas></div>
+        <div class="sliders">
+            <label>轴距</label><input type="range" id="len" min="2" max="5" step=".1" value="3.5"><span id="lval">3.5m</span>
+            <label>轮距</label><input type="range" id="wid" min="1.2" max="2.5" step=".1" value="1.8"><span id="wval">1.8m</span>
+            <label>轮胎R</label><input type="range" id="rad" min=".25" max=".6" step=".02" value=".4"><span id="rval">0.40m</span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    SophiGo Development Team &copy; 2026 ·
+    <a href="waterfall.html">首页</a> ·
+    <a href="background.html">综述报告</a> ·
+    <a href="workspace.html">交互工作台</a>
+    <br>基于 Hermes + DeepSeek V4 Pro + Antigravity IDE
+</footer>
+
+<script>
+mermaid.initialize({startOnLoad:true,theme:'dark',flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},securityLevel:'loose'});
+
+// Three.js
+let sc,ca,re,cg,ch,ws=[];
+function i3(){
+    const b=document.querySelector('.three-box'),w=b.clientWidth,h=b.clientHeight;
+    sc=new THREE.Scene();sc.background=new THREE.Color(0x010103);
+    sc.fog=new THREE.FogExp2(0x010103,.1);
+    ca=new THREE.PerspectiveCamera(40,w/h,.1,100);ca.position.set(4,3,5);ca.lookAt(0,0,0);
+    re=new THREE.WebGLRenderer({canvas:document.getElementById('c3d'),antialias:true});
+    re.setSize(w,h);re.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    sc.add(new THREE.AmbientLight(0xffffff,.4));
+    let dl=new THREE.DirectionalLight(0x4285F4,.8);dl.position.set(5,10,7);sc.add(dl);
+    sc.add(new THREE.PointLight(0xEA4335,1.2,10).position.set(-2,1,-2));
+    let g=new THREE.GridHelper(20,20,0x4285F4,0x111122);g.position.y=-.55;sc.add(g);
+    cg=new THREE.Group();sc.add(cg);
+    let bs=new THREE.Mesh(new THREE.BoxGeometry(1.2,.45,2.2),new THREE.MeshPhongMaterial({color:0xEA4335,transparent:true,opacity:.12}));
+    bs.position.y=.35;cg.add(bs);
+    ch=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1,.25,1)),new THREE.LineBasicMaterial({color:0xEA4335}));
+    cg.add(ch);
+    let wm=new THREE.LineBasicMaterial({color:0x4285F4}),we=new THREE.EdgesGeometry(new THREE.CylinderGeometry(1,1,.25,12,1,true));
+    for(let i=0;i<4;i++){let w=new THREE.LineSegments(we,wm);w.rotation.z=Math.PI/2;cg.add(w);ws.push(w)}
+    let ae=new THREE.EdgesGeometry(new THREE.CylinderGeometry(.04,.04,1,8,1,true)),am=new THREE.LineBasicMaterial({color:0xffffff});
+    let af=new THREE.LineSegments(ae,am),ab=new THREE.LineSegments(ae,am);
+    af.rotation.z=Math.PI/2;ab.rotation.z=Math.PI/2;cg.add(af);cg.add(ab);
+    up();['len','wid','rad'].forEach(id=>document.getElementById(id).addEventListener('input',up));
+    an();
+}
+function up(){
+    let l=+document.getElementById('len').value,w=+document.getElementById('wid').value,r=+document.getElementById('rad').value;
+    document.getElementById('lval').innerText=l.toFixed(1)+'m';
+    document.getElementById('wval').innerText=w.toFixed(1)+'m';
+    document.getElementById('rval').innerText=r.toFixed(2)+'m';
+    ch.scale.set(w*.7,1,l*.7);
+    ws.forEach(wh=>wh.scale.set(r,1.2,r));
+    let x=w/2,z=l/2,y=-.15;
+    ws[0].position.set(-x,y,z);ws[1].position.set(x,y,z);
+    ws[2].position.set(-x,y,-z);ws[3].position.set(x,y,-z);
+}
+function an(){requestAnimationFrame(an);cg.rotation.y+=.004;cg.position.y=Math.sin(Date.now()*.0015)*.04;re.render(sc,ca)}
+window.addEventListener('resize',()=>{let b=document.querySelector('.three-box');ca.aspect=b.clientWidth/b.clientHeight;ca.updateProjectionMatrix();re.setSize(b.clientWidth,b.clientHeight)});
+window.onload=i3;
+</script>
+</body>
+</html>

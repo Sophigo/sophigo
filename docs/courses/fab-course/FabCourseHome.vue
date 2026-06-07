@@ -1,1737 +1,1297 @@
 <template>
-  <div class="fab-portal">
-    <!-- Ambient Background Lighting -->
-    <div class="ambient-glow bg-glow-1"></div>
-    <div class="ambient-glow bg-glow-2"></div>
-    <div class="ambient-glow bg-glow-3"></div>
+  <div class="fab-home">
 
-    <!-- Apple-style Glassmorphic Navigation Bar -->
-    <header class="portal-nav">
-      <div class="nav-container">
-        <a href="/docs/" class="nav-brand">
-          <span class="brand-dot"></span>
-          SophiGo Docs <span class="brand-sub">Fab 课程</span>
+    <!-- ── Navigation ── -->
+    <header class="fab-nav">
+      <div class="nav-inner">
+        <a :href="homeUrl" class="nav-brand">
+          <img src="/logo.png" alt="SophiGo" class="nav-logo" />
+          <span>SophiGo</span>
         </a>
         <nav class="nav-links">
-          <a href="/docs/courses/ai-basics/">AI 基础应用</a>
-          <a href="/docs/courses/mobile-robot/">移动机器人</a>
-          <a href="/docs/courses/cmf/">CMF 规范</a>
-          <a href="/" class="btn-back">返回主站</a>
+          <a href="/docs/">Home</a>
+          <a href="/docs/courses/fab-course/" class="nav-active">Fab Courses</a>
+          <a href="/docs/courses/ai-basics/">AI Basics</a>
+          <a href="/docs/courses/mobile-robot/">Mobile Robot</a>
+          <a href="/docs/courses/cmf/">CMF</a>
+          <a href="/docs/news/index.html">Insights</a>
         </nav>
       </div>
     </header>
 
-    <main class="portal-content">
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="badge">FAB LAB</div>
-        <h1 class="hero-title">
-          数字化快速原型 <span class="text-gradient">Digital Fabrication</span>
-        </h1>
-        <p class="hero-subtitle">
-          依托 Fab Lab (数字化制造实验室)，带您深入了解如何通过一系列开源软硬件工具和数字制造设备，实现从“想法”到“原型”的快速迭代与开发。
-        </p>
-        <div class="hero-actions">
-          <a href="#lab-management" class="btn-primary">开始探索</a>
-          <a href="#tutorials-grid" class="btn-secondary">核心教程 (1-14)</a>
+    <main>
+
+      <!-- ── Hero ── -->
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">FAB LAB · DIGITAL FABRICATION</p>
+          <h1>How to Make<br /><em>Almost Everything</em></h1>
+          <p class="hero-sub">
+            Built on the MIT FabAcademy curriculum and the global Fab Lab network.
+            Develop full-stack engineering thinking — from digital fabrication
+            fundamentals to AI-integrated product prototyping.
+          </p>
+          <div class="hero-btns">
+            <a href="#overview" class="btn-solid">Explore the Course</a>
+            <a href="https://www.nexmaker.com/" target="_blank" rel="noopener" class="btn-outline">NexMaker Docs ↗</a>
+          </div>
+          <div class="hero-pills">
+            <span class="pill">14 Modules</span>
+            <span class="pill">MIT FabAcademy</span>
+            <span class="pill">400+ Students</span>
+            <span class="pill">UNNC · ZJU · ZWU</span>
+          </div>
         </div>
       </section>
 
-      <!-- Category Navigation Tabs -->
-      <div class="sticky-tabs">
-        <div class="tabs-container">
-          <a href="#lab-management" class="tab-link">🔬 实验室基础</a>
-          <a href="#tutorials-grid" class="tab-link">🛠️ 核心教程 (1-14)</a>
-          <a href="#class-archives" class="tab-link">🎓 创新项目与归档</a>
-          <a href="#frontier-tech" class="tab-link">🔮 前沿探索</a>
+      <!-- ── Sticky Tabs ── -->
+      <div class="tabs-bar">
+        <div class="tabs-inner">
+          <a href="#overview" class="stab">Overview</a>
+          <a href="#tutorials" class="stab">Tutorials</a>
+          <a href="#course-list" class="stab">Course List</a>
         </div>
       </div>
 
-      <!-- 🔬 1. Lab Management Section -->
-      <section id="lab-management" class="section-container">
-        <div class="section-header">
-          <span class="section-badge">00</span>
-          <h2>实验室管理与基础</h2>
-          <p>在进入实验室进行物理制造之前，必须熟悉实验室的基本运作规范与安全守则。</p>
-        </div>
+      <!-- ── Section 1: Overview + Lab Manage (merged) ── -->
+      <section id="overview" class="sec">
+        <div class="sec-inner">
 
-        <div class="lab-cards-grid">
-          <div v-for="item in labItems" :key="item.title" class="glass-card lab-card">
-            <div class="card-icon" v-html="item.icon"></div>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.desc }}</p>
-            <div class="card-footer">
-              <button @click="openDocDrawer(item.link, item.title)" class="btn-card-read">快捷阅读</button>
-              <a :href="item.link" class="btn-card-link" target="_blank">新标签打开</a>
+          <!-- Overview text -->
+          <div class="sec-head">
+            <p class="sec-tag">OVERVIEW</p>
+            <h2>What is Fab Lab?</h2>
+          </div>
+
+          <div class="ov-layout">
+            <div class="ov-text">
+              <p>
+                A <strong>Fab Lab</strong> (Fabrication Laboratory) is a digital
+                fabrication workspace developed by MIT's Center for Bits and Atoms.
+                Using a standardized set of CNC machines, 3D printers, laser cutters,
+                and electronics tools, participants can design and build almost
+                anything — from custom circuit boards to IoT devices to structural
+                prototypes.
+              </p>
+              <p>
+                The <strong>FabAcademy</strong> is a distributed education program
+                delivered globally via the Fab Lab network. Students complete weekly
+                hands-on assignments — each producing a physical artifact — covering
+                the full stack from design to fabrication to firmware.
+              </p>
+              <p>
+                At <strong>UNNC-FabLab</strong>, we adapt this curriculum to build
+                engineers who think in full-stack terms: combining mechanical design,
+                electronics, AI tools, and product thinking into one coherent
+                learning path.
+              </p>
+            </div>
+            <div class="ov-stats">
+              <div class="stat-block">
+                <span class="stat-n">2000<sup>+</sup></span>
+                <span class="stat-l">Fab Labs worldwide</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-n">14</span>
+                <span class="stat-l">Core modules</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-n">MIT</span>
+                <span class="stat-l">Curriculum origin</span>
+              </div>
             </div>
           </div>
+
+          <!-- Lab Manage cards (merged) -->
+          <div class="lab-head">
+            <p class="sec-tag">LAB MANAGE</p>
+            <h2>Lab Operations</h2>
+            <p class="sec-sub">Essential documentation before entering and working in the Fab Lab.</p>
+          </div>
+
+          <div class="lab-grid">
+            <div
+              v-for="item in labItems"
+              :key="item.title"
+              class="lab-card"
+            >
+              <div class="lab-icon" v-html="item.icon"></div>
+              <div class="lab-body">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.desc }}</p>
+              </div>
+              <div class="lab-foot">
+                <button @click="openDrawer(item.link, item.title)" class="lab-read-btn">Read docs</button>
+                <a :href="item.link" target="_blank" class="lab-open-link">Full screen ↗</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- 🛠️ 2. Core Tutorials Grid (Interactive Correlation Map) -->
-      <section id="tutorials-grid" class="section-container relative-container">
-        <div class="section-header">
-          <span class="section-badge">01 - 14</span>
-          <h2>核心课程教程</h2>
-          <p>
-            涵盖项目管理、计算机辅助设计 (CAD)、增减材制造、PCB 电子制造、物联网和人机交互等完整链路。
-            <br />
-            <span class="glow-tip">💡 鼠标悬停在卡片上，可查看各模块之间的技术关联。</span>
-          </p>
-        </div>
+      <!-- ── Section 2: Tutorials ── -->
+      <section id="tutorials" class="sec sec-alt">
+        <div class="sec-inner">
 
-        <!-- SVG Connection Overlay -->
-        <div class="svg-connections-container" id="svg-container">
-          <svg class="connections-svg" ref="svgElement">
-            <defs>
-              <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00f2fe" />
-                <stop offset="100%" stop-color="#8a2be2" />
-              </linearGradient>
-              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <!-- Glowing Bezier Paths -->
-            <path
-              v-for="(line, idx) in activeLines"
-              :key="idx"
-              :d="line.d"
-              stroke="url(#neonGradient)"
-              stroke-width="2.5"
-              fill="none"
-              filter="url(#glow)"
-              class="connection-path"
-            />
-          </svg>
-        </div>
+          <div class="sec-head">
+            <p class="sec-tag">TUTORIALS</p>
+            <h2>14 Core Modules</h2>
+            <p class="sec-sub">
+              From project documentation and CAD design to AI vehicle development.
+              Click any card to open the corresponding documentation.
+            </p>
+          </div>
 
-        <!-- Grid Container -->
-        <div class="tutorials-grid-container" id="tutorials-container">
-          <div
-            v-for="tut in tutorials"
-            :key="tut.id"
-            :id="'card-' + tut.id"
-            class="glass-card tutorial-card"
-            :class="{
-              'card-hovered': hoveredCardId === tut.id,
-              'card-related': isRelated(tut.id),
-              'card-dimmed': hoveredCardId !== null && hoveredCardId !== tut.id && !isRelated(tut.id)
-            }"
-            @mouseenter="onCardMouseEnter(tut.id)"
-            @mouseleave="onCardMouseLeave"
-          >
-            <div class="tut-header">
-              <span class="tut-num">{{ String(tut.id).padStart(2, '0') }}</span>
-              <div class="tut-icon" v-html="tut.icon"></div>
-            </div>
-            
-            <h3 class="tut-title">{{ tut.title }}</h3>
-            <p class="tut-desc">{{ tut.desc }}</p>
-
-            <!-- Links list -->
-            <div class="tut-links-container">
-              <div class="tut-links-heading">核心子章节：</div>
-              <ul class="tut-sublinks">
-                <li v-for="link in tut.links" :key="link.title">
-                  <a @click.prevent="openDocDrawer(link.path, link.title)" href="#" class="sublink-item">
-                    {{ link.title }}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Action buttons -->
-            <div class="tut-actions">
-              <button @click="openDocDrawer(tut.assessment, tut.title + ' - 评估指标')" class="btn-tut-read">
-                📋 评估指标
-              </button>
-              <a :href="tut.assessment" class="btn-tut-open" target="_blank">
-                全屏 ↗
-              </a>
-            </div>
-
-            <!-- Highlight visual tags -->
-            <div class="tut-relation-badge" v-if="hoveredCardId === tut.id">
-              ACTIVE
-            </div>
-            <div class="tut-relation-badge related" v-else-if="isRelated(tut.id)">
-              RELATED
+          <div class="tut-grid">
+            <div
+              v-for="tut in tutorials"
+              :key="tut.id"
+              class="tut-card"
+              @click="openDrawer(tut.docsPath, tut.title)"
+            >
+              <div class="tc-top">
+                <span class="tc-num">{{ String(tut.id).padStart(2, '0') }}</span>
+                <div class="tc-icon" v-html="tut.icon"></div>
+              </div>
+              <h3 class="tc-title">{{ tut.title }}</h3>
+              <p class="tc-desc">{{ tut.desc }}</p>
+              <div class="tc-links">
+                <span
+                  v-for="link in tut.links"
+                  :key="link.title"
+                  class="tc-link"
+                  @click.stop="openDrawer(link.path, link.title)"
+                >{{ link.title }}</span>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      <!-- 🎓 3. Class Archives (FABS) Section -->
-      <section id="class-archives" class="section-container">
-        <div class="section-header">
-          <span class="section-badge">FABS</span>
-          <h2>年度创新项目与班级档案</h2>
-          <p>历年来 NexMaker Academy、浙江大学设计工程 (ZJU) 以及 宁波诺丁汉大学 (UNNC) 课程的学生成果与项目归档。</p>
-        </div>
+      <!-- ── Section 3: Course List ── -->
+      <section id="course-list" class="sec">
+        <div class="sec-inner">
 
-        <div class="archive-groups">
-          <div v-for="group in archiveGroups" :key="group.title" class="archive-group-block glass-card">
-            <h3>{{ group.title }}</h3>
-            <div class="archive-subgrids">
-              <div v-for="sub in group.items" :key="sub.name" class="archive-sub-card">
-                <h4>{{ sub.name }}</h4>
-                <div class="archive-sub-links">
-                  <span v-for="link in sub.links" :key="link.title" class="archive-link-wrapper">
-                    <!-- If absolute http link, open normally; else drawer preview -->
-                    <a 
-                      v-if="link.path.startsWith('http')" 
-                      :href="link.path" 
-                      target="_blank" 
-                      class="archive-link"
-                    >
-                      {{ link.title }} ↗
-                    </a>
-                    <a 
-                      v-else 
-                      @click.prevent="openDocDrawer(link.path, link.title)" 
-                      href="#" 
-                      class="archive-link"
-                    >
-                      {{ link.title }}
-                    </a>
-                  </span>
+          <div class="sec-head">
+            <p class="sec-tag">COURSE LIST</p>
+            <h2>Classes &amp; Teams</h2>
+            <p class="sec-sub">
+              Student cohorts from UNNC FabLab, ZJU, ZWU, and NexMaker Academy.
+              Click any team to view their project documentation site.
+            </p>
+          </div>
+
+          <div class="cohort-list">
+            <div
+              v-for="group in cohortGroups"
+              :key="group.id"
+              class="cohort-row"
+            >
+              <div class="cohort-meta">
+                <span class="cohort-inst">{{ group.institution }}</span>
+                <span class="cohort-year">{{ group.year }}</span>
+              </div>
+              <div class="cohort-body">
+                <h3 class="cohort-name">{{ group.name }}</h3>
+                <div class="cohort-teams">
+                  <a
+                    v-for="team in group.teams"
+                    :key="team.name"
+                    :href="team.url"
+                    :target="team.url.startsWith('http') ? '_blank' : undefined"
+                    class="team-link"
+                  >{{ team.name }}</a>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      <!-- 🔮 4. Frontier Tech (Others) Section -->
-      <section id="frontier-tech" class="section-container">
-        <div class="section-header">
-          <span class="section-badge">NEXT-GEN</span>
-          <h2>前沿技术探索</h2>
-          <p>面向下一代混合现实与智能机器人底盘加工的技术储备与行业标准规范。</p>
-        </div>
-
-        <div class="frontier-grid">
-          <div v-for="item in frontierItems" :key="item.category" class="glass-card frontier-card">
-            <div class="frontier-icon" v-html="item.icon"></div>
-            <h3>{{ item.category }}</h3>
-            <p>{{ item.desc }}</p>
-            <div class="frontier-sub-links">
-              <a 
-                v-for="link in item.links" 
-                :key="link.title" 
-                @click.prevent="openDocDrawer(link.path, link.title)" 
-                href="#"
-                class="frontier-link-pill"
-              >
-                {{ link.title }}
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <!-- Hyperframe Drawer (Slide-in document preview drawer) -->
-    <div 
-      class="hyperframe-overlay" 
-      :class="{ 'overlay-active': drawerOpen }"
-      @click="closeDocDrawer"
+    <!-- ── Slide-in Doc Drawer ── -->
+    <div
+      class="drawer-bg"
+      :class="{ open: drawerOpen }"
+      @click="closeDrawer"
     >
-      <div 
-        class="hyperframe-drawer" 
-        :class="{ 'drawer-active': drawerOpen }"
+      <div
+        class="drawer"
+        :class="{ open: drawerOpen }"
         @click.stop
       >
-        <!-- Drawer Header -->
-        <div class="drawer-header">
-          <div class="drawer-title-area">
-            <span class="drawer-badge">HYPERFRAME</span>
+        <div class="drawer-hd">
+          <div class="drawer-hd-left">
+            <span class="drawer-badge">DOCS</span>
             <h3 class="drawer-title">{{ drawerTitle }}</h3>
           </div>
-          <div class="drawer-controls">
-            <a :href="drawerFullscreenUrl" target="_blank" class="btn-drawer-full" v-if="drawerFullscreenUrl">
-              全屏阅读 ↗
-            </a>
-            <button @click="closeDocDrawer" class="btn-drawer-close" aria-label="关闭">
-              ✕
-            </button>
+          <div class="drawer-hd-right">
+            <a
+              v-if="drawerUrl"
+              :href="drawerUrl"
+              target="_blank"
+              class="drawer-fs"
+            >Open full screen ↗</a>
+            <button @click="closeDrawer" class="drawer-x" aria-label="Close">✕</button>
           </div>
         </div>
-
-        <!-- Drawer Content View -->
-        <div class="drawer-body-container" ref="drawerBody">
-          <!-- Glassmorphic Skeleton Loader -->
-          <div class="skeleton-loader" v-if="drawerLoading">
-            <div class="skeleton-glow"></div>
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line p1"></div>
-            <div class="skeleton-line p2"></div>
-            <div class="skeleton-line p3"></div>
-            <div class="skeleton-block"></div>
-            <div class="skeleton-line p1"></div>
+        <div class="drawer-bd" ref="drawerBodyEl">
+          <div v-if="drawerLoading" class="drawer-sk">
+            <div class="sk-bar"></div>
+            <div class="sk-line" style="width:68%"></div>
+            <div class="sk-line" style="width:82%"></div>
+            <div class="sk-line" style="width:50%"></div>
+            <div class="sk-block"></div>
+            <div class="sk-line" style="width:74%"></div>
           </div>
-
-          <!-- Document Render Area -->
-          <div 
-            v-else-if="drawerContent" 
-            class="vp-doc custom-doc-render" 
-            v-html="drawerContent"
+          <div
+            v-else-if="drawerHtml"
+            class="vp-doc custom-doc-render"
+            v-html="drawerHtml"
           ></div>
-
-          <!-- Fallback or Iframe Loader if direct fetch failed -->
-          <div v-else-if="drawerFallback" class="fallback-frame-container">
-            <div class="fallback-message">
-              <p>正在载入完整视图模块...</p>
-            </div>
-            <iframe :src="drawerFullscreenUrl" class="fallback-iframe"></iframe>
+          <div v-else-if="drawerFallback" class="drawer-iframe-wrap">
+            <iframe :src="drawerUrl" class="drawer-iframe"></iframe>
           </div>
-          
-          <div v-else class="drawer-empty">
-            <p>暂无文档内容</p>
-          </div>
+          <div v-else class="drawer-empty">No content available.</div>
         </div>
       </div>
     </div>
 
-    <!-- Scroll To Top Button -->
-    <button 
-      class="scroll-top-btn" 
-      :class="{ 'show-scroll': showScrollTop }"
-      @click="scrollToTop"
-    >
-      ↑
-    </button>
-
-    <footer class="portal-footer">
-      <p>© 2026 SophiGo Docs. Powering Creative & Engineering Minds.</p>
+    <!-- ── Footer ── -->
+    <footer class="fab-footer">
+      <div class="footer-inner">
+        <span>© 2026 SophiGo · UNNC-FabLab</span>
+        <a href="https://www.nexmaker.com/" target="_blank" rel="noopener">NexMaker ↗</a>
+      </div>
     </footer>
+
   </div>
 </template>
 
+
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-// Define relationships between tutorials
-const relationships = {
-  1: [2, 13],       // PM -> CAD, BP
-  2: [3, 6, 8, 9],  // CAD -> 3D, Laser, CNC, Mold
-  3: [2, 9, 12],    // 3D -> CAD, Mold, Materials
-  4: [5, 7],        // Electric -> Arduino, PCB
-  5: [4, 7, 10, 11, 14], // Arduino -> Elec, PCB, IoT, Interface, AI Vehicle
-  6: [2, 12],       // Laser -> CAD, Materials
-  7: [4, 5],        // PCB -> Electric, Arduino
-  8: [2, 12],       // CNC -> CAD, Materials
-  9: [2, 3],        // Mold -> CAD, 3D
-  10: [5, 11],      // IoT -> Arduino, Interface
-  11: [5, 10],      // Interface -> Arduino, IoT
-  12: [3, 6, 8],    // Materials -> 3D, Laser, CNC
-  13: [1],          // BP -> PM
-  14: [2, 5]        // AI Vehicle -> CAD, Arduino
-};
+// ── Localhost detection ──
+const homeUrl = ref('/');
 
-// Core data elements
-const hoveredCardId = ref(null);
-const activeLines = ref([]);
-const svgElement = ref(null);
-
-const drawerOpen = ref(false);
+// ── Drawer state ──
+const drawerOpen  = ref(false);
 const drawerTitle = ref('');
-const drawerContent = ref('');
-const drawerLoading = ref(false);
-const drawerFullscreenUrl = ref('');
+const drawerHtml  = ref('');
+const drawerUrl   = ref('');
+const drawerLoading  = ref(false);
 const drawerFallback = ref(false);
-const drawerBody = ref(null);
+const drawerBodyEl   = ref(null);
 
-const showScrollTop = ref(false);
-
-// Recalculate SVG connection coordinates
-function calculateConnections() {
-  if (hoveredCardId.value === null) {
-    activeLines.value = [];
-    return;
-  }
-
-  const container = document.getElementById('tutorials-container');
-  const svg = svgElement.value;
-  if (!container || !svg) return;
-
-  const containerRect = container.getBoundingClientRect();
-  const hoveredEl = document.getElementById(`card-${hoveredCardId.value}`);
-  if (!hoveredEl) return;
-
-  const hoveredRect = hoveredEl.getBoundingClientRect();
-  const x1 = hoveredRect.left - containerRect.left + hoveredRect.width / 2;
-  const y1 = hoveredRect.top - containerRect.top + hoveredRect.height / 2;
-
-  const relatedIds = relationships[hoveredCardId.value] || [];
-  const lines = [];
-
-  relatedIds.forEach((relId) => {
-    const relEl = document.getElementById(`card-${relId}`);
-    if (!relEl) return;
-
-    const relRect = relEl.getBoundingClientRect();
-    const x2 = relRect.left - containerRect.left + relRect.width / 2;
-    const y2 = relRect.top - containerRect.top + relRect.height / 2;
-
-    // Draw quadratic curve: bend upward or downward depending on distance
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-    const midX = (x1 + x2) / 2;
-    const midY = (y1 + y2) / 2 - Math.max(30, Math.min(80, Math.abs(dx) * 0.15));
-
-    lines.push({
-      d: `M ${x1} ${y1} Q ${midX} ${midY} ${x2} ${y2}`
-    });
-  });
-
-  activeLines.value = lines;
-}
-
-// Mouse events on tutorial cards
-function onCardMouseEnter(id) {
-  hoveredCardId.value = id;
-  calculateConnections();
-}
-
-function onCardMouseLeave() {
-  hoveredCardId.value = null;
-  activeLines.value = [];
-}
-
-function isRelated(id) {
-  if (hoveredCardId.value === null) return false;
-  const list = relationships[hoveredCardId.value] || [];
-  return list.includes(id);
-}
-
-// Hyperframe content loading via fetch & parsing
-async function openDocDrawer(path, title) {
-  drawerTitle.value = title;
-  drawerOpen.value = true;
+async function openDrawer(path, title) {
+  drawerTitle.value   = title;
+  drawerOpen.value    = true;
   drawerLoading.value = true;
-  drawerContent.value = '';
+  drawerHtml.value    = '';
   drawerFallback.value = false;
-  
-  // Format the document URL properly
-  let targetPath = path.replace(/\.md$/, '');
-  if (targetPath.startsWith('/')) targetPath = targetPath.substring(1);
-  if (!targetPath.startsWith('docs/')) {
-    if (!targetPath.startsWith('courses/fab-course/')) {
-      targetPath = 'courses/fab-course/' + targetPath;
-    }
-    targetPath = 'docs/' + targetPath;
-  }
 
-  const finalUrl = '/' + targetPath;
-  drawerFullscreenUrl.value = finalUrl;
+  // Normalize path → URL
+  let p = path.replace(/\.md$/, '');
+  if (p.startsWith('/')) p = p.slice(1);
+  if (!p.startsWith('docs/')) {
+    if (!p.startsWith('courses/fab-course/')) p = 'courses/fab-course/' + p;
+    p = 'docs/' + p;
+  }
+  const url = '/' + p;
+  drawerUrl.value = url;
 
   try {
-    const response = await fetch(finalUrl);
-    if (!response.ok) throw new Error('Document not found');
-    const htmlText = await response.text();
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlText, 'text/html');
-    
-    // Extract VitePress document body
-    const docBody = doc.querySelector('.vp-doc');
-    if (docBody) {
-      // Clean up headers or elements if needed
-      drawerContent.value = docBody.innerHTML;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('not found');
+    const html = await res.text();
+    const doc  = new DOMParser().parseFromString(html, 'text/html');
+    const body = doc.querySelector('.vp-doc');
+    if (body) {
+      drawerHtml.value = body.innerHTML;
     } else {
-      // Fallback: use iframe
       drawerFallback.value = true;
     }
-  } catch (error) {
-    console.warn('Failed to parse doc directly, falling back to iframe:', error);
+  } catch {
     drawerFallback.value = true;
   } finally {
     drawerLoading.value = false;
-    if (drawerBody.value) {
-      drawerBody.value.scrollTop = 0;
-    }
+    if (drawerBodyEl.value) drawerBodyEl.value.scrollTop = 0;
   }
 }
 
-function closeDocDrawer() {
-  drawerOpen.value = false;
-}
+function closeDrawer() { drawerOpen.value = false; }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Global window event listeners
-function handleScroll() {
-  showScrollTop.value = window.scrollY > 300;
-}
-
-function handleResize() {
-  if (hoveredCardId.value !== null) {
-    calculateConnections();
-  }
-}
-
-function handleKeydown(e) {
-  if (e.key === 'Escape' && drawerOpen.value) {
-    closeDocDrawer();
-  }
+function onKey(e) {
+  if (e.key === 'Escape' && drawerOpen.value) closeDrawer();
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', handleResize);
-  window.addEventListener('keydown', handleKeydown);
+  if (
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1'
+  ) {
+    homeUrl.value = 'http://localhost:5173';
+  }
+  window.addEventListener('keydown', onKey);
 });
-
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-  window.removeEventListener('resize', handleResize);
-  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keydown', onKey);
 });
 
-// Setup metadata details
+
+// ══════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════
+
+// ── Lab Manage items ──
 const labItems = [
   {
-    title: '实验室管理规范',
-    desc: '详细描述 Fab Lab 运作准则、出勤要求与空间维护条例。',
-    link: '/docs/courses/fab-course/doc/0manage/labmanage.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
+    title: 'Lab Rules & Guidelines',
+    desc:  'Operating standards, attendance requirements, and space maintenance procedures.',
+    link:  '/docs/courses/fab-course/doc/0manage/labmanage.md',
+    icon:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
   },
   {
-    title: 'Fab Lab 介绍',
-    desc: '探索全球数字化制造实验室网络及其愿景理念与核心软硬件配置。',
-    link: '/docs/courses/fab-course/doc/Fab/FAB.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>'
+    title: 'Fab Lab Introduction',
+    desc:  'The global Fab Lab network, its vision, core machine inventory, and the FabAcademy program.',
+    link:  '/docs/courses/fab-course/doc/Fab/FAB.md',
+    icon:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>',
   },
   {
-    title: 'NexMaker 创客学术',
-    desc: '了解 NexMaker 创客联盟、创新培育课程与开发者社群孵化计划。',
-    link: '/docs/courses/fab-course/doc/0manage/nexmaker-academy.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>'
+    title: 'Access & Safety',
+    desc:  'Mandatory safety protocols for high-power equipment, CNC machines, and hazardous materials.',
+    link:  '/docs/courses/fab-course/doc/0manage/access_safety.md',
+    icon:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
   },
   {
-    title: '安全与准入规范',
-    desc: '使用高功耗设备、特种机械与易燃易爆材料时的必备安全指南。',
-    link: '/docs/courses/fab-course/doc/0manage/access_safety.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+    title: 'Material & Tools',
+    desc:  'Lab materials (acrylic, wood, resin) and equipment list with specs and booking procedures.',
+    link:  '/docs/courses/fab-course/doc/0manage/material.md',
+    icon:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
   },
-  {
-    title: '常用材料指南',
-    desc: '亚克力、木板、树脂等数字化制造主要耗材属性说明与选择矩阵。',
-    link: '/docs/courses/fab-course/doc/0manage/material.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
-  },
-  {
-    title: '设备与工具清单',
-    desc: '展示实验室中所有数字切片机、3D打印机、焊接工具的性能参数与预约流程。',
-    link: '/docs/courses/fab-course/doc/0manage/tool.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
-  }
 ];
 
+// ── Tutorials (14 modules, NexMaker order) ──
 const tutorials = [
   {
-    id: 1,
-    title: '项目管理与网页构建',
-    desc: '基于 Git 进行版本控制，掌握 Markdown 写作与图床使用，依托 Docsify/VitePress 搭建个人数字化原型记录主站。',
-    assessment: '/docs/courses/fab-course/doc/1projectmanage/Assessment1.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+    id: 1, title: 'Project Management',
+    desc: 'Version control with Git, Markdown documentation, and building personal project sites with VitePress.',
+    docsPath: '/docs/courses/fab-course/doc/1projectmanage/Assessment1.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
     links: [
-      { title: 'Git 工具入门', path: '/docs/courses/fab-course/doc/1projectmanage/git.md' },
-      { title: 'Markdown 语法', path: '/docs/courses/fab-course/doc/1projectmanage/markdown.md' },
-      { title: 'VitePress 现代静态站', path: '/docs/courses/fab-course/doc/1projectmanage/vitepress.md' },
-      { title: 'AIGC 辅助开发', path: '/docs/courses/fab-course/doc/1projectmanage/aigc.md' }
-    ]
+      { title: 'Git basics',   path: '/docs/courses/fab-course/doc/1projectmanage/git.md' },
+      { title: 'Markdown',     path: '/docs/courses/fab-course/doc/1projectmanage/markdown.md' },
+      { title: 'VitePress',    path: '/docs/courses/fab-course/doc/1projectmanage/vitepress.md' },
+      { title: 'AIGC tools',   path: '/docs/courses/fab-course/doc/1projectmanage/aigc.md' },
+    ],
   },
   {
-    id: 2,
-    title: '计算机辅助设计 (CAD)',
-    desc: '掌握 Fusion 360 与 SolidWorks 建模技术，探索参数化几何结构设计与钣金设计，辅以 AI 生成式设计工具创造新结构。',
-    assessment: '/docs/courses/fab-course/doc/2cad/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>',
+    id: 2, title: 'CAD Design',
+    desc: 'Parametric 3D modeling with Fusion 360 & SolidWorks. Sheet metal and AI-assisted generative design.',
+    docsPath: '/docs/courses/fab-course/doc/2cad/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>',
     links: [
-      { title: 'Fusion 360 操作指南', path: '/docs/courses/fab-course/doc/2cad/3D_Design_Fusion360.md' },
-      { title: 'Solidworks 建模', path: '/docs/courses/fab-course/doc/2cad/Solidworks.md' },
-      { title: '参数化设计', path: '/docs/courses/fab-course/doc/2cad/parameterdesign.md' },
-      { title: '钣金件设计', path: '/docs/courses/fab-course/doc/2cad/fusion360-sheetmetal.md' }
-    ]
+      { title: 'Fusion 360',        path: '/docs/courses/fab-course/doc/2cad/3D_Design_Fusion360.md' },
+      { title: 'SolidWorks',         path: '/docs/courses/fab-course/doc/2cad/Solidworks.md' },
+      { title: 'Parametric design',  path: '/docs/courses/fab-course/doc/2cad/parameterdesign.md' },
+      { title: 'Sheet metal',        path: '/docs/courses/fab-course/doc/2cad/fusion360-sheetmetal.md' },
+    ],
   },
   {
-    id: 3,
-    title: '3D 打印技术',
-    desc: '探索 FDM 熔融沉积、SLA 光固化、HP-MJF 尼龙烧结打印工艺与切片软件配置，掌握快速增材实体制造的完整流程。',
-    assessment: '/docs/courses/fab-course/doc/3_3dprinter/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6M6 14h12v8H6z"/></svg>',
+    id: 3, title: '3D Printing',
+    desc: 'FDM, SLA, and HP-MJF processes. Slicing software setup and design constraints for additive manufacturing.',
+    docsPath: '/docs/courses/fab-course/doc/3_3dprinter/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6M6 14h12v8H6z"/></svg>',
     links: [
-      { title: 'FDM 设计指南', path: '/docs/courses/fab-course/doc/3_3dprinter/3.FDM-designguide.md' },
-      { title: 'FDM 设备实操', path: '/docs/courses/fab-course/doc/3_3dprinter/4.FDM-machineoperation.md' },
-      { title: 'SLA 设计指南', path: '/docs/courses/fab-course/doc/3_3dprinter/6.sladesignguide.md' },
-      { title: '切片软件使用', path: '/docs/courses/fab-course/doc/3_3dprinter/9.3Dslicesoftware.md' }
-    ]
+      { title: 'FDM design guide',   path: '/docs/courses/fab-course/doc/3_3dprinter/3.FDM-designguide.md' },
+      { title: 'FDM machine ops',    path: '/docs/courses/fab-course/doc/3_3dprinter/4.FDM-machineoperation.md' },
+      { title: 'SLA design guide',   path: '/docs/courses/fab-course/doc/3_3dprinter/6.sladesignguide.md' },
+      { title: 'Slice software',     path: '/docs/courses/fab-course/doc/3_3dprinter/9.3Dslicesoftware.md' },
+    ],
   },
   {
-    id: 4,
-    title: '电子设计与电路基础',
-    desc: '掌握电子元器件特性及电路基本定律（欧姆、基尔霍夫等），熟练使用现代 EDA 工具（如 KiCad / EasyEDA）设计原理图。',
-    assessment: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/><path d="M7 2v4M17 2v4M7 18v4M17 18v4M2 7h4M2 17h4M18 7h4M18 17h4"/></svg>',
+    id: 4, title: 'Electronic Design',
+    desc: 'Component fundamentals, circuit laws (Ohm, Kirchhoff), schematic capture with KiCad or EasyEDA.',
+    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v4M17 2v4M7 18v4M17 18v4M2 7h4M2 17h4M18 7h4M18 17h4"/></svg>',
     links: [
-      { title: '基本元器件', path: '/docs/courses/fab-course/doc/4electric_design/electricparameter_component.md' },
-      { title: '电路基础知识', path: '/docs/courses/fab-course/doc/4electric_design/basicknowledge.md' },
-      { title: 'EDA 绘图与排版', path: '/docs/courses/fab-course/doc/4electric_design/tool.md' }
-    ]
+      { title: 'Components',    path: '/docs/courses/fab-course/doc/4electric_design/electricparameter_component.md' },
+      { title: 'Circuit basics', path: '/docs/courses/fab-course/doc/4electric_design/basicknowledge.md' },
+      { title: 'EDA tools',     path: '/docs/courses/fab-course/doc/4electric_design/tool.md' },
+    ],
   },
   {
-    id: 5,
-    title: 'Arduino 软硬件应用',
-    desc: '深入开源硬件架构，掌握 C++ 嵌入式软件开发，通过信号采集与执行器控制实现物理世界与底层逻辑的代码链接。',
-    assessment: '/docs/courses/fab-course/doc/5arduino/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-4M12 6V2M2 12h4M18 12h4"/><path d="M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/><circle cx="12" cy="12" r="6"/></svg>',
+    id: 5, title: 'Arduino Application',
+    desc: 'Embedded C++ on open-source hardware. Sensor input, actuator control, and physical computing.',
+    docsPath: '/docs/courses/fab-course/doc/5arduino/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-4M12 6V2M2 12h4M18 12h4"/><path d="M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/><circle cx="12" cy="12" r="6"/></svg>',
     links: [
-      { title: 'Arduino 基础操作', path: '/docs/courses/fab-course/doc/5arduino/arduino_basic.md' },
-      { title: 'Arduino 编程语法', path: '/docs/courses/fab-course/doc/5arduino/arduino_code.md' },
-      { title: 'Arduino 信号输入', path: '/docs/courses/fab-course/doc/5arduino/Arduino_Input.md' },
-      { title: '机械臂联合仿真', path: '/docs/courses/fab-course/doc/5arduino/robot-mycobot.md' }
-    ]
+      { title: 'Arduino basics', path: '/docs/courses/fab-course/doc/5arduino/arduino_basic.md' },
+      { title: 'Arduino code',   path: '/docs/courses/fab-course/doc/5arduino/arduino_code.md' },
+      { title: 'Signal input',   path: '/docs/courses/fab-course/doc/5arduino/Arduino_Input.md' },
+    ],
   },
   {
-    id: 6,
-    title: '激光切割工艺',
-    desc: '学习二维矢量图纸准备流程，深入板件卡接的机械结构设计，熟练掌握激光雕刻机对非金属材料的加工实操技巧。',
-    assessment: '/docs/courses/fab-course/doc/6laser_cutter/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>',
+    id: 6, title: 'Laser Cutting',
+    desc: 'Vector file preparation, press-fit joint design, laser engraving and cutting on non-metal materials.',
+    docsPath: '/docs/courses/fab-course/doc/6laser_cutter/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>',
     links: [
-      { title: '安全守则规范', path: '/docs/courses/fab-course/doc/6laser_cutter/Safety.md' },
-      { title: 'AutoCAD 图纸准备', path: '/docs/courses/fab-course/doc/6laser_cutter/AutoCAD.md' },
-      { title: '结构卡接设计', path: '/docs/courses/fab-course/doc/6laser_cutter/Design_guide.md' },
-      { title: '切割加工实操', path: '/docs/courses/fab-course/doc/6laser_cutter/Machine_practice.md' }
-    ]
+      { title: 'Safety rules',    path: '/docs/courses/fab-course/doc/6laser_cutter/Safety.md' },
+      { title: 'AutoCAD prep',    path: '/docs/courses/fab-course/doc/6laser_cutter/AutoCAD.md' },
+      { title: 'Joint design',    path: '/docs/courses/fab-course/doc/6laser_cutter/Design_guide.md' },
+      { title: 'Machine practice',path: '/docs/courses/fab-course/doc/6laser_cutter/Machine_practice.md' },
+    ],
   },
   {
-    id: 7,
-    title: 'PCB 制造与焊接工艺',
-    desc: '从电路拼版到物理蚀刻，学习 SMT 表面贴装工艺与回流焊原理，系统掌握手工烙铁与热风枪焊接调试规范。',
-    assessment: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
+    id: 7, title: 'PCB Manufacture',
+    desc: 'SMT surface mount assembly, reflow soldering, manual iron and hot-air rework and debugging.',
+    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
     links: [
-      { title: 'SMT 表面贴装', path: '/docs/courses/fab-course/doc/7PCB_manufacture/SMT.md' },
-      { title: '手工焊接技巧', path: '/docs/courses/fab-course/doc/7PCB_manufacture/manual.md' }
-    ]
+      { title: 'SMT assembly',     path: '/docs/courses/fab-course/doc/7PCB_manufacture/SMT.md' },
+      { title: 'Manual soldering', path: '/docs/courses/fab-course/doc/7PCB_manufacture/manual.md' },
+    ],
   },
   {
-    id: 8,
-    title: 'CNC 数控加工工艺',
-    desc: '系统学习桌面雕刻机加工的减材工艺，重点学习 G-code 编程、坐标系对刀与三轴 CNC 设备的刀路规划与削减实操。',
-    assessment: '/docs/courses/fab-course/doc/8CNC_manufacture/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6M14 2v20M2 14h12"/></svg>',
+    id: 8, title: 'CNC Manufacture',
+    desc: 'G-code programming, toolpath planning, work-coordinate setup, and 3-axis subtractive milling.',
+    docsPath: '/docs/courses/fab-course/doc/8CNC_manufacture/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6M14 2v20M2 14h12"/></svg>',
     links: [
-      { title: 'CNC 机器类型', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cnctype.md' },
-      { title: '刀路规划工具', path: '/docs/courses/fab-course/doc/8CNC_manufacture/tool.md' },
-      { title: '三轴数控编程', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncprogram.md' },
-      { title: '设备实操步骤', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncmanufacture.md' }
-    ]
+      { title: 'CNC machine types',   path: '/docs/courses/fab-course/doc/8CNC_manufacture/cnctype.md' },
+      { title: 'Toolpath planning',    path: '/docs/courses/fab-course/doc/8CNC_manufacture/tool.md' },
+      { title: '3-axis programming',   path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncprogram.md' },
+      { title: 'Machine practice',     path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncmanufacture.md' },
+    ],
   },
   {
-    id: 9,
-    title: '翻模与铸造',
-    desc: '基于 3D 打印实体制作阳模，学习单模与双开模具制造，掌握硅胶倒模与树脂等液态材料铸造成型的完整化学工艺。',
-    assessment: '/docs/courses/fab-course/doc/9MOLD/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+    id: 9, title: 'Mold & Casting',
+    desc: 'Silicone mold making from 3D-printed masters; resin and liquid-material casting processes.',
+    docsPath: '/docs/courses/fab-course/doc/9MOLD/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
     links: [
-      { title: '硅胶与树脂材料', path: '/docs/courses/fab-course/doc/9MOLD/material.md' },
-      { title: '模具设计工具', path: '/docs/courses/fab-course/doc/9MOLD/tool.md' },
-      { title: '翻模铸造步骤', path: '/docs/courses/fab-course/doc/9MOLD/method.md' }
-    ]
+      { title: 'Materials',      path: '/docs/courses/fab-course/doc/9MOLD/material.md' },
+      { title: 'Mold tools',     path: '/docs/courses/fab-course/doc/9MOLD/tool.md' },
+      { title: 'Casting method', path: '/docs/courses/fab-course/doc/9MOLD/method.md' },
+    ],
   },
   {
-    id: 10,
-    title: '物联网与交互设计',
-    desc: '探索 TCP/IP、MQTT、HTTP 通信协议，编写物联网程序，使 ESP8266 微控制器经由 WiFi 稳定接入云端阿里云平台。',
-    assessment: '/docs/courses/fab-course/doc/10IOT/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+    id: 10, title: 'IoT & Interaction',
+    desc: 'TCP/IP, MQTT, HTTP protocols. Connecting ESP8266 microcontrollers to cloud platforms via WiFi.',
+    docsPath: '/docs/courses/fab-course/doc/10IOT/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
     links: [
-      { title: '物联网基本介绍', path: '/docs/courses/fab-course/doc/10IOT/IOT_basic.md' },
-      { title: 'ESP8266 阿里云', path: '/docs/courses/fab-course/doc/10IOT/NodeMCUESP8266_ALiYun.md' }
-    ]
+      { title: 'IoT basics',      path: '/docs/courses/fab-course/doc/10IOT/IOT_basic.md' },
+      { title: 'ESP8266 + Cloud', path: '/docs/courses/fab-course/doc/10IOT/NodeMCUESP8266_ALiYun.md' },
+    ],
   },
   {
-    id: 11,
-    title: '界面与交互应用程序',
-    desc: '利用 Processing/NodeJS 编写界面应用，通过串口读取外设传感器数据，设计人机交互的动态画面与皮影艺术交互装置。',
-    assessment: '/docs/courses/fab-course/doc/11Interface-application-programming/Assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    id: 11, title: 'Interface Application Programming',
+    desc: 'Processing / Node.js UI development, serial-port sensor data, and interactive installations.',
+    docsPath: '/docs/courses/fab-course/doc/11Interface-application-programming/Assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
     links: [
-      { title: 'Processing 编程', path: '/docs/courses/fab-course/doc/11Interface-application-programming/processing.md' },
-      { title: 'Processing 串口', path: '/docs/courses/fab-course/doc/11Interface-application-programming/processingwitharduino.md' },
-      { title: '皮影戏艺术交互', path: '/docs/courses/fab-course/doc/11Interface-application-programming/piying.md' }
-    ]
+      { title: 'Processing',         path: '/docs/courses/fab-course/doc/11Interface-application-programming/processing.md' },
+      { title: 'Processing + Arduino',path: '/docs/courses/fab-course/doc/11Interface-application-programming/processingwitharduino.md' },
+    ],
   },
   {
-    id: 12,
-    title: '标准件与耗材采购',
-    desc: '掌握机械零部件标准化规格（螺母、联轴器、滑块），熟悉主流标准结构采购源（Misumi、Digi-Key、Mouser）。',
-    assessment: '/docs/courses/fab-course/doc/12material&tool/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+    id: 12, title: 'Material & Tool',
+    desc: 'Standard mechanical parts (fasteners, couplings, rails) and sourcing from Misumi, Digi-Key, Mouser.',
+    docsPath: '/docs/courses/fab-course/doc/12material&tool/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
     links: [
-      { title: '常用机械零件', path: '/docs/courses/fab-course/doc/12material&tool/standardcomponentpart.md' },
-      { title: '常用耗材一览', path: '/docs/courses/fab-course/doc/12material&tool/material.md' }
-    ]
+      { title: 'Standard parts', path: '/docs/courses/fab-course/doc/12material&tool/standardcomponentpart.md' },
+      { title: 'Materials list',  path: '/docs/courses/fab-course/doc/12material&tool/material.md' },
+    ],
   },
   {
-    id: 13,
-    title: '商业计划书基础',
-    desc: '学习发掘原型方案的商业落地点与生产估值，打磨产品与用户画像，掌握合格创业项目商业计划书的核心写法与路演要素。',
-    assessment: '/docs/courses/fab-course/doc/13BP/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+    id: 13, title: 'Business Plan Basics',
+    desc: 'Market validation, product-user fit, cost estimation, and pitching a startup business plan.',
+    docsPath: '/docs/courses/fab-course/doc/13BP/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
     links: [
-      { title: '商业孵化指南', path: '/docs/courses/fab-course/doc/13BP/README.md' }
-    ]
+      { title: 'Incubation guide', path: '/docs/courses/fab-course/doc/13BP/README.md' },
+    ],
   },
   {
-    id: 14,
-    title: '智能移动载具开发',
-    desc: '掌握阿克曼/差速等轮式底盘控制模型，编写底层微处理器硬件驱动，融合 AI 与雷达深度感知建立 ROS2 在线开发与仿真。',
-    assessment: '/docs/courses/fab-course/doc/14AI&vehicle/assessment.md',
-    icon: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+    id: 14, title: 'AI Vehicle',
+    desc: 'Wheeled chassis kinematics, microcontroller firmware, and ROS2 with AI perception integration.',
+    docsPath: '/docs/courses/fab-course/doc/14AI&vehicle/assessment.md',
+    icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
     links: [
-      { title: '底盘开发基础', path: '/docs/courses/fab-course/doc/14AI&vehicle/basic.md' },
-      { title: '智能车算法仿真', path: '/docs/courses/fab-course/doc/14AI&vehicle/aiplatform.md' }
-    ]
-  }
+      { title: 'Chassis basics', path: '/docs/courses/fab-course/doc/14AI&vehicle/basic.md' },
+      { title: 'AI platform sim', path: '/docs/courses/fab-course/doc/14AI&vehicle/aiplatform.md' },
+    ],
+  },
 ];
 
-const archiveGroups = [
+// ── Course List (all cohorts, NexMaker order) ──
+const cohortGroups = [
   {
-    title: '宁波诺丁汉大学 (UNNC FabLab)',
-    items: [
-      {
-        name: 'Fab Academy 成果展示',
-        links: [
-          { title: 'Fab Academy 2025 - UNNC 归档', path: '/docs/courses/fab-course/class/fab-2025-UNNC.md' },
-          { title: 'UNNC-FabLab 2025-2 归档', path: '/docs/courses/fab-course/class/fab-2025-UNNC-2.md' },
-          { title: 'Fab Academy 2023 成果', path: '/docs/courses/fab-course/doc/Fab/fab2023.md' }
-        ]
-      }
-    ]
+    id: 'nexmaker-1',
+    institution: 'NexMaker Academy',
+    year: 'Session 1',
+    name: 'NexMaker Academy — Session 1',
+    teams: [
+      { name: 'NexMaker Academy S1', url: '/docs/courses/fab-course/class/fab-01' },
+    ],
   },
   {
-    title: '浙江大学设计工程 (ZJU Design Engineering)',
-    items: [
-      {
-        name: '2023 年度创新专题',
-        links: [
-          { title: 'Design Engineering 2023', path: '/docs/courses/fab-course/class/fab-2023-zju-de.md' },
-          { title: 'Design Manufacture 2023', path: '/docs/courses/fab-course/class/fab-2023-zju-dm.md' },
-          { title: 'DE mini 2023', path: '/docs/courses/fab-course/class/fab-2023-zju-mini.md' }
-        ]
-      },
-      {
-        name: '2022 年度创新专题',
-        links: [
-          { title: 'Design Engineering 2022', path: '/docs/courses/fab-course/class/fab-2022-zju-de.md' },
-          { title: 'Design Manufacture 2022', path: '/docs/courses/fab-course/class/fab-2022-zju-dm.md' },
-          { title: 'DE mini 2022', path: '/docs/courses/fab-course/class/fab-2022-zju-mini.md' }
-        ]
-      },
-      {
-        name: '往届专题归档',
-        links: [
-          { title: 'Design Engineering 2021', path: '/docs/courses/fab-course/class/fab-2021-zju-de.md' },
-          { title: 'Design Manufacture 2021', path: '/docs/courses/fab-course/class/fab-2021-zju-dm.md' },
-          { title: 'Design Engineering 2020', path: '/docs/courses/fab-course/class/fab-2020-zju-de.md' }
-        ]
-      }
-    ]
+    id: 'nexmaker-2',
+    institution: 'NexMaker Academy',
+    year: 'Session 2',
+    name: 'NexMaker Academy — Session 2',
+    teams: [
+      { name: 'NexMaker Academy S2', url: '/docs/courses/fab-course/class/fab-02' },
+    ],
   },
   {
-    title: '浙江万里学院与创客学术 (ZWU & NexMaker)',
-    items: [
-      {
-        name: '万里学院交互系统 (ZWU)',
-        links: [
-          { title: 'Interactive System 2026A1', path: '/docs/courses/fab-course/class/FAB-2026-ZWU-01.md' },
-          { title: 'Interactive System 2024', path: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem.md' },
-          { title: 'IS 2+2 2024', path: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2.md' }
-        ]
-      },
-      {
-        name: '创客学术 (NexMaker)',
-        links: [
-          { title: 'NexMaker Academy 第 1 期', path: '/docs/courses/fab-course/class/fab-01.md' },
-          { title: 'NexMaker Academy 第 2 期', path: '/docs/courses/fab-course/class/fab-02.md' }
-        ]
-      }
-    ]
-  }
-];
-
-const frontierItems = [
-  {
-    category: 'XR (扩展现实)',
-    desc: '研究多维度混合现实系统、轻量化头显供应链生态及快速定位算法技术储备。',
-    icon: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8.5v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="7.5" cy="12" r="2.5"/><circle cx="16.5" cy="12" r="2.5"/><path d="M10 2v4.5M14 2v4.5"/></svg>',
-    links: [
-      { title: 'XR 概述', path: '/docs/courses/fab-course/XR/readme.md' },
-      { title: '解决方案', path: '/docs/courses/fab-course/XR/application_solution.md' },
-      { title: '快速入门', path: '/docs/courses/fab-course/XR/howtostart.md' },
-      { title: '专利技术', path: '/docs/courses/fab-course/XR/xrultrasoudpatent.md' }
-    ]
+    id: 'unnc-2025',
+    institution: 'UNNC FabLab',
+    year: '2025',
+    name: 'Fab Academy 2025 — UNNC',
+    teams: [
+      { name: 'FabAcademy 2025 UNNC',  url: '/docs/courses/fab-course/class/fab-2025-UNNC' },
+      { name: 'UNNC FabLab 2025-2',    url: '/docs/courses/fab-course/class/fab-2025-UNNC-2' },
+      { name: 'FabAcademy 2023',        url: '/docs/courses/fab-course/doc/Fab/fab2023' },
+    ],
   },
   {
-    category: 'AGV (自动导引车)',
-    desc: '专注于移动机器人底盘的结构设计、智能激光导航算法、运动姿态规划及供应链集成标准。',
-    icon: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="12" rx="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M9 19h6"/></svg>',
-    links: [
-      { title: 'AGV 概述', path: '/docs/courses/fab-course/AGV/readme.md' },
-      { title: '解决方案', path: '/docs/courses/fab-course/AGV/agvapplication.md' },
-      { title: '开发入门', path: '/docs/courses/fab-course/AGV/agvhowtostart.md' },
-      { title: '供应链标准', path: '/docs/courses/fab-course/AGV/agvindusrtstandard.md' }
-    ]
-  }
+    id: 'zju-2023',
+    institution: 'ZJU Design Engineering',
+    year: '2023',
+    name: 'Design Engineering 2023',
+    teams: [
+      { name: 'Design Engineering 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-de' },
+      { name: 'Design Manufacture 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-dm' },
+      { name: 'DE mini 2023',            url: '/docs/courses/fab-course/class/fab-2023-zju-mini' },
+    ],
+  },
+  {
+    id: 'zju-2022',
+    institution: 'ZJU Design Engineering',
+    year: '2022',
+    name: 'Design Engineering 2022',
+    teams: [
+      { name: 'Design Engineering 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-de' },
+      { name: 'Design Manufacture 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-dm' },
+      { name: 'DE mini 2022',            url: '/docs/courses/fab-course/class/fab-2022-zju-mini' },
+    ],
+  },
+  {
+    id: 'zju-2021',
+    institution: 'ZJU Design Engineering',
+    year: '2020–2021',
+    name: 'Design Engineering 2020–2021',
+    teams: [
+      { name: 'Design Engineering 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-de' },
+      { name: 'Design Manufacture 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-dm' },
+      { name: 'Design Engineering 2020', url: '/docs/courses/fab-course/class/fab-2020-zju-de' },
+    ],
+  },
+  {
+    id: 'zwu',
+    institution: 'ZWU Interactive System',
+    year: '2024–2026',
+    name: 'Interactive System',
+    teams: [
+      { name: 'IS 2026-A1',  url: '/docs/courses/fab-course/class/FAB-2026-ZWU-01' },
+      { name: 'IS 2024',     url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem' },
+      { name: 'IS 2+2 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2' },
+    ],
+  },
 ];
 </script>
 
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Global Container Styles */
-.fab-portal {
-  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #08080c;
-  color: #f5f5f7;
+/* ── Reset & Root ── */
+.fab-home {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #09090f;
+  color: #f1f5f9;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
-  padding-bottom: 5rem;
-  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Pulsing Glow Orbs */
-.ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-  animation: float-glow 20s infinite alternate ease-in-out;
-}
-.bg-glow-1 {
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, #00f2fe 0%, transparent 70%);
-  top: -10vw;
-  right: -10vw;
-}
-.bg-glow-2 {
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, #8a2be2 0%, transparent 70%);
-  top: 40vh;
-  left: -20vw;
-  animation-duration: 25s;
-}
-.bg-glow-3 {
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, #ff007f 0%, transparent 70%);
-  bottom: -10vw;
-  right: 10vw;
-  animation-duration: 18s;
-}
-
-@keyframes float-glow {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5%, 5%) scale(1.1); }
-}
-
-/* Apple-style Navigation Header */
-.portal-nav {
+/* ── Nav ── */
+.fab-nav {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(8, 8, 12, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 200;
+  background: rgba(9, 9, 15, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
-.nav-container {
-  max-width: 1200px;
+.nav-inner {
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 56px;
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align right to push brand to left and links to right */
+  justify-content: space-between;
 }
 .nav-brand {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #fff;
-  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-right: auto; /* Push brand left */
-  letter-spacing: -0.5px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
 }
-.brand-dot {
-  width: 8px;
-  height: 8px;
-  background: #00f2fe;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #00f2fe;
-}
-.brand-sub {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: #86868b;
-  padding-left: 0.5rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+.nav-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 .nav-links a {
-  color: #e8e8ed;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover,
+.nav-links a.nav-active {
+  color: #f1f5f9;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 6rem 1.5rem 5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.hero-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #3b82f6;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem;
+  color: #f8fafc;
+}
+.hero h1 em {
+  font-style: normal;
+  color: #3b82f6;
+}
+.hero-sub {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+.hero-btns {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.btn-solid {
+  background: #3b82f6;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  transition: background 0.15s, transform 0.15s;
+}
+.btn-solid:hover { background: #2563eb; transform: translateY(-1px); }
+.btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
-  transition: color 0.3s;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  transition: border-color 0.15s, color 0.15s;
 }
-.nav-links a:hover {
-  color: #00f2fe;
-}
-.nav-links .btn-back {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.35rem 0.85rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  transition: all 0.3s;
-}
-.nav-links .btn-back:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-}
-
-/* Hero Section */
-.hero-section {
-  max-width: 900px;
-  margin: 6rem auto 4rem;
-  text-align: center;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-.badge {
-  display: inline-block;
-  background: rgba(0, 242, 254, 0.1);
-  border: 1px solid rgba(0, 242, 254, 0.3);
-  color: #00f2fe;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 1.5rem;
-}
-.hero-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  margin-bottom: 1.5rem;
-}
-.text-gradient {
-  background: linear-gradient(135deg, #00f2fe 0%, #8a2be2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hero-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: #86868b;
-  font-weight: 400;
-  line-height: 1.6;
-  max-width: 680px;
-  margin: 0 auto 2.5rem;
-}
-.hero-actions {
+.btn-outline:hover { border-color: rgba(255,255,255,0.35); color: #f1f5f9; }
+.hero-pills {
   display: flex;
   justify-content: center;
-  gap: 1.2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
-.btn-primary, .btn-secondary {
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #000;
-  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
-}
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
+.pill {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
 }
 
-/* Sticky Category Tabs */
-.sticky-tabs {
+/* ── Sticky Section Tabs ── */
+.tabs-bar {
   position: sticky;
-  top: 56px;
-  z-index: 90;
-  background: rgba(8, 8, 12, 0.8);
+  top: 60px;
+  z-index: 100;
+  background: rgba(9, 9, 15, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 0.75rem 0;
-  margin-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-.tabs-container {
-  max-width: 1200px;
+.tabs-inner {
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  overflow-x: auto;
-  scrollbar-width: none;
+  gap: 0;
 }
-.tab-link {
-  color: #86868b;
-  text-decoration: none;
-  font-size: 0.9rem;
+.stab {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  white-space: nowrap;
-  transition: color 0.3s;
+  color: #64748b;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
 }
-.tab-link:hover {
-  color: #fff;
+.stab:hover {
+  color: #cbd5e1;
+  border-bottom-color: rgba(255,255,255,0.15);
 }
 
-/* Section Containers */
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto 7rem;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1;
+/* ── Shared Section Styles ── */
+.sec {
+  padding: 4.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.section-header {
-  margin-bottom: 3rem;
+.sec-alt {
+  background: rgba(255, 255, 255, 0.015);
 }
-.section-badge {
-  font-size: 0.8rem;
+.sec-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.sec-head {
+  margin-bottom: 2.5rem;
+}
+.sec-tag {
+  font-size: 0.68rem;
   font-weight: 700;
-  color: #00f2fe;
-  letter-spacing: 2px;
-  display: block;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #3b82f6;
+  margin: 0 0 0.6rem;
 }
-.section-header h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 0.75rem;
-  color: #fff;
-}
-.section-header p {
-  color: #86868b;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin: 0;
-}
-.glow-tip {
-  color: #8a2be2;
-  font-size: 0.85rem;
-  font-weight: 500;
-  display: inline-block;
-  margin-top: 0.5rem;
-  text-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
-}
-
-/* Glass Card styling base */
-.glass-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-/* 🔬 Lab Cards Layout */
-.lab-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-.lab-card {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-}
-.card-icon {
-  color: #00f2fe;
-  background: rgba(0, 242, 254, 0.08);
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-.lab-card h3 {
-  font-size: 1.25rem;
+.sec-head h2 {
+  font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #f8fafc;
 }
-.lab-card p {
-  color: #86868b;
+.sec-sub {
+  margin: 0.6rem 0 0;
   font-size: 0.9rem;
+  color: #64748b;
   line-height: 1.6;
-  margin-bottom: 2rem;
-  flex-grow: 1;
-}
-.card-footer {
-  display: flex;
-  gap: 1rem;
-}
-.btn-card-read {
-  flex-grow: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #fff;
-  padding: 0.6rem;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-card-read:hover {
-  background: #00f2fe;
-  color: #000;
-  border-color: #00f2fe;
-}
-.btn-card-link {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #86868b;
-  padding: 0.6rem 0.9rem;
-  border-radius: 10px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: all 0.3s;
-  text-align: center;
-}
-.btn-card-link:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
 }
 
-/* 🛠️ Core Tutorials Grid (Interactive Correlation Map) */
-.relative-container {
-  position: relative;
-}
-.svg-connections-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-}
-.connections-svg {
-  width: 100%;
-  height: 100%;
-}
-.connection-path {
-  stroke-dasharray: 8 6;
-  animation: connection-flow 2s infinite linear;
-}
-@keyframes connection-flow {
-  to {
-    stroke-dashoffset: -28;
-  }
-}
-
-.tutorials-grid-container {
+/* ── Overview Layout ── */
+.ov-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 2rem;
-  position: relative;
-  z-index: 10;
+  grid-template-columns: 1fr 280px;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
 }
-.tutorial-card {
-  padding: 2.2rem;
+.ov-text p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.8;
+  margin: 0 0 1rem;
+}
+.ov-text p:last-child { margin: 0; }
+.ov-text strong { color: #e2e8f0; font-weight: 600; }
+.ov-stats {
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  gap: 1.5rem;
+  border-left: 1px solid rgba(255,255,255,0.07);
+  padding-left: 2rem;
 }
-
-/* Active Hover Card States */
-.card-hovered {
-  transform: translateY(-8px) scale(1.03);
-  background: rgba(0, 242, 254, 0.03);
-  border-color: #00f2fe !important;
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.3) !important;
-  z-index: 15;
-}
-.card-related {
-  transform: scale(1.01);
-  border-color: #8a2be2 !important;
-  background: rgba(138, 43, 226, 0.03);
-  box-shadow: 0 0 20px rgba(138, 43, 226, 0.25) !important;
-  z-index: 12;
-}
-.card-dimmed {
-  opacity: 0.25;
-  filter: blur(1px);
-}
-
-.tut-header {
+.stat-block {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 0.2rem;
 }
-.tut-num {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: rgba(255,255,255,0.06);
+.stat-n {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.03em;
   line-height: 1;
 }
-.card-hovered .tut-num {
-  color: rgba(0, 242, 254, 0.15);
-}
-.card-related .tut-num {
-  color: rgba(138, 43, 226, 0.15);
-}
-.tut-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.04);
-  color: #86868b;
-  transition: all 0.3s;
-}
-.card-hovered .tut-icon {
-  background: rgba(0, 242, 254, 0.1);
-  color: #00f2fe;
-}
-.card-related .tut-icon {
-  background: rgba(138, 43, 226, 0.1);
-  color: #8a2be2;
-}
-
-.tut-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-  color: #fff;
-  letter-spacing: -0.5px;
-}
-.tut-desc {
-  font-size: 0.88rem;
-  color: #86868b;
-  line-height: 1.6;
-  margin-bottom: 1.8rem;
-  flex-grow: 1;
-}
-
-/* Internal links list */
-.tut-links-container {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.8rem;
-}
-.tut-links-heading {
+.stat-n sup { font-size: 1rem; vertical-align: super; }
+.stat-l {
   font-size: 0.75rem;
-  font-weight: 700;
-  color: #86868b;
+  color: #475569;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.6rem;
-}
-.tut-sublinks {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-.sublink-item {
-  font-size: 0.82rem;
-  color: #a1a1a6;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: all 0.2s;
-}
-.sublink-item::before {
-  content: '·';
-  font-weight: bold;
-}
-.sublink-item:hover {
-  color: #00f2fe;
-  transform: translateX(3px);
+  letter-spacing: 0.06em;
 }
 
-.tut-actions {
-  display: flex;
-  gap: 0.8rem;
-}
-.btn-tut-read {
-  flex-grow: 1;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  color: #fff;
-  padding: 0.65rem;
-  border-radius: 10px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-tut-read:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-}
-.btn-tut-open {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #86868b;
-  padding: 0.65rem 1rem;
-  border-radius: 10px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: all 0.3s;
-  text-align: center;
-  white-space: nowrap;
-}
-.btn-tut-open:hover {
-  border-color: rgba(255,255,255,0.2);
-  color: #fff;
-}
-
-/* Relation Badge */
-.tut-relation-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #00f2fe;
-  color: #000;
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 0.15rem 0.45rem;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
-}
-.tut-relation-badge.related {
-  background: #8a2be2;
-  color: #fff;
-}
-
-/* 🎓 Archives section styling */
-.archive-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.archive-group-block {
-  padding: 2.5rem;
-}
-.archive-group-block h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding-bottom: 0.75rem;
-}
-.archive-subgrids {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-}
-.archive-sub-card h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #86868b;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.archive-sub-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-.archive-link {
-  font-size: 0.9rem;
-  color: #f5f5f7;
-  text-decoration: none;
-  transition: color 0.3s;
-  display: inline-block;
-}
-.archive-link:hover {
-  color: #00f2fe;
-}
-
-/* 🔮 Frontier tech layout */
-.frontier-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-  gap: 2rem;
-}
-@media (max-width: 600px) {
-  .frontier-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.frontier-card {
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-}
-.frontier-icon {
-  color: #8a2be2;
+/* ── Lab Manage (merged into Overview) ── */
+.lab-head {
   margin-bottom: 1.5rem;
 }
-.frontier-card h3 {
+.lab-head h2 {
   font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #f8fafc;
 }
-.frontier-card p {
-  color: #86868b;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  flex-grow: 1;
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
-.frontier-sub-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-.frontier-link-pill {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  color: #e8e8ed;
-  padding: 0.45rem 1rem;
-  border-radius: 15px;
-  font-size: 0.82rem;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.frontier-link-pill:hover {
-  background: rgba(138, 43, 226, 0.1);
-  border-color: #8a2be2;
-  color: #00f2fe;
-  transform: translateY(-1px);
-}
-
-/* Hyperframe Drawer (Slide-in document preview) */
-.hyperframe-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 200;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.overlay-active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.hyperframe-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: min(680px, 90dvw);
-  height: 100vh;
-  background: rgba(13, 13, 18, 0.85);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.lab-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  z-index: 210;
+  gap: 0.75rem;
+  transition: border-color 0.15s, background 0.15s;
 }
-.drawer-active {
-  transform: translateX(0);
+.lab-card:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.04);
 }
+.lab-icon {
+  color: #3b82f6;
+  display: flex;
+}
+.lab-body { flex: 1; }
+.lab-body h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 0.35rem;
+}
+.lab-body p {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+.lab-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.lab-read-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+.lab-read-btn:hover { border-color: rgba(255,255,255,0.25); color: #e2e8f0; }
+.lab-open-link {
+  font-size: 0.75rem;
+  color: #475569;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.lab-open-link:hover { color: #94a3b8; }
 
-.drawer-header {
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+/* ── Tutorials Grid ── */
+.tut-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.tut-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+  min-height: 180px;
+}
+.tut-card:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.04);
+  transform: translateY(-2px);
+}
+.tc-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.25rem;
 }
-.drawer-title-area {
+.tc-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #3b82f6;
+  letter-spacing: 0.08em;
+  font-feature-settings: 'tnum';
+}
+.tc-icon {
+  color: #334155;
+}
+.tc-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
+  line-height: 1.3;
+}
+.tc-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+.tc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+.tc-link {
+  font-size: 0.68rem;
+  color: #475569;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+  white-space: nowrap;
+}
+.tc-link:hover {
+  color: #94a3b8;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* ── Course List ── */
+.cohort-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cohort-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  align-items: start;
+}
+.cohort-row:last-child { border-bottom: none; }
+.cohort-meta {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding-top: 0.1rem;
+}
+.cohort-inst {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.cohort-year {
+  font-size: 0.75rem;
+  color: #475569;
+  font-weight: 500;
+}
+.cohort-body { display: flex; flex-direction: column; gap: 0.75rem; }
+.cohort-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
+}
+.cohort-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.team-link {
+  font-size: 0.78rem;
+  color: #64748b;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  font-weight: 500;
+}
+.team-link:hover {
+  color: #e2e8f0;
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Drawer ── */
+.drawer-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 500;
+  pointer-events: none;
+  transition: background 0.25s;
+}
+.drawer-bg.open {
+  background: rgba(0,0,0,0.55);
+  pointer-events: auto;
+}
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(620px, 92vw);
+  background: #0f1117;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 501;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.drawer-hd-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  overflow: hidden;
 }
 .drawer-badge {
   font-size: 0.65rem;
-  font-weight: 800;
-  color: #00f2fe;
-  letter-spacing: 1.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #3b82f6;
+  text-transform: uppercase;
 }
 .drawer-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
   margin: 0;
-}
-.drawer-controls {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-.btn-drawer-full {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #000;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.45rem 1rem;
-  border-radius: 15px;
-  transition: all 0.3s;
-}
-.btn-drawer-full:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
-}
-.btn-drawer-close {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-drawer-close:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.drawer-body-container {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 2.5rem 2.5rem 5rem;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.1) transparent;
-}
-
-/* Glassmorphic Loader Skeleton */
-.skeleton-loader {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  position: relative;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
-.skeleton-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-  animation: skeleton-shimmer 1.5s infinite;
+.drawer-hd-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
-@keyframes skeleton-shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+.drawer-fs {
+  font-size: 0.75rem;
+  color: #475569;
+  text-decoration: none;
+  transition: color 0.15s;
 }
-.skeleton-line {
-  height: 15px;
-  background: rgba(255,255,255,0.03);
+.drawer-fs:hover { color: #94a3b8; }
+.drawer-x {
+  background: none;
+  border: none;
+  color: #475569;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
+  transition: color 0.15s;
+  font-family: inherit;
+}
+.drawer-x:hover { color: #e2e8f0; }
+.drawer-bd {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.25rem;
+}
+
+/* Skeleton */
+.drawer-sk { display: flex; flex-direction: column; gap: 0.75rem; }
+.sk-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #1e293b 25%, #3b82f6 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+}
+.sk-line {
+  height: 12px;
+  background: rgba(255,255,255,0.05);
   border-radius: 4px;
 }
-.skeleton-line.title {
-  height: 32px;
-  width: 60%;
-  margin-bottom: 1.5rem;
+.sk-block {
+  height: 80px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  margin: 0.5rem 0;
 }
-.skeleton-line.p1 { width: 100%; }
-.skeleton-line.p2 { width: 90%; }
-.skeleton-line.p3 { width: 95%; }
-.skeleton-block {
-  height: 200px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.04);
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
-/* Document content injection override styles */
-.custom-doc-render {
-  color: #e8e8ed;
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
-.custom-doc-render :deep(h1),
-.custom-doc-render :deep(h2),
-.custom-doc-render :deep(h3) {
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-.custom-doc-render :deep(p) {
-  margin-bottom: 1.2rem;
-}
-.custom-doc-render :deep(a) {
-  color: #00f2fe;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba(0, 242, 254, 0.4);
-  transition: all 0.3s;
-}
-.custom-doc-render :deep(a:hover) {
-  border-bottom-style: solid;
-}
-.custom-doc-render :deep(pre) {
-  background: rgba(0,0,0,0.4) !important;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 1.2rem;
-  margin: 1.5rem 0;
-  overflow-x: auto;
-}
-.custom-doc-render :deep(code) {
-  font-family: monospace;
-  font-size: 0.88rem;
-}
-
-/* Fallback iframe view styles */
-.fallback-frame-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.fallback-message {
-  padding: 1rem;
-  color: #86868b;
-  text-align: center;
-  font-size: 0.85rem;
-}
-.fallback-iframe {
-  flex-grow: 1;
+.drawer-iframe-wrap { height: 100%; min-height: 400px; }
+.drawer-iframe {
   width: 100%;
-  height: 60vh;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  background: #fff;
+  height: 100%;
+  border: none;
+  min-height: 400px;
+}
+.drawer-empty {
+  color: #475569;
+  font-size: 0.85rem;
+  padding: 2rem 0;
+  text-align: center;
 }
 
-/* Scroll To Top button */
-.scroll-top-btn {
-  position: fixed;
-  bottom: 2.5rem;
-  right: 2.5rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+/* VitePress doc render inside drawer */
+.custom-doc-render {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: #94a3b8;
+}
+.custom-doc-render h1,
+.custom-doc-render h2,
+.custom-doc-render h3 {
+  color: #e2e8f0;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.custom-doc-render h1 { font-size: 1.2rem; }
+.custom-doc-render h2 { font-size: 1rem; }
+.custom-doc-render h3 { font-size: 0.9rem; }
+.custom-doc-render p { margin: 0 0 0.75rem; }
+.custom-doc-render code {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 95;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.82em;
+  color: #7dd3fc;
+}
+.custom-doc-render pre {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+.custom-doc-render img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+.custom-doc-render a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+.custom-doc-render a:hover { text-decoration: underline; }
+
+/* ── Footer ── */
+.fab-footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.scroll-top-btn:hover {
-  background: #00f2fe;
-  color: #000;
-  border-color: #00f2fe;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-}
-.show-scroll {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-/* Footer */
-.portal-footer {
-  text-align: center;
-  padding: 3rem 0;
-  border-top: 1px solid rgba(255,255,255,0.03);
-  color: #515154;
+  justify-content: space-between;
   font-size: 0.8rem;
-  font-weight: 500;
-  position: relative;
-  z-index: 10;
+  color: #334155;
+}
+.footer-inner a {
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-inner a:hover { color: #64748b; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero h1 { font-size: 2.25rem; }
+  .tut-grid { grid-template-columns: repeat(2, 1fr); }
+  .lab-grid { grid-template-columns: repeat(2, 1fr); }
+  .ov-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .ov-stats {
+    flex-direction: row;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hero h1 { font-size: 1.8rem; }
+  .tut-grid { grid-template-columns: 1fr; }
+  .lab-grid { grid-template-columns: 1fr; }
+  .cohort-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .tabs-inner { gap: 0; overflow-x: auto; }
+  .stab { white-space: nowrap; }
 }
 </style>

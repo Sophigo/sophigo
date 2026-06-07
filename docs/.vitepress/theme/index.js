@@ -294,7 +294,7 @@ function getHomepageUrl() {
   return 'https://sophigo.com/';
 }
 
-// Intercept clicks on homepage links (Logo, "首页", and "返回主站" button)
+// Intercept clicks on brand links and "返回主站" buttons.
 // in the capture phase to override default VitePress routing.
 function setupHomeLinks() {
   document.addEventListener('click', (event) => {
@@ -302,10 +302,9 @@ function setupHomeLinks() {
     if (!anchor) return;
 
     const isLogo = anchor.classList.contains('title') && anchor.closest('.VPNavBarTitle');
-    const isHomeNav = (anchor.classList.contains('VPNavBarMenuLink') || anchor.classList.contains('VPNavScreenMenuLink')) && anchor.textContent.trim() === '首页';
     const isBackButton = anchor.classList.contains('VPButton') && anchor.textContent.includes('返回主站');
 
-    if (isLogo || isHomeNav || isBackButton) {
+    if (isLogo || isBackButton) {
       event.preventDefault();
       event.stopPropagation();
       window.location.href = getHomepageUrl();
@@ -339,11 +338,11 @@ function fixProductionLinks() {
       }
     });
 
-    // 2. Force logo + "首页" links + "返回主站" links to go to the correct homepage (targetHome)
+    // 2. Force logo + "返回主站" links to go to the correct homepage (targetHome).
+    // Keep the visible "首页" nav item on /docs/.
     document.querySelectorAll('.VPNavBarMenuLink, .VPNavScreenMenuLink, .VPNavBarTitle a, .VPNavBarTitle a.title, a.logo, a.VPButton').forEach(link => {
       const text = link.textContent.trim();
-      if (text === '首页' || 
-          text.includes('返回主站') || 
+      if (text.includes('返回主站') || 
           link.classList.contains('title') || 
           link.classList.contains('logo') || 
           link.querySelector('.logo')) {

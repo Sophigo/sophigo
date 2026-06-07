@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-2028学年教育部白名单赛事完整表格</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #1a237e;
+        }
+        
+        .category-title {
+            color: #1a237e;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-title::before {
+            content: "•";
+            font-size: 2rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 1200px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f5f7ff;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px 0;
+        }
+        
+        .status-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-upcoming {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .status-ended {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .link {
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        .link::after {
+            content: "↗";
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-top: 5px solid #1a237e;
+        }
+        
+        .footer a {
+            color: #7986cb;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-active {
+            background: #e8f5e9;
+        }
+        
+        .legend-upcoming {
+            background: #fff3e0;
+        }
+        
+        .legend-ended {
+            background: #ffebee;
+        }
+        
+        .search-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #1a237e;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .category-section {
+                padding: 15px;
+            }
+            
+            .meta-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2025-2028学年教育部白名单赛事完整表格</h1>
+            <div class="subtitle">47项全国性竞赛活动信息汇总（2025-2028学年）</div>
+            <div class="meta-info">
+                <div class="meta-item">数据来源：教育部官方通知</div>
+                <div class="meta-item">更新时间：2026年5月25日</div>
+                <div class="meta-item">赛事总数：47项</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索赛事名称、主办单位或关键词..." onkeyup="searchTable()">
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-active"></div>
+                    <span>正在报名/进行中</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-upcoming"></div>
+                    <span>即将开始/暂未开启</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-ended"></div>
+                    <span>已结束/成绩查询</span>
+                </div>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">一、自然科学素养类（22项）</h2>
+                <div class="table-container">
+                    <table id="naturalScienceTable">
+                        <thead>
+                            <tr>
+                                <th width="5%">序号</th>
+                                <th width="20%">赛事名称</th>
+                                <th width="15%">主题/方向</th>
+                                <th width="15%">主办单位</th>
+                                <th width="10%">指导单位</th>
+                                <th width="10%">白名单状态</th>
+                                <th width="10%">参赛对象</th>
+                                <th width="15%">链接/状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>全国青少年人工智能创新挑战赛</strong></td>
+                                <td>人工智能创新</td>
+                                <td>中国少年儿童发展服务中心</td>
+                                <td>中国人工智能学会、中国计算机学会、中科院计算所、中科院软件所</td>
+                                <td>白名单第1项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://aiic.china61.org.cn" class="link" target="_blank">官网链接</a><br><span class="status-badge status-upcoming">25-26暂未开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>世界机器人大会青少年机器人设计与信息素养大赛</strong></td>
+                                <td>机器人设计与信息素养</td>
+                                <td>中国电子学会</td>
+                                <td>世界机器人大会组委会</td>
+                                <td>白名单第2项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://ceic.kpcb.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">信息素养大赛已开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>全国青少年无人机大赛</strong></td>
+                                <td>无人机技术</td>
+                                <td>中国航空学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第3项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.int-ede.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">地区选拔赛开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>宋庆龄少年儿童发明奖</strong></td>
+                                <td>发明创造</td>
+                                <td>中国宋庆龄基金会、中国发明协会</td>
+                                <td>宋庆龄基金会</td>
+                                <td>白名单第4项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://sclaci.sclc2017.org/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">各地区已开启市赛</span></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><strong>全国中学生天文知识竞赛</strong></td>
+                                <td>天文知识</td>
+                                <td>中国天文学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第5项</td>
+                                <td>初中、高中、中职</td>
+                                <td><a href="https://www.bjp.org.cn/qgzxstwzsjs/index.shtml" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">多地区正在举办</span></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><strong>"地球小博士"全国地理科普知识大赛活动</strong></td>
+                                <td>地理科普</td>
+                                <td>中国地理学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第6项</td>
+                                <td>普通高中</td>
+                                <td><a href="http://www.geodoctor.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">报名结束，考试阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><strong>全国中学生水科技发明比赛暨斯德哥尔摩青少年水奖中国区选拔赛</strong></td>
+                                <td>水科技发明</td>
+                                <td>生态环境部宣传教育中心、水利部宣传教育中心</td>
+                                <td>生态环境部、水利部</td>
+                                <td>白名单第7项</td>
+                                <td>小学、初中、高中</td>
+                                <td><a href="https://www.chinaeol.net/ceecxm/qgzxsskjfmbs/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">报名结束，评比阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><strong>全国中学生地球科学奥林匹克竞赛</strong></td>
+                                <td>地球科学</td>
+                                <td>中国地震学会、中国地球物理学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第8项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.ssoc.org.cn/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">成绩查询阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><strong>全国中学生数学奥林匹克竞赛</strong></td>
+                                <td>数学</td>
+                                <td>中国数学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第9项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.cms.org.cn" class="link" target="_blank">官方网站</a></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><strong>全国中学生物理奥林匹克竞赛</strong></td>
+                                <td>物理</td>
+                                <td>中国物理学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第10项</td>
+                                <td>普通高中</td>
+                                <td><a href="http://cpho.pku.edu.cn/" class="link" target="_blank">官方网站</a></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td><strong>全国中学生化学奥林匹克竞赛</strong></td>
+                                <td>化学</td>
+                                <td>中国化学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第11项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.chemsoc.org.cn" class="link" target="_blank">官方网站</a></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td><strong>全国中学生生物学奥林匹克竞赛</strong></td>
+                                <td>生物学</td>
+                                <td>中国植物学会、中国动物学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第12项</td>
+                                <td>普通高中</td>
+                                <td><a href="http://www.botany.org.cn" class="link" target="_blank">官方网站</a></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td><strong>全国中学生信息学奥林匹克竞赛</strong></td>
+                                <td>信息学</td>
+                                <td>中国计算机学会</td>
+                                <td>中国科协</td>
+                                <td>白名单第13项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.noi.cn" class="link" target="_blank">官方网站</a></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td><strong>全国青少年科技创新大赛</strong></td>
+                                <td>科技创新</td>
+                                <td>中国科协青少年科技中心</td>
+                                <td>中国科协</td>
+                                <td>白名单第14项</td>
+                                <td>普通高中、中职</td>
+                                <td><a href="https://cyscc.org/castic" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">各省市已开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td><strong>全国青少年航天创新大赛</strong></td>
+                                <td>航天科技</td>
+                                <td>中国航天科技国际交流中心</td>
+                                <td>中国航天科技集团</td>
+                                <td>白名单第15项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://nysic.declare.htgjjl.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">5月底前完成选拔赛</span></td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td><strong>丘成桐中学科学奖</strong></td>
+                                <td>科学研究</td>
+                                <td>清华大学</td>
+                                <td>丘成桐数学科学中心</td>
+                                <td>白名单第16项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.yau-awards.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">2025年获奖名单公布</span></td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td><strong>全球发明大会（中国）竞赛活动</strong></td>
+                                <td>发明创造</td>
+                                <td>中国友好和平发展基金会</td>
+                                <td>中国科协</td>
+                                <td>白名单第17项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://icc.cffpd.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">2-6月宣传报名</span></td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td><strong>全国青少年人工智能大赛</strong></td>
+                                <td>人工智能</td>
+                                <td>中国福利会、中国妇女发展基金会</td>
+                                <td>中国科协</td>
+                                <td>白名单第18项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://aic.cwicp.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">需省组委报名</span></td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td><strong>全国青少年科学实验能力大赛</strong></td>
+                                <td>科学实验</td>
+                                <td>中国教育装备行业协会</td>
+                                <td>教育部</td>
+                                <td>白名单第19项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.nysec.com.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">7月23日前报送名单</span></td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td><strong>全国青少年科学探究建模能力大赛</strong></td>
+                                <td>科学建模</td>
+                                <td>北京师范大学</td>
+                                <td>教育部</td>
+                                <td>白名单第20项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://simcc.bnu.edu.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">建模能力赛结束</span></td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td><strong>全国青少年心理成长知识与应用创新大赛</strong></td>
+                                <td>心理健康</td>
+                                <td>中国心理卫生协会</td>
+                                <td>卫健委</td>
+                                <td>白名单第21项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.camh-edu.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">1-6月初赛复赛</span></td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td><strong>全国青少年安全与应急科普创新大赛</strong></td>
+                                <td>安全应急</td>
+                                <td>中国灾害防御协会</td>
+                                <td>应急管理部</td>
+                                <td>白名单第22项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.nyseic.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">3月开放报名</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">二、人文综合素养类（12项）</h2>
+                <div class="table-container">
+                    <table id="humanitiesTable">
+                        <thead>
+                            <tr>
+                                <th width="5%">序号</th>
+                                <th width="20%">赛事名称</th>
+                                <th width="15%">主题/方向</th>
+                                <th width="15%">主办单位</th>
+                                <th width="10%">指导单位</th>
+                                <th width="10%">白名单状态</th>
+                                <th width="10%">参赛对象</th>
+                                <th width="15%">链接/状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23</td>
+                                <td><strong>全国青少年禁毒知识竞赛</strong></td>
+                                <td>禁毒知识</td>
+                                <td>中国禁毒基金会</td>
+                                <td>公安部</td>
+                                <td>白名单第23项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.2-class.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">总决赛结束</span></td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td><strong>世界华人学生作文大赛</strong></td>
+                                <td>作文写作</td>
+                                <td>中华全国归国华侨联合会、中华全国台湾同胞联谊会</td>
+                                <td>教育部</td>
+                                <td>白名单第24项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.zuowendasai.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">征稿结束</span></td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td><strong>"外研社杯"全国中学生外语素养大赛</strong></td>
+                                <td>外语素养</td>
+                                <td>北京外国语大学</td>
+                                <td>教育部</td>
+                                <td>白名单第25项</td>
+                                <td>普通高中、中职</td>
+                                <td><a href="http://events.fltrp.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-ended">报名结束</span></td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td><strong>高中生创新能力大赛</strong></td>
+                                <td>创新能力</td>
+                                <td>中国老教授协会</td>
+                                <td>教育部</td>
+                                <td>白名单第26项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.iccedu.com.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">初赛阶段开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>27</td>
+                                <td><strong>全国中学生环境保护优秀作文征集活动</strong></td>
+                                <td>环保作文</td>
+                                <td>中华环保联合会</td>
+                                <td>生态环境部</td>
+                                <td>白名单第27项</td>
+                                <td>普通高中、中职</td>
+                                <td><a href="https://www.huaxiao.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">决赛阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td><strong>"美丽中国"全国版图知识竞赛（中小学组）</strong></td>
+                                <td>版图知识</td>
+                                <td>自然资源部宣传教育中心</td>
+                                <td>自然资源部</td>
+                                <td>白名单第28项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.pecmnr.cn/gjbt/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">暂未开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>29</td>
+                                <td><strong>全国青少年劳动技能与智能设计大赛（AILD）</strong></td>
+                                <td>劳动技能与智能设计</td>
+                                <td>中国自动化学会</td>
+                                <td>教育部</td>
+                                <td>白名单第29项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://aild.caa.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">3月在线报名</span></td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td><strong>中华诗词美育大赛</strong></td>
+                                <td>诗词美育</td>
+                                <td>中华诗词学会</td>
+                                <td>教育部</td>
+                                <td>白名单第30项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.zhscmyds.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">初赛阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td><strong>鲁迅青少年文学大赛</strong></td>
+                                <td>文学创作</td>
+                                <td>鲁迅文化基金会</td>
+                                <td>教育部</td>
+                                <td>白名单第31项</td>
+                                <td>普通高中</td>
+                                <td><a href="https://www.luxunwenxue.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">省级初赛进行中</span></td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td><strong>全国青少年红色文化传承与实践创新大赛</strong></td>
+                                <td>红色文化</td>
+                                <td>中国红色文化研究会</td>
+                                <td>教育部</td>
+                                <td>白名单第32项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.hswhds.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">报名开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>33</td>
+                                <td><strong>"讲好中国故事"全国中小学语言素养大赛</strong></td>
+                                <td>语言素养</td>
+                                <td>中国教育电视协会</td>
+                                <td>教育部</td>
+                                <td>白名单第33项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.centv.cn/jhzggs" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">报名开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td><strong>同颂中华·全国青少年志愿文学创作与诵读大赛</strong></td>
+                                <td>志愿文学</td>
+                                <td>中国青年报社</td>
+                                <td>共青团中央</td>
+                                <td>白名单第34项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://h5.cyol.com/special/2025baimingdan/share/index.html" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">报名开启</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">三、艺术体育类（13项）</h2>
+                <div class="table-container">
+                    <table id="artsSportsTable">
+                        <thead>
+                            <tr>
+                                <th width="5%">序号</th>
+                                <th width="20%">赛事名称</th>
+                                <th width="15%">主题/方向</th>
+                                <th width="15%">主办单位</th>
+                                <th width="10%">指导单位</th>
+                                <th width="10%">白名单状态</th>
+                                <th width="10%">参赛对象</th>
+                                <th width="15%">链接/状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>35</td>
+                                <td><strong>全国中小学生绘画书法作品比赛</strong></td>
+                                <td>绘画书法</td>
+                                <td>中国儿童中心（全国妇联儿童事业发展集团）</td>
+                                <td>教育部</td>
+                                <td>白名单第35项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="https://www.ccc.org.cn/col/col281/index.html" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">作品准备阶段</span></td>
+                            </tr>
+                            <tr>
+                                <td>36</td>
+                                <td><strong>"我爱祖国海疆"全国青少年航海模型教育竞赛</strong></td>
+                                <td>航海模型</td>
+                                <td>中国航海模型运动协会</td>
+                                <td>国家体育总局</td>
+                                <td>白名单第36项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://cmma.sports.cn/index/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">需本地教体局通知</span></td>
+                            </tr>
+                            <tr>
+                                <td>37</td>
+                                <td><strong>"驾驭未来"全国青少年车辆模型教育竞赛</strong></td>
+                                <td>车辆模型</td>
+                                <td>中国车辆模型运动协会</td>
+                                <td>国家体育总局</td>
+                                <td>白名单第37项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://cmac.sports.cn/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">需本地教体局通知</span></td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td><strong>全国青少年模拟飞行锦标赛</strong></td>
+                                <td>模拟飞行</td>
+                                <td>国家体育总局航空无线电模型运动管理中心</td>
+                                <td>国家体育总局</td>
+                                <td>白名单第38项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://yg.asfcyy.com/home" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">需本地教体局通知</span></td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td><strong>"飞向北京·飞向太空"全国青少年航空航天模型教育竞赛活动</strong></td>
+                                <td>航空航天模型</td>
+                                <td>中国航空运动协会</td>
+                                <td>国家体育总局</td>
+                                <td>白名单第39项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.asfc.org.cn/index/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">需本地教体局通知</span></td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td><strong>全国青少年传统体育项目比赛</strong></td>
+                                <td>传统体育</td>
+                                <td>中国青少年宫协会</td>
+                                <td>国家体育总局</td>
+                                <td>白名单第40项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.cnypa.org/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">暂未开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>41</td>
+                                <td><strong>"希望颂"——全国青少年书画艺术大展</strong></td>
+                                <td>书画艺术</td>
+                                <td>中国国际书画艺术研究会</td>
+                                <td>教育部</td>
+                                <td>白名单第41项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://gjshyjh.com/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">个人投稿开启</span></td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td><strong>全国中小学生海洋文化创意设计大赛</strong></td>
+                                <td>海洋文化创意</td>
+                                <td>中国海洋发展基金会、中国海洋大学、自然资源部北海局</td>
+                                <td>自然资源部</td>
+                                <td>白名单第42项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://mcdnpss.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">3-6月作品征集</span></td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td><strong>全国青少年国防素养大赛</strong></td>
+                                <td>国防素养</td>
+                                <td>南京理工大学</td>
+                                <td>国防部</td>
+                                <td>白名单第43项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.gfsy.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">4月底前完成报名</span></td>
+                            </tr>
+                            <tr>
+                                <td>44</td>
+                                <td><strong>"戏剧中国"全国青少年戏剧文化艺术大赛</strong></td>
+                                <td>戏剧文化</td>
+                                <td>中国戏剧文学学会</td>
+                                <td>文化和旅游部</td>
+                                <td>白名单第44项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://zxwyyxj.com/" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">初赛报名中</span></td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td><strong>全国青少年人工智能辅助生成数字艺术创作者大赛</strong></td>
+                                <td>AI数字艺术</td>
+                                <td>文化和旅游部艺术发展中心</td>
+                                <td>文化和旅游部</td>
+                                <td>白名单第45项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.aigcnyacc.com" class="link" target="_blank">官方网站</a><br><span class="status-badge status-upcoming">等待开启报名</span></td>
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td><strong>学校美育助力行动——青少年视觉艺术传承与创新工作坊展示</strong></td>
+                                <td>视觉艺术</td>
+                                <td>中国艺术教育促进会</td>
+                                <td>教育部</td>
+                                <td>白名单第46项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://www.ccpae.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">报名进行中</span></td>
+                            </tr>
+                            <tr>
+                                <td>47</td>
+                                <td><strong>"常青藤"全国青少年校园戏剧创意大赛</strong></td>
+                                <td>校园戏剧</td>
+                                <td>中央戏剧学院</td>
+                                <td>教育部</td>
+                                <td>白名单第47项</td>
+                                <td>小学、初中、高中、中职</td>
+                                <td><a href="http://cqtxj.org.cn" class="link" target="_blank">官方网站</a><br><span class="status-badge status-active">1-5月报名初审</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">数据说明</h2>
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h3 style="color: #1a237e; margin-bottom: 15px;">重要说明：</h3>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1a237e;">•</span>
+                            <strong>原文链接：</strong> <a href="https://mp.weixin.qq.com/s/7qiWMn9DjeyOH7Ky43so-g" class="link" target="_blank">https://mp.weixin.qq.com/s/7qiWMn9DjeyOH7Ky43so-g</a>
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1a237e;">•</span>
+                            <strong>数据来源：</strong> 教育部官方通知 + 白名单赛事网（2026年4月15日整理）
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1a237e;">•</span>
+                            <strong>白名单状态：</strong> 所有赛事均为教育部2025-2028学年面向中小学生的全国性竞赛活动
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1a237e;">•</span>
+                            <strong>参赛对象：</strong> 均为在校中小学生，具体学段见各赛事说明
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1a237e;">•</span>
+                            <strong>状态说明：</strong> 基于2026年5月25日最新信息，具体以各赛事官方通知为准
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>教育部2025-2028学年白名单赛事信息汇总</h3>
+            <p>数据来源：教育部官方通知、白名单赛事网、相关微信公众号文章</p>
+            <p>原文链接：<a href="https://mp.weixin.qq.com/s/7qiWMn9DjeyOH7Ky43so-g" target="_blank">https://mp.weixin.qq.com/s/7qiWMn9DjeyOH7Ky43so-g</a></p>
+            <p>生成时间：2026年5月25日 | 数据整理工具：Marvis AI</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">注：所有赛事信息以官方发布为准，建议参赛者及时关注各赛事官网最新通知</p>
+        </div>
+    </div>
+    
+    <script>
+        function searchTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const tables = document.querySelectorAll('table');
+            
+            tables.forEach(table => {
+                const rows = table.getElementsByTagName('tr');
+                
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+                    
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (found) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // 初始化搜索框
+        document.getElementById('searchInput').addEventListener('input', searchTable);
+    </script>
+</body>
+</html>

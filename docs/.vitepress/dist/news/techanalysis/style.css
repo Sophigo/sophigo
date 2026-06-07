@@ -55,8 +55,9 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--border-light); z-index: 999;
 }
 .navbar-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-.navbar-logo { font-family: 'Outfit'; font-size: 1.1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 4px; }
-.navbar-logo span { font-weight: 400; color: var(--text-secondary); }
+.navbar-logo { font-family: 'Outfit'; font-size: 1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.navbar-logo img { width: 22px; height: 22px; object-fit: contain; display: block; }
+.navbar-logo span { font-weight: 700; color: var(--text-primary); }
 .navbar-links { display: flex; gap: 20px; list-style: none; }
 .navbar-links a { font-size: 0.72rem; color: rgba(245,245,247,0.8); transition: var(--transition-fast); }
 .navbar-links a:hover { color: var(--text-primary); }

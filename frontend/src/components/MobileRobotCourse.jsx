@@ -10,36 +10,18 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
   const [campTab, setCampTab] = useState('junior');
   const [selectedChassis, setSelectedChassis] = useState(4); // Default to Option 5 (Index 4)
 
+  const agentSlugs = [
+    'orchestrator', 'mechanical', 'manufacturing', 'hardware', 'firmware',
+    'algorithm', 'system-integration', 'product-market', 'budgeting', 'patent-rd', 'education'
+  ];
+  const agentEmojis = ['🎯', '⚙️', '🏭', '🔌', '💻', '🧠', '🔗', '📈', '💰', '🔬', '🎓'];
+
   const t = {
     zh: {
       backBtn: "返回主页",
-      courseTag: "Sophigo 专业实战课程",
-      title: "AI 移动机器人软硬件集成课程",
-      subtitle: "从电机控制、运动学建模到 ROS2 导航与 Web 3D 在线仿真，掌握软硬件一体化开发的核心链条。",
+      title: "AI移动机器人",
+      subtitle: "核心：需求提出与定义，AI工具使用与工程化，辩证思考与决策，了解AI能力边界，文档复盘；",
       
-      // Target Audience Section
-      audienceTitle: "适用群体",
-      audienceSubtitle: "无论您是初学者还是专业开发人员，本课程都为您设计了匹配的知识成长路径。",
-      audiences: [
-        {
-          icon: <GraduationCap size={28} />,
-          title: "高校新工科专业学生",
-          desc: "机器人工程、自动化、电子工程、计算机等专业学生。帮助打通底层硬件寄存器与高层操作系统（ROS2）之间的知识鸿沟，将理论算法完美呈现在物理实体上。",
-          badges: ["算法验证", "毕设加分", "软硬兼修"]
-        },
-        {
-          icon: <Cpu size={28} />,
-          title: "嵌入式与物联网工程师",
-          desc: "已具备基本单片机开发基础，但希望跨入高级机器人控制、多传感器融合和 SLAM 自动导航领域的工程师。快速进阶 ROS2 主流机器人技术框架。",
-          badges: ["技术进阶", "掌握ROS2", "高薪就业"]
-        },
-        {
-          icon: <Wrench size={28} />,
-          title: "机器人创客与 DIY 极客",
-          desc: "想要从零制造一台自己定制的多功能自动避障/巡检小车。我们提供完整的开源 PCB 线路图、3D 打印 CMF 外壳文件，以及网页仿真器环境，帮助创意落地。",
-          badges: ["创意孵化", "开源硬件", "快速打样"]
-        }
-      ],
 
       // Student Profile
       profileTitle: "招生学员画像",
@@ -48,7 +30,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
         { label: "基础门槛", value: "具备一定的英语、科学、基础编程或机器人操作经验。" },
         { label: "招收年龄", value: "初一、初二、高一、高二。" },
         { label: "核心兴趣", value: "对人工智能、具身智能、产品创新及硬核科技竞赛有浓厚探索欲的初高中生。" },
-        { label: "核心诉求", value: "有国内升学（强基计划、综合评价、科创特长）或海外顶尖名校申请需求，渴望建立真正符合工业标准的个人项目作品集。" }
+        { label: "核心诉求", value: "对新工科、跨学科教育有深入兴趣，有国内升学（强基计划、综合评价、科创特长）或海外顶尖名校申请需求，渴望建立真正符合工业标准的个人项目作品集。" }
       ],
 
       // Teaching Philosophy
@@ -238,9 +220,9 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       ],
 
       // Multi-Agent Section
-      agentTitle: "🧠 专家 Agent 协同体系 (Sophi-Core Orchestration)",
+      agentTitle: "🧠 专家 Agent 协同体系",
       agentSubtitle: "本课程核心特色是引入工业级多智能体（Multi-Agent）开发架构，将复杂的工程任务解耦，协同学生完成研发。",
-      agentFlowTitle: "智能体底层逻辑 — \"基于状态的编排\" (State-Based Orchestration)",
+      agentFlowTitle: "智能体底层逻辑 — \"基于状态的编排\"",
       agentHeaders: {
         role: "智能体角色",
         focus: "核心关注点",
@@ -261,15 +243,15 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       ],
 
       // PBL Team Roles
-      pblTitle: "团队角色理解 (PBL Role Mapping)",
+      pblTitle: "团队角色理解",
       pblSubtitle: "每个精锐双人组需明确分工与角色定位，协同推进项目落地",
       pblRoles: [
-        { name: "产品经理 (PM)", desc: "负责场景定义、人机交互与功能定义。使用提示词工程撰写 PRD，使用 AI 渲染进行外观迭代。" },
+        { name: "产品经理", desc: "负责场景定义、人机交互与功能定义。使用提示词工程撰写 PRD，使用 AI 渲染进行外观迭代。" },
         { name: "前端/交互工程师", desc: "使用 HTML5/CSS/JavaScript 零代码生成器开发 Web 交互控制终端，部署长连接。" },
         { name: "后端与算法工程师", desc: "负责运动控制、路径规划算法调试，打通大模型 Agent 与底层硬件通信接口。" },
         { name: "嵌入式软硬件工程师", desc: "主导硬件选型、接线 Wokwi 仿真验证，执行底盘物理接线与固件烧录。" },
         { name: "机械工程师", desc: "使用 AI 辅助设计底盘物理结构，操作 3D 打印与激光切割机，对齐传感器支架。" },
-        { name: "项目经理 (PJM) / 系统集成师", desc: "维护飞书看板与进度，主导全系统软硬件集成联调，撰写排故日志。" }
+        { name: "项目经理 / 系统集成师", desc: "维护飞书看板与进度，主导全系统软硬件集成联调，撰写排故日志。" }
       ],
 
       // Evaluation weights
@@ -295,7 +277,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           desc: "对接三位一体招生（综评）。宁波营由联合国科创实验室（UNNC-BDO）组织，利用 UNNC-FabLab 印章背书，重点强调“算法到实物的闭环转化（Sim-to-Real）”和“Git 工业级版本控制”，极大提升面试含金量。"
         }
       ],
-      contestTitle: "教育部白名单赛事对接",
+      contestTitle: "教育部白名单赛事",
       contests: [
         "第九届全国青少年人工智能创新挑战赛 (教育部 2025-2028 学年白名单竞赛)",
         "青少年科技创新大赛 / 全国青少年信息技术创新实践大赛（NOC）",
@@ -305,33 +287,9 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
     },
     en: {
       backBtn: "Back to Home",
-      courseTag: "Sophigo Practical Course",
       title: "AI Mobile Robot Hardware-Software Course",
       subtitle: "From motor control, kinematics modeling, to ROS2 navigation and Web 3D simulation. Master the entire robotics integration chain.",
       
-      // Target Audience Section
-      audienceTitle: "Target Audience",
-      audienceSubtitle: "Whether you are a beginner or a professional developer, this course is designed for your career and knowledge growth.",
-      audiences: [
-        {
-          icon: <GraduationCap size={28} />,
-          title: "Robotics & Engineering Students",
-          desc: "For college majors like Robotics, Automation, EE, and Computer Science. Bridge the gap between low-level hardware registers and high-level OS like ROS2, bringing formulas to life on physical chassis.",
-          badges: ["Algorithm Test", "Thesis Boost", "Full-Stack Hardware"]
-        },
-        {
-          icon: <Cpu size={28} />,
-          title: "Embedded & IoT Engineers",
-          desc: "For developers with basic MCU experience who want to leap into advanced robotics control, multi-sensor fusion, and SLAM navigation. Step into the professional ROS2 architecture.",
-          badges: ["Tech Upgrade", "Master ROS2", "Career Growth"]
-        },
-        {
-          icon: <Wrench size={28} />,
-          title: "Makers & DIY Geeks",
-          desc: "For creators who want to build a custom autonomous navigation car from scratch. We open-source all PCB schematics, CMF enclosure files, and provide a web simulator to build your dream.",
-          badges: ["Prototype Incubator", "Open Hardware", "Quick Mockup"]
-        }
-      ],
 
       // Student Profile
       profileTitle: "Student Profile",
@@ -530,7 +488,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       ],
 
       // Multi-Agent Section
-      agentTitle: "🧠 Expert Agent Orchestration (Sophi-Core)",
+      agentTitle: "🧠 Expert Agent Orchestration",
       agentSubtitle: "This course leverages an industrial multi-agent architecture. Complex engineering scopes are split and assigned to dedicated AI specialists.",
       agentFlowTitle: "Underlying Orchestration - State-Based Orchestration Flow",
       agentHeaders: {
@@ -553,10 +511,10 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       ],
 
       // PBL Team Roles
-      pblTitle: "PBL Role Mapping",
+      pblTitle: "Team Role Mapping",
       pblSubtitle: "Duos define clear roles in each phase to simulate professional engineering teams",
       pblRoles: [
-        { name: "Product Manager (PM)", desc: "Establishes product scope, UX needs, and requirements. Compiles PRDs via LLMs and drafts aesthetics." },
+        { name: "Product Manager", desc: "Establishes product scope, UX needs, and requirements. Compiles PRDs via LLMs and drafts aesthetics." },
         { name: "Frontend Engineer", desc: "Builds Web client panels using zero-code tools, bridging dashboards to boards via WebSockets." },
         { name: "Backend / Algo Engineer", desc: "Adapts kinematic equations, handles navigation vectors, and links LLMs to chassis motors." },
         { name: "Embedded Hardware Dev", desc: "Validates electronics in virtual Wokwi boards, routes wiring, and flashes firmware." },
@@ -587,7 +545,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           desc: "Aimed at Triple-in-One admissions. Ningbo sessions run through the UNNC-BDO laboratory. Emphasizes Git version logs and Sim-to-Real algorithms for admissions benefits."
         }
       ],
-      contestTitle: "Official Competitions Paths",
+      contestTitle: "Official Competitions",
       contests: [
         "9th National Youth AI Innovation Contest (Official whitelist competition)",
         "National Youth Science & Tech Invention Contest / NOC Competitions",
@@ -613,11 +571,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
 
         {/* Hero Area */}
         <div style={heroWrapperStyle}>
-          <span style={tagStyle}>
-            <Zap size={12} style={{ color: 'var(--klein-blue)' }} />
-            {t.courseTag}
-          </span>
-          <h1 className="title-hero text-gradient-blue" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <h1 className="title-hero" style={{ marginTop: '1rem', marginBottom: '1rem', color: '#ffffff' }}>
             {t.title}
           </h1>
           <p className="description" style={{ marginInline: 'auto', maxWidth: '750px', fontSize: '1.15rem' }}>
@@ -684,147 +638,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           </div>
         </section>
 
-        {/* SECTION: Modular Chassis Evolution */}
-        <section style={{ marginBlock: '6rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 style={sectionTitleStyle}>{t.chassisTitle}</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.chassisSubtitle}</p>
-          </div>
-
-          {/* Interactive Chassis Display */}
-          <div className="glassmorphism-card" style={chassisContainerStyle}>
-            
-            {/* Left Nav Menu */}
-            <div style={chassisNavStyle}>
-              {t.chassisOptions.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedChassis(idx)}
-                  style={selectedChassis === idx ? chassisBtnActiveStyle : chassisBtnStyle}
-                >
-                  <span style={{ fontWeight: '700' }}>{opt.id}</span>
-                  <span style={{ fontSize: '0.8rem', opacity: 0.8, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{opt.name}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Right Display Panel */}
-            <div style={chassisDetailsPanelStyle(selectedChassis === 4)}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: selectedChassis === 4 ? 'var(--klein-blue)' : 'var(--text-primary)' }}>
-                  {t.chassisOptions[selectedChassis].id}: {t.chassisOptions[selectedChassis].name}
-                </h3>
-                {selectedChassis === 4 && (
-                  <span style={badgeOmniStyle}>Ultimate Core Direction</span>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div>
-                  <h4 style={chassisLabelStyle}>🛠️ 设计细节 (Design Specifications)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].desc}</p>
-                </div>
-                
-                <div>
-                  <h4 style={chassisLabelStyle}>🎮 交互与控制特征 (Control & Interaction)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].interaction}</p>
-                </div>
-
-                <div>
-                  <h4 style={chassisLabelStyle}>🎯 最佳适用场景 (Best Scenario)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].scene}</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Core recommendation box */}
-          <div className="glassmorphism-card" style={recommendationBoxStyle}>
-            <h4 style={{ fontWeight: '700', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span>{t.recommendationTitle}</span>
-            </h4>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              {t.recommendationDesc}
-            </p>
-          </div>
-        </section>
-
-        {/* Section: Target Audience */}
-        <section style={{ marginBlock: '6rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 style={sectionTitleStyle}>{t.audienceTitle}</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.audienceSubtitle}</p>
-          </div>
-
-          <div className="grid-featured" style={{ gap: '2rem' }}>
-            {t.audiences.map((aud, idx) => (
-              <div key={idx} className="grid-col-4 glassmorphism-card" style={audienceCardStyle}>
-                <div style={iconWrapperStyle}>{aud.icon}</div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: '600', marginBlock: '1.25rem 0.75rem' }}>
-                  {aud.title}
-                </h3>
-                <p style={audienceDescStyle}>{aud.desc}</p>
-                <div style={badgesWrapperStyle}>
-                  {aud.badges.map((badge, bIdx) => (
-                    <span key={bIdx} style={badgeStyle}>{badge}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section: Course Syllabus Outline (Vitepress chapters) */}
-        <section style={{ marginBlock: '6rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={sectionTitleStyle}>{t.outlineTitle}</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.outlineSubtitle}</p>
-          </div>
-
-          <div style={timelineWrapperStyle}>
-            {t.modules.map((mod, idx) => (
-              <div key={idx} className="glassmorphism-card" style={timelineCardStyle}>
-                
-                {/* Visual marker */}
-                <div style={numberCircleStyle}>
-                  {mod.num}
-                </div>
-
-                {/* Left content detail */}
-                <div style={moduleIntroStyle}>
-                  <span style={moduleTagStyle}>{mod.tag}</span>
-                  <h3 style={moduleTitleStyle}>{mod.title}</h3>
-                  <p style={moduleDescStyle}>{mod.desc}</p>
-                  
-                  {/* Action Link to Vitepress */}
-                  <a 
-                    href={mod.link}
-                    style={detailsLinkStyle}
-                    className="btn-cta"
-                  >
-                    <span>{t.viewDetails}</span>
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-
-                {/* Right bullet lists */}
-                <div style={modulePointsStyle}>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    {mod.points.map((pt, pIdx) => (
-                      <li key={pIdx} style={pointItemStyle}>
-                        <CheckCircle size={16} style={{ color: 'var(--klein-blue)', flexShrink: 0, marginTop: '0.15rem' }} />
-                        <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-            ))}
-          </div>
-        </section>
-
+        
         {/* SECTION: 12-Day Camps Detailed Syllabus */}
         <section style={{ marginBlock: '6rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -939,14 +753,14 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.agentSubtitle}</p>
           </div>
 
-          <div className="grid-featured" style={{ gap: '2rem' }}>
-            
-            {/* Visual Architecture Image Frame (Col 6) */}
-            <div className="grid-col-6 glassmorphism-card" style={agentVisualFrameStyle}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+
+            {/* Architecture Image */}
+            <div className="glassmorphism-card" style={agentVisualFrameStyle}>
               <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '16px', height: '100%', minHeight: '350px' }}>
-                <img 
-                  src="/news/sophicar/assets/architecture.jpg" 
-                  alt="SophiCar Multi-Agent System Architecture" 
+                <img
+                  src="/news/sophigo/assets/architecture.jpg"
+                  alt="SophiCar Multi-Agent System Architecture"
                   style={{ width: '100%', height: '100%', objectFit: 'contain', transition: 'transform 0.5s ease' }}
                   className="zoom-image"
                 />
@@ -958,55 +772,108 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
               </div>
             </div>
 
-            {/* Orchestration Pipeline CSS Graph (Col 6) */}
-            <div className="grid-col-6 glassmorphism-card" style={agentOrchestrationFrameStyle}>
+            {/* Agent Interactive Card Grid */}
+            <div className="glassmorphism-card" style={agentGridContainerStyle}>
+              <div style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                  点击卡片查看详情
+                </span>
+              </div>
+              <div style={agentGridStyle}>
+                {t.agents.map((agent, idx) => (
+                  <a
+                    key={idx}
+                    href={`/courses/mobile-robot/agent-${agentSlugs[idx]}.html`}
+                    className="agent-card-lg-link"
+                  >
+                    <div className="agent-card-lg-inner">
+                      <div style={{ fontSize: '2.2rem', marginBottom: '0.5rem', lineHeight: '1', display: 'block' }}>
+                        {agentEmojis[idx]}
+                      </div>
+                      <div style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: '1.3' }}>
+                        {agent.role.replace(/^[^\w一-鿿]*\s*/, '')}
+                      </div>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', lineHeight: '1.3' }}>
+                        {agent.focus.length > 18 ? agent.focus.slice(0, 18) + '...' : agent.focus}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Architecture Components - 20 Cards Grid */}
+            <div className="glassmorphism-card" style={agentOrchestrationFrameStyle}>
               <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Bot size={20} style={{ color: 'var(--klein-blue)' }} />
                 {t.agentFlowTitle}
               </h3>
-              
-              {/* CSS Node map */}
-              <div style={nodeFlowWrapperStyle}>
-                <div style={flowNodeStyle('input')}>
-                  <span style={flowNodeTitleStyle}>学生输入造物需求</span>
-                  <span style={flowNodeDescStyle}>Student Specs</span>
-                </div>
-                <div style={flowConnectorStyle}>↓</div>
-                <div style={flowNodeStyle('orch')}>
-                  <span style={flowNodeTitleStyle}>Orchestrator 任务拆解</span>
-                  <span style={flowNodeDescStyle}>Task Decomposer</span>
-                </div>
-                <div style={flowConnectorStyle}>↓</div>
-                
-                {/* parallel branches */}
-                <div style={parallelNodesWrapperStyle}>
-                  <div style={parallelNodeStyle}>
-                    <span style={{ fontWeight: 'bold', fontSize: '0.75rem' }}>⚙️ 机械设计</span>
-                    <span style={{ fontSize: '0.65rem', opacity: 0.8 }}>Chassis CAD</span>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {/* AI工具层 - 5 cards */}
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--klein-blue)', marginBottom: '0.5rem', paddingBottom: '0.25rem', borderBottom: '2px solid var(--klein-blue)' }}>
+                    🤖 AI工具层
                   </div>
-                  <div style={parallelNodeStyle}>
-                    <span style={{ fontWeight: 'bold', fontSize: '0.75rem' }}>🔌 硬件电路</span>
-                    <span style={{ fontSize: '0.65rem', opacity: 0.8 }}>Wokwi Wire</span>
-                  </div>
-                  <div style={parallelNodeStyle}>
-                    <span style={{ fontWeight: 'bold', fontSize: '0.75rem' }}>💻 固件代码</span>
-                    <span style={{ fontSize: '0.65rem', opacity: 0.8 }}>ESP32 Drive</span>
-                  </div>
-                  <div style={parallelNodeStyle}>
-                    <span style={{ fontWeight: 'bold', fontSize: '0.75rem' }}>🧠 算法专家</span>
-                    <span style={{ fontSize: '0.65rem', opacity: 0.8 }}>PID & Kin</span>
+                  <div style={archCardGridStyle}>
+                    {['提示词工程 (Prompt Engineering)', 'Vibe Coding (AI编程)', '多模态文生图/视频生成', 'AI辅助数据分析', 'AI Agent编排与调度'].map((item, i) => (
+                      <div key={i} className="arch-card">
+                        <span className="arch-card-title">{item.split('(')[0].trim()}</span>
+                        {item.includes('(') && <span className="arch-card-sub">{item.split('(')[1].replace(')', '')}</span>}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div style={flowConnectorStyle}>↓</div>
-                <div style={flowNodeStyle('verify')}>
-                  <span style={flowNodeTitleStyle}>系统集成 & 物理联调</span>
-                  <span style={flowNodeDescStyle}>Sim-to-Real Integration</span>
+                {/* 教育专家Agent专家集群 - 9 cards */}
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--klein-blue)', marginBottom: '0.5rem', paddingBottom: '0.25rem', borderBottom: '2px solid var(--klein-blue)' }}>
+                    🧠 教育专家Agent专家集群
+                  </div>
+                  <div style={archCardGridStyle}>
+                    {[
+                      { icon: '🎯', name: 'Orchestrator Agent', detail: '任务拆解与质量评估' },
+                      { icon: '⚙️', name: '机械设计 Agent', detail: '参数化建模与结构' },
+                      { icon: '🏭', name: '机械制造 Agent', detail: 'DFM校验与BOM生成' },
+                      { icon: '🔌', name: '嵌入式硬件 Agent', detail: '电路图与引脚规划' },
+                      { icon: '💻', name: '嵌入式软件 Agent', detail: '固件驱动与Vibe Coding' },
+                      { icon: '🧠', name: '算法专家 Agent', detail: '运动学与PID调优' },
+                      { icon: '🔗', name: '系统集成 Agent', detail: '协议调优与联调诊断' },
+                      { icon: '📈', name: '产品与市场 Agent', detail: '竞品分析与商业可行' },
+                      { icon: '💰', name: '商业与成本 Agent', detail: '供应链与成本优化' }
+                    ].map((item, i) => (
+                      <a key={i} href={`/courses/mobile-robot/agent-${['orchestrator','mechanical','manufacturing','hardware','firmware','algorithm','system-integration','product-market','budgeting'][i]}.html`} className="arch-card-link">
+                        <div className="arch-card agent">
+                          <span className="arch-card-icon">{item.icon}</span>
+                          <span className="arch-card-title">{item.name}</span>
+                          <span className="arch-card-sub">{item.detail}</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div style={flowConnectorStyle}>↓</div>
-                <div style={flowNodeStyle('eval')}>
-                  <span style={flowNodeTitleStyle}>教育专家 Agent 评估</span>
-                  <span style={flowNodeDescStyle}>Outcome Radar Radar</span>
+
+                {/* 其他基础层 - remaining 6 cards */}
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--klein-blue)', marginBottom: '0.5rem', paddingBottom: '0.25rem', borderBottom: '2px solid var(--klein-blue)' }}>
+                    📦 基础设施与成果
+                  </div>
+                  <div style={archCardGridStyle}>
+                    {[
+                      { title: 'Sophi Omni', sub: '全模态融合引擎', emoji: '🌐' },
+                      { title: '知识库与数据库底座', sub: 'RAG知识管理', emoji: '📚' },
+                      { title: 'Fab实验室', sub: '数字化加工与制造', emoji: '🔧' },
+                      { title: '工程软件与工具链', sub: 'MCP连接与API集成', emoji: '🛠️' },
+                      { title: '系统集成', sub: '软硬件联合调试', emoji: '🔗' },
+                      { title: '输出与成果', sub: '作品集与技术报告', emoji: '🏆' }
+                    ].map((item, i) => (
+                      <div key={i} className="arch-card infra">
+                        <span className="arch-card-icon">{item.emoji}</span>
+                        <span className="arch-card-title">{item.title}</span>
+                        <span className="arch-card-sub">{item.sub}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1130,8 +997,132 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
                   </li>
                 ))}
               </ul>
+              <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <a href="/courses/mobile-robot/Chineseedulist.html" style={{ fontSize: '0.9rem', color: 'var(--klein-blue)', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <ExternalLink size={14} /> 查看教育部白名单赛事详情
+                </a>
+                <a href="/courses/mobile-robot/international-competitions.html" style={{ fontSize: '0.9rem', color: 'var(--klein-blue)', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <ExternalLink size={14} /> 国际机器人与科创赛事概览
+                </a>
+              </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* SECTION: Modular Chassis Evolution (moved to bottom) */}
+        <section style={{ marginBlock: '6rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <h2 style={sectionTitleStyle}>{t.chassisTitle}</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.chassisSubtitle}</p>
+          </div>
+
+          {/* Interactive Chassis Display */}
+          <div className="glassmorphism-card" style={chassisContainerStyle}>
+
+            {/* Left Nav Menu */}
+            <div style={chassisNavStyle}>
+              {t.chassisOptions.map((opt, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedChassis(idx)}
+                  style={selectedChassis === idx ? chassisBtnActiveStyle : chassisBtnStyle}
+                >
+                  <span style={{ fontWeight: '700' }}>{opt.id}</span>
+                  <span style={{ fontSize: '0.8rem', opacity: 0.8, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{opt.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Right Display Panel */}
+            <div style={chassisDetailsPanelStyle(selectedChassis === 4)}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: selectedChassis === 4 ? 'var(--klein-blue)' : 'var(--text-primary)' }}>
+                  {t.chassisOptions[selectedChassis].id}: {t.chassisOptions[selectedChassis].name}
+                </h3>
+                {selectedChassis === 4 && (
+                  <span style={badgeOmniStyle}>Ultimate Core Direction</span>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div>
+                  <h4 style={chassisLabelStyle}>🛠️ 设计细节 (Design Specifications)</h4>
+                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].desc}</p>
+                </div>
+
+                <div>
+                  <h4 style={chassisLabelStyle}>🎮 交互与控制特征 (Control & Interaction)</h4>
+                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].interaction}</p>
+                </div>
+
+                <div>
+                  <h4 style={chassisLabelStyle}>🎯 最佳适用场景 (Best Scenario)</h4>
+                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].scene}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Core recommendation box */}
+          <div className="glassmorphism-card" style={recommendationBoxStyle}>
+            <h4 style={{ fontWeight: '700', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span>{t.recommendationTitle}</span>
+            </h4>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+              {t.recommendationDesc}
+            </p>
+          </div>
+        </section>
+
+        {/* Section: Course Syllabus Outline (moved to bottom) */}
+        <section style={{ marginBlock: '6rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 style={sectionTitleStyle}>{t.outlineTitle}</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.outlineSubtitle}</p>
+          </div>
+
+          <div style={timelineWrapperStyle}>
+            {t.modules.map((mod, idx) => (
+              <div key={idx} className="glassmorphism-card" style={timelineCardStyle}>
+
+                {/* Visual marker */}
+                <div style={numberCircleStyle}>
+                  {mod.num}
+                </div>
+
+                {/* Left content detail */}
+                <div style={moduleIntroStyle}>
+                  <span style={moduleTagStyle}>{mod.tag}</span>
+                  <h3 style={moduleTitleStyle}>{mod.title}</h3>
+                  <p style={moduleDescStyle}>{mod.desc}</p>
+
+                  {/* Action Link to Vitepress */}
+                  <a
+                    href={mod.link}
+                    style={detailsLinkStyle}
+                    className="btn-cta"
+                  >
+                    <span>{t.viewDetails}</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+
+                {/* Right bullet lists */}
+                <div style={modulePointsStyle}>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {mod.points.map((pt, pIdx) => (
+                      <li key={pIdx} style={pointItemStyle}>
+                        <CheckCircle size={16} style={{ color: 'var(--klein-blue)', flexShrink: 0, marginTop: '0.15rem' }} />
+                        <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+              </div>
+            ))}
           </div>
         </section>
 
@@ -1141,6 +1132,123 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       <style>{`
         .zoom-image:hover {
           transform: scale(1.03);
+        }
+        .agent-card-link:hover .agent-card-inner {
+          transform: scale(1.08);
+          border-color: var(--klein-blue);
+          box-shadow: 0 8px 24px rgba(0, 47, 167, 0.2);
+          background-color: rgba(0, 47, 167, 0.06);
+        }
+        .agent-card-link {
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          border-radius: 12px;
+          transition: transform 0.3s ease;
+        }
+        .agent-card-link:hover {
+          transform: translateY(-2px);
+        }
+        .agent-card-inner {
+          padding: 0.75rem 0.5rem;
+          border-radius: 12px;
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 68px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .agent-card-lg-link {
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          border-radius: 16px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .agent-card-lg-link:hover {
+          transform: translateY(-4px);
+        }
+        .agent-card-lg-link:hover .agent-card-lg-inner {
+          transform: scale(1.05);
+          border-color: var(--klein-blue);
+          box-shadow: 0 12px 32px rgba(0, 47, 167, 0.25);
+          background: linear-gradient(135deg, rgba(0, 47, 167, 0.08), rgba(74, 158, 255, 0.04));
+        }
+        .agent-card-lg-inner {
+          padding: 1.25rem 0.75rem;
+          border-radius: 16px;
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+          height: 100%;
+        }
+        .arch-card-link {
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          border-radius: 12px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .arch-card-link:hover {
+          transform: translateY(-3px);
+        }
+        .arch-card-link:hover .arch-card {
+          border-color: var(--klein-blue);
+          box-shadow: 0 8px 24px rgba(0, 47, 167, 0.2);
+          background: linear-gradient(135deg, rgba(0, 47, 167, 0.08), rgba(74, 158, 255, 0.04));
+        }
+        .arch-card {
+          padding: 1rem 0.75rem;
+          border-radius: 12px;
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.35rem;
+          cursor: default;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          height: 100%;
+          min-height: 72px;
+        }
+        .arch-card.agent {
+          cursor: pointer;
+        }
+        .arch-card.infra {
+          background: linear-gradient(135deg, rgba(0,47,167,0.03), rgba(0,0,0,0.01));
+        }
+        .arch-card-icon {
+          font-size: 1.6rem;
+          line-height: 1;
+          display: block;
+        }
+        .arch-card-title {
+          font-weight: 700;
+          font-size: 0.78rem;
+          color: var(--text-primary);
+          line-height: 1.3;
+          display: block;
+        }
+        .arch-card-sub {
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          line-height: 1.3;
+          display: block;
         }
       `}</style>
     </div>
@@ -1619,6 +1727,21 @@ const agentVisualFrameStyle = {
   justifyContent: 'center'
 };
 
+const agentGridContainerStyle = {
+  padding: '2rem',
+  borderRadius: '24px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
+};
+
+const agentGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
+  gap: '1rem',
+  width: '100%'
+};
+
 const agentOrchestrationFrameStyle = {
   padding: '2.5rem',
   borderRadius: '24px',
@@ -1673,27 +1796,22 @@ const flowConnectorStyle = {
   fontWeight: 'bold'
 };
 
+const archCardGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+  gap: '0.75rem',
+  width: '100%'
+};
+
 const parallelNodesWrapperStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: '0.5rem',
+  gap: '0.75rem',
   width: '100%',
-  maxWidth: '450px',
+  maxWidth: '480px',
   marginBlock: '0.5rem'
 };
 
-const parallelNodeStyle = {
-  padding: '0.5rem',
-  borderRadius: '8px',
-  backgroundColor: 'var(--bg-secondary)',
-  border: '1px solid var(--border-color)',
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  height: '56px',
-  boxShadow: '0 2px 6px rgba(0,0,0,0.01)'
-};
 
 const pblRoleMiniCardStyle = {
   padding: '1.25rem',

@@ -8,15 +8,14 @@ layout: false
     <div class="nav-container">
       <!-- Brand -->
       <a class="nav-brand" :href="homeUrl">
-        <img class="logo" src="/logo.png" alt="Sophigo Logo"></img>
-        <span class="brand-title">Sophigo Docs</span>
-        <span class="brand-divider">|</span>
-        <span class="brand-subtitle">AI 基础应用</span>
+        <img class="logo" src="/logo.png" alt="SophiGo Logo"></img>
+        <span class="brand-title">SophiGo</span>
       </a>
       <!-- Nav Links -->
       <div class="nav-menu">
-        <a class="nav-menu-link" :href="homeUrl">首页 <span class="ext-icon">↗</span></a>
+        <a class="nav-menu-link" href="/docs/">首页</a>
         <a class="nav-menu-link" href="/docs/courses/fab-course/">Fab 课程</a>
+        <a class="nav-menu-link active" href="/docs/courses/ai-basics/">AI 基础应用</a>
         <a class="nav-menu-link" href="/docs/courses/mobile-robot/">移动机器人</a>
         <a class="nav-menu-link" href="/docs/courses/cmf/">CMF 应用</a>
         <a class="nav-menu-link" href="/docs/news/index.html">探讨</a>
@@ -38,7 +37,7 @@ layout: false
   <section class="hero-section">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-  <h1 class="hero-title">AI 技术应用实战赋能培训班</h1>
+  <h1 class="hero-title">AI基础应用创造营</h1>
   </div>
   </section>
 
@@ -336,7 +335,7 @@ onMounted(() => {
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
 }
 
 .brand-divider {
@@ -1025,5 +1024,240 @@ onMounted(() => {
 .ip-note {
   font-style: italic;
   line-height: 1.4;
+}
+
+/* Course page polish */
+.aibasic-brochure {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.12), transparent 34rem),
+    linear-gradient(180deg, #07101d 0%, #080d16 44%, #070b12 100%);
+}
+
+.nav-bar {
+  height: 64px;
+  background: rgba(7, 13, 24, 0.82);
+  border-bottom-color: rgba(148, 163, 184, 0.12);
+}
+
+.nav-container,
+.brochure-container {
+  max-width: 1120px;
+}
+
+.nav-brand .logo {
+  width: 26px;
+  height: 26px;
+}
+
+.brand-title {
+  font-size: 16px;
+}
+
+.hero-section {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  padding: 5rem 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(7, 13, 24, 0.34), rgba(7, 13, 24, 0.86)),
+    linear-gradient(90deg, rgba(7, 13, 24, 0.72), rgba(7, 13, 24, 0.2) 45%, rgba(7, 13, 24, 0.72)),
+    url('/unnc_campus.jpg') no-repeat center 42%;
+  background-size: cover;
+}
+
+.hero-overlay {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(59, 130, 246, 0.26), transparent 28rem),
+    linear-gradient(180deg, transparent 0%, rgba(7, 13, 24, 0.38) 100%);
+}
+
+.hero-title {
+  font-size: 3.25rem;
+  letter-spacing: 0;
+  text-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+.brochure-container {
+  padding: 2.75rem 1.75rem 4rem;
+}
+
+#course-plan {
+  padding-top: 0 !important;
+}
+
+.section-container {
+  padding: 3.25rem 0;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.9rem;
+}
+
+.objective-card,
+.timeline-content,
+.teacher-card {
+  background: rgba(15, 23, 42, 0.76);
+  border-color: rgba(148, 163, 184, 0.12);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+}
+
+.objective-card {
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.objective-card p {
+  font-size: 0.95rem;
+  color: #dbeafe;
+}
+
+.schedule-tabs-wrapper {
+  gap: 1rem;
+}
+
+.schedule-tabs {
+  gap: 1rem;
+}
+
+.day-tab-btn {
+  min-height: 82px;
+  padding: 1rem 1.15rem;
+  border-color: rgba(148, 163, 184, 0.12);
+  background: rgba(15, 23, 42, 0.66);
+}
+
+.day-tab-btn.active {
+  background: rgba(37, 99, 235, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.28);
+}
+
+.timeline-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding-left: 0;
+  margin: 0;
+  border-left: none;
+}
+
+.timeline-item::before {
+  display: none;
+}
+
+.time-tag {
+  position: static;
+  transform: none;
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+}
+
+.timeline-content {
+  height: 100%;
+  padding: 1.25rem 1.4rem;
+}
+
+.timeline-content h4 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-content li {
+  color: #b6c3d6;
+}
+
+.teachers-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.teacher-card {
+  padding: 1.25rem;
+  min-height: 220px;
+}
+
+.teacher-bio {
+  color: #b6c3d6;
+}
+
+.unnc-image-wrapper {
+  border-radius: 14px !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28) !important;
+}
+
+.unnc-image-wrapper img {
+  height: min(48vw, 520px) !important;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+@media (max-width: 1180px) {
+  .teachers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .nav-container {
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 0.9rem;
+    margin-left: auto;
+  }
+
+  .nav-menu-link {
+    white-space: nowrap;
+  }
+
+  .menu-divider,
+  .theme-switch-btn,
+  .github-link {
+    display: none;
+  }
+
+  .nav-container,
+  .brochure-container {
+    padding-inline: 1.1rem;
+  }
+
+  .hero-section {
+    min-height: 260px;
+    padding: 4rem 1.1rem;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;
+  }
+
+  .section-container {
+    padding: 2.4rem 0;
+  }
+
+  .schedule-tabs,
+  .timeline-container,
+  .teachers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .time-tag {
+    margin-bottom: 0.55rem;
+  }
+
+  .unnc-image-wrapper img {
+    height: 260px !important;
+  }
 }
 </style>

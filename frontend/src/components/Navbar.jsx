@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Moon, Menu, X, ChevronDown, User, LogOut, FileText, Globe } from 'lucide-react';
+import { Sun, Moon, Menu, X, ChevronDown, User, LogOut, FileText, Settings, LayoutDashboard } from 'lucide-react';
 
-export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, onToggleTheme, lang = 'zh', onToggleLang }) {
+export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, onToggleTheme, lang = 'zh', onToggleLang, onNavigate }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCoursesDropdownOpen, setIsCoursesDropdownOpen] = useState(false);
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [username, setUsername] = useState('User');
 
-  // Refs for delayed close timers (prevents flicker when moving to dropdown)
   const coursesCloseTimer = useRef(null);
   const toolsCloseTimer = useRef(null);
 
@@ -18,38 +17,33 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
   const closeTools = () => { toolsCloseTimer.current = setTimeout(() => setIsToolsDropdownOpen(false), 150); };
 
   useEffect(() => {
-    if (userToken) {
-      // Decode JWT roughly to show user's username
-      try {
-        const payload = JSON.parse(atob(userToken.split('.')[1]));
-        setUsername(payload.username || 'User_01');
-      } catch (e) {
-        setUsername('User_01');
-      }
+    if (userSession?.user) {
+      const metadata = userSession.user.user_metadata;
+      setUsername(metadata?.nickname || metadata?.username || userSession.user.email.split('@')[0]);
     }
-  }, [userToken]);
+  }, [userSession]);
 
   const t = {
     zh: {
       home: '首页',
       courses: '课程',
       fabCourse: 'Fab课程',
-      aiBasics: 'AI应用基础',
+      aiBasics: 'AI 基础应用',
       mobileRobot: 'AI移动机器人',
       cmf: 'CMF应用',
       tools: '工具',
-      sophicar: '参数化设计车辆',
-      threejs: 'threejs生成器',
-      stlQuote: 'stl 报价',
+      sophicar: 'Sophicar交通工具生成器',
+      threejs: '3D生成器',
+      stlQuote: 'stl分析仪',
       mods: 'Mods',
-      videoGen: '视频生成',
-      matting: '抠图',
+      matting: '抠图工具',
       news: '资讯',
-      aboutUs: '关于我们',
-      register: '注册',
+      aboutUs: '加入我们',
+      register: '注册 / 登录',
       enterDocs: '进入文档系统',
       logout: '退出登录',
-      profile: '个人中心'
+      profile: '个人中心',
+      workbench: '工作台'
     },
     en: {
       home: 'Home',
@@ -59,39 +53,39 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
       mobileRobot: 'AI Mobile Robot',
       cmf: 'CMF Application',
       tools: 'Tools',
-      sophicar: 'Parametric Vehicle Design',
+      sophicar: 'Sophicar Vehicle Generator',
       threejs: 'Three.js Generator',
-      stlQuote: 'STL Quote',
+      stlQuote: 'STL Analyzer',
       mods: 'Mods',
-      videoGen: 'Video Gen',
-      matting: 'Matting',
+      matting: 'Matting Tool',
       news: 'News',
-      aboutUs: 'About Us',
-      register: 'Register',
+      aboutUs: 'Join Us',
+      register: 'Register / Login',
       enterDocs: 'Docs System',
       logout: 'Logout',
-      profile: 'Profile'
+      profile: 'Profile',
+      workbench: 'Workbench'
     }
   }[lang] || {
     home: '首页',
     courses: '课程',
     fabCourse: 'Fab课程',
-    aiBasics: 'AI应用基础',
+    aiBasics: 'AI 基础应用',
     mobileRobot: 'AI移动机器人',
     cmf: 'CMF应用',
     tools: '工具',
-    sophicar: '参数化设计车辆',
-    threejs: 'threejs生成器',
-    stlQuote: 'stl 报价',
+    sophicar: 'Sophicar交通工具生成器',
+    threejs: '3D生成器',
+    stlQuote: 'stl分析仪',
     mods: 'Mods',
-    videoGen: '视频生成',
-    matting: '抠图',
+    matting: '抠图工具',
     news: '资讯',
-    aboutUs: '关于我们',
-    register: '注册',
+    aboutUs: '加入我们',
+    register: '注册 / 登录',
     enterDocs: '进入文档系统',
     logout: '退出登录',
-    profile: '个人中心'
+    profile: '个人中心',
+    workbench: '工作台'
   };
 
   return (
@@ -107,22 +101,22 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '64px'
+        height: '72px'
       }}>
-        {/* Brand Logo */}
-        <a href="/" style={{
-          fontSize: '1.25rem',
+        {/* Brand Logo - 1.5x larger font & logo size (Item 4) */}
+        <a href="#/" onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }} style={{
+          fontSize: '1.875rem',
           fontWeight: 700,
           textDecoration: 'none',
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.5rem'
+          gap: '0.75rem'
         }}>
           <img src="/logo.png" alt="Sophigo Logo" style={{
-            width: '24px',
-            height: '24px',
+            width: '36px',
+            height: '36px',
             objectFit: 'contain'
           }} />
           Sophigo
@@ -130,12 +124,11 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
 
         {/* Desktop Nav Items */}
         <div style={{
-          display: 'none',
           display: 'flex',
           alignItems: 'center',
           gap: '2.5rem'
         }} className="desktop-nav">
-          <a href="/" style={navLinkStyle}>{t.home}</a>
+          <a href="#/" onClick={() => onNavigate('home')} style={navLinkStyle}>{t.home}</a>
 
           {/* Courses Dropdown */}
           <div 
@@ -184,15 +177,15 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 zIndex: 110,
                 animation: 'fadeIn 0.2s ease'
               }}>
-                <a href="/docs/courses/fab-course/" style={dropdownItemStyle}>{t.fabCourse}</a>
-                <a href="/docs/courses/ai-basics/" style={dropdownItemStyle}>{t.aiBasics}</a>
-                <a href="#/courses/mobile-robot" style={dropdownItemStyle}>{t.mobileRobot}</a>
-                <a href="/docs/courses/cmf/" style={dropdownItemStyle}>{t.cmf}</a>
+                <a href="#/courses/fab-course" onClick={() => { onNavigate('fab-course'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.fabCourse}</a>
+                <a href="#/courses/ai-basics" onClick={() => { onNavigate('ai-basics'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.aiBasics}</a>
+                <a href="#/courses/mobile-robot" onClick={() => { onNavigate('mobile-robot-course'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.mobileRobot}</a>
+                <a href="#/courses/cmf" onClick={() => { onNavigate('cmf'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.cmf}</a>
               </div>
             )}
           </div>
 
-          {/* Tools Dropdown */}
+          {/* Tools Dropdown - Modified tool items (Item 9) */}
           <div 
             style={{ position: 'relative' }}
             onMouseEnter={openTools}
@@ -230,7 +223,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 position: 'absolute',
                 top: '100%',
                 left: '0',
-                width: '200px',
+                width: '240px',
                 borderRadius: '12px',
                 padding: '0.5rem 0',
                 marginTop: '4px',
@@ -240,18 +233,16 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                 animation: 'fadeIn 0.2s ease'
               }}>
                 <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.sophicar}</a>
-                <a href="/docs/tools/threejs-generator/" style={dropdownItemStyle}>{t.threejs}</a>
-                <a href="/docs/tools/stl-quote/stlquote.html" style={dropdownItemStyle}>{t.stlQuote}</a>
+                <a href="/docs/tools/threejs-generator/app.html" style={dropdownItemStyle}>{t.threejs}</a>
                 <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.mods}</a>
-                <a href="/docs/tools/video-generation/" style={dropdownItemStyle}>{t.videoGen}</a>
-                <a href="/docs/tools/matting/" style={dropdownItemStyle}>{t.matting}</a>
               </div>
             )}
           </div>
 
           <a href="/docs/news/index.html" style={navLinkStyle}>{t.news}</a>
 
-          <a href="#about" style={navLinkStyle}>{t.aboutUs}</a>
+          {/* Join Us Link (Item 13) */}
+          <a href="#/join-us" onClick={() => onNavigate('join-us')} style={navLinkStyle}>{t.aboutUs}</a>
         </div>
 
         {/* Right Action controls */}
@@ -283,7 +274,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           </button>
 
           {/* User Sign In / Profile dropdown */}
-          {userToken ? (
+          {userSession ? (
             <div 
               style={{ position: 'relative' }}
               onMouseEnter={() => setIsProfileDropdownOpen(true)}
@@ -335,6 +326,32 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
                   border: '1px solid var(--border-color)',
                   zIndex: 110
                 }}>
+                  {/* Redirects to Dashboard (Item 2) */}
+                  <button 
+                    onClick={() => { onNavigate('profile'); setIsProfileDropdownOpen(false); }}
+                    style={{
+                      ...dropdownItemStyle,
+                      width: '100%',
+                      background: 'none',
+                      border: 'none',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                  >
+                    <Settings size={14} />
+                    {t.profile}
+                  </button>
+                  <a
+                    href="/docs/news/sophigo/workspace.html"
+                    onClick={() => setIsProfileDropdownOpen(false)}
+                    style={{...dropdownItemStyle, display: 'flex', alignItems: 'center', gap: '0.5rem'}}
+                  >
+                    <LayoutDashboard size={14} />
+                    {t.workbench}
+                  </a>
                   <a href="/docs/index.html" style={{...dropdownItemStyle, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
                     <FileText size={14} />
                     {t.enterDocs}
@@ -407,7 +424,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
               border: 'none',
               cursor: 'pointer',
               color: 'var(--text-primary)',
-              display: 'flex',
+              display: 'none',
               padding: '0.25rem'
             }}
             className="mobile-menu-btn"
@@ -421,10 +438,10 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
       {isMobileMenuOpen && (
         <div className="glassmorphism" style={{
           position: 'fixed',
-          top: '64px',
+          top: '72px',
           left: 0,
           width: '100%',
-          height: 'calc(100vh - 64px)',
+          height: 'calc(100vh - 72px)',
           padding: '2rem',
           display: 'flex',
           flexDirection: 'column',
@@ -434,16 +451,16 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
           overflowY: 'auto',
           animation: 'slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
-          <a href="/" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.home}</a>
+          <a href="#/" onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }} style={mobileNavLinkStyle}>{t.home}</a>
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
           
           <div>
             <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.courses}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
-              <a href="/docs/courses/fab-course/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.fabCourse}</a>
-              <a href="/docs/courses/ai-basics/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.aiBasics}</a>
-              <a href="#/courses/mobile-robot" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mobileRobot}</a>
-              <a href="/docs/courses/cmf/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.cmf}</a>
+              <a href="#/courses/fab-course" onClick={() => { setIsMobileMenuOpen(false); onNavigate('fab-course'); }} style={mobileSubNavLinkStyle}>{t.fabCourse}</a>
+              <a href="#/courses/ai-basics" onClick={() => { setIsMobileMenuOpen(false); onNavigate('ai-basics'); }} style={mobileSubNavLinkStyle}>{t.aiBasics}</a>
+              <a href="#/courses/mobile-robot" onClick={() => { onNavigate('mobile-robot-course'); setIsMobileMenuOpen(false); }} style={mobileSubNavLinkStyle}>{t.mobileRobot}</a>
+              <a href="#/courses/cmf" onClick={() => { setIsMobileMenuOpen(false); onNavigate('cmf'); }} style={mobileSubNavLinkStyle}>{t.cmf}</a>
             </div>
           </div>
           
@@ -453,11 +470,8 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
             <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.tools}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
               <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.sophicar}</a>
-              <a href="/docs/tools/threejs-generator/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
-              <a href="/docs/tools/stl-quote/stlquote.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.stlQuote}</a>
+              <a href="/docs/tools/threejs-generator/app.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
               <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>
-              <a href="/docs/tools/video-generation/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.videoGen}</a>
-              <a href="/docs/tools/matting/" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.matting}</a>
             </div>
           </div>
 
@@ -467,7 +481,7 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
           
-          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.aboutUs}</a>
+          <a href="#/join-us" onClick={() => { onNavigate('join-us'); setIsMobileMenuOpen(false); }} style={mobileNavLinkStyle}>{t.aboutUs}</a>
         </div>
       )}
 
@@ -492,6 +506,9 @@ export default function Navbar({ onOpenAuthModal, userToken, onLogout, theme, on
         @media (max-width: 768px) {
           .desktop-nav {
             display: none !important;
+          }
+          .mobile-menu-btn {
+            display: flex !important;
           }
         }
       `}</style>
