@@ -22,102 +22,333 @@ const SVG_ICONS = {
 };
 
 // ── Data ──
-
 const LAB_ITEMS = [
   {
-    title: 'Lab Rules & Guidelines',
-    desc: 'Operating standards, attendance, and space maintenance procedures.',
+    title: '实验室安全与工作规范',
+    desc: '实验室运行规范、考勤要求及空间日常维护流程。',
     link: '/docs/courses/fab-course/doc/0manage/labmanage.html',
     icon: SVG_ICONS.folder,
   },
   {
-    title: 'Fab Lab Network',
-    desc: 'Global Fab Lab vision, MIT CBA origin, core machine inventory, and FabAcademy program.',
+    title: '全球 Fab Lab 网络介绍',
+    desc: '全球 Fab Lab 愿景、MIT CBA 起源、核心机器清单与 FabAcademy 分布式项目。',
     link: '/docs/courses/fab-course/doc/Fab/FAB.html',
     icon: SVG_ICONS.globe,
   },
   {
-    title: 'Access & Safety',
-    desc: 'Mandatory safety protocols for high-power equipment, CNC, and hazardous materials.',
+    title: '安全准入与设备规范',
+    desc: '大功率设备、CNC 铣床及危险材料操作的强制性安全准则。',
     link: '/docs/courses/fab-course/doc/0manage/access_safety.html',
     icon: SVG_ICONS.shield,
   },
   {
-    title: 'Material & Equipment',
-    desc: 'Lab materials (acrylic, wood, resin) and equipment list with booking procedures.',
+    title: '材料选型与设备预约',
+    desc: '实验室常规耗材（亚克力、木板、树脂等）及机器设备预约规范流程。',
     link: '/docs/courses/fab-course/doc/0manage/material.html',
     icon: SVG_ICONS.tool,
   },
 ];
 
 const TUTORIALS = [
-  { id: 1, title: 'Project Management', icon: SVG_ICONS.folder, desc: 'Git, Markdown, static site deployment with VitePress/GitHub Pages, and AIGC-assisted documentation workflows.',
+  { id: 1, title: '项目管理与文档工作流', icon: SVG_ICONS.folder, desc: 'Git 协同控制、Markdown 基础、静态网站部署（VitePress/GitHub Pages）及 AIGC 文档工作流。',
     docsPath: '/docs/courses/fab-course/doc/1projectmanage/Assessment1.html' },
-  { id: 2, title: 'CAD Design', icon: SVG_ICONS.box, desc: 'Parametric 3D modeling in Fusion 360 & SolidWorks. Sheet metal, generative design.',
+  { id: 2, title: 'CAD 参数化设计', icon: SVG_ICONS.box, desc: 'Fusion 360 与 SolidWorks 参数化三维建模、装配体、钣金设计及生成式设计基础。',
     docsPath: '/docs/courses/fab-course/doc/2cad/Assessment.html' },
-  { id: 3, title: '3D Printing', icon: SVG_ICONS.printer, desc: 'FDM, SLA, HP-MJF processes. Slicing, design constraints, and post-processing.',
+  { id: 3, title: '3D 打印工艺与加工', icon: SVG_ICONS.printer, desc: 'FDM、SLA 与 HP-MJF 切片设置、模型排版、支撑设计约束及表面后处理。',
     docsPath: '/docs/courses/fab-course/doc/3_3dprinter/assessment.html' },
-  { id: 4, title: 'Electronic Design', icon: SVG_ICONS.cpu, desc: 'Component fundamentals, Ohm/Kirchhoff laws, schematic capture with KiCad or EasyEDA.',
+  { id: 4, title: '电子电路开发与仿真', icon: SVG_ICONS.cpu, desc: '常用元器件选型、面包板调试、欧姆/基尔霍夫定律，KiCad 原理图绘制与 PCB 布局。',
     docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.html' },
-  { id: 5, title: 'Arduino Application', icon: SVG_ICONS.radio, desc: 'Embedded C++ on open hardware. Sensor input, actuator control, physical computing.',
+  { id: 5, title: 'Arduino 嵌入式开发', icon: SVG_ICONS.radio, desc: '基于开源硬件的 C++ 底层编程、GPIO 中断、模拟/数字传感器输入与舵机/电机执行控制。',
     docsPath: '/docs/courses/fab-course/doc/5arduino/assessment.html' },
-  { id: 6, title: 'Laser Cutting', icon: SVG_ICONS.crop, desc: 'Vector files, press-fit joints, engraving and cutting on acrylic, wood, and cardstock.',
+  { id: 6, title: '激光切割结构设计', icon: SVG_ICONS.crop, desc: '矢量文件排版、插接公差设计，亚克力、木板及卡纸的激光雕刻与高速切割。',
     docsPath: '/docs/courses/fab-course/doc/6laser_cutter/Assessment.html' },
-  { id: 7, title: 'PCB Manufacture', icon: SVG_ICONS.zap, desc: 'SMT assembly, reflow soldering, manual iron and hot-air rework and inspection.',
+  { id: 7, title: 'PCB 焊接装配与返修', icon: SVG_ICONS.zap, desc: 'SMT 表面贴片装配、回流焊接，手工烙铁与热风枪对密脚芯片的拆焊返修与短路质检。',
     docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.html' },
-  { id: 8, title: 'CNC Manufacture', icon: SVG_ICONS.hardDrive, desc: 'G-code programming, toolpath planning, work offsets, and 3-axis subtractive milling.',
+  { id: 8, title: 'CNC 减材制造加工', icon: SVG_ICONS.hardDrive, desc: 'G代码原理、CAM 刀路规划（平移/挖槽/轮廓）、对刀与坐标原点设定，三轴机床操作。',
     docsPath: '/docs/courses/fab-course/doc/8CNC_manufacture/Assessment.html' },
-  { id: 9, title: 'Mold & Casting', icon: SVG_ICONS.layers, desc: 'Silicone mold making from 3D-printed masters, resin and liquid casting.',
+  { id: 9, title: '硅胶模具与液体浇铸', icon: SVG_ICONS.layers, desc: '基于 3D 打印阳模翻制硅橡胶阴模，AB 双组份树脂、石膏及金属材料液体翻砂浇铸。',
     docsPath: '/docs/courses/fab-course/doc/9MOLD/assessment.html' },
-  { id: 10, title: 'IoT & Interaction', icon: SVG_ICONS.wifi, desc: 'TCP/IP, MQTT, HTTP. ESP8266 to cloud platforms for sensor data and remote control.',
+  { id: 10, title: '物联网无线通信', icon: SVG_ICONS.wifi, desc: 'TCP/IP、MQTT、HTTP 协议，ESP8266 接入本地 Wi-Fi 并上传传感器数据至物联网平台。',
     docsPath: '/docs/courses/fab-course/doc/10IOT/Assessment.html' },
-  { id: 11, title: 'Interface Application Programming', icon: SVG_ICONS.terminal, desc: 'Processing/Node.js UIs, serial-port data visualization, and interactive installations.',
+  { id: 11, title: '交互界面与控制应用', icon: SVG_ICONS.terminal, desc: '使用 Processing 或 Node.js 编写上位机，实现串口数据可视化监控及跨网络交互面板。',
     docsPath: '/docs/courses/fab-course/doc/11Interface-application-programming/Assessment.html' },
-  { id: 12, title: 'Material & Tool', icon: SVG_ICONS.package, desc: 'Standard parts (fasteners, rails, couplings), sourcing from Misumi, Digi-Key, Mouser.',
+  { id: 12, title: '常用标准件与五金工具', icon: SVG_ICONS.package, desc: '常用五金件规格（螺丝/轴承/联轴器/铝型材），米思米与 Digi-Key 标准件检索采购。',
     docsPath: '/docs/courses/fab-course/doc/12material&tool/assessment.html' },
-  { id: 13, title: 'Business Plan Basics', icon: SVG_ICONS.briefcase, desc: 'Market validation, product-user fit, cost estimation, and startup pitching.',
+  { id: 13, title: '精益商业计划书基础', icon: SVG_ICONS.briefcase, desc: '产品-市场匹配度验证、多级物料采购成本核算、竞品分析及产品技术路线汇报。',
     docsPath: '/docs/courses/fab-course/doc/13BP/assessment.html' },
-  { id: 14, title: 'AI Vehicle', icon: SVG_ICONS.bot, desc: 'Wheeled chassis kinematics, MCU firmware, and ROS2 with AI perception integration.',
+  { id: 14, title: 'AI 智能载具集成开发', icon: SVG_ICONS.bot, desc: '轮式底盘运动学正逆解建模、双轮差速/麦轮驱动固件，以及 ROS2 导航与 VLM 视觉算法集成。',
     docsPath: '/docs/courses/fab-course/doc/14AI&vehicle/assessment.html' },
 ];
 
-const COHORT_GROUPS = [
-  { id: 'nexmaker-1', institution: 'NexMaker Academy', year: 'Session 1', name: 'NexMaker Academy — Session 1',
-    teams: [{ name: 'Academy S1', url: '/docs/courses/fab-course/class/fab-01.html' }] },
-  { id: 'nexmaker-2', institution: 'NexMaker Academy', year: 'Session 2', name: 'NexMaker Academy — Session 2',
-    teams: [{ name: 'Academy S2', url: '/docs/courses/fab-course/class/fab-02.html' }] },
-  { id: 'unnc', institution: 'UNNC FabLab', year: '2023–2025', name: 'Fab Academy UNNC',
-    teams: [
-      { name: 'FabAcademy 2025', url: '/docs/courses/fab-course/class/fab-2025-UNNC.html' },
-      { name: 'UNNC 2025-2', url: '/docs/courses/fab-course/class/fab-2025-UNNC-2.html' },
-      { name: 'FabAcademy 2023', url: '/docs/courses/fab-course/doc/Fab/fab2023.html' },
-    ] },
-  { id: 'zju-2023', institution: 'ZJU Design Engineering', year: '2023', name: 'DE / DM 2023',
-    teams: [
-      { name: 'DE 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-de.html' },
-      { name: 'DM 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-dm.html' },
-      { name: 'Mini 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-mini.html' },
-    ] },
-  { id: 'zju-2022', institution: 'ZJU Design Engineering', year: '2022', name: 'DE / DM 2022',
-    teams: [
-      { name: 'DE 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-de.html' },
-      { name: 'DM 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-dm.html' },
-      { name: 'Mini 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-mini.html' },
-    ] },
-  { id: 'zju-2020-21', institution: 'ZJU Design Engineering', year: '2020–2021', name: 'DE / DM 2020–2021',
-    teams: [
-      { name: 'DE 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-de.html' },
-      { name: 'DM 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-dm.html' },
-      { name: 'DE 2020', url: '/docs/courses/fab-course/class/fab-2020-zju-de.html' },
-    ] },
-  { id: 'zwu', institution: 'ZWU Interactive System', year: '2024–2026', name: 'Interactive System Program',
-    teams: [
-      { name: 'IS 2026-A1', url: '/docs/courses/fab-course/class/FAB-2026-ZWU-01.html' },
-      { name: 'IS 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem.html' },
-      { name: 'IS 2+2 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2.html' },
-    ] },
+const SCHOOL_GROUPS = [
+  {
+    school: 'ZJU',
+    schoolName: '浙江大学工业设计 (ZJU)',
+    cohorts: [
+      { year: '2023年', name: '浙大 DE / DM 2023级', teams: [
+        { name: 'DE 2023团队', url: '/docs/courses/fab-course/class/fab-2023-zju-de.html' },
+        { name: 'DM 2023团队', url: '/docs/courses/fab-course/class/fab-2023-zju-dm.html' },
+        { name: 'Mini 2023团队', url: '/docs/courses/fab-course/class/fab-2023-zju-mini.html' }
+      ]},
+      { year: '2022年', name: '浙大 DE / DM 2022级', teams: [
+        { name: 'DE 2022团队', url: '/docs/courses/fab-course/class/fab-2022-zju-de.html' },
+        { name: 'DM 2022团队', url: '/docs/courses/fab-course/class/fab-2022-zju-dm.html' },
+        { name: 'Mini 2022团队', url: '/docs/courses/fab-course/class/fab-2022-zju-mini.html' }
+      ]},
+      { year: '2020–2021年', name: '浙大 DE / DM 2020-2021级', teams: [
+        { name: 'DE 2021团队', url: '/docs/courses/fab-course/class/fab-2021-zju-de.html' },
+        { name: 'DM 2021团队', url: '/docs/courses/fab-course/class/fab-2021-zju-dm.html' },
+        { name: 'DE 2020团队', url: '/docs/courses/fab-course/class/fab-2020-zju-de.html' }
+      ]}
+    ]
+  },
+  {
+    school: 'UNNC-FABLAB',
+    schoolName: '宁波诺丁汉大学 FabLab (UNNC-FABLAB)',
+    cohorts: [
+      { year: '2025级', name: '宁诺 Fab Academy 2025级', teams: [
+        { name: '宁诺班 2025', url: '/docs/courses/fab-course/class/fab-2025-UNNC.html' },
+        { name: '宁诺班 2025-2', url: '/docs/courses/fab-course/class/fab-2025-UNNC-2.html' }
+      ]},
+      { year: '2023级', name: '宁诺 Fab Academy 2023级', teams: [
+        { name: '宁诺班 2023', url: '/docs/courses/fab-course/doc/Fab/fab2023.html' }
+      ]}
+    ]
+  },
+  {
+    school: 'ZWU',
+    schoolName: '浙江万里学院 (ZWU)',
+    cohorts: [
+      { year: '2024–2026年', name: '万里学院交互系统班', teams: [
+        { name: '交互系统 2026-A1', url: '/docs/courses/fab-course/class/FAB-2026-ZWU-01.html' },
+        { name: '交互系统 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem.html' },
+        { name: '交互系统 2+2 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2.html' }
+      ]}
+    ]
+  },
+  {
+    school: 'NexMaker',
+    schoolName: 'NexMaker 创客学院',
+    cohorts: [
+      { year: '第二期', name: 'NexMaker 创客营 — 第二期', teams: [
+        { name: '创客营 S2', url: '/docs/courses/fab-course/class/fab-02.html' }
+      ]},
+      { year: '第一期', name: 'NexMaker 创客营 — 第一期', teams: [
+        { name: '创客营 S1', url: '/docs/courses/fab-course/class/fab-01.html' }
+      ]}
+    ]
+  }
 ];
 
+const CASE_ITEMS = [
+  {
+    id: 1,
+    isVideo: true,
+    src: '/docs/courses/fab-course/case/assets/D2CEF083-C025-4750-A304-88C0129457AC/assets/media3.mov-0.0000-92.3667.mov',
+    poster: '/docs/courses/fab-course/case/assets/D2CEF083-C025-4750-A304-88C0129457AC/thumbnail.jpeg',
+    titleZh: '物理总装与线束整理',
+    titleEn: '物理总装与线束整理',
+    descZh: '智能车模物理样机总装，精细理线工艺与接线布局，打通基础驱动与板载传感器的通信联调。',
+    descEn: '智能车模物理样机总装，精细理线工艺与接线布局，打通基础驱动与板载传感器的通信联调。'
+  },
+  {
+    id: 2,
+    isVideo: true,
+    src: '/docs/courses/fab-course/case/assets/D9A7D241-51E9-4A42-9731-C049D97FD256/assets/media10.mp4-0.0000-88.8500.mp4',
+    poster: '/docs/courses/fab-course/case/assets/D9A7D241-51E9-4A42-9731-C049D97FD256/thumbnail.jpeg',
+    titleZh: '参数化设计与受力仿真',
+    titleEn: '参数化设计与受力仿真',
+    descZh: '在 Fusion 360 中进行多维底盘滑块参数化设计，并通过网格划分与应力拓扑分析校正机械强度。',
+    descEn: '在 Fusion 360 中进行多维底盘滑块参数化设计，并通过网格划分与应力拓扑分析校正机械强度。'
+  },
+  {
+    id: 3,
+    isVideo: true,
+    src: '/docs/courses/fab-course/case/assets/72C808D0-5B37-40C6-A9D2-F3EF3AD36D1D/assets/media11.mp4-0.0000-92.8670.mp4',
+    poster: '/docs/courses/fab-course/case/assets/72C808D0-5B37-40C6-A9D2-F3EF3AD36D1D/thumbnail.jpeg',
+    titleZh: '全向麦轮动力学与虚实联动',
+    titleEn: '全向麦轮动力学与虚实联动',
+    descZh: '全向麦克纳姆轮运动学矩阵正逆解计算，配合 3D WebGL 在线仿真器进行控制指令的闭环同步调试。',
+    descEn: '全向麦克纳姆轮运动学矩阵正逆解计算，配合 3D WebGL 在线仿真器进行控制指令的闭环同步调试。'
+  },
+  {
+    id: 4,
+    isVideo: false,
+    src: '/docs/courses/fab-course/case/assets/24DE65CA-4AEF-4EA1-AD31-6DFA18CFA5A1/assets/slide4_highres.png',
+    titleZh: '数字化制造与工艺定型',
+    titleEn: '数字化制造与工艺定型',
+    descZh: '综合运用 3D 打印、激光切割等多维度制造工艺，集成启动按键、超声波模块与蓝白黑三色 CMF 面板。',
+    descEn: '综合运用 3D 打印、激光切割等多维度制造工艺，集成启动按键、超声波模块与蓝白黑三色 CMF 面板。'
+  }
+];
+
+function ShowcaseCard({ item, lang }) {
+  const videoRef = React.useRef(null);
+  const containerRef = React.useRef(null);
+  const [isMuted, setIsMuted] = React.useState(true);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!item.isVideo) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRef.current?.play().then(() => {
+            setIsPlaying(true);
+          }).catch(() => {
+            // Autoplay might be blocked by browser policies
+          });
+        } else {
+          videoRef.current?.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [item.isVideo]);
+
+  const handleMuteToggle = (e) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      const newMuted = !videoRef.current.muted;
+      videoRef.current.muted = newMuted;
+      setIsMuted(newMuted);
+    }
+  };
+
+  const handleDoubleClick = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="fc-case-card"
+      style={{
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border-color)',
+        borderRadius: '16px',
+        padding: '1.25rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+        overflow: 'hidden',
+        position: 'relative',
+        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        minHeight: '500px'
+      }}
+      onDoubleClick={handleDoubleClick}
+    >
+      <div style={{ position: 'relative', width: '100%', height: '360px', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#000', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {item.isVideo ? (
+          <>
+            <video
+              ref={videoRef}
+              src={item.src}
+              poster={item.poster}
+              muted={isMuted}
+              loop
+              playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', cursor: 'pointer' }}
+            />
+            {/* Control HUD overlay */}
+            <div style={{ position: 'absolute', bottom: '8px', right: '8px', zIndex: 10, display: 'flex', gap: '0.5rem' }}>
+              <button
+                onClick={handleMuteToggle}
+                style={{
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  color: '#fff',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  backdropFilter: 'blur(4px)',
+                  transition: 'background 0.2s',
+                  outline: 'none'
+                }}
+                title={isMuted ? (lang === 'zh' ? '解除静音' : 'Unmute') : (lang === 'zh' ? '静音' : 'Mute')}
+              >
+                {isMuted ? '🔇' : '🔊'}
+              </button>
+              <button
+                onClick={handleDoubleClick}
+                style={{
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  color: '#fff',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem',
+                  backdropFilter: 'blur(4px)',
+                  transition: 'background 0.2s',
+                  outline: 'none'
+                }}
+                title={lang === 'zh' ? '双击全屏' : 'Double Click Fullscreen'}
+              >
+                ⛶
+              </button>
+            </div>
+            {/* Play indicator */}
+            <div style={{ position: 'absolute', top: '8px', left: '8px', background: 'rgba(0,0,0,0.5)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.65rem', color: '#fff', pointerEvents: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span className="fc-pulse-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4cd964', display: 'inline-block' }}></span>
+              {isPlaying ? (lang === 'zh' ? '自动播放中' : 'Auto Playing') : (lang === 'zh' ? '已暂停' : 'Paused')}
+            </div>
+          </>
+        ) : (
+          <img
+            src={item.src}
+            alt={item.titleZh}
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+          />
+        )}
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <h4 style={{ fontSize: '0.85rem', fontWeight: 600, margin: '0 0 0.35rem', color: 'var(--text-primary)' }}>
+          {lang === 'zh' ? item.titleZh : item.titleEn}
+        </h4>
+        <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>
+          {lang === 'zh' ? item.descZh : item.descEn}
+        </p>
+        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.03)' }}>
+          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
+            {item.isVideo ? (lang === 'zh' ? '💡 双击视频最大化播放' : '💡 Double click video to maximize') : ''}
+          </span>
+          <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--klein-blue)', letterSpacing: '0.05em' }}>
+            {item.isVideo ? 'VIDEO' : 'IMAGE'}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function FabCourse({ onBack, lang = 'zh' }) {
   return (
@@ -127,17 +358,16 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         {/* ── Hero ── */}
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem' }}>
           <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '1rem' }}>
-            Fab Lab · Digital Fabrication
+            Fab Lab · 数字化造物
           </span>
           <h1 className="title-hero text-gradient" style={{ marginBottom: '1rem' }}>
             How to Make<br />Almost Everything
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', marginBottom: '2rem' }}>
-            Built on the MIT FabAcademy curriculum and the global Fab Lab network.
-            Learn full-stack engineering — from digital fabrication fundamentals to AI-integrated prototyping.
+            源自麻省理工学院（MIT）FabAcademy 经典课程体系与全球数字化造物网络。学习新工科全栈工程方法——从微型数字化制造基础到 AI 驱动的敏捷硬件原型开发。
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-            {['14 Modules', 'MIT FabAcademy', '400+ Students', 'UNNC · ZJU · ZWU'].map((pill, i) => (
+            {['14 个核心开发模块', 'MIT 经典课程体系', '累计培养 400+ 学员', '宁诺 · 浙大 · 万里'].map((pill, i) => (
               <span key={i} style={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--text-muted)', border: '1px solid var(--border-color)', borderRadius: '999px', padding: '0.25rem 0.75rem' }}>
                 {pill}
               </span>
@@ -149,10 +379,11 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         <div style={{ position: 'sticky', top: '72px', zIndex: 50, background: 'var(--bg-navbar)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-color)', marginBottom: '3rem' }}>
           <div className="container-custom" style={{ display: 'flex', gap: '0' }}>
             {[
-              { id: 'overview', label: 'Overview' },
-              { id: 'lab', label: 'Lab Manage' },
-              { id: 'tutorials', label: 'Tutorials' },
-              { id: 'courses', label: 'Course List' },
+              { id: 'overview', label: '概述' },
+              { id: 'cases', label: '案例展示' },
+              { id: 'lab', label: '安全与运行' },
+              { id: 'tutorials', label: '课程大纲' },
+              { id: 'courses', label: '班级' },
             ].map((tab) => (
               <a key={tab.id} href={`#fc-${tab.id}`} onClick={(e) => { e.preventDefault(); document.getElementById(`fc-${tab.id}`)?.scrollIntoView({ behavior: 'smooth' }); }}
                 style={{ padding: '0.75rem 1.25rem', fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none', borderBottom: '2px solid transparent', cursor: 'pointer', transition: 'color 0.15s, border-color 0.15s' }}>
@@ -165,35 +396,55 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         {/* ═══ Section 1: Overview ═══ */}
         <section id="fc-overview" style={{ marginBottom: '4rem' }}>
           <div style={{ marginBottom: '2rem' }}>
-            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>OVERVIEW</span>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.5rem' }}>What is Fab Lab?</h2>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>课程概述</span>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.5rem' }}>什么是 Fab Lab？</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: '2.5rem', alignItems: 'start' }}>
             <div>
               <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '0.75rem' }}>
-                A <strong style={{ color: 'var(--text-primary)' }}>Fab Lab</strong> (Fabrication Laboratory) is a digital fabrication workspace originally developed by MIT's Center for Bits and Atoms. Equipped with a standardized set of CNC machines, 3D printers, laser cutters, and electronics tools, participants can design and build almost anything — from custom circuit boards to IoT devices to structural prototypes.
+                <strong style={{ color: 'var(--text-primary)' }}>Fab Lab</strong>（微型数字化制造实验室）是由麻省理工学院（MIT）比特与原子中心发起的一项全球数字化制造空间。它配备了一套标准化的数字化制造工具（如 CNC 铣床、3D 打印机、激光切割机及电子电路开发工具等），让参与者能够亲手设计并制造几乎任何东西——从定制电路板、物联网设备到复杂的结构原型。
               </p>
               <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '0.75rem' }}>
-                The <strong style={{ color: 'var(--text-primary)' }}>FabAcademy</strong> is a distributed education program delivered globally via the Fab Lab network. Students complete weekly hands-on assignments — each producing a physical artifact — covering the full stack from design to fabrication to firmware.
+                <strong style={{ color: 'var(--text-primary)' }}>FabAcademy</strong> 是依托全球 Fab Lab 网络开展的分布式教育项目。学员每周完成具有挑战性的实操任务，并亲手制作出相应的物理原型，内容涵盖机械设计、数字化制造、电路开发以及嵌入式编程等全栈工程链条。
               </p>
               <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
-                At <strong style={{ color: 'var(--text-primary)' }}>UNNC-FabLab / NexMaker</strong>, we adapt this curriculum to build engineers who think in full-stack terms: combining mechanical design, electronics, AI tools, and product thinking into one coherent learning path.
+                在 <strong style={{ color: 'var(--text-primary)' }}>宁波诺丁汉大学 FabLab 和 NexMaker</strong>，我们引入这一经典课程体系，结合 AI 智能开发工具，致力于培养具备全栈思维的跨学科创新人才：将工业设计、电子硬件、算法控制与产品决策融为一体。
               </p>
             </div>
             <div style={{ borderLeft: '1px solid var(--border-color)', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>2000<sup style={{ fontSize: '0.75rem', verticalAlign: 'super' }}>+</sup></div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>Fab Labs worldwide</div></div>
-              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>14</div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>Core modules</div></div>
-              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>MIT</div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>Curriculum origin</div></div>
+              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>2000<sup style={{ fontSize: '0.75rem', verticalAlign: 'super' }}>+</sup></div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>全球 Fab Lab 空间</div></div>
+              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>14</div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>核心开发模块</div></div>
+              <div><div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>MIT</div><div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.15rem' }}>课程体系源自</div></div>
             </div>
+          </div>
+        </section>
+
+        {/* ═══ Section: Showcase (2x2 Grid) ═══ */}
+        <section id="fc-cases" style={{ marginBottom: '4rem' }}>
+          <div style={{ marginBottom: '2rem' }}>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>
+              案例展示
+            </span>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.25rem' }}>
+              项目案例与数字化造物
+            </h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              学生夏令营实操案例展示。当浏览到该区域时视频自动播放，双击视频卡片可最大化全屏浏览。
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }} className="fc-cases-grid">
+            {CASE_ITEMS.map((item) => (
+              <ShowcaseCard key={item.id} item={item} lang={lang} />
+            ))}
           </div>
         </section>
 
         {/* ═══ Section 2: Lab Manage ═══ */}
         <section id="fc-lab" style={{ marginBottom: '4rem', padding: '3rem', borderRadius: '20px', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div style={{ marginBottom: '1.5rem' }}>
-            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>LAB MANAGE</span>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '0 0 0.25rem' }}>Lab Operations</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Essential documentation before entering and working in the Fab Lab.</p>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>安全与运行</span>
+            <h2 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '0 0 0.25rem' }}>实验室管理规范</h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>进入实验室工作以及安全使用工具的必备参考文档。</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
             {LAB_ITEMS.map((item) => (
@@ -217,7 +468,7 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
                       marginTop: 'auto',
                       width: 'fit-content'
                     }}>
-                    <span>{lang === 'zh' ? '查看文档细节' : 'View Doc Details'}</span>
+                    <span>查看文档细节</span>
                     <ExternalLink size={12} style={{ flexShrink: 0 }} />
                   </a>
                 </div>
@@ -229,9 +480,9 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         {/* ═══ Section 3: Tutorials ═══ */}
         <section id="fc-tutorials" style={{ marginBottom: '4rem' }}>
           <div style={{ marginBottom: '2rem' }}>
-            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>TUTORIALS</span>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.25rem' }}>14 Core Modules</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>From project documentation and CAD design to AI vehicle development. Click any card to open docs.</p>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>课程大纲</span>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.25rem' }}>14 个核心开发模块</h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>从项目文档管理、三维参数化设计到 AI 智能载具开发。点击下方卡片可直接打开对应文档章节。</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
             {TUTORIALS.map((tut) => (
@@ -257,7 +508,7 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
                     marginTop: 'auto',
                     width: 'fit-content'
                   }}>
-                  <span>{lang === 'zh' ? '查看文档细节' : 'View Doc Details'}</span>
+                  <span>查看文档细节</span>
                   <ExternalLink size={12} style={{ flexShrink: 0 }} />
                 </a>
               </div>
@@ -268,31 +519,33 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         {/* ═══ Section 4: Course List ═══ */}
         <section id="fc-courses" style={{ marginBottom: '4rem', padding: '3rem', borderRadius: '20px', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div style={{ marginBottom: '2rem' }}>
-            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>COURSE LIST</span>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.25rem' }}>Classes & Teams</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Student cohorts from UNNC FabLab, ZJU, ZWU, and NexMaker Academy. Click any team to view their project site.</p>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.18em', color: 'var(--klein-blue)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>班级</span>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 0.25rem' }}>班级</h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>来自宁波诺丁汉大学 FabLab、浙江大学、浙江万里学院及 NexMaker 创客学院的历届学员档案。点击团队标签可直接查看其课程主页与作品集。</p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {COHORT_GROUPS.map((group) => (
-              <div key={group.id} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: '1.25rem', padding: '1.25rem 0', borderBottom: '1px solid var(--border-color)' }}>
-                <div>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--klein-blue)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{group.institution}</div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '0.15rem' }}>{group.year}</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{group.name}</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                    {group.teams.map((team) => (
-                      <a key={team.name} href={team.url} target={team.url.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
-                        style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', textDecoration: 'none', border: '1px solid var(--border-color)', borderRadius: '6px', padding: '0.25rem 0.7rem', fontWeight: 500, transition: 'color 0.15s, border-color 0.15s, background 0.15s', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
-                        className="fc-team-link">
-                        {team.name} <ExternalLink size={12} />
-                      </a>
-                    ))}
+            {SCHOOL_GROUPS.map((school) =>
+              school.cohorts.map((cohort) => (
+                <div key={`${school.school}-${cohort.name}`} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: '1.25rem', padding: '1.25rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                  <div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--klein-blue)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{school.school}</div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '0.15rem' }}>{cohort.year}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{cohort.name}</div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                      {cohort.teams.map((team) => (
+                        <a key={team.name} href={team.url} target={team.url.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+                          style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', textDecoration: 'none', border: '1px solid var(--border-color)', borderRadius: '6px', padding: '0.25rem 0.7rem', fontWeight: 500, transition: 'color 0.15s, border-color 0.15s, background 0.15s', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                          className="fc-team-link">
+                          {team.name} <ExternalLink size={12} />
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </section>
 
@@ -304,7 +557,24 @@ export default function FabCourse({ onBack, lang = 'zh' }) {
         .fc-lab-card:hover { border-color: rgba(0, 47, 167, 0.45) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); }
         .fc-tut-card { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
         .fc-tut-card:hover { border-color: rgba(0, 47, 167, 0.45) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); }
+        .fc-case-card { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fc-case-card:hover { border-color: rgba(0, 47, 167, 0.45) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); }
         .fc-team-link:hover { color: var(--text-primary) !important; border-color: var(--klein-blue) !important; background: rgba(0,47,167,0.04) !important; }
+
+        @keyframes fc-pulse {
+          0% { transform: scale(0.95); opacity: 0.5; }
+          50% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(0.95); opacity: 0.5; }
+        }
+        .fc-pulse-dot {
+          animation: fc-pulse 1.5s infinite;
+        }
+
+        @media (max-width: 768px) {
+          .fc-cases-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
 
         @media (max-width: 900px) {
           #fc-lab div[style*="grid-template-columns"] { grid-template-columns: repeat(2, 1fr) !important; }
