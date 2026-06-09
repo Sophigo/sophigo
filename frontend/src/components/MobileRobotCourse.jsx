@@ -19,7 +19,9 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
   const t = {
     zh: {
       title: "AI移动机器人",
-      subtitle: "核心：需求提出与定义，AI工具使用与工程化，辩证思考与决策，了解AI能力边界，文档复盘；",
+      subtitle: `2023年人类步入 AI 原生时代，传统的编程与制造门槛正被全面降维。未来科技人才的核心壁垒，不再是死记硬背的底层语法和机械接线，而是定义真实需求、驾驭 AI 工具进行系统性决策的能力。
+
+在这个过程中参与者一起在解决工程问题，从而培养能力：需求提出与定义，AI工具使用与工程化，辩证思考与决策，了解AI能力边界，文档复盘，AI移动机器人是一个入门体验的非常好的机会点`,
       
 
       // Student Profile
@@ -562,19 +564,61 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           <h1 className="title-hero" style={{ marginTop: '1rem', marginBottom: '1rem', color: '#ffffff' }}>
             {t.title}
           </h1>
-          <p className="description" style={{ marginInline: 'auto', maxWidth: '750px', fontSize: '1.15rem' }}>
+          <p className="description" style={{ marginInline: 'auto', maxWidth: '750px', fontSize: '1.15rem', whiteSpace: 'pre-line' }}>
             {t.subtitle}
           </p>
-        </div>
 
-        {/* Stats Row */}
-        <div style={statsRowStyle}>
-          {t.stats.map((stat, idx) => (
-            <div key={idx} className="glassmorphism-card" style={statCardStyle}>
-              <div style={statValueStyle}>{stat.value}</div>
-              <div style={statLabelStyle}>{stat.label}</div>
-            </div>
-          ))}
+          {/* Showcase of 5 Robot Prototypes */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: '1.25rem',
+            marginTop: '3.5rem',
+            width: '100%',
+            maxWidth: '1000px',
+            marginInline: 'auto'
+          }}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <div 
+                key={num} 
+                className="glassmorphism-card"
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-color)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  aspectRatio: '1',
+                  overflow: 'hidden',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  transition: 'transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.borderColor = 'var(--klein-blue)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px var(--klein-blue-glow)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.borderColor = 'var(--border-color)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <img 
+                  src={`/robot_option${num}.png`} 
+                  alt={`Robot Option ${num}`} 
+                  style={{ 
+                    maxWidth: '100%', 
+                    maxHeight: '100%', 
+                    objectFit: 'contain',
+                    borderRadius: '8px'
+                  }} 
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* SECTION: Student Profile & Teaching Philosophy (Side-by-side grid) */}
@@ -660,6 +704,19 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
                   <span style={conceptTagStyle('junior')}>{t.juniorConcept}</span>
                 </div>
 
+                {/* Robot Prototype Image */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                  <img 
+                    src="/junior_robot.png" 
+                    alt="Junior Robot Prototype" 
+                    style={{ 
+                      maxHeight: '260px', 
+                      maxWidth: '100%', 
+                      objectFit: 'contain'
+                    }} 
+                  />
+                </div>
+
                 {/* Mobile Responsive Layout / Table */}
                 <div style={{ overflowX: 'auto' }}>
                   <table style={campTableStyle}>
@@ -696,6 +753,19 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
                   <span style={conceptTagStyle('senior')}>{t.seniorConcept}</span>
+                </div>
+
+                {/* Robot Prototype Image */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                  <img 
+                    src="/senior_robot.png" 
+                    alt="Senior Robot Prototype" 
+                    style={{ 
+                      maxHeight: '260px', 
+                      maxWidth: '100%', 
+                      objectFit: 'contain'
+                    }} 
+                  />
                 </div>
 
                 {/* Differences Grid */}
@@ -760,35 +830,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
               </div>
             </div>
 
-            {/* Agent Interactive Card Grid */}
-            <div className="glassmorphism-card" style={agentGridContainerStyle}>
-              <div style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-                  点击卡片查看详情
-                </span>
-              </div>
-              <div style={agentGridStyle}>
-                {t.agents.map((agent, idx) => (
-                  <a
-                    key={idx}
-                    href={`/courses/mobile-robot/agent-${agentSlugs[idx]}.html`}
-                    className="agent-card-lg-link"
-                  >
-                    <div className="agent-card-lg-inner">
-                      <div style={{ fontSize: '2.2rem', marginBottom: '0.5rem', lineHeight: '1', display: 'block' }}>
-                        {agentEmojis[idx]}
-                      </div>
-                      <div style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: '1.3' }}>
-                        {agent.role.replace(/^[^\w一-鿿]*\s*/, '')}
-                      </div>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', lineHeight: '1.3' }}>
-                        {agent.focus.length > 18 ? agent.focus.slice(0, 18) + '...' : agent.focus}
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
+
 
             {/* Architecture Components - 20 Cards Grid */}
             <div className="glassmorphism-card" style={agentOrchestrationFrameStyle}>
@@ -868,33 +910,6 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
 
           </div>
 
-          {/* Expert Agents Table */}
-          <div className="glassmorphism-card" style={{ marginTop: '3rem', padding: '2rem', borderRadius: '24px', overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
-                  <th style={{ padding: '1rem', fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', width: '20%' }}>
-                    {t.agentHeaders.role}
-                  </th>
-                  <th style={{ padding: '1rem', fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', width: '35%' }}>
-                    {t.agentHeaders.focus}
-                  </th>
-                  <th style={{ padding: '1rem', fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', width: '45%' }}>
-                    {t.agentHeaders.task}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {t.agents.map((agent, idx) => (
-                  <tr key={idx} style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: idx % 2 === 0 ? 'rgba(0,0,0,0.01)' : 'transparent' }}>
-                    <td style={{ padding: '1rem', fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>{agent.role}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{agent.focus}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{agent.task}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </section>
 
         {/* SECTION: PBL Role Mapping & Evaluation Weights */}
@@ -998,71 +1013,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           </div>
         </section>
 
-        {/* SECTION: Modular Chassis Evolution (moved to bottom) */}
-        <section style={{ marginBlock: '6rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 style={sectionTitleStyle}>{t.chassisTitle}</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{t.chassisSubtitle}</p>
-          </div>
 
-          {/* Interactive Chassis Display */}
-          <div className="glassmorphism-card" style={chassisContainerStyle}>
-
-            {/* Left Nav Menu */}
-            <div style={chassisNavStyle}>
-              {t.chassisOptions.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedChassis(idx)}
-                  style={selectedChassis === idx ? chassisBtnActiveStyle : chassisBtnStyle}
-                >
-                  <span style={{ fontWeight: '700' }}>{opt.id}</span>
-                  <span style={{ fontSize: '0.8rem', opacity: 0.8, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{opt.name}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Right Display Panel */}
-            <div style={chassisDetailsPanelStyle(selectedChassis === 4)}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: selectedChassis === 4 ? 'var(--klein-blue)' : 'var(--text-primary)' }}>
-                  {t.chassisOptions[selectedChassis].id}: {t.chassisOptions[selectedChassis].name}
-                </h3>
-                {selectedChassis === 4 && (
-                  <span style={badgeOmniStyle}>Ultimate Core Direction</span>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div>
-                  <h4 style={chassisLabelStyle}>🛠️ 设计细节 (Design Specifications)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].desc}</p>
-                </div>
-
-                <div>
-                  <h4 style={chassisLabelStyle}>🎮 交互与控制特征 (Control & Interaction)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].interaction}</p>
-                </div>
-
-                <div>
-                  <h4 style={chassisLabelStyle}>🎯 最佳适用场景 (Best Scenario)</h4>
-                  <p style={chassisValueStyle}>{t.chassisOptions[selectedChassis].scene}</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Core recommendation box */}
-          <div className="glassmorphism-card" style={recommendationBoxStyle}>
-            <h4 style={{ fontWeight: '700', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span>{t.recommendationTitle}</span>
-            </h4>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              {t.recommendationDesc}
-            </p>
-          </div>
-        </section>
 
         {/* Section: Course Syllabus Outline (moved to bottom) */}
         <section style={{ marginBlock: '6rem' }}>
