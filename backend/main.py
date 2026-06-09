@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 
-app = FastAPI(title="Sophigo Backend API")
+app = FastAPI(title="SophiGo Backend API")
 
 # Setup CORS to support local development on separate ports
 app.add_middleware(

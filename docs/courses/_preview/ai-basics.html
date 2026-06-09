@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI 基础应用 — SophiGo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#3c3c43;background:#fff;line-height:1.7;font-size:16px}
+nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid #e2e2e3;z-index:100}
+.nav-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;height:100%;padding:0 32px}
+.brand{font-weight:700;font-size:18px;margin-right:40px}
+.nl{padding:6px 14px;border-radius:6px;color:#6e6e73;text-decoration:none;font-size:14px;font-weight:500;transition:all .2s}
+.nl:hover{color:#0ea5e9;background:#f6f6f7}
+.nl.act{color:#0ea5e9;background:rgba(14,165,233,.1)}
+.m{max-width:860px;margin:0 auto;padding:96px 32px 80px}
+.m h1{font-size:2rem;font-weight:700;margin-bottom:.5em}
+.m h2{font-size:1.5rem;font-weight:600;margin:2em 0 .6em;padding-bottom:.3em;border-bottom:1px solid #e2e2e3}
+.m h3{font-size:1.2rem;font-weight:600;margin:1.5em 0 .5em}
+.m p{margin-bottom:1em}
+.m blockquote{margin:1em 0;padding:.8em 1.2em;border-left:4px solid #0ea5e9;background:#f6f6f7;border-radius:0 8px 8px 0}
+.m a{color:#0ea5e9;text-decoration:none;font-weight:500}
+.m a:hover{text-decoration:underline}
+.m ul,.m ol{margin:.5em 0 1em 1.5em}
+.m li{margin-bottom:.3em}
+.m hr{margin:2em 0;border:none;border-top:1px solid #e2e2e3}
+.m table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.9em}
+.m th,.m td{padding:10px 14px;border:1px solid #e2e2e3;text-align:left}
+.m th{background:#f6f6f7;font-weight:600}
+.m tr:nth-child(even){background:#f6f6f7}
+.m code{font-family:"SF Mono",Consolas,monospace;background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:.875em}
+.m pre{background:#282c34;color:#abb2bf;padding:1em;border-radius:8px;overflow-x:auto;margin:1em 0}
+.m pre code{background:0 0;padding:0;color:inherit;font-size:.85em}
+.m img{max-width:100%;border-radius:8px;margin:1em 0}
+.nav-pg{display:flex;justify-content:space-between;margin-top:3em;padding-top:1.5em;border-top:1px solid #e2e2e3}
+</style></head>
+<body><nav><div class="nav-inner"><span class="brand">SophiGo</span><a href="mobile-robot.html" class="nl">移动机器人</a><a href="fab-course.html" class="nl">Fab 课程</a><a href="ai-basics.html" class="nl act">AI 基础应用</a><a href="cmf.html" class="nl">CMF 应用</a></div></nav>
+<main class="m"><h1 id="ai">AI 基础应用创造营</h1>
+<blockquote>
+<p><strong>聚焦 AI 工具基础应用与实际工作场景落地，帮助参训人员提升 AI 认知，掌握核心 AI 工具的初步使用方法。</strong></p>
+</blockquote>
+<hr />
+<h2 id="_1">🏗️ 页面架构说明</h2>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>技术方案</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>课程首页</strong></td>
+<td>VitePress Markdown（当前页面）</td>
+<td>提供课程定位、三天日程安排、师资力量及合作院校信息展示</td>
+</tr>
+<tr>
+<td><strong>技术细节文档</strong></td>
+<td>VitePress 静态子站点</td>
+<td>点击各章节链接跳转，提供深度教学内容与参考资料</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1">📌 1. 课程定位</h2>
+<p><strong>时代之变（Why）：</strong> 2023 年以来，以 ChatGPT 为代表的大语言模型和各类 AIGC 工具正以前所未有的速度渗透到各行各业。无论是内容创作、数据分析还是产品开发，AI 已不再是一个可选项，而是职场核心竞争力的一部分。未来的高效工作者，核心壁垒不再是单一的操作技能，而是<strong>定义需求、驾驭 AI 工具进行系统性决策</strong>的能力。</p>
+<p><strong>方法之新（How）：</strong> 本课程采用 <strong>"需求驱动 + 实战导向"</strong> 的教学模式，紧紧围绕真实工作场景展开。通过"需求拆解 → AI 工具实操 → 产品落地"的完整链路，帮助参训人员在 3 天高密度集训中快速掌握 AI 工具的应用方法论，并输出可直接投入使用的 AI 原生工具/产品原型。</p>
+<p><strong>成果之硬（What）：</strong> 课程涵盖 AI 需求分析、Prompt 工程、AIGC 全工具链实操、电商数据抓取分析、数字人开发、Web 可视化等六大模块。每位学员将在导师指导下完成一个完整的 AI 原生产品原型，并参与最终路演与结业评审。</p>
+<h3 id="11">1.1 核心能力培养</h3>
+<p>在整个学习过程中，参与者将共同解决实际问题，从而培养以下核心能力：</p>
+<ul>
+<li><strong>AI 需求分析与拆解</strong>：精准描述业务痛点，将模糊需求拆解为可执行的 MVP。</li>
+<li><strong>Prompt 工程</strong>：掌握目标-要求-约束三要素向 AI 提出需求的技巧，获取高质量输出。</li>
+<li><strong>AIGC 全工具实操</strong>：覆盖图文、PPT、视频生成等场景的国内外主流 AI 工具运用。</li>
+<li><strong>数据驱动决策</strong>：利用可视化爬取 + AI 分析实现数据采集、清洗与报告生成。</li>
+<li><strong>数字人开发基础</strong>：理解 RAG 原理，掌握 2D 数字人交互实现流程。</li>
+<li><strong>AI 原生产品设计</strong>：从需求到原型，独立输出 AI 原生工具或产品方案。</li>
+</ul>
+<hr />
+<h2 id="12">🎯 1.2 适用对象</h2>
+<ul>
+<li><strong>企业团队</strong>：希望将 AI 工具融入日常工作效率提升的职场人群。</li>
+<li><strong>创业者</strong>：希望通过 AI 技术快速构建产品 MVP 的初创团队。</li>
+<li><strong>个人学习者</strong>：对 AI 工具有浓厚兴趣，希望系统掌握 AI 应用技能的自学者。</li>
+</ul>
+<hr />
+<h2 id="2">📋 2. 课程大纲 — 三日日程安排</h2>
+<blockquote>
+<p><strong>课程目标：</strong> 本次培训聚焦 AI 工具基础应用与实际工作场景落地，帮助参训人员将 AI 技术应用于 IP 形象打造、数字人开发、电商数据抓取分析等工作场景，最终能独立输出 AI 原生产品方案。</p>
+</blockquote>
+<h3 id="day-1-ai-aigc">DAY 1 — AI 需求拆解与 AIGC 实操</h3>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>模块</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>上午</strong></td>
+<td>模块 1：AI 需求拆解与 MVP 落地思维</td>
+<td>• 解析 AI 与工作的融合逻辑，明确 AI 使用边界与核心价值<br>• 教授 AI 需求分析方法，实现从主观判断到用户真实需求的转变<br>• 讲解模糊痛点拆解为可执行 MVP 的核心步骤与方法<br>• 结合场景梳理 AI 应用框架，完成《AI 产品说明书》初稿</td>
+</tr>
+<tr>
+<td><strong>下午</strong></td>
+<td>模块 2：AIGC 全工具实操与场景应用</td>
+<td>• 讲解 Prompt 核心撰写技巧，掌握不同场景的设计逻辑<br>• 介绍国内外主流 AIGC 工具，覆盖图文、PPT、简易视频生成<br>• 演示各类 AIGC 工具搭配策略，适配创意工作不同需求<br>• 实操指导学员用工具完成 IP 形象设计与报告生成</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-2">DAY 2 — 数据抓取分析与数字人</h3>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>模块</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>上午</strong></td>
+<td>模块 3：电商数据采集分析与 Web 可视化</td>
+<td>• 教学可视化爬取技术，实现多平台电商数据高效抓取<br>• 讲解 Cursor+NotebookLM 用法，实现对话式数据清洗与分析<br>• 教授 Prompt 定制技巧，实现秒级报告与图文一键排版<br>• 借助 Google AI Studio，实现分析数据的 Web 开发与可视化</td>
+</tr>
+<tr>
+<td><strong>下午</strong></td>
+<td>模块 4：数字人开发与 API 交互实操</td>
+<td>• 讲解 RAG、NotebookLM 核心原理，夯实数字人开发基础<br>• 介绍 Web 前后端基础，解析数字人 API 调用逻辑与方法<br>• 演示 2D 数字人简易交互实现流程，开展现场实操指导<br>• 结合实际创意场景，梳理数字人开发核心环节与优化方向</td>
+</tr>
+</tbody>
+</table>
+<h3 id="day-3">DAY 3 — 项目卡点攻坚与路演结业</h3>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>模块</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>上午</strong></td>
+<td>模块 5：AI 项目开发卡点攻坚与推进</td>
+<td>• 收集学员实操问题，由导师进行集中解答<br>• 针对学员项目进度，开展一对一推进指导<br>• 帮助定位项目关键卡点，提供落地解决思路<br>• 督促梳理项目当前进展，提炼核心问题并提交</td>
+</tr>
+<tr>
+<td><strong>下午</strong></td>
+<td>模块 6：AI 原生产品路演 &amp; 结业仪式</td>
+<td>• 学员开展产品路演，展示自主开发的 AI 原生工具/产品原型<br>• 导师从产品逻辑、技术实现、用户体验维度进行专业点评与结业指导<br>• 举行结业仪式，颁发培训结业证书</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">👨‍🏫 3. 核心师资力量</h2>
+<table>
+<thead>
+<tr>
+<th>导师</th>
+<th>职称</th>
+<th>专长领域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>孙煦 教授</strong></td>
+<td>理工学院合作与创新副院长 / 教授 / 博导</td>
+<td>智能人机交互与创新设计，申获专利 20 余项，获 IF、IDA、A'Design 等国际设计大奖 30 余项</td>
+</tr>
+<tr>
+<td><strong>吴波</strong></td>
+<td>UNNC-FabLab 实验室经理 / 全球导师</td>
+<td>软硬件全栈工程师，专注于 AI 落地应用开发、交通工具创新算法及定制工作流开发</td>
+</tr>
+<tr>
+<td><strong>张尧闰 博士</strong></td>
+<td>宁诺人机交互博士在读 / 帝国理工硕士</td>
+<td>MIT Fab Academy 认证专家，深耕 AI 与时尚创意交叉领域</td>
+</tr>
+<tr>
+<td><strong>郗铭钊</strong></td>
+<td>AI 应用专家 / 交互设计师</td>
+<td>跨学科设计与 AI 技术落地实战经验，交互设计获德国红点（Red Dot）设计大奖</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">🏆 4. 课程产出与评估</h2>
+<h3 id="41">4.1 核心交付物</h3>
+<ul>
+<li><strong>《AI 产品说明书》</strong>：针对实际工作场景的 AI 应用需求分析文档。</li>
+<li><strong>IP 形象设计作品</strong>：使用 AIGC 工具完成的企业或个人 IP 形象。</li>
+<li><strong>电商数据分析报告</strong>：从数据抓取到可视化呈现的完整分析报告。</li>
+<li><strong>数字人交互原型</strong>：2D 数字人简易交互演示。</li>
+<li><strong>AI 原生产品原型</strong>：包含完整的方案文档与可演示的产品原型，参与最终路演。</li>
+</ul>
+<h3 id="42">4.2 评估维度</h3>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>权重</th>
+<th>标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 工具使用能力</td>
+<td>30%</td>
+<td>工具选择的合理性、Prompt 质量、AI 输出成果的创新性</td>
+</tr>
+<tr>
+<td>项目完成度</td>
+<td>35%</td>
+<td>产品原型的完整度、功能实现质量、路演表现</td>
+</tr>
+<tr>
+<td>场景落地价值</td>
+<td>25%</td>
+<td>解决真实痛点的有效性、方案的可实施性</td>
+</tr>
+<tr>
+<td>学习参与度</td>
+<td>10%</td>
+<td>课堂互动、团队协作、反馈迭代</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">🏛️ 5. 合作院校</h2>
+<p>本次培训依托宁波诺丁汉大学（UNNC）校园资源开展。</p>
+<h3 id="_2">宁波诺丁汉大学校园</h3>
+<p>宁波诺丁汉大学（University of Nottingham Ningbo China）是中国第一所经教育部批准引进世界一流大学的中外合作大学，由英国诺丁汉大学与浙江万里学院合作创办。校园位于宁波市鄞州区，拥有国际化的教学环境与先进的硬件设施。</p>
+<p><img alt="UNNC 校园" src="/unnc_campus.jpg" /></p>
+<hr />
+<h2 id="_3">💬 划词批注互动区</h2>
+<p>本平台已集成<strong>高保真本地划词评论系统</strong>。如果您对课程内容、AI 工具使用或项目方案存在任何疑问：
+1. 请先在<a href="/">主站首页</a>注册并登录。
+2. 返回本页面，<strong>用鼠标直接划选目标文字</strong>，即可触发高亮批注面板进行提问或讨论。
+3. 您的疑问将会显示在对应文本行下，助您与社区共同进步！</p><div class="nav-pg"><div>← <a href="fab-course.html">Fab 课程</a></div><div><a href="cmf.html">CMF 应用</a> →</div></div></main></body></html>

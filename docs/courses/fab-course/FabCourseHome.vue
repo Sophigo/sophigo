@@ -1,24 +1,6 @@
 <template>
   <div class="fab-home">
 
-    <!-- ── Navigation ── -->
-    <header class="fab-nav">
-      <div class="nav-inner">
-        <a :href="homeUrl" class="nav-brand">
-          <img src="/logo.png" alt="SophiGo" class="nav-logo" />
-          <span>SophiGo</span>
-        </a>
-        <nav class="nav-links">
-          <a href="/docs/">Home</a>
-          <a href="/docs/courses/fab-course/" class="nav-active">Fab Courses</a>
-          <a href="/docs/courses/ai-basics/">AI Basics</a>
-          <a href="/docs/courses/mobile-robot/">Mobile Robot</a>
-          <a href="/docs/courses/cmf/">CMF</a>
-          <a href="/docs/news/index.html">Insights</a>
-        </nav>
-      </div>
-    </header>
-
     <main>
 
       <!-- ── Hero ── -->
@@ -261,13 +243,6 @@
       </div>
     </div>
 
-    <!-- ── Footer ── -->
-    <footer class="fab-footer">
-      <div class="footer-inner">
-        <span>© 2026 SophiGo · UNNC-FabLab</span>
-        <a href="https://www.nexmaker.com/" target="_blank" rel="noopener">NexMaker ↗</a>
-      </div>
-    </footer>
 
   </div>
 </template>
@@ -275,9 +250,6 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-
-// ── Localhost detection ──
-const homeUrl = ref('/');
 
 // ── Drawer state ──
 const drawerOpen  = ref(false);
@@ -331,12 +303,6 @@ function onKey(e) {
 }
 
 onMounted(() => {
-  if (
-    window.location.hostname === 'localhost' ||
-    window.location.hostname === '127.0.0.1'
-  ) {
-    homeUrl.value = 'http://localhost:5173';
-  }
   window.addEventListener('keydown', onKey);
 });
 onUnmounted(() => {
@@ -624,58 +590,7 @@ const cohortGroups = [
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Nav ── */
-.fab-nav {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: rgba(9, 9, 15, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-.nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #f1f5f9;
-  letter-spacing: -0.01em;
-}
-.nav-logo {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-.nav-links a {
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 500;
-  transition: color 0.15s;
-}
-.nav-links a:hover,
-.nav-links a.nav-active {
-  color: #f1f5f9;
-}
-
-/* ── Hero ── */
+/* ── Shared Section Styles ── */
 .hero {
   padding: 6rem 1.5rem 5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -758,7 +673,7 @@ const cohortGroups = [
 /* ── Sticky Section Tabs ── */
 .tabs-bar {
   position: sticky;
-  top: 60px;
+  top: 0;
   z-index: 100;
   background: rgba(9, 9, 15, 0.9);
   backdrop-filter: blur(12px);
@@ -1250,27 +1165,6 @@ const cohortGroups = [
 }
 .custom-doc-render a:hover { text-decoration: underline; }
 
-/* ── Footer ── */
-.fab-footer {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 1.5rem;
-}
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #334155;
-}
-.footer-inner a {
-  color: #334155;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer-inner a:hover { color: #64748b; }
-
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero h1 { font-size: 2.25rem; }
@@ -1286,7 +1180,6 @@ const cohortGroups = [
   }
 }
 @media (max-width: 600px) {
-  .nav-links { display: none; }
   .hero h1 { font-size: 1.8rem; }
   .tut-grid { grid-template-columns: 1fr; }
   .lab-grid { grid-template-columns: 1fr; }

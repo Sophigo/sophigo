@@ -124,6 +124,19 @@ function removeIndentProp(node) {
   }
 }
 
+function extractYear(text) {
+  const match = text.match(/20\d{2}/);
+  return match ? Number(match[0]) : -Infinity;
+}
+
+sections.fabs.items = sections.fabs.items
+  .map((item, index) => ({ item, index }))
+  .sort((a, b) => {
+    const yearDiff = extractYear(b.item.text) - extractYear(a.item.text);
+    return yearDiff || a.index - b.index;
+  })
+  .map(({ item }) => item);
+
 const finalSidebar = [];
 for (const key in sections) {
   const section = sections[key];

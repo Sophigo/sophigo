@@ -79,14 +79,6 @@ export default function AiBasics({ onBack }) {
 
   return (
     <div className="aibasic-page">
-      {/* Back button */}
-      <div style={{ position: 'relative', maxWidth: '1120px', margin: '0 auto', padding: '1rem 1.75rem 0' }}>
-        <button onClick={onBack} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', borderRadius: '20px', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(15,23,42,0.6)', color: '#94a3b8', fontFamily: 'inherit' }}>
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
-      </div>
-
       {/* Hero */}
       <section className="aibasic-hero">
         <div className="aibasic-hero-overlay" />
@@ -168,8 +160,8 @@ export default function AiBasics({ onBack }) {
 
       <style>{`
         .aibasic-page {
-          background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.12), transparent 34rem),
-                      linear-gradient(180deg, #07101d 0%, #080d16 44%, #070b12 100%);
+          background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08), transparent 34rem),
+                      linear-gradient(180deg, rgba(7,16,29,0.20) 0%, rgba(8,13,22,0.15) 44%, rgba(7,11,18,0.20) 100%);
           color: #f3f4f6;
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
           min-height: 100vh;
@@ -181,27 +173,38 @@ export default function AiBasics({ onBack }) {
           display: flex;
           align-items: center;
           padding: 5rem 1.5rem;
-          background: linear-gradient(180deg, rgba(7,13,24,0.34), rgba(7,13,24,0.86)),
-                      linear-gradient(90deg, rgba(7,13,24,0.72), rgba(7,13,24,0.2) 45%, rgba(7,13,24,0.72));
-          background-size: cover;
-          background-position: center 42%;
           overflow: hidden;
           border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .aibasic-hero::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(7,13,24,0.30), rgba(7,13,24,0.60)),
+                      linear-gradient(90deg, rgba(7,13,24,0.50), rgba(7,13,24,0.2) 45%, rgba(7,13,24,0.50)),
+                      url('/unnc_campus.jpg');
+          background-size: cover;
+          background-position: center 45%;
+          opacity: 0.5;
+          z-index: 1;
         }
         .aibasic-hero-overlay {
           position: absolute; inset: 0;
           background: radial-gradient(circle at 50% 46%, rgba(59,130,246,0.26), transparent 28rem),
                       linear-gradient(180deg, transparent 0%, rgba(7,13,24,0.38) 100%);
           pointer-events: none;
+          z-index: 2;
         }
         .aibasic-hero-content {
-          position: relative; z-index: 2;
+          position: relative; z-index: 3;
           max-width: 1120px; margin: 0 auto; width: 100%;
+          text-align: center;
         }
         .aibasic-hero-title {
           font-size: 3.25rem; font-weight: 800; color: #fff;
           margin: 0; letter-spacing: 0;
           text-shadow: 0 12px 36px rgba(0,0,0,0.5);
+          text-align: center;
         }
         .aibasic-container { max-width: 1120px; margin: 0 auto; padding: 2.75rem 1.75rem; }
         .aibasic-section { padding: 3.25rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }

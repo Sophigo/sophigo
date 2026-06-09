@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import fabSidebar from './fab_sidebar.js'
 
 export default defineConfig({
-  title: "Sophigo Docs",
+  title: "SophiGo Docs",
   description: "AI 时代的生存与创新工具 - 课程与规范开发文档",
   base: '/docs/', // namespace prefix for assets and pages
   ignoreDeadLinks: true,
@@ -18,7 +18,6 @@ export default defineConfig({
       { text: 'Fab 课程', link: '/courses/fab-course/' },
       { text: 'AI 基础应用', link: '/courses/ai-basics/' },
       { text: '移动机器人', link: '/courses/mobile-robot/' },
-      { text: 'CMF 应用', link: '/courses/cmf/' },
       { text: '探讨', link: '/news/index.html' }
     ],
 
@@ -56,6 +55,7 @@ export default defineConfig({
         {
           text: '数字化辅助工具',
           items: [
+            { text: 'CMF 应用', link: '/courses/cmf/' },
             { text: '参数化设计车辆', link: 'https://sophicar.com/' },
             { text: '3D生成器', link: '/tools/threejs-generator/app.html' },
                         { text: 'stl 报价', link: '/tools/stl-quote/stlquote.html' },

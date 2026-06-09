@@ -6,10 +6,9 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
     zh: {
       eyebrow: "JOIN US",
       title: "we Drive, We Thrive",
-      back: "返回首页",
       whoTitle: "我们是谁 · WHO WE ARE",
-      whoDesc1: "“Sophi”源自拉丁语“Sophia”，代表智慧与精致；“Go”则代表探索与前行。Sophigo 致力于打破传统工科与软硬件开发的边界，构建集硬件、算法与 CMF 极简美学于一体的工程创新数字化平台。我们是由一群来自全球多所顶尖高校、具备跨学科背景的极客与创客组成的敏捷造物团队。",
-      whoDesc2: "在 Sophigo，我们相信“代码构筑物理实体”。团队汇聚了软件算法、机械结构、CMF 表面处理以及数字制造等领域的顶尖人才。我们从第一性原理出发，重构人、代码与智能实体之间的协作模型，赋能下一代工程师与创造者。",
+      whoDesc1: "“Sophi”源自拉丁语“Sophia”，代表智慧与精致；“Go”则代表探索与前行。SophiGo 致力于打破传统工科与软硬件开发的边界，构建集硬件、算法与 CMF 极简美学于一体的工程创新数字化平台。我们是由一群来自全球多所顶尖高校、具备跨学科背景的极客与创客组成的敏捷造物团队。",
+      whoDesc2: "在 SophiGo，我们相信“代码构筑物理实体”。团队汇聚了软件算法、机械结构、CMF 表面处理以及数字制造等领域的顶尖人才。我们从第一性原理出发，重构人、代码与智能实体之间的协作模型，赋能下一代工程师与创造者。",
       whatTitle: "我们做什么 · WHAT WE DO",
       whatDesc: "我们深耕 AI Native 时代下的敏捷硬件开发与新工科教育，致力于将复杂算法与物理底盘解算无缝结合，开发从参数化交通工具生成器、仿真运动链、到物理实体装配的完整闭环流程。",
       pillars: [
@@ -20,20 +19,20 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       joinTitle: "希望你的加入 · OPEN ROLES",
       joinDesc: "我们寻找敢于打破常规、热衷于将代码转化为物理现实的探险家。不论你是软件极客、机器人专家，还是工业设计美学家，这里都有你的舞台。",
       roles: [
-        { role: "ROS2 机器人算法工程师", type: "全职 / 杭州或远程", desc: "负责移动底盘轨迹规划、运动学逆解开发与多模态传感器仿真调试。熟悉 ROS2 与 C++。" },
-        { role: "参数化 CAD 渲染开发 (Three.js/WebGL)", type: "全职或实习 / 杭州", desc: "负责 Web 端参数化 3D 几何渲染与仿真粒子流交互。熟悉 Three.js、WebGL 与 React。" },
-        { role: "CMF 工业设计师 & 美学顾问", type: "全职或兼职", desc: "定义物理实体的色彩、触觉工艺配方。主导标准表面处理（阳极氧化/喷砂）的数字化建模。" }
+        { role: "ROS2 机器人算法工程师", type: "全职 / 宁波或远程", desc: "负责移动底盘轨迹规划、运动学逆解开发与多模态传感器仿真调试。熟悉 ROS2 与 C++。" },
+        { role: "参数化 CAD 渲染开发 (Three.js/WebGL)", type: "全职或实习 / 宁波", desc: "负责 Web 端参数化 3D 几何渲染与仿真粒子流交互。熟悉 Three.js、WebGL 与 React。" },
+        { role: "CMF 工业设计师 & 美学顾问", type: "全职或兼职", desc: "定义物理实体的色彩、触觉工艺配方。主导标准表面处理（阳极氧化/喷砂）的数字化建模。" },
+        { role: "嵌入式系统开发工程师", type: "全职或实习 / 宁波", desc: "负责 STM32/ESP32 底层驱动开发与电机控制算法实现，熟悉 RTOS、CAN 总线与传感器融合。" }
       ],
       contact: "投递通道",
-      contactBtn: "发送简历至 join@sophigo.com"
+      contactBtn: "发送简历至 bobwu@profabx.com"
     },
     en: {
       eyebrow: "JOIN US",
       title: "We Drive, We Thrive",
-      back: "Back to Home",
       whoTitle: "WHO WE ARE",
-      whoDesc1: "'Sophi' originates from Latin 'Sophia', representing wisdom and refinement; 'Go' signifies exploration and progress. Sophigo is dedicated to breaking the boundary of traditional engineering and hardware development, building a digital platform integrating hardware, algorithms, and CMF minimalist aesthetics. We are an agile fabrication team of cross-disciplinary makers from global leading universities.",
-      whoDesc2: "At Sophigo, we believe in 'Code defining physical entities'. We gather talents from software algorithms, mechanical structures, CMF surface finishes, and digital manufacturing. Guided by first principles, we reshape the collaboration model between humans, code, and smart entities, empowering the next-generation engineers.",
+      whoDesc1: "'Sophi' originates from Latin 'Sophia', representing wisdom and refinement; 'Go' signifies exploration and progress. SophiGo is dedicated to breaking the boundary of traditional engineering and hardware development, building a digital platform integrating hardware, algorithms, and CMF minimalist aesthetics. We are an agile fabrication team of cross-disciplinary makers from global leading universities.",
+      whoDesc2: "At SophiGo, we believe in 'Code defining physical entities'. We gather talents from software algorithms, mechanical structures, CMF surface finishes, and digital manufacturing. Guided by first principles, we reshape the collaboration model between humans, code, and smart entities, empowering the next-generation engineers.",
       whatTitle: "WHAT WE DO",
       whatDesc: "We specialize in agile hardware R&D and 'New Engineering' education in the AI Native era, seamlessly integrating complex kinematics with mechanical chassis, creating closed-loop pipelines from parametric design models to physical assemblies.",
       pillars: [
@@ -44,12 +43,13 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       joinTitle: "OPEN ROLES",
       joinDesc: "We look for explorers who dare to challenge boundaries and turn lines of code into physical reality. Whether you are a hacker, roboticist, or CMF artist, welcome home.",
       roles: [
-        { role: "ROS2 Robotics Algorithm Engineer", type: "Full-time / Hangzhou or Remote", desc: "Design trajectory planning and kinematics solvers. Experience with ROS2, C++ and MuJoCo is required." },
-        { role: "Parametric CAD & WebGL Developer", type: "Full-time or Intern / Hangzhou", desc: "Build Web 3D geometries and dynamic simulation interfaces. Proficient with Three.js, WebGL and React." },
-        { role: "CMF Industrial Designer", type: "Full-time or Part-time", desc: "Define colors, materials, and finishes. Main standard anodizing, sandblasting surface modeling." }
+        { role: "ROS2 Robotics Algorithm Engineer", type: "Full-time / Ningbo or Remote", desc: "Design trajectory planning and kinematics solvers. Experience with ROS2, C++ and MuJoCo is required." },
+        { role: "Parametric CAD & WebGL Developer", type: "Full-time or Intern / Ningbo", desc: "Build Web 3D geometries and dynamic simulation interfaces. Proficient with Three.js, WebGL and React." },
+        { role: "CMF Industrial Designer", type: "Full-time or Part-time", desc: "Define colors, materials, and finishes. Main standard anodizing, sandblasting surface modeling." },
+        { role: "Embedded Systems Engineer", type: "Full-time or Intern / Ningbo", desc: "Develop STM32/ESP32 firmware and motor control algorithms. Experienced with RTOS, CAN bus, and sensor fusion." }
       ],
       contact: "Contact Channel",
-      contactBtn: "Send Resume to join@sophigo.com"
+      contactBtn: "Send Resume to bobwu@profabx.com"
     }
   }[lang] || t.zh;
 
@@ -57,20 +57,20 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
     <div style={{
       position: 'relative',
       minHeight: '100vh',
-      backgroundColor: '#02060f',
+      backgroundColor: 'rgba(2, 6, 15, 0.20)',
       color: '#f4f9ff',
       overflowX: 'hidden',
       fontFamily: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     }}>
-      {/* Glowing background - exactly replicating reference style */}
+      {/* AntiGravityBackground from App.jsx provides the animated particle background */}
+      {/* Transparent overlay for subtle ambient glow */}
       <div style={{
         position: 'fixed',
         inset: 0,
         zIndex: 0,
         background: `
-          radial-gradient(1000px 500px at 85% -10%, rgba(26, 141, 217, 0.22), transparent 60%),
-          radial-gradient(800px 400px at 15% 20%, rgba(10, 63, 116, 0.28), transparent 64%),
-          #02060f
+          radial-gradient(1000px 500px at 85% -10%, rgba(26, 141, 217, 0.10), transparent 60%),
+          radial-gradient(800px 400px at 15% 20%, rgba(10, 63, 116, 0.12), transparent 64%)
         `,
         pointerEvents: 'none'
       }} />
@@ -78,28 +78,6 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       {/* Main Container */}
       <div className="container-custom" style={{ position: 'relative', zIndex: 1, paddingBlock: '4rem 6rem' }}>
         
-        {/* Back Button */}
-        <button 
-          onClick={onBack}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: '#90a8c5',
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            fontSize: '0.95rem',
-            fontWeight: 500,
-            marginBottom: '3rem',
-            transition: 'color 0.2s'
-          }}
-          className="back-btn-hover"
-        >
-          <ArrowLeft size={18} />
-          {t.back}
-        </button>
-
         {/* Hero Section */}
         <div style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative' }}>
           <span style={{
@@ -192,7 +170,7 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
             </div>
 
             {/* Roles Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="roles-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }} className="roles-grid">
               {t.roles.map((role, idx) => (
                 <div 
                   key={idx}
@@ -222,7 +200,7 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
                   </div>
 
                   <a 
-                    href="mailto:join@sophigo.com" 
+                    href="mailto:bobwu@profabx.com" 
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -262,7 +240,7 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
               请将个人简历及作品集（PDF格式，如有参数化几何脚本或ROS2控制节点Demo更佳）发送至我们的邮箱，我们会在3个工作日内与你联系。
             </p>
             <a 
-              href="mailto:join@sophigo.com"
+              href="mailto:bobwu@profabx.com"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -289,9 +267,6 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       </div>
 
       <style>{`
-        .back-btn-hover:hover {
-          color: #ffffff !important;
-        }
         .pillar-card-hover:hover {
           border-color: rgba(26, 141, 217, 0.4) !important;
           transform: translateY(-2px);

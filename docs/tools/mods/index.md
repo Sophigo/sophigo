@@ -1,6 +1,6 @@
 # Mods 快速原型编译器
 
-Mods 是集成在 Sophigo 平台中的流式数字制造（Flow-based Digital Fabrication）节点编辑器。它允许用户将 CAD 图纸、G-Code 和电机轨迹以可视化的工作流形式相互连接与编译。
+Mods 是集成在 SophiGo 平台中的流式数字制造（Flow-based Digital Fabrication）节点编辑器。它允许用户将 CAD 图纸、G-Code 和电机轨迹以可视化的工作流形式相互连接与编译。
 
 ## 核心特性
 

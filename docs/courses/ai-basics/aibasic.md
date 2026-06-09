@@ -17,7 +17,7 @@ layout: false
         <a class="nav-menu-link" href="/docs/courses/fab-course/">Fab 课程</a>
         <a class="nav-menu-link active" href="/docs/courses/ai-basics/">AI 基础应用</a>
         <a class="nav-menu-link" href="/docs/courses/mobile-robot/">移动机器人</a>
-        <a class="nav-menu-link" href="/docs/courses/cmf/">CMF 应用</a>
+        <a class="nav-menu-link" href="/docs/courses/cmf/">工具：CMF 应用</a>
         <a class="nav-menu-link" href="/docs/news/index.html">探讨</a>
         <span class="menu-divider">|</span>
         <!-- Theme toggle simulation -->

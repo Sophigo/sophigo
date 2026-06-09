@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  ArrowLeft, BookOpen, Cpu, Layers, Globe, Users, Shield, Zap,
-  ExternalLink, FileText, X, Loader2, ChevronRight, Wrench,
-  Monitor, Printer, CircuitBoard, Radio, Crop, Cpu as CpuIcon,
-  HardDrive, Droplets, Wifi, Terminal, Package, Briefcase, Bot,
-  ClubIcon as Tool, CheckCircle, MapPin, Calendar, Github
-} from 'lucide-react';
+import React from 'react';
+import { ExternalLink } from 'lucide-react';
 
 const SVG_ICONS = {
   folder: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
@@ -33,229 +27,102 @@ const LAB_ITEMS = [
   {
     title: 'Lab Rules & Guidelines',
     desc: 'Operating standards, attendance, and space maintenance procedures.',
-    link: '/docs/courses/fab-course/doc/0manage/labmanage.md',
+    link: '/docs/courses/fab-course/doc/0manage/labmanage.html',
     icon: SVG_ICONS.folder,
   },
   {
     title: 'Fab Lab Network',
     desc: 'Global Fab Lab vision, MIT CBA origin, core machine inventory, and FabAcademy program.',
-    link: '/docs/courses/fab-course/doc/Fab/FAB.md',
+    link: '/docs/courses/fab-course/doc/Fab/FAB.html',
     icon: SVG_ICONS.globe,
   },
   {
     title: 'Access & Safety',
     desc: 'Mandatory safety protocols for high-power equipment, CNC, and hazardous materials.',
-    link: '/docs/courses/fab-course/doc/0manage/access_safety.md',
+    link: '/docs/courses/fab-course/doc/0manage/access_safety.html',
     icon: SVG_ICONS.shield,
   },
   {
     title: 'Material & Equipment',
     desc: 'Lab materials (acrylic, wood, resin) and equipment list with booking procedures.',
-    link: '/docs/courses/fab-course/doc/0manage/material.md',
+    link: '/docs/courses/fab-course/doc/0manage/material.html',
     icon: SVG_ICONS.tool,
   },
 ];
 
 const TUTORIALS = [
   { id: 1, title: 'Project Management', icon: SVG_ICONS.folder, desc: 'Git, Markdown, static site deployment with VitePress/GitHub Pages, and AIGC-assisted documentation workflows.',
-    docsPath: '/docs/courses/fab-course/doc/1projectmanage/Assessment1.md',
-    links: [
-      { title: 'Git basics', path: '/docs/courses/fab-course/doc/1projectmanage/git.md' },
-      { title: 'Markdown', path: '/docs/courses/fab-course/doc/1projectmanage/markdown.md' },
-      { title: 'VitePress', path: '/docs/courses/fab-course/doc/1projectmanage/vitepress.md' },
-      { title: 'AIGC tools', path: '/docs/courses/fab-course/doc/1projectmanage/aigc.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/1projectmanage/Assessment1.html' },
   { id: 2, title: 'CAD Design', icon: SVG_ICONS.box, desc: 'Parametric 3D modeling in Fusion 360 & SolidWorks. Sheet metal, generative design.',
-    docsPath: '/docs/courses/fab-course/doc/2cad/Assessment.md',
-    links: [
-      { title: 'Fusion 360', path: '/docs/courses/fab-course/doc/2cad/3D_Design_Fusion360.md' },
-      { title: 'SolidWorks', path: '/docs/courses/fab-course/doc/2cad/Solidworks.md' },
-      { title: 'Parametric', path: '/docs/courses/fab-course/doc/2cad/parameterdesign.md' },
-      { title: 'Sheet metal', path: '/docs/courses/fab-course/doc/2cad/fusion360-sheetmetal.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/2cad/Assessment.html' },
   { id: 3, title: '3D Printing', icon: SVG_ICONS.printer, desc: 'FDM, SLA, HP-MJF processes. Slicing, design constraints, and post-processing.',
-    docsPath: '/docs/courses/fab-course/doc/3_3dprinter/assessment.md',
-    links: [
-      { title: 'FDM design', path: '/docs/courses/fab-course/doc/3_3dprinter/3.FDM-designguide.md' },
-      { title: 'FDM ops', path: '/docs/courses/fab-course/doc/3_3dprinter/4.FDM-machineoperation.md' },
-      { title: 'SLA design', path: '/docs/courses/fab-course/doc/3_3dprinter/6.sladesignguide.md' },
-      { title: 'Slicing', path: '/docs/courses/fab-course/doc/3_3dprinter/9.3Dslicesoftware.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/3_3dprinter/assessment.html' },
   { id: 4, title: 'Electronic Design', icon: SVG_ICONS.cpu, desc: 'Component fundamentals, Ohm/Kirchhoff laws, schematic capture with KiCad or EasyEDA.',
-    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
-    links: [
-      { title: 'Components', path: '/docs/courses/fab-course/doc/4electric_design/electricparameter_component.md' },
-      { title: 'Basics', path: '/docs/courses/fab-course/doc/4electric_design/basicknowledge.md' },
-      { title: 'EDA tools', path: '/docs/courses/fab-course/doc/4electric_design/tool.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.html' },
   { id: 5, title: 'Arduino Application', icon: SVG_ICONS.radio, desc: 'Embedded C++ on open hardware. Sensor input, actuator control, physical computing.',
-    docsPath: '/docs/courses/fab-course/doc/5arduino/assessment.md',
-    links: [
-      { title: 'Basics', path: '/docs/courses/fab-course/doc/5arduino/arduino_basic.md' },
-      { title: 'Code', path: '/docs/courses/fab-course/doc/5arduino/arduino_code.md' },
-      { title: 'Input', path: '/docs/courses/fab-course/doc/5arduino/Arduino_Input.md' },
-      { title: 'Output', path: '/docs/courses/fab-course/doc/5arduino/Arduino_output.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/5arduino/assessment.html' },
   { id: 6, title: 'Laser Cutting', icon: SVG_ICONS.crop, desc: 'Vector files, press-fit joints, engraving and cutting on acrylic, wood, and cardstock.',
-    docsPath: '/docs/courses/fab-course/doc/6laser_cutter/Assessment.md',
-    links: [
-      { title: 'Safety', path: '/docs/courses/fab-course/doc/6laser_cutter/Safety.md' },
-      { title: 'AutoCAD', path: '/docs/courses/fab-course/doc/6laser_cutter/AutoCAD.md' },
-      { title: 'Design guide', path: '/docs/courses/fab-course/doc/6laser_cutter/Design_guide.md' },
-      { title: 'Machine practice', path: '/docs/courses/fab-course/doc/6laser_cutter/Machine_practice.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/6laser_cutter/Assessment.html' },
   { id: 7, title: 'PCB Manufacture', icon: SVG_ICONS.zap, desc: 'SMT assembly, reflow soldering, manual iron and hot-air rework and inspection.',
-    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.md',
-    links: [
-      { title: 'SMT assembly', path: '/docs/courses/fab-course/doc/7PCB_manufacture/SMT.md' },
-      { title: 'Soldering', path: '/docs/courses/fab-course/doc/7PCB_manufacture/manual.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/4electric_design/Assessment.html' },
   { id: 8, title: 'CNC Manufacture', icon: SVG_ICONS.hardDrive, desc: 'G-code programming, toolpath planning, work offsets, and 3-axis subtractive milling.',
-    docsPath: '/docs/courses/fab-course/doc/8CNC_manufacture/Assessment.md',
-    links: [
-      { title: 'Types', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cnctype.md' },
-      { title: 'Toolpath', path: '/docs/courses/fab-course/doc/8CNC_manufacture/tool.md' },
-      { title: 'Programming', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncprogram.md' },
-      { title: 'Practice', path: '/docs/courses/fab-course/doc/8CNC_manufacture/cncmanufacture.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/8CNC_manufacture/Assessment.html' },
   { id: 9, title: 'Mold & Casting', icon: SVG_ICONS.layers, desc: 'Silicone mold making from 3D-printed masters, resin and liquid casting.',
-    docsPath: '/docs/courses/fab-course/doc/9MOLD/assessment.md',
-    links: [
-      { title: 'Materials', path: '/docs/courses/fab-course/doc/9MOLD/material.md' },
-      { title: 'Tools', path: '/docs/courses/fab-course/doc/9MOLD/tool.md' },
-      { title: 'Methods', path: '/docs/courses/fab-course/doc/9MOLD/method.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/9MOLD/assessment.html' },
   { id: 10, title: 'IoT & Interaction', icon: SVG_ICONS.wifi, desc: 'TCP/IP, MQTT, HTTP. ESP8266 to cloud platforms for sensor data and remote control.',
-    docsPath: '/docs/courses/fab-course/doc/10IOT/Assessment.md',
-    links: [
-      { title: 'IoT basics', path: '/docs/courses/fab-course/doc/10IOT/IOT_basic.md' },
-      { title: 'ESP8266+Cloud', path: '/docs/courses/fab-course/doc/10IOT/NodeMCUESP8266_ALiYun.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/10IOT/Assessment.html' },
   { id: 11, title: 'Interface Application Programming', icon: SVG_ICONS.terminal, desc: 'Processing/Node.js UIs, serial-port data visualization, and interactive installations.',
-    docsPath: '/docs/courses/fab-course/doc/11Interface-application-programming/Assessment.md',
-    links: [
-      { title: 'Processing', path: '/docs/courses/fab-course/doc/11Interface-application-programming/processing.md' },
-      { title: 'Processing+Arduino', path: '/docs/courses/fab-course/doc/11Interface-application-programming/processingwitharduino.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/11Interface-application-programming/Assessment.html' },
   { id: 12, title: 'Material & Tool', icon: SVG_ICONS.package, desc: 'Standard parts (fasteners, rails, couplings), sourcing from Misumi, Digi-Key, Mouser.',
-    docsPath: '/docs/courses/fab-course/doc/12material&tool/assessment.md',
-    links: [
-      { title: 'Standard parts', path: '/docs/courses/fab-course/doc/12material&tool/standardcomponentpart.md' },
-      { title: 'Materials', path: '/docs/courses/fab-course/doc/12material&tool/material.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/12material&tool/assessment.html' },
   { id: 13, title: 'Business Plan Basics', icon: SVG_ICONS.briefcase, desc: 'Market validation, product-user fit, cost estimation, and startup pitching.',
-    docsPath: '/docs/courses/fab-course/doc/13BP/assessment.md',
-    links: [
-      { title: 'Guide', path: '/docs/courses/fab-course/doc/13BP/README.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/13BP/assessment.html' },
   { id: 14, title: 'AI Vehicle', icon: SVG_ICONS.bot, desc: 'Wheeled chassis kinematics, MCU firmware, and ROS2 with AI perception integration.',
-    docsPath: '/docs/courses/fab-course/doc/14AI&vehicle/assessment.md',
-    links: [
-      { title: 'Chassis', path: '/docs/courses/fab-course/doc/14AI&vehicle/basic.md' },
-      { title: 'AI platform', path: '/docs/courses/fab-course/doc/14AI&vehicle/aiplatform.md' },
-    ] },
+    docsPath: '/docs/courses/fab-course/doc/14AI&vehicle/assessment.html' },
 ];
 
 const COHORT_GROUPS = [
   { id: 'nexmaker-1', institution: 'NexMaker Academy', year: 'Session 1', name: 'NexMaker Academy — Session 1',
-    teams: [{ name: 'Academy S1', url: '/docs/courses/fab-course/class/fab-01' }] },
+    teams: [{ name: 'Academy S1', url: '/docs/courses/fab-course/class/fab-01.html' }] },
   { id: 'nexmaker-2', institution: 'NexMaker Academy', year: 'Session 2', name: 'NexMaker Academy — Session 2',
-    teams: [{ name: 'Academy S2', url: '/docs/courses/fab-course/class/fab-02' }] },
+    teams: [{ name: 'Academy S2', url: '/docs/courses/fab-course/class/fab-02.html' }] },
   { id: 'unnc', institution: 'UNNC FabLab', year: '2023–2025', name: 'Fab Academy UNNC',
     teams: [
-      { name: 'FabAcademy 2025', url: '/docs/courses/fab-course/class/fab-2025-UNNC' },
-      { name: 'UNNC 2025-2', url: '/docs/courses/fab-course/class/fab-2025-UNNC-2' },
-      { name: 'FabAcademy 2023', url: '/docs/courses/fab-course/doc/Fab/fab2023' },
+      { name: 'FabAcademy 2025', url: '/docs/courses/fab-course/class/fab-2025-UNNC.html' },
+      { name: 'UNNC 2025-2', url: '/docs/courses/fab-course/class/fab-2025-UNNC-2.html' },
+      { name: 'FabAcademy 2023', url: '/docs/courses/fab-course/doc/Fab/fab2023.html' },
     ] },
   { id: 'zju-2023', institution: 'ZJU Design Engineering', year: '2023', name: 'DE / DM 2023',
     teams: [
-      { name: 'DE 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-de' },
-      { name: 'DM 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-dm' },
-      { name: 'Mini 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-mini' },
+      { name: 'DE 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-de.html' },
+      { name: 'DM 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-dm.html' },
+      { name: 'Mini 2023', url: '/docs/courses/fab-course/class/fab-2023-zju-mini.html' },
     ] },
   { id: 'zju-2022', institution: 'ZJU Design Engineering', year: '2022', name: 'DE / DM 2022',
     teams: [
-      { name: 'DE 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-de' },
-      { name: 'DM 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-dm' },
-      { name: 'Mini 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-mini' },
+      { name: 'DE 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-de.html' },
+      { name: 'DM 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-dm.html' },
+      { name: 'Mini 2022', url: '/docs/courses/fab-course/class/fab-2022-zju-mini.html' },
     ] },
   { id: 'zju-2020-21', institution: 'ZJU Design Engineering', year: '2020–2021', name: 'DE / DM 2020–2021',
     teams: [
-      { name: 'DE 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-de' },
-      { name: 'DM 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-dm' },
-      { name: 'DE 2020', url: '/docs/courses/fab-course/class/fab-2020-zju-de' },
+      { name: 'DE 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-de.html' },
+      { name: 'DM 2021', url: '/docs/courses/fab-course/class/fab-2021-zju-dm.html' },
+      { name: 'DE 2020', url: '/docs/courses/fab-course/class/fab-2020-zju-de.html' },
     ] },
   { id: 'zwu', institution: 'ZWU Interactive System', year: '2024–2026', name: 'Interactive System Program',
     teams: [
-      { name: 'IS 2026-A1', url: '/docs/courses/fab-course/class/FAB-2026-ZWU-01' },
-      { name: 'IS 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem' },
-      { name: 'IS 2+2 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2' },
+      { name: 'IS 2026-A1', url: '/docs/courses/fab-course/class/FAB-2026-ZWU-01.html' },
+      { name: 'IS 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem.html' },
+      { name: 'IS 2+2 2024', url: '/docs/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2.html' },
     ] },
 ];
 
 
-export default function FabCourse({ onBack }) {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [drawerTitle, setDrawerTitle] = useState('');
-  const [drawerUrl, setDrawerUrl] = useState('');
-  const [drawerHtml, setDrawerHtml] = useState('');
-  const [drawerLoading, setDrawerLoading] = useState(false);
-  const [drawerFallback, setDrawerFallback] = useState(false);
-  const drawerBodyRef = useRef(null);
-
-  const openDrawer = async (path, title) => {
-    setDrawerTitle(title);
-    setDrawerOpen(true);
-    setDrawerLoading(true);
-    setDrawerHtml('');
-    setDrawerFallback(false);
-
-    let p = path.replace(/\.md$/, '');
-    if (p.startsWith('/')) p = p.slice(1);
-    if (!p.startsWith('docs/') && !p.startsWith('courses/')) {
-      p = 'docs/courses/fab-course/' + p;
-    } else if (p.startsWith('courses/')) {
-      p = 'docs/' + p;
-    }
-    const url = '/' + p;
-    setDrawerUrl(url);
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('not found');
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      const body = doc.querySelector('.vp-doc');
-      if (body) {
-        setDrawerHtml(body.innerHTML);
-      } else {
-        setDrawerFallback(true);
-      }
-    } catch {
-      setDrawerFallback(true);
-    } finally {
-      setDrawerLoading(false);
-      if (drawerBodyRef.current) drawerBodyRef.current.scrollTop = 0;
-    }
-  };
-
-  const closeDrawer = () => setDrawerOpen(false);
-
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape' && drawerOpen) closeDrawer(); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [drawerOpen]);
-
+export default function FabCourse({ onBack, lang = 'zh' }) {
   return (
     <div style={{ paddingTop: '3rem', paddingBottom: '4rem', minHeight: '80vh', position: 'relative', zIndex: 5 }}>
       <div className="container-custom">
-
-        {/* Back */}
-        <button onClick={onBack} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', borderRadius: '20px', cursor: 'pointer', marginBottom: '2rem', border: '1px solid var(--border-color)', background: 'transparent', color: 'var(--text-secondary)' }}>
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
 
         {/* ── Hero ── */}
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem' }}>
@@ -330,19 +197,28 @@ export default function FabCourse({ onBack }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
             {LAB_ITEMS.map((item) => (
-              <div key={item.title} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', transition: 'border-color 0.15s' }}
+              <div key={item.title}
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', transition: 'all 0.2s ease-in-out', minHeight: '200px' }}
                 className="fc-lab-card">
                 <div style={{ color: 'var(--klein-blue)', display: 'flex' }} dangerouslySetInnerHTML={{ __html: item.icon }} />
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <h3 style={{ fontSize: '0.85rem', fontWeight: 600, margin: '0 0 0.3rem', color: 'var(--text-primary)' }}>{item.title}</h3>
-                  <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>{item.desc}</p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingTop: '0.35rem', borderTop: '1px solid var(--border-color)' }}>
-                  <button onClick={() => openDrawer(item.link, item.title)} style={{ background: 'none', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', fontSize: '0.7rem', fontWeight: 500, padding: '0.25rem 0.6rem', borderRadius: '6px', cursor: 'pointer', fontFamily: 'inherit' }}>
-                    Read
-                  </button>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textDecoration: 'none' }}>
-                    Full screen ↗
+                  <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: '0 0 1.25rem', flex: 1 }}>{item.desc}</p>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="btn-cta"
+                    style={{
+                      padding: '0.4rem 1rem',
+                      borderRadius: '20px',
+                      fontSize: '0.74rem',
+                      fontWeight: '600',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      textDecoration: 'none',
+                      marginTop: 'auto',
+                      width: 'fit-content'
+                    }}>
+                    <span>{lang === 'zh' ? '查看文档细节' : 'View Doc Details'}</span>
+                    <ExternalLink size={12} style={{ flexShrink: 0 }} />
                   </a>
                 </div>
               </div>
@@ -359,25 +235,31 @@ export default function FabCourse({ onBack }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
             {TUTORIALS.map((tut) => (
-              <div key={tut.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', padding: '1.15rem', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', cursor: 'pointer', transition: 'border-color 0.15s, transform 0.15s', minHeight: '155px' }}
-                className="fc-tut-card"
-                onClick={() => openDrawer(tut.docsPath, tut.title)}>
+              <div key={tut.id}
+                style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', padding: '1.15rem', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', transition: 'all 0.2s ease-in-out', minHeight: '200px' }}
+                className="fc-tut-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.15rem' }}>
                   <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--klein-blue)', letterSpacing: '0.08em' }}>{String(tut.id).padStart(2, '0')}</span>
                   <div style={{ color: 'var(--border-color)' }} dangerouslySetInnerHTML={{ __html: tut.icon }} />
                 </div>
                 <h3 style={{ fontSize: '0.82rem', fontWeight: 600, margin: 0, color: 'var(--text-primary)', lineHeight: '1.3' }}>{tut.title}</h3>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0, flex: 1 }}>{tut.desc}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem', marginTop: '0.15rem' }}>
-                  {tut.links.slice(0, 3).map((link) => (
-                    <span key={link.title} onClick={(e) => { e.stopPropagation(); openDrawer(link.path, link.title); }}
-                      style={{ fontSize: '0.64rem', color: 'var(--text-muted)', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '0.1rem 0.4rem', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'color 0.12s, border-color 0.12s' }}
-                      className="fc-tut-link">
-                      {link.title}
-                    </span>
-                  ))}
-                  {tut.links.length > 3 && <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)' }}>+{tut.links.length - 3}</span>}
-                </div>
+                <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: '0 0 1rem', flex: 1 }}>{tut.desc}</p>
+                <a href={tut.docsPath} target="_blank" rel="noopener noreferrer" className="btn-cta"
+                  style={{
+                    padding: '0.4rem 1rem',
+                    borderRadius: '20px',
+                    fontSize: '0.74rem',
+                    fontWeight: '600',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    textDecoration: 'none',
+                    marginTop: 'auto',
+                    width: 'fit-content'
+                  }}>
+                  <span>{lang === 'zh' ? '查看文档细节' : 'View Doc Details'}</span>
+                  <ExternalLink size={12} style={{ flexShrink: 0 }} />
+                </a>
               </div>
             ))}
           </div>
@@ -416,89 +298,13 @@ export default function FabCourse({ onBack }) {
 
       </div>
 
-      {/* ═══ Slide-in Drawer ═══ */}
-      <div style={{
-        position: 'fixed', inset: 0, background: drawerOpen ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0)',
-        zIndex: 500, pointerEvents: drawerOpen ? 'auto' : 'none', transition: 'background 0.25s'
-      }} onClick={closeDrawer}>
-        <div style={{
-          position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(620px, 92vw)',
-          background: 'var(--bg-primary)', borderLeft: '1px solid var(--border-color)',
-          display: 'flex', flexDirection: 'column',
-          transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 0.28s cubic-bezier(0.4, 0, 0.2, 1)', zIndex: 501
-        }} onClick={(e) => e.stopPropagation()}>
-          {/* Drawer Header */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', borderBottom: '1px solid var(--border-color)', gap: '1rem', flexShrink: 0 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', overflow: 'hidden' }}>
-              <span style={{ fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--klein-blue)', textTransform: 'uppercase' }}>DOCS</span>
-              <h3 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{drawerTitle}</h3>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
-              {drawerUrl && <a href={drawerUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Open full screen ↗</a>}
-              <button onClick={closeDrawer} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '1rem', cursor: 'pointer', padding: '0.2rem', lineHeight: 1, fontFamily: 'inherit' }}>✕</button>
-            </div>
-          </div>
-          {/* Drawer Body */}
-          <div ref={drawerBodyRef} style={{ flex: 1, overflowY: 'auto', padding: '1.5rem 1.25rem' }}>
-            {drawerLoading && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <div className="fc-sk-bar" />
-                <div className="fc-sk-line" style={{ width: '68%' }} />
-                <div className="fc-sk-line" style={{ width: '82%' }} />
-                <div className="fc-sk-line" style={{ width: '50%' }} />
-                <div className="fc-sk-block" />
-                <div className="fc-sk-line" style={{ width: '74%' }} />
-              </div>
-            )}
-            {!drawerLoading && drawerHtml && (
-              <div className="fc-doc-render" dangerouslySetInnerHTML={{ __html: drawerHtml }} />
-            )}
-            {!drawerLoading && drawerFallback && (
-              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-                  Could not load document preview.
-                </p>
-                <a href={drawerUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--klein-blue)', fontSize: '0.9rem' }}>
-                  Open in full screen ↗
-                </a>
-              </div>
-            )}
-            {!drawerLoading && !drawerHtml && !drawerFallback && (
-              <div style={{ textAlign: 'center', padding: '2rem 0', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                No content available.
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
       {/* Styles */}
       <style>{`
-        .fc-lab-card:hover { border-color: rgba(0, 47, 167, 0.3) !important; }
-        .fc-tut-card:hover { border-color: rgba(0, 47, 167, 0.35) !important; transform: translateY(-2px); }
-        .fc-tut-link:hover { color: var(--text-secondary) !important; border-color: rgba(0, 47, 167, 0.3) !important; }
+        .fc-lab-card { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fc-lab-card:hover { border-color: rgba(0, 47, 167, 0.45) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); }
+        .fc-tut-card { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fc-tut-card:hover { border-color: rgba(0, 47, 167, 0.45) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); }
         .fc-team-link:hover { color: var(--text-primary) !important; border-color: var(--klein-blue) !important; background: rgba(0,47,167,0.04) !important; }
-
-        .fc-sk-bar { height: 3px; background: linear-gradient(90deg, var(--border-color) 25%, var(--klein-blue) 50%, var(--border-color) 75%); background-size: 200% 100%; animation: fc-shimmer 1.4s infinite; border-radius: 2px; margin-bottom: 0.5rem; }
-        .fc-sk-line { height: 12px; background: var(--border-color); border-radius: 4px; }
-        .fc-sk-block { height: 80px; background: rgba(0,0,0,0.03); border-radius: 6px; margin: 0.5rem 0; }
-
-        @keyframes fc-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-        .fc-doc-render { font-size: 0.85rem; line-height: 1.75; color: var(--text-secondary); }
-        .fc-doc-render h1, .fc-doc-render h2, .fc-doc-render h3 { color: var(--text-primary); font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
-        .fc-doc-render h1 { font-size: 1.15rem; }
-        .fc-doc-render h2 { font-size: 1rem; }
-        .fc-doc-render h3 { font-size: 0.88rem; }
-        .fc-doc-render p { margin: 0 0 0.75rem; }
-        .fc-doc-render code { background: var(--border-color); border-radius: 4px; padding: 0.1em 0.35em; font-size: 0.82em; color: #7dd3fc; }
-        .fc-doc-render pre { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin: 0.75rem 0; }
-        .fc-doc-render img { max-width: 100%; border-radius: 6px; }
-        .fc-doc-render a { color: var(--klein-blue); text-decoration: none; }
-        .fc-doc-render a:hover { text-decoration: underline; }
-        .fc-doc-render ul, .fc-doc-render ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
-        .fc-doc-render li { margin-bottom: 0.25rem; }
 
         @media (max-width: 900px) {
           #fc-lab div[style*="grid-template-columns"] { grid-template-columns: repeat(2, 1fr) !important; }

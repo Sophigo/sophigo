@@ -188,14 +188,6 @@ export default function Cmf({ onBack }) {
 
   return (
     <div className="cmf-page">
-      {/* Back */}
-      <div style={{ position: 'relative', maxWidth: '1440px', margin: '0 auto', padding: '1rem 24px 0' }}>
-        <button onClick={onBack} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', borderRadius: '20px', cursor: 'pointer', border: '1px solid var(--cmf-border)', background: 'rgba(255,255,255,0.035)', color: 'var(--cmf-sub)', fontFamily: 'inherit' }}>
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
-      </div>
-
       {/* Intro */}
       <section className="cmf-intro" style={{ padding: '28px 24px 0' }}>
         <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: '24px', alignItems: 'end' }}>
@@ -336,7 +328,7 @@ export default function Cmf({ onBack }) {
       </section>
 
       <style>{`
-        :root {
+        .cmf-page {
           --cmf-bg: #08090c;
           --cmf-panel: rgba(19, 22, 28, 0.82);
           --cmf-panel-strong: rgba(27, 31, 39, 0.92);

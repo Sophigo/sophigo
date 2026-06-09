@@ -95,7 +95,7 @@ export default function AntiGravityBackground() {
       size: 0.35,
       map: dotTexture,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.40,
       depthWrite: false,
       blending: THREE.NormalBlending,
     });

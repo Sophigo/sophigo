@@ -493,83 +493,404 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "NexMaker academy-1",
-        "link": "/courses/fab-course/class/fab-01",
+        "text": "ZWU-interactivesystem 2026A1",
+        "link": "/courses/fab-course/class/FAB-2026-ZWU-01",
         "items": [
           {
-            "text": "Jiahao Liu",
-            "link": "https://nex-fab.gitlab.io/fab-01/jiahaoliu/"
+            "text": "zwu2026-1-001",
+            "link": "https://nexmaker-fab.github.io/zwu2026-1-001/"
           },
           {
-            "text": "Qihao Bao",
-            "link": "https://nex-fab.gitlab.io/fab-01/qihaobao/"
+            "text": "Jowywlz",
+            "link": "https://nexmaker-fab.github.io/zwu-2026-1-002/"
           },
           {
-            "text": "Jocelin",
-            "link": "https://nex-fab.gitlab.io/fab-01/jocelin/"
+            "text": "ZwU-2026-1-003",
+            "link": "https://nexmaker-fab.github.io/ZwU-2026-1-003/"
           },
           {
-            "text": "Lei chen",
-            "link": "https://nex-fab.gitlab.io/fab-01/chenlei/"
-          },
-          {
-            "text": "Yijun Wang",
-            "link": "https://nex-fab.gitlab.io/fab-01/yijunwang/"
-          },
-          {
-            "text": "luis Li",
-            "link": "https://nex-fab.gitlab.io/fab-01/luis/"
-          },
-          {
-            "text": "Liang Guo",
-            "link": "https://nex-fab.gitlab.io/fab-01/gl/"
-          },
-          {
-            "text": "Jacen Wang",
-            "link": "https://nex-fab.gitlab.io/fab-01/jacen/"
-          },
-          {
-            "text": "Mars Ma",
-            "link": "https://nex-fab.gitlab.io/fab-01/marsma/"
-          },
-          {
-            "text": "Bo Li",
-            "link": "https://nex-fab.gitlab.io/fab-01/bo-li/"
-          },
-          {
-            "text": "Bob Wu",
-            "link": "https://nex-fab.gitlab.io/fab-01/bobstudent/"
+            "text": "AETHER STUDIO",
+            "link": "https://nexmaker-fab.github.io/zwu-2026-1-004/"
           }
         ],
         "collapsed": true
       },
       {
-        "text": "NexMaker academy-2",
-        "link": "/courses/fab-course/class/fab-02",
+        "text": "ZWU-interactivesystem 2026A2",
+        "link": "/courses/fab-course/class/FAB-2026-ZWU-01",
         "items": [
           {
-            "text": "June",
-            "link": "https://nex-fab.gitlab.io/fab-02/june/"
+            "text": "ZWU-2026-2-001",
+            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-001/"
           },
           {
-            "text": "Otto",
-            "link": "https://nex-fab.gitlab.io/fab-02/otto"
+            "text": "V-JESH",
+            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-002/"
           },
           {
-            "text": "Ciel",
-            "link": "https://nex-fab.gitlab.io/fab-02/ciel"
+            "text": "ZWU-2026-2-003",
+            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-003/"
           },
           {
-            "text": "Jenny",
-            "link": "https://nex-fab.gitlab.io/fab-02/jenny"
+            "text": "ZWU-2026-2-004",
+            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-004/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Fab Academy 2025-UNNC",
+        "link": "/courses/fab-course/doc/Fab/fab2023",
+        "items": [
+          {
+            "text": "Xu Sun",
+            "link": "https://fabacademy.org/2025/labs/unnc/students/xu-sun/"
           },
           {
-            "text": "Orkun",
-            "link": "https://nex-fab.gitlab.io/fab-02/orkun"
+            "text": "Yaolun Zhang",
+            "link": "https://fabacademy.org/2023/labs/ningbo/students/yaorun-zhang/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "UNNC-FabLab-2025-1",
+        "link": "/courses/fab-course/class/fab-2025-UNNC",
+        "items": [
+          {
+            "text": "Fengyi zhao",
+            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-ZHAO/"
           },
           {
-            "text": "Candy",
-            "link": "https://nex-fab.gitlab.io/fab-02/candy/"
+            "text": "Yan bing",
+            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-yan/"
+          },
+          {
+            "text": "Ao Liu",
+            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-AO/"
+          },
+          {
+            "text": "Yi shan tong",
+            "link": "https://unnc-fab.github.io/2025-1-ty/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "UNNC-FabLab-2025-2",
+        "link": "/courses/fab-course/class/fab-2025-UNNC-2",
+        "items": [
+          {
+            "text": "Wenqing zhong",
+            "link": "https://unnc-fab.github.io/2025-2-wenqing/"
+          },
+          {
+            "text": "Simon",
+            "link": "https://unnc-fab.github.io/2025-2-simon/"
+          },
+          {
+            "text": "Xiangdong Huang",
+            "link": "https://unnc-fab.github.io/2025-2-xiangdong/"
+          },
+          {
+            "text": "Mingzhao Xi",
+            "link": "https://unnc-fab.github.io/2025-2-mingzhao/"
+          },
+          {
+            "text": "Jiawei",
+            "link": "https://unnc-fab.github.io/2025-2-jiawei/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design engineering 2025"
+      },
+      {
+        "text": "ZWU-interactivesystem 2024",
+        "link": "/courses/fab-course/class/fab-2024-zwu-Interactivesystem",
+        "items": [
+          {
+            "text": "SZPJNF",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-1/#/"
+          },
+          {
+            "text": "Ecobloom",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-2-Ecobloom/#/"
+          },
+          {
+            "text": "Yes or Yes",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-3-Yes-or-yes/#/"
+          },
+          {
+            "text": "watermelon sugar",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-4/#/"
+          },
+          {
+            "text": "BCZG",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-5/#/"
+          },
+          {
+            "text": "None group",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-6/#/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "ZWU-interactivesystem2+2 2024",
+        "link": "/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2",
+        "items": [
+          {
+            "text": "Mars",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-7/#/"
+          },
+          {
+            "text": "Bunbun",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-8-BUNBUN/#/"
+          },
+          {
+            "text": "BSST",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-9-BSST/#/"
+          },
+          {
+            "text": "4AOL",
+            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-10-4AOL/#/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Fab Academy 2023  UNNC- NexMaker",
+        "link": "/courses/fab-course/doc/Fab/fab2023",
+        "items": [
+          {
+            "text": "Yaolun Zhang",
+            "link": "https://fabacademy.org/2023/labs/ningbo/students/yaorun-zhang/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Engineering2023 ",
+        "link": "/courses/fab-course/class/fab-2023-zju-de",
+        "items": [
+          {
+            "text": "InnoWarm",
+            "link": "https://nexmaker-fab.github.io/2023zjude-InnoWarm/#/"
+          },
+          {
+            "text": "YSD",
+            "link": "https://nexmaker-fab.github.io/2023zjude-YSD/"
+          },
+          {
+            "text": "NOBRAINNOPAIN",
+            "link": "https://nexmaker-fab.github.io/2023zjude-NOBRAINNOPAIN/"
+          },
+          {
+            "text": "Keyidu",
+            "link": "https://nexmaker-fab.github.io/2023zjude-keyidu/#/"
+          },
+          {
+            "text": "10:36",
+            "link": "https://nexmaker-fab.github.io/2023zjude-10-36/"
+          },
+          {
+            "text": "Woodman123",
+            "link": "https://design-engineering.littleor.cn/"
+          },
+          {
+            "text": "FiveTigers",
+            "link": "https://nexmaker-fab.github.io/2023zjude-FiveTigers/#/"
+          },
+          {
+            "text": "ORG030",
+            "link": "https://nexmaker-fab.github.io/2023zjude-ORG030/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Manufacture2023",
+        "link": "/courses/fab-course/class/fab-2023-zju-dm",
+        "items": [
+          {
+            "text": "The-Dynamic-Seven",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-The-Dynamic-Seven/"
+          },
+          {
+            "text": "7DE",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-7DE/"
+          },
+          {
+            "text": "Tomorrow-s-Wonder-Team",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-Tomorrow-s-Wonder-Team/"
+          },
+          {
+            "text": "Team-novva",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-teamnovva/"
+          },
+          {
+            "text": "INNOGENIUSES",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-INNOGENIUSES/"
+          },
+          {
+            "text": "Gladiators",
+            "link": "https://nexmaker-fab.github.io/2023zjudem-Team-Gladiators/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Engineering mini 2023",
+        "link": "/courses/fab-course/class/fab-2023-zju-mini",
+        "items": [
+          {
+            "text": "Fivevolution",
+            "link": "https://nexmaker-fab.github.io/2023zjudemini-hi1/#/"
+          },
+          {
+            "text": "Fivist",
+            "link": "https://nexmaker-fab.github.io/2023zjudemini-hi2/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Engineering2022 ",
+        "link": "/courses/fab-course/class/fab-2022-zju-de",
+        "items": [
+          {
+            "text": "the Red Gang Tailor's",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-team5/#/"
+          },
+          {
+            "text": "doubleQ",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-doubleQ/#/"
+          },
+          {
+            "text": "BIG5",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-BIG5/"
+          },
+          {
+            "text": "SixGod",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-SixGod/"
+          },
+          {
+            "text": "ALL RIGHT",
+            "link": "https://markshaw1234.github.io/2022zjudem-team4.github.io/"
+          },
+          {
+            "text": "Peopl3 Drag Per2on",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-peopl3-drag-per2on/#/"
+          },
+          {
+            "text": "SoFarSoGood",
+            "link": "https://nexmaker-fab.github.io/2022zjude1-SoFarSoGood/#/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Manufacture2022",
+        "link": "/courses/fab-course/class/fab-2022-zju-dm",
+        "items": [
+          {
+            "text": "TECviz",
+            "link": "https://nexmaker-fab.github.io/TECviz/#/"
+          },
+          {
+            "text": "BRAINII MAKERS",
+            "link": "https://nexmaker-fab.github.io/2022zjudem-team2/"
+          },
+          {
+            "text": "NEXEERO",
+            "link": "https://sesebak.github.io/NEXEERO_TEAM/#/"
+          },
+          {
+            "text": "Mavericks",
+            "link": "https://nexmaker-fab.github.io/2022zjudem-team4/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Engineering mini 2022",
+        "link": "/courses/fab-course/class/fab-2022-zju-mini",
+        "items": [
+          {
+            "text": "Four Esigners",
+            "link": "https://nexmaker-fab.github.io/2022zjudemini-team1boy/"
+          },
+          {
+            "text": "Four Vegetables",
+            "link": "https://nexmaker-fab.github.io/2022zjudemini-team2/#/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Engineering2021 ",
+        "link": "/courses/fab-course/class/fab-2021-zju-de",
+        "items": [
+          {
+            "text": "CNFD",
+            "link": "https://374737390.wixsite.com/my-site"
+          },
+          {
+            "text": "NBD",
+            "link": "https://notblinddesign.wixsite.com/nbdesign"
+          },
+          {
+            "text": "UNDEFINED",
+            "link": "https://xxzzxh.github.io/"
+          },
+          {
+            "text": "2021toast",
+            "link": "https://perfect-anger-34c.notion.site/2021-Toast-9d52603d5d39409b8337738a551b5df1"
+          },
+          {
+            "text": "X-Lab",
+            "link": "https://x-labby.webflow.io/"
+          },
+          {
+            "text": "Get1688",
+            "link": "https://1175138076.wixsite.com/get1688"
+          },
+          {
+            "text": "WooHoo",
+            "link": "https://richengaa.wixsite.com/woohoo"
+          },
+          {
+            "text": "OUTLAST Zone",
+            "link": "http://121.41.45.236:8001/"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Design Manufacture2021",
+        "link": "/courses/fab-course/class/fab-2021-zju-dm",
+        "items": [
+          {
+            "text": "The Flash team",
+            "link": "https://turatsinzecmu2020.wixsite.com/theflash"
+          },
+          {
+            "text": "The Crescent",
+            "link": "https://bitenotes.wixsite.com/thecrescent"
+          },
+          {
+            "text": "Estimate",
+            "link": "https://lushomo19.wixsite.com/estimate"
+          },
+          {
+            "text": "Kltkawsar",
+            "link": "https://kltkawsar.wixsite.com/website"
+          },
+          {
+            "text": "Rahmansezad",
+            "link": "https://rahmansezad.wixsite.com/astro"
           }
         ],
         "collapsed": true
@@ -683,404 +1004,83 @@ export default [
         "collapsed": true
       },
       {
-        "text": "Design Engineering2021 ",
-        "link": "/courses/fab-course/class/fab-2021-zju-de",
+        "text": "NexMaker academy-1",
+        "link": "/courses/fab-course/class/fab-01",
         "items": [
           {
-            "text": "CNFD",
-            "link": "https://374737390.wixsite.com/my-site"
+            "text": "Jiahao Liu",
+            "link": "https://nex-fab.gitlab.io/fab-01/jiahaoliu/"
           },
           {
-            "text": "NBD",
-            "link": "https://notblinddesign.wixsite.com/nbdesign"
+            "text": "Qihao Bao",
+            "link": "https://nex-fab.gitlab.io/fab-01/qihaobao/"
           },
           {
-            "text": "UNDEFINED",
-            "link": "https://xxzzxh.github.io/"
+            "text": "Jocelin",
+            "link": "https://nex-fab.gitlab.io/fab-01/jocelin/"
           },
           {
-            "text": "2021toast",
-            "link": "https://perfect-anger-34c.notion.site/2021-Toast-9d52603d5d39409b8337738a551b5df1"
+            "text": "Lei chen",
+            "link": "https://nex-fab.gitlab.io/fab-01/chenlei/"
           },
           {
-            "text": "X-Lab",
-            "link": "https://x-labby.webflow.io/"
+            "text": "Yijun Wang",
+            "link": "https://nex-fab.gitlab.io/fab-01/yijunwang/"
           },
           {
-            "text": "Get1688",
-            "link": "https://1175138076.wixsite.com/get1688"
+            "text": "luis Li",
+            "link": "https://nex-fab.gitlab.io/fab-01/luis/"
           },
           {
-            "text": "WooHoo",
-            "link": "https://richengaa.wixsite.com/woohoo"
+            "text": "Liang Guo",
+            "link": "https://nex-fab.gitlab.io/fab-01/gl/"
           },
           {
-            "text": "OUTLAST Zone",
-            "link": "http://121.41.45.236:8001/"
+            "text": "Jacen Wang",
+            "link": "https://nex-fab.gitlab.io/fab-01/jacen/"
+          },
+          {
+            "text": "Mars Ma",
+            "link": "https://nex-fab.gitlab.io/fab-01/marsma/"
+          },
+          {
+            "text": "Bo Li",
+            "link": "https://nex-fab.gitlab.io/fab-01/bo-li/"
+          },
+          {
+            "text": "Bob Wu",
+            "link": "https://nex-fab.gitlab.io/fab-01/bobstudent/"
           }
         ],
         "collapsed": true
       },
       {
-        "text": "Design Manufacture2021",
-        "link": "/courses/fab-course/class/fab-2021-zju-dm",
+        "text": "NexMaker academy-2",
+        "link": "/courses/fab-course/class/fab-02",
         "items": [
           {
-            "text": "The Flash team",
-            "link": "https://turatsinzecmu2020.wixsite.com/theflash"
+            "text": "June",
+            "link": "https://nex-fab.gitlab.io/fab-02/june/"
           },
           {
-            "text": "The Crescent",
-            "link": "https://bitenotes.wixsite.com/thecrescent"
+            "text": "Otto",
+            "link": "https://nex-fab.gitlab.io/fab-02/otto"
           },
           {
-            "text": "Estimate",
-            "link": "https://lushomo19.wixsite.com/estimate"
+            "text": "Ciel",
+            "link": "https://nex-fab.gitlab.io/fab-02/ciel"
           },
           {
-            "text": "Kltkawsar",
-            "link": "https://kltkawsar.wixsite.com/website"
+            "text": "Jenny",
+            "link": "https://nex-fab.gitlab.io/fab-02/jenny"
           },
           {
-            "text": "Rahmansezad",
-            "link": "https://rahmansezad.wixsite.com/astro"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Engineering2022 ",
-        "link": "/courses/fab-course/class/fab-2022-zju-de",
-        "items": [
-          {
-            "text": "the Red Gang Tailor's",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-team5/#/"
+            "text": "Orkun",
+            "link": "https://nex-fab.gitlab.io/fab-02/orkun"
           },
           {
-            "text": "doubleQ",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-doubleQ/#/"
-          },
-          {
-            "text": "BIG5",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-BIG5/"
-          },
-          {
-            "text": "SixGod",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-SixGod/"
-          },
-          {
-            "text": "ALL RIGHT",
-            "link": "https://markshaw1234.github.io/2022zjudem-team4.github.io/"
-          },
-          {
-            "text": "Peopl3 Drag Per2on",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-peopl3-drag-per2on/#/"
-          },
-          {
-            "text": "SoFarSoGood",
-            "link": "https://nexmaker-fab.github.io/2022zjude1-SoFarSoGood/#/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Manufacture2022",
-        "link": "/courses/fab-course/class/fab-2022-zju-dm",
-        "items": [
-          {
-            "text": "TECviz",
-            "link": "https://nexmaker-fab.github.io/TECviz/#/"
-          },
-          {
-            "text": "BRAINII MAKERS",
-            "link": "https://nexmaker-fab.github.io/2022zjudem-team2/"
-          },
-          {
-            "text": "NEXEERO",
-            "link": "https://sesebak.github.io/NEXEERO_TEAM/#/"
-          },
-          {
-            "text": "Mavericks",
-            "link": "https://nexmaker-fab.github.io/2022zjudem-team4/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Engineering mini 2022",
-        "link": "/courses/fab-course/class/fab-2022-zju-mini",
-        "items": [
-          {
-            "text": "Four Esigners",
-            "link": "https://nexmaker-fab.github.io/2022zjudemini-team1boy/"
-          },
-          {
-            "text": "Four Vegetables",
-            "link": "https://nexmaker-fab.github.io/2022zjudemini-team2/#/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Fab Academy 2023  UNNC- NexMaker",
-        "link": "/courses/fab-course/doc/Fab/fab2023",
-        "items": [
-          {
-            "text": "Yaolun Zhang",
-            "link": "https://fabacademy.org/2023/labs/ningbo/students/yaorun-zhang/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Engineering2023 ",
-        "link": "/courses/fab-course/class/fab-2023-zju-de",
-        "items": [
-          {
-            "text": "InnoWarm",
-            "link": "https://nexmaker-fab.github.io/2023zjude-InnoWarm/#/"
-          },
-          {
-            "text": "YSD",
-            "link": "https://nexmaker-fab.github.io/2023zjude-YSD/"
-          },
-          {
-            "text": "NOBRAINNOPAIN",
-            "link": "https://nexmaker-fab.github.io/2023zjude-NOBRAINNOPAIN/"
-          },
-          {
-            "text": "Keyidu",
-            "link": "https://nexmaker-fab.github.io/2023zjude-keyidu/#/"
-          },
-          {
-            "text": "10:36",
-            "link": "https://nexmaker-fab.github.io/2023zjude-10-36/"
-          },
-          {
-            "text": "Woodman123",
-            "link": "https://design-engineering.littleor.cn/"
-          },
-          {
-            "text": "FiveTigers",
-            "link": "https://nexmaker-fab.github.io/2023zjude-FiveTigers/#/"
-          },
-          {
-            "text": "ORG030",
-            "link": "https://nexmaker-fab.github.io/2023zjude-ORG030/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Manufacture2023",
-        "link": "/courses/fab-course/class/fab-2023-zju-dm",
-        "items": [
-          {
-            "text": "The-Dynamic-Seven",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-The-Dynamic-Seven/"
-          },
-          {
-            "text": "7DE",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-7DE/"
-          },
-          {
-            "text": "Tomorrow-s-Wonder-Team",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-Tomorrow-s-Wonder-Team/"
-          },
-          {
-            "text": "Team-novva",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-teamnovva/"
-          },
-          {
-            "text": "INNOGENIUSES",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-INNOGENIUSES/"
-          },
-          {
-            "text": "Gladiators",
-            "link": "https://nexmaker-fab.github.io/2023zjudem-Team-Gladiators/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design Engineering mini 2023",
-        "link": "/courses/fab-course/class/fab-2023-zju-mini",
-        "items": [
-          {
-            "text": "Fivevolution",
-            "link": "https://nexmaker-fab.github.io/2023zjudemini-hi1/#/"
-          },
-          {
-            "text": "Fivist",
-            "link": "https://nexmaker-fab.github.io/2023zjudemini-hi2/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "ZWU-interactivesystem 2024",
-        "link": "/courses/fab-course/class/fab-2024-zwu-Interactivesystem",
-        "items": [
-          {
-            "text": "SZPJNF",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-1/#/"
-          },
-          {
-            "text": "Ecobloom",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-2-Ecobloom/#/"
-          },
-          {
-            "text": "Yes or Yes",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-3-Yes-or-yes/#/"
-          },
-          {
-            "text": "watermelon sugar",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-4/#/"
-          },
-          {
-            "text": "BCZG",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-5/#/"
-          },
-          {
-            "text": "None group",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-6/#/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "ZWU-interactivesystem2+2 2024",
-        "link": "/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2",
-        "items": [
-          {
-            "text": "Mars",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-7/#/"
-          },
-          {
-            "text": "Bunbun",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-8-BUNBUN/#/"
-          },
-          {
-            "text": "BSST",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-9-BSST/#/"
-          },
-          {
-            "text": "4AOL",
-            "link": "https://nexmaker-fab.github.io/2024ZWU-IS-10-4AOL/#/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Fab Academy 2025-UNNC",
-        "link": "/courses/fab-course/doc/Fab/fab2023",
-        "items": [
-          {
-            "text": "Xu Sun",
-            "link": "https://fabacademy.org/2025/labs/unnc/students/xu-sun/"
-          },
-          {
-            "text": "Yaolun Zhang",
-            "link": "https://fabacademy.org/2023/labs/ningbo/students/yaorun-zhang/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "UNNC-FabLab-2025-1",
-        "link": "/courses/fab-course/class/fab-2025-UNNC",
-        "items": [
-          {
-            "text": "Fengyi zhao",
-            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-ZHAO/"
-          },
-          {
-            "text": "Yan bing",
-            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-yan/"
-          },
-          {
-            "text": "Ao Liu",
-            "link": "https://nexmaker-fab.github.io/2025UNNCFAB-AO/"
-          },
-          {
-            "text": "Yi shan tong",
-            "link": "https://unnc-fab.github.io/2025-1-ty/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "UNNC-FabLab-2025-2",
-        "link": "/courses/fab-course/class/fab-2025-UNNC-2",
-        "items": [
-          {
-            "text": "Wenqing zhong",
-            "link": "https://unnc-fab.github.io/2025-2-wenqing/"
-          },
-          {
-            "text": "Simon",
-            "link": "https://unnc-fab.github.io/2025-2-simon/"
-          },
-          {
-            "text": "Xiangdong Huang",
-            "link": "https://unnc-fab.github.io/2025-2-xiangdong/"
-          },
-          {
-            "text": "Mingzhao Xi",
-            "link": "https://unnc-fab.github.io/2025-2-mingzhao/"
-          },
-          {
-            "text": "Jiawei",
-            "link": "https://unnc-fab.github.io/2025-2-jiawei/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Design engineering 2025"
-      },
-      {
-        "text": "ZWU-interactivesystem 2026A1",
-        "link": "/courses/fab-course/class/FAB-2026-ZWU-01",
-        "items": [
-          {
-            "text": "zwu2026-1-001",
-            "link": "https://nexmaker-fab.github.io/zwu2026-1-001/"
-          },
-          {
-            "text": "Jowywlz",
-            "link": "https://nexmaker-fab.github.io/zwu-2026-1-002/"
-          },
-          {
-            "text": "ZwU-2026-1-003",
-            "link": "https://nexmaker-fab.github.io/ZwU-2026-1-003/"
-          },
-          {
-            "text": "AETHER STUDIO",
-            "link": "https://nexmaker-fab.github.io/zwu-2026-1-004/"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "ZWU-interactivesystem 2026A2",
-        "link": "/courses/fab-course/class/FAB-2026-ZWU-01",
-        "items": [
-          {
-            "text": "ZWU-2026-2-001",
-            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-001/"
-          },
-          {
-            "text": "V-JESH",
-            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-002/"
-          },
-          {
-            "text": "ZWU-2026-2-003",
-            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-003/"
-          },
-          {
-            "text": "ZWU-2026-2-004",
-            "link": "https://nexmaker-fab.github.io/ZWU-2026-2-004/"
+            "text": "Candy",
+            "link": "https://nex-fab.gitlab.io/fab-02/candy/"
           }
         ],
         "collapsed": true

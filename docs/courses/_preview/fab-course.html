@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fab 课程 — SophiGo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#3c3c43;background:#fff;line-height:1.7;font-size:16px}
+nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid #e2e2e3;z-index:100}
+.nav-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;height:100%;padding:0 32px}
+.brand{font-weight:700;font-size:18px;margin-right:40px}
+.nl{padding:6px 14px;border-radius:6px;color:#6e6e73;text-decoration:none;font-size:14px;font-weight:500;transition:all .2s}
+.nl:hover{color:#0ea5e9;background:#f6f6f7}
+.nl.act{color:#0ea5e9;background:rgba(14,165,233,.1)}
+.m{max-width:860px;margin:0 auto;padding:96px 32px 80px}
+.m h1{font-size:2rem;font-weight:700;margin-bottom:.5em}
+.m h2{font-size:1.5rem;font-weight:600;margin:2em 0 .6em;padding-bottom:.3em;border-bottom:1px solid #e2e2e3}
+.m h3{font-size:1.2rem;font-weight:600;margin:1.5em 0 .5em}
+.m p{margin-bottom:1em}
+.m blockquote{margin:1em 0;padding:.8em 1.2em;border-left:4px solid #0ea5e9;background:#f6f6f7;border-radius:0 8px 8px 0}
+.m a{color:#0ea5e9;text-decoration:none;font-weight:500}
+.m a:hover{text-decoration:underline}
+.m ul,.m ol{margin:.5em 0 1em 1.5em}
+.m li{margin-bottom:.3em}
+.m hr{margin:2em 0;border:none;border-top:1px solid #e2e2e3}
+.m table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.9em}
+.m th,.m td{padding:10px 14px;border:1px solid #e2e2e3;text-align:left}
+.m th{background:#f6f6f7;font-weight:600}
+.m tr:nth-child(even){background:#f6f6f7}
+.m code{font-family:"SF Mono",Consolas,monospace;background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:.875em}
+.m pre{background:#282c34;color:#abb2bf;padding:1em;border-radius:8px;overflow-x:auto;margin:1em 0}
+.m pre code{background:0 0;padding:0;color:inherit;font-size:.85em}
+.m img{max-width:100%;border-radius:8px;margin:1em 0}
+.nav-pg{display:flex;justify-content:space-between;margin-top:3em;padding-top:1.5em;border-top:1px solid #e2e2e3}
+</style></head>
+<body><nav><div class="nav-inner"><span class="brand">SophiGo</span><a href="mobile-robot.html" class="nl">移动机器人</a><a href="fab-course.html" class="nl act">Fab 课程</a><a href="ai-basics.html" class="nl">AI 基础应用</a><a href="cmf.html" class="nl">CMF 应用</a></div></nav>
+<main class="m"><h1 id="fab-digital-fabrication">Fab 课程 — 数字化快速原型 (Digital Fabrication)</h1>
+<blockquote>
+<p><strong>Built on the MIT FabAcademy curriculum and the global Fab Lab network. Develop full-stack engineering thinking — from digital fabrication fundamentals to AI-integrated product prototyping.</strong></p>
+</blockquote>
+<hr />
+<h2 id="_1">🏗️ 页面架构说明</h2>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>技术方案</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>课程首页</strong></td>
+<td>VitePress Markdown（当前页面）</td>
+<td>提供课程定位、14 个核心模块、实验室资源及历年班级档案等综合展示</td>
+</tr>
+<tr>
+<td><strong>技术细节文档</strong></td>
+<td>VitePress 静态子站点</td>
+<td>点击各章节链接跳转，提供深度技术理论、实验指南与评估指标</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1">📌 1. 课程定位</h2>
+<p><strong>时代之变（Why）：</strong> 数字化制造正在重塑从创意到产品的全过程。传统的手工原型验证模式已无法适应快速迭代的产品开发节奏。在未来工程人才的培养中，核心壁垒不再是单一设备的操作熟练度，而是<strong>跨学科的系统性工程思维、数字制造工具的整合能力以及 AI 辅助设计与优化</strong>的综合素质。</p>
+<p><strong>方法之新（How）：</strong> 本课程根植于 MIT <strong>FabAcademy</strong> 全球课程体系，依托 <strong>Fab Lab（数字化制造实验室）</strong> 标准设备网络，独创性地将<strong>项目式学习（PBL）、数字制造工艺链与 AI 生成式设计</strong>融为一体。通过"设计 → 制造 → 测试 → 迭代"的完整工程闭环，赋能学生跨越从图纸到实物的技术鸿沟。</p>
+<p><strong>成果之硬（What）：</strong> 课程覆盖从项目管理、CAD 设计、3D 打印、激光切割、PCB 制造到物联网与智能载具开发的全栈技能树。参与者将完成 14 个模块的动手项目，每个模块产出可验证的物理原型，最终构建出一套体现个人工程能力的开源作品集。</p>
+<h3 id="11">1.1 核心能力培养</h3>
+<p>在 Fab Lab 环境中，参与者通过解决真实工程问题，培养以下核心能力：</p>
+<ul>
+<li><strong>项目管理与文档</strong>：使用 Git 进行版本控制，掌握 Markdown 技术写作，搭建个人数字化原型记录站点。</li>
+<li><strong>数字设计与建模</strong>：运用 Fusion 360 / SolidWorks 进行参数化三维设计，掌握钣金、曲面等高级建模技术。</li>
+<li><strong>增材制造工艺</strong>：掌握 FDM、SLA、HP-MJF 等多种 3D 打印工艺的切片设置与设计约束。</li>
+<li><strong>减材制造工艺</strong>：掌握 CNC 数控编程、刀路规划与三轴铣削实操技能。</li>
+<li><strong>电子设计与 PCB 制造</strong>：从电路原理图设计到 PCB 蚀刻、SMT 贴装与焊接调试的完整链路。</li>
+<li><strong>嵌入式开发</strong>：基于 Arduino/ESP32 开源硬件平台，编写嵌入式 C++ 控制程序。</li>
+<li><strong>物联网与交互设计</strong>：打通 TCP/IP、MQTT 协议，实现设备云端接入与人机交互界面开发。</li>
+<li><strong>AI 辅助工程</strong>：运用 AI 工具进行生成式设计、代码辅助开发与工程决策优化。</li>
+</ul>
+<hr />
+<h2 id="12">⚖️ 1.2 教学差异对比</h2>
+<p>为保证数字化制造教学效果，课程严格执行以下规范：</p>
+<table>
+<thead>
+<tr>
+<th>🔴 禁止行为</th>
+<th>🟢 标准行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❌ "大家打开 Fusion 360，跟着我画一个底盘模型"</td>
+<td>✅ "你的底盘需要满足这三项功能要求，请你选择最合适的建模策略"</td>
+</tr>
+<tr>
+<td>❌ "按照这个 G-code 参数设置 CNC 机器"</td>
+<td>✅ "你的零件需要这些精度要求，请根据材料和刀具约束，自主设定加工参数"</td>
+</tr>
+<tr>
+<td>❌ "先学完所有理论知识再进实验室"</td>
+<td>✅ "在动手制造中发现问题，带着问题查找理论依据，用 AI 辅助理解原理"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13">🎯 1.3 招生学员画像</h2>
+<ul>
+<li><strong>基础门槛</strong>：具备基本的三维空间思维和动手实践兴趣。</li>
+<li><strong>适用对象</strong>：大学工科/设计专业学生、Fab Lab 爱好者、创客空间成员。</li>
+<li><strong>核心兴趣</strong>：对数字化制造、开源硬件、产品原型开发有浓厚探索欲的工程与设计背景学生。</li>
+<li><strong>核心诉求</strong>：希望建立从设计到实物的完整工程能力，打造符合工业标准的个人项目作品集。</li>
+</ul>
+<hr />
+<h2 id="2-14">📋 2. 课程大纲 — 14 个核心模块</h2>
+<p>课程遵循 MIT FabAcademy 全球标准框架，共 14 个模块，涵盖从项目管理到智能载具开发的完整数字制造链路：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">编号</th>
+<th>模块名称</th>
+<th>核心内容</th>
+<th>主要工具/设备</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>01</strong></td>
+<td>项目管理与网页构建</td>
+<td>Git 版本控制、Markdown 写作、VitePress 静态站点搭建</td>
+<td>Git, VitePress, Markdown</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>02</strong></td>
+<td>计算机辅助设计 (CAD)</td>
+<td>Fusion 360 / SolidWorks 参数化建模、钣金设计、AI 生成式设计</td>
+<td>Fusion 360, SolidWorks</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>03</strong></td>
+<td>3D 打印技术</td>
+<td>FDM/SLA/HP-MJF 工艺、切片软件配置、设计约束与后处理</td>
+<td>Bambu Lab, Prusa, Cura</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>04</strong></td>
+<td>电子设计与电路基础</td>
+<td>元器件特性、电路定律、EDA 原理图绘制与 PCB 布局</td>
+<td>KiCad, EasyEDA</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>05</strong></td>
+<td>Arduino 软硬件应用</td>
+<td>嵌入式 C++ 开发、传感器信号采集、执行器控制</td>
+<td>Arduino IDE, Wokwi</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>06</strong></td>
+<td>激光切割工艺</td>
+<td>矢量图纸准备、卡接结构设计、激光雕刻与切割实操</td>
+<td>AutoCAD, 激光切割机</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>07</strong></td>
+<td>PCB 制造与焊接工艺</td>
+<td>SMT 表面贴装、回流焊、手工焊接与热风枪调试</td>
+<td>回流焊炉, 烙铁</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>08</strong></td>
+<td>CNC 数控加工工艺</td>
+<td>G-code 编程、坐标系对刀、三轴刀路规划与铣削减材实操</td>
+<td>桌面 CNC 雕刻机</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>09</strong></td>
+<td>翻模与铸造</td>
+<td>硅胶模具制作、树脂浇注成型、单模与双开模工艺</td>
+<td>硅胶, 树脂, 真空机</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td>物联网与交互设计</td>
+<td>TCP/IP/MQTT/HTTP 协议、ESP8266 云端接入</td>
+<td>ESP8266, 阿里云</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td>界面与交互应用程序</td>
+<td>Processing/Node.js 界面开发、串口通信、交互装置设计</td>
+<td>Processing, Node.js</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td>标准件与耗材采购</td>
+<td>机械标准件规格认知、供应链采购源对接</td>
+<td>Misumi, Digi-Key, Mouser</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td>商业计划书基础</td>
+<td>产品市场定位、成本估算、创业路演要素</td>
+<td>-</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td>智能移动载具开发</td>
+<td>轮式底盘控制模型、ROS2 感知与仿真、AI 融合开发</td>
+<td>ROS2, Sophicar 仿真</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>核心教程详细文档 &rarr; <a href="/courses/fab-course/doc/1projectmanage/Assessment1.md">点击查看完整模块文档</a></strong></p>
+</blockquote>
+<hr />
+<h2 id="3">🔬 3. 实验室资源与管理</h2>
+<h3 id="31">3.1 实验室基础</h3>
+<table>
+<thead>
+<tr>
+<th>资源类别</th>
+<th>内容</th>
+<th>文档入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实验室管理规范</strong></td>
+<td>运作准则、出勤要求与空间维护条例</td>
+<td><a href="/courses/fab-course/doc/0manage/labmanage.md">查看文档</a></td>
+</tr>
+<tr>
+<td><strong>Fab Lab 介绍</strong></td>
+<td>全球数字化制造实验室网络与 MIT FabAcademy 课程体系</td>
+<td><a href="/courses/fab-course/doc/Fab/FAB.md">查看文档</a></td>
+</tr>
+<tr>
+<td><strong>NexMaker 创客学术</strong></td>
+<td>创客联盟、创新培育课程与开发者社群孵化计划</td>
+<td><a href="/courses/fab-course/doc/0manage/nexmaker-academy.md">查看文档</a></td>
+</tr>
+<tr>
+<td><strong>安全与准入规范</strong></td>
+<td>高功耗设备、特种机械与易燃易爆材料安全指南</td>
+<td><a href="/courses/fab-course/doc/0manage/access_safety.md">查看文档</a></td>
+</tr>
+<tr>
+<td><strong>常用材料指南</strong></td>
+<td>亚克力、木板、树脂等主要耗材属性说明与选择矩阵</td>
+<td><a href="/courses/fab-course/doc/0manage/material.md">查看文档</a></td>
+</tr>
+<tr>
+<td><strong>设备与工具清单</strong></td>
+<td>数字切片机、3D 打印机、焊接工具性能参数与预约流程</td>
+<td><a href="/courses/fab-course/doc/0manage/tool.md">查看文档</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">🎓 4. 年度创新项目与班级档案</h2>
+<h3 id="41-unnc-fablab">4.1 宁波诺丁汉大学 (UNNC FabLab)</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>年份</th>
+<th>学生作品入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fab Academy 2025</td>
+<td>UNNC 归档</td>
+<td><a href="/courses/fab-course/class/fab-2025-UNNC">查看班级</a></td>
+</tr>
+<tr>
+<td>UNNC FabLab 2025-2</td>
+<td>第二期</td>
+<td><a href="/courses/fab-course/class/fab-2025-UNNC-2">查看班级</a></td>
+</tr>
+<tr>
+<td>Fab Academy 2023</td>
+<td>成果展示</td>
+<td><a href="/courses/fab-course/doc/Fab/fab2023">查看班级</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-zju-design-engineering">4.2 浙江大学设计工程 (ZJU Design Engineering)</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>年份</th>
+<th>学生作品入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design Engineering 2023</td>
+<td>2023</td>
+<td><a href="/courses/fab-course/class/fab-2023-zju-de">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Manufacture 2023</td>
+<td>2023</td>
+<td><a href="/courses/fab-course/class/fab-2023-zju-dm">查看班级</a></td>
+</tr>
+<tr>
+<td>DE mini 2023</td>
+<td>2023</td>
+<td><a href="/courses/fab-course/class/fab-2023-zju-mini">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Engineering 2022</td>
+<td>2022</td>
+<td><a href="/courses/fab-course/class/fab-2022-zju-de">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Manufacture 2022</td>
+<td>2022</td>
+<td><a href="/courses/fab-course/class/fab-2022-zju-dm">查看班级</a></td>
+</tr>
+<tr>
+<td>DE mini 2022</td>
+<td>2022</td>
+<td><a href="/courses/fab-course/class/fab-2022-zju-mini">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Engineering 2021</td>
+<td>2021</td>
+<td><a href="/courses/fab-course/class/fab-2021-zju-de">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Manufacture 2021</td>
+<td>2021</td>
+<td><a href="/courses/fab-course/class/fab-2021-zju-dm">查看班级</a></td>
+</tr>
+<tr>
+<td>Design Engineering 2020</td>
+<td>2020</td>
+<td><a href="/courses/fab-course/class/fab-2020-zju-de">查看班级</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-zwu-nexmaker">4.3 浙江万里学院与创客学术 (ZWU &amp; NexMaker)</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>年份</th>
+<th>学生作品入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interactive System 2026A1</td>
+<td>2026</td>
+<td><a href="/courses/fab-course/class/FAB-2026-ZWU-01">查看班级</a></td>
+</tr>
+<tr>
+<td>Interactive System 2024</td>
+<td>2024</td>
+<td><a href="/courses/fab-course/class/fab-2024-zwu-Interactivesystem">查看班级</a></td>
+</tr>
+<tr>
+<td>IS 2+2 2024</td>
+<td>2024</td>
+<td><a href="/courses/fab-course/class/fab-2024-zwu-Interactivesystem2+2">查看班级</a></td>
+</tr>
+<tr>
+<td>NexMaker Academy 第 1 期</td>
+<td>-</td>
+<td><a href="/courses/fab-course/class/fab-01">查看班级</a></td>
+</tr>
+<tr>
+<td>NexMaker Academy 第 2 期</td>
+<td>-</td>
+<td><a href="/courses/fab-course/class/fab-02">查看班级</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">🏆 5. 课程产出与评估</h2>
+<h3 id="51">5.1 核心交付物</h3>
+<ul>
+<li><strong>14 个物理原型</strong>：每个模块完成一个可验证的物理制造物，覆盖 CAD 模型、3D 打印件、PCB 电路板、激光切割件等。</li>
+<li><strong>开源项目仓库</strong>：规范的 Git 仓库，内含完整的设计源文件、制造参数、代码及工程日志。</li>
+<li><strong>个人作品站点</strong>：基于 VitePress 搭建的数字化原型记录主站，展示完整学习路径与项目沉淀。</li>
+<li><strong>最终综合项目</strong>：将多个模块技能整合，完成一个具有实际应用价值的综合原型项目。</li>
+</ul>
+<h3 id="52">5.2 评估维度</h3>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>权重</th>
+<th>标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数字制造能力</strong></td>
+<td>30%</td>
+<td>设备操作熟练度、工艺参数合理性、原型完成度与精度</td>
+</tr>
+<tr>
+<td><strong>设计与创新能力</strong></td>
+<td>25%</td>
+<td>设计方案的原创性、功能与美学的平衡、解决问题的工程思维</td>
+</tr>
+<tr>
+<td><strong>文档与项目管理</strong></td>
+<td>25%</td>
+<td>Git 仓库规范性、技术文档完整性、工程日志质量</td>
+</tr>
+<tr>
+<td><strong>协作与迭代能力</strong></td>
+<td>20%</td>
+<td>团队协作表现、基于反馈的设计迭代、开源贡献精神</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vitepress">📚 技术文档章节（VitePress 详情页入口）</h2>
+<p>点击以下模块即可跳转查看详细技术文档及实验指南：</p>
+<h3 id="1_1"><a href="/courses/fab-course/doc/1projectmanage/Assessment1.md">模块 1：项目管理与网页构建</a></h3>
+<ul>
+<li><strong>核心内容</strong>：Git 版本控制、Markdown 技术写作、VitePress 现代静态站点搭建、AIGC 辅助开发。</li>
+<li><a href="/courses/fab-course/doc/1projectmanage/git.md">Git 基础</a> · <a href="/courses/fab-course/doc/1projectmanage/markdown.md">Markdown 语法</a> · <a href="/courses/fab-course/doc/1projectmanage/vitepress.md">VitePress 指南</a></li>
+</ul>
+<h3 id="2-cad"><a href="/courses/fab-course/doc/2cad/Assessment.md">模块 2：计算机辅助设计 (CAD)</a></h3>
+<ul>
+<li><strong>核心内容</strong>：Fusion 360 / SolidWorks 参数化建模、钣金设计、AI 生成式结构优化。</li>
+<li><a href="/courses/fab-course/doc/2cad/3D_Design_Fusion360.md">Fusion 360 指南</a> · <a href="/courses/fab-course/doc/2cad/Solidworks.md">SolidWorks 指南</a> · <a href="/courses/fab-course/doc/2cad/parameterdesign.md">参数化设计</a></li>
+</ul>
+<h3 id="33d"><a href="/courses/fab-course/doc/3_3dprinter/assessment.md">模块 3：3D 打印技术</a></h3>
+<ul>
+<li><strong>核心内容</strong>：FDM 熔融沉积、SLA 光固化、HP-MJF 尼龙烧结工艺与切片软件配置。</li>
+<li><a href="/courses/fab-course/doc/3_3dprinter/3.FDM-designguide.md">FDM 设计指南</a> · <a href="/courses/fab-course/doc/3_3dprinter/6.sladesignguide.md">SLA 设计指南</a></li>
+</ul>
+<h3 id="4-14"><a href="/courses/fab-course/doc/4electric_design/Assessment.md">模块 4-14 详情文档 &rarr;</a></h3>
+<blockquote>
+<p>完整的 14 个模块评估指标、实验指南与技术参考文档，请通过左侧 <strong>Fab 课程</strong> 侧边栏导航浏览。</p>
+</blockquote>
+<hr />
+<h2 id="_2">💬 划词批注互动区</h2>
+<p>本平台已集成<strong>高保真本地划词评论系统</strong>。如果您对 CAD 建模技巧、3D 打印参数或电路设计存在任何疑问：
+1. 请先在<a href="/">主站首页</a>注册并登录。
+2. 返回本页面，<strong>用鼠标直接划选目标文字</strong>，即可触发高亮批注面板进行提问或讨论。
+3. 您的疑问将会显示在对应文本行下，助您与社区极客共同进步！</p><div class="nav-pg"><div>← <a href="mobile-robot.html">移动机器人</a></div><div><a href="ai-basics.html">AI 基础应用</a> →</div></div></main></body></html>

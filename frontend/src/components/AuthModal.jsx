@@ -144,7 +144,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
         {/* Modal Header */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>用户认证</h2>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Sophigo - AI 时代的工程创新方法</p>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>SophiGo - AI 时代的工程创新方法</p>
         </div>
 
         {/* Tabs switcher */}

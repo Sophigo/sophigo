@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>移动机器人 — SophiGo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#3c3c43;background:#fff;line-height:1.7;font-size:16px}
+nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid #e2e2e3;z-index:100}
+.nav-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;height:100%;padding:0 32px}
+.brand{font-weight:700;font-size:18px;margin-right:40px}
+.nl{padding:6px 14px;border-radius:6px;color:#6e6e73;text-decoration:none;font-size:14px;font-weight:500;transition:all .2s}
+.nl:hover{color:#0ea5e9;background:#f6f6f7}
+.nl.act{color:#0ea5e9;background:rgba(14,165,233,.1)}
+.m{max-width:860px;margin:0 auto;padding:96px 32px 80px}
+.m h1{font-size:2rem;font-weight:700;margin-bottom:.5em}
+.m h2{font-size:1.5rem;font-weight:600;margin:2em 0 .6em;padding-bottom:.3em;border-bottom:1px solid #e2e2e3}
+.m h3{font-size:1.2rem;font-weight:600;margin:1.5em 0 .5em}
+.m p{margin-bottom:1em}
+.m blockquote{margin:1em 0;padding:.8em 1.2em;border-left:4px solid #0ea5e9;background:#f6f6f7;border-radius:0 8px 8px 0}
+.m a{color:#0ea5e9;text-decoration:none;font-weight:500}
+.m a:hover{text-decoration:underline}
+.m ul,.m ol{margin:.5em 0 1em 1.5em}
+.m li{margin-bottom:.3em}
+.m hr{margin:2em 0;border:none;border-top:1px solid #e2e2e3}
+.m table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.9em}
+.m th,.m td{padding:10px 14px;border:1px solid #e2e2e3;text-align:left}
+.m th{background:#f6f6f7;font-weight:600}
+.m tr:nth-child(even){background:#f6f6f7}
+.m code{font-family:"SF Mono",Consolas,monospace;background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:.875em}
+.m pre{background:#282c34;color:#abb2bf;padding:1em;border-radius:8px;overflow-x:auto;margin:1em 0}
+.m pre code{background:0 0;padding:0;color:inherit;font-size:.85em}
+.m img{max-width:100%;border-radius:8px;margin:1em 0}
+.nav-pg{display:flex;justify-content:space-between;margin-top:3em;padding-top:1.5em;border-top:1px solid #e2e2e3}
+</style></head>
+<body><nav><div class="nav-inner"><span class="brand">SophiGo</span><a href="mobile-robot.html" class="nl act">移动机器人</a><a href="fab-course.html" class="nl">Fab 课程</a><a href="ai-basics.html" class="nl">AI 基础应用</a><a href="cmf.html" class="nl">CMF 应用</a></div></nav>
+<main class="m"><h1 id="ai-ros-2">移动机器人软硬件集成课程 (AI &amp; ROS 2)</h1>
+<blockquote>
+<p><strong>主题：教给孩子 AI 时代的生存逻辑，培养 AI 时代的科创人才</strong></p>
+</blockquote>
+<hr />
+<h2 id="_1">🏗️ 页面架构说明</h2>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>技术方案</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>课程首页</strong></td>
+<td>VitePress Markdown（当前页面）</td>
+<td>提供课程定位、核心能力、软硬件选型、双组大纲及多智能体协作等高阶信息展示</td>
+</tr>
+<tr>
+<td><strong>技术细节文档</strong></td>
+<td>VitePress 静态子站点</td>
+<td>点击各章节链接跳转，提供深度技术理论、实验指南与代码示例</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1">📌 1. 课程定位</h2>
+<p><strong>时代之变（Why）：</strong> 2023 年人类步入 AI 原生时代，传统的编程与制造门槛正被全面降维。未来科技人才的核心壁垒，不再是死记硬背的底层语法和机械接线，而是<strong>定义真实需求、驾驭 AI 工具进行系统性决策</strong>的能力。</p>
+<p><strong>方法之新（How）：</strong> 本课程独创性地融合 <strong>开源造物精神（FabLab）、项目式学习（PBL）与工业级 AI 敏捷工作流</strong>。通过"硬件统一，AI 赋能"的超级工程放大器，赋能学生跨越跨学科技术鸿沟，完成从"工具使用者"到"物理世界创造者"的蜕变。</p>
+<p><strong>成果之硬（What）：</strong> 课程以国家高素质科创人才鉴定标准为导向。通过对比 3 种以上 AI 方案、BOM 成本优化和 DFM 审查，引导学生打造出打通"端-网-云"的具身智能机器人以及工业级开源作品集，为国内强基综评与海外顶尖名校申请做储备。</p>
+<h3 id="11">1.1 核心能力培养</h3>
+<p>在这个过程中参与者将共同解决真实工程问题，从而培养以下核心能力：
+* <strong>需求提出与定义</strong>：精准描述痛点，翻译为机器可读的结构化需求。
+* <strong>AI 工具使用与工程化</strong>：调度 LLM 编写代码、生成 CAD 脚本、执行 DFM 工艺审查。
+* <strong>辩证思考与决策</strong>：在 AI 产出的多套备选方案中，权衡稳定性、成本与美学进行科学决策。
+* <strong>了解 AI 能力边界</strong>：清晰识别哪些任务应交由 AI 快速生成，哪些任务必须由人类进行机理校验。
+* <strong>文档与复盘</strong>：规范整理工程日志与 Git 提交链，沉淀可复用的开源技术资产。</p>
+<hr />
+<h2 id="12">⚖️ 1.2 教学差异对比</h2>
+<p>为了保证 AI Native 教学效果，课程严格执行以下教学规范：</p>
+<table>
+<thead>
+<tr>
+<th>🔴 禁止行为（绝对不允许出现）</th>
+<th>🟢 标准行为（必须严格执行）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❌ "今天我们来学习 Python 语法，然后写一个控制机器人的代码"</td>
+<td>✅ "你的机器人需要实现自动避障功能，现在告诉 AI 你的需求，它会给你 3 种避障方案"</td>
+</tr>
+<tr>
+<td>❌ "大家打开 Fusion 360，跟着我画一个底盘模型"</td>
+<td>✅ "AI 已经生成了 3 个底盘模型，你需要从稳定性、重量、美观度三个维度选一个最好的"</td>
+</tr>
+<tr>
+<td>❌ "这个电路的原理是这样的，大家按照这个图接线"</td>
+<td>✅ "AI 已经画好了电路图并生成了接线教程，你按照教程接线，有问题直接问 AI"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13">🎯 1.3 招生学员画像</h2>
+<ul>
+<li><strong>基础门槛</strong>：具备一定的英语、科学、基础编程或机器人操作经验。</li>
+<li><strong>招收年龄</strong>：初一、初二、高一、高二。</li>
+<li><strong>核心兴趣</strong>：对人工智能、具身智能、产品创新及硬核科技竞赛有浓厚探索欲的初高中生。</li>
+<li><strong>核心诉求</strong>：有国内升学（强基计划、综合评价、科创特长）或海外顶尖名校申请需求，渴望建立一套含金量极高、真正符合工业标准的个人项目作品集。</li>
+</ul>
+<hr />
+<h2 id="14-sophilab">🛞 1.4 模块化硬件底盘演进 (Sophilab 移动载荷)</h2>
+<p>课程基于统一的标准件和参数化设计框架，提供 5 种不同侧重点的 AGV（自动导航车）硬件底盘设计概念供评估与迭代：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">方案编号</th>
+<th>核心概念 (Option)</th>
+<th>关键设计细节 (Key Design Ideas)</th>
+<th>交互特征与功能</th>
+<th>最佳适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Option 1</strong></td>
+<td><strong>基础模块化 3030 框架</strong><br>(Basic modular 3030 frame)</td>
+<td>• 3030 铝型材骨架<br>• FDM 3D打印连接件<br>• 模块化顶板<br>• 树莓派安装区</td>
+<td>纯机械组装，电机安装与基础底盘结构理解。</td>
+<td>极速原型搭建 / 基础 AGV 套件</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Option 2</strong></td>
+<td><strong>教育控制面板版</strong><br>(EDU control panel version)</td>
+<td>• 蓝白黑拼色 FDM 外壳<br>• 前置按钮控制面板<br>• LED 状态指示灯条<br>• 可拆卸侧板</td>
+<td>启动/暂停/停止实体按键，LED 状态反馈，易于模块识别。</td>
+<td>高中课堂交互与动态展示</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Option 3</strong></td>
+<td><strong>STEM 传感器实验版</strong><br>(STEM sensor version)</td>
+<td>• 树莓派多位置挂载点<br>• 超声波防撞传感器<br>• 云台相机支架<br>• 传感器塔架结构</td>
+<td>软硬件独立编程，AI、物联网及传感器融合实验。</td>
+<td>传感器开发与树莓派视觉项目</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Option 4</strong></td>
+<td><strong>编程反馈版</strong><br>(Coding feedback version)</td>
+<td>• LED 点阵屏幕<br>• 编码器反馈按钮<br>• 前置碰撞杠<br>• 随车工具架</td>
+<td>直观的 LED 点阵显示，随车控制调试，适合开放式硬件开发。</td>
+<td>逻辑算法编写与创客空间活动</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Option 5</strong></td>
+<td><strong>终极麦克纳姆轮全向版</strong><br>(Final combined omni version)</td>
+<td>• 铝型材与 FDM 混合结构<br>• 麦克纳姆全向轮<br>• 快速拔插传感器模块<br>• 前置多功能控制面板</td>
+<td><strong>360° 全向移动控制</strong>，多传感器硬件联动，集成式电源管理系统。</td>
+<td><strong>终极具身智能 Sophi-Core 概念</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>🏆 推荐研发方向（Recommended Final Direction）：</strong> 
+采用 <strong>Option 5</strong> 作为主攻路线。使用 3030 工业铝型材框架保证高刚性，麦克纳姆轮实现全向零半径转向，配合蓝白黑三色 CMF 工艺打样外壳，集成物理启动/暂停按键、超声波避障、广角相机，并可选配激光雷达。</p>
+</blockquote>
+<hr />
+<h2 id="2">📋 2. 课程大纲</h2>
+<h3 id="21-ai">🟢 2.1 初中组：AI 机器人产品体验营</h3>
+<blockquote>
+<p><strong>核心理念：</strong> <code>"AI 做所有事，学生只做决策"</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>天数与主题</th>
+<th>上午内容</th>
+<th>下午内容</th>
+<th>核心工具</th>
+<th>交付产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>第一天</strong><br>问题挖掘</td>
+<td>• <strong>主题分享</strong>：FabLab 精神、AI 时代软硬件开发流程与产品经理思维定义小车。</td>
+<td>• <strong>团队组建</strong>：构建“双人精锐组”，飞书看板项目管理入门。<br>• <strong>概念探索</strong>：定义产品核心功能，AI 辅助起名、Slogan 与文生图脑暴。</td>
+<td>通义千问/Kimi/DeepSeek/豆包、飞书看板</td>
+<td>小组问题分析报告、创意脑暴海报、基础 PRD 草稿</td>
+</tr>
+<tr>
+<td><strong>第二天</strong><br>功能定义</td>
+<td>• <strong>概念设计</strong>：模块化部件认知（学生做 100% 决策）。<br>• <strong>提示词工程</strong>：学习目标-要求-约束三要素向 AI 提需求。</td>
+<td>• <strong>行为流定义</strong>：AI 自动生成用户交互逻辑图。<br>• <strong>软硬件选型</strong>：AI 推荐最优硬件清单。<br>• <strong>Vibe Coding</strong>：在 AI 指导下部署 VSCode 并快速生成项目介绍网页。</td>
+<td>VSCode/lingma、文生图工具、Gitee</td>
+<td>工业标准 PRD 文档、硬件选型清单、项目发布网页</td>
+</tr>
+<tr>
+<td><strong>第三天</strong><br>参数化设计</td>
+<td>• <strong>设计规范</strong>：学习工业级 CMF 与 DFM（可制造性设计）规范，理解“为加工而设计”。</td>
+<td>• <strong>模型终审</strong>：通过 <code>sophicar.com</code> 网页端进行参数化底盘滑块设计，三维度横向评估。<br>• <strong>数字化加工</strong>：操作 3D 打印机/激光切割机加工实物。</td>
+<td><code>sophicar.com</code>、Fusion 360 AI 脚本、MakerLab</td>
+<td><code>.stl</code> 格式三维结构模型、数字化加工参数文档、物理底盘零件</td>
+</tr>
+<tr>
+<td><strong>第四天</strong><br>嵌入式基础</td>
+<td>• <strong>引脚认知</strong>：建立对 ESP32-S3 开源硬件全局认知，专注于懂逻辑而不死记硬背。</td>
+<td>• <strong>虚拟仿真</strong>：在 Wokwi 平台完成接线验证。<br>• <strong>自然语言编程</strong>：学生用自然语言描述运动需求，AI 自动生成控制逻辑与固件烧录。</td>
+<td>Wokwi 仿真平台、Aily Blockly、ESP32-S3 核心板</td>
+<td>Wokwi 仿真模型、ESP32-S3 控制代码、第一台通电运行的物理样机</td>
+</tr>
+<tr>
+<td><strong>第五、六天</strong><br>软硬件调试</td>
+<td>• <strong>整机总装</strong>：动手组装外壳与传感器支架，指挥 AI 生成数字化装配步骤教程。<br>• <strong>工艺优化</strong>：整理杂乱电路，AI 生成理线规范，杜绝“飞线”。</td>
+<td>• <strong>控制重构</strong>：用自然语言描述深层控制（传感器融合、避障逻辑），由 AI 编译。<br>• <strong>总线调优</strong>：调试主控板与电机、舵机间的 CAN 总线/串口通信。</td>
+<td>VSCode、万用表、CAN 总线扩展模块</td>
+<td>车辆避障算法代码、硬件测试报告、工业级布线避障机器人</td>
+</tr>
+<tr>
+<td><strong>第七天</strong><br>全栈 Vibe Coding</td>
+<td>• <strong>零代码界面</strong>：跳过前端 UI 代码，通过纯自然语言与 AI 对话编译出美观的 HTML 网页交互控制面板。</td>
+<td>• <strong>跨网控制</strong>：配置 Wi-Fi/蓝牙协议，将网页端控制面板与小车主控板长连接跨网桥接。</td>
+<td>HTML5/CSS/JavaScript 零代码生成器、本地 Wi-Fi 模块</td>
+<td>跨平台前端控制网页源码、AI 交互控制接口文档、无线交互终端</td>
+</tr>
+<tr>
+<td><strong>第八天</strong><br>多模态交互</td>
+<td>• <strong>交互赋能</strong>：描述多模态工作流需求，指挥 AI 将语音控制、视觉识别与避障算法合并，全自动生成集成系统代码。</td>
+<td>• <strong>联调测试</strong>：实现“听到指令出发、看到特定障碍物精准刹车/倒垃圾”的智能化逻辑。</td>
+<td>Qwen VLM、Hugging Face、Aily Blockly</td>
+<td>完整合并的交互控制逻辑代码包、全功能集成演示视频</td>
+</tr>
+<tr>
+<td><strong>第九天</strong><br>数字孪生</td>
+<td>• <strong>孪生认知</strong>：理解“虚拟仿真 &rarr; 实体部署”系统集成，由 AI 辅助驱动 3D 虚拟车物理引擎。</td>
+<td>• <strong>虚实联动</strong>：高频双向同步逻辑部署，实现“滑块调整/物理移动 &rarr; 虚拟 3D 屏幕车动画同步”。</td>
+<td>Three.js 3D 渲染引擎、数据双向同步智能体</td>
+<td>3D 数字孪生仿真控制系统源码、端-网-云-虚拟仿真演示系统</td>
+</tr>
+<tr>
+<td><strong>第十天</strong><br>轻量化优化</td>
+<td>• <strong>系统集成</strong>：全功能饱和压力测试，优化控制参数。<br>• <strong>结构优化</strong>：向 AI 提出轻量化拓扑需求，进行减重应力分析并微调机械结构。</td>
+<td>• <strong>工艺定型</strong>：最后一轮理线与质检，AI 辅助撰写产品说明书。</td>
+<td>VSCode、Autodesk Fusion 360 Generative Design</td>
+<td>最终版多模态综合控制代码、产品拓扑优化说明书、终极物理原型机</td>
+</tr>
+<tr>
+<td><strong>第十一天</strong><br>包装测试</td>
+<td>• <strong>系统压测</strong>：开展“端-网-云-虚拟仿真”完整闭环压力测试，优化文档与日志。</td>
+<td>• <strong>开源整理</strong>：整理 Gitee/GitHub 代码仓库，规范文档与演示视频。</td>
+<td>Git/GitHub Pages、Markdown 编辑器</td>
+<td>规范开源的 GitHub 技术仓库、定量分析图表、学术型技术报告</td>
+</tr>
+<tr>
+<td><strong>第十二天</strong><br>产品发布</td>
+<td>• <strong>路演路演</strong>：正式举办产品发布会，各小组轮流进行 5 分钟技术路演 + 5 分钟评审团 Q&amp;A。</td>
+<td>• <strong>企业参访</strong>：企业专家演讲与答辩证书颁发。</td>
+<td>投影仪、路演 PPT</td>
+<td>创新技术讲解视频、联合认证结营证书、带走个人物理机器人</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="22-ai">🔵 2.2 高中组：AI 具身智能产品工程营</h3>
+<blockquote>
+<p><strong>核心理念：</strong> <code>"AI 做基础执行，学生做系统设计和深度决策"</code></p>
+</blockquote>
+<h4 id="_2">💡 高中组与初中组的本质区别</h4>
+<ol>
+<li><strong>多智能体协同（Multi-Agent Workflow）</strong>：打破“输入提示词、生成单点结果”的线性黑盒体验，全面引入“专家智能体编排体系”，学生通过状态机协同调度多个专项 Agent（机械、硬件、代码、算法）。</li>
+<li><strong>白盒机理剖析</strong>：完美调和传统代码/电路硬核数理公式与 AI 零代码降维工具的冲突。独创 <strong>“AI 生成复杂要素 &rarr; 学生进行白盒机理剖析 &rarr; 仿真验证 &rarr; 物理实操重构”</strong> 的逆向工程流，释放 70% 的低价值琐碎时间，让学生专注于<strong>运动学反解、有限状态机构建及全局技术拓扑</strong>的设计与推导。</li>
+<li><strong>学术级诚实性交付</strong>：拒绝流水账式的传统日记。学生最终交付必须包含<strong>数理公式推导、定量分析图表、Git Commit 全留痕证据链</strong>的学术型开源作品集，精准对齐强基综评标准。</li>
+</ol>
+<h4 id="_3">📋 高中组核心大纲补充</h4>
+<ul>
+<li><strong>Day 1-2：痛点深度挖掘与专利分析</strong>：引入联合国可持续发展目标（SDGs），利用 AI 进行行业级专利检索与分析，从现有竞品中提炼技术壁垒，形成高级商业可行性与市场规模分析报告。</li>
+<li><strong>Day 3-4：工业级 BOM 与 DFM 深度审查</strong>：引导学生利用 AI 智能体对机械底盘进行三维模型多维度纵向评估，编写结构优化与应力分析文档；自动生成多级 BOM（物料清单）并进行供应链采购成本优化。</li>
+<li><strong>Day 5-6：运动学反解推导与多路总线通信</strong>：深入 ESP32-S3 与算能 Duo 芯片架构，推导双轮差速/麦轮运动学矩阵，在 Wokwi 中进行逻辑校验；打通 CAN 总线与串口通信，实现机械臂多轴协同控制。</li>
+<li><strong>Day 7-8：跨网控制与边缘视觉 VLM 部署</strong>：基于 MQTT/WiFi 部署高频双向通信，利用视觉语言模型（Qwen VLM / YOLO）将多模态提问（语音、画面）深度转化为机器人的结构化 JSON 动作指令流。</li>
+<li><strong>Day 9-10：三维数字孪生与生成式拓扑优化</strong>：基于 Three.js 自主设计双向虚实联动仿真控制面板，配合 Fusion 360 Generative Design 进行车身结构轻量化迭代。</li>
+<li><strong>Day 11-12：学术答辩与开源发布</strong>：生成规范的 README、技术拓扑图，进行系统级端-网-云压力测试，举行全英文学术路演。</li>
+</ul>
+<hr />
+<h2 id="3-agent-sophi-core-orchestration">🧠 3. 专家 Agent 协同体系 (Sophi-Core Orchestration)</h2>
+<p>本课程的核心特色是引入了工业级的多智能体（Multi-Agent）开发架构，将复杂的工程任务解耦，由不同的专家 Agent 协同学生完成研发：</p>
+<p><img alt="SophiCar Multi-Agent System Architecture" src="/news/sophigo/assets/architecture.jpg" /></p>
+<h3 id="31">3.1 专家智能体角色分工</h3>
+<table>
+<thead>
+<tr>
+<th>智能体角色</th>
+<th>核心关注点 (R&amp;D Focus)</th>
+<th>夏令营协同任务 (Camp Role)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>🎯 Orchestrator Agent</strong></td>
+<td>项目总协调与质量评估，负责任务拆解与全局监控。</td>
+<td>接收学生需求，将其拆解为 9 维度子任务，调度专家集群。</td>
+</tr>
+<tr>
+<td><strong>⚙️ 机械设计 Agent</strong></td>
+<td>结构强度、减重优化、三维参数化建模。</td>
+<td>结合 <code>sophicar.com</code> 为学生提供 3 套底盘方案进行决策。</td>
+</tr>
+<tr>
+<td><strong>🏭 机械制造 Agent</strong></td>
+<td>DFM（可制造性）校验、BOM（物料清单）生成。</td>
+<td>提供加工余量建议、3D 打印层厚指导及标准件零件清单。</td>
+</tr>
+<tr>
+<td><strong>🔌 嵌入式硬件 Agent</strong></td>
+<td>电路图生成、元器件选型、引脚冲突规避。</td>
+<td>自动生成 Wokwi 仿真接线图及物理接线安全说明。</td>
+</tr>
+<tr>
+<td><strong>💻 嵌入式软件 Agent</strong></td>
+<td>驱动编写、底层总线配置、自然语言 Vibe Coding。</td>
+<td>生成 ESP32-S3 底层固件代码，供学生审核与一键烧录。</td>
+</tr>
+<tr>
+<td><strong>🧠 算法专家 Agent</strong></td>
+<td>运动学反解、PID 调优、VLM 动作流解析。</td>
+<td>提供差速/麦轮运动学公式推导框架，生成调参建议。</td>
+</tr>
+<tr>
+<td><strong>🔗 系统集成 Agent</strong></td>
+<td>总线协议调优、故障排查、物理整机联调。</td>
+<td>在通电联调时，提供结构化的排故清单与接线诊断指南。</td>
+</tr>
+<tr>
+<td><strong>📈 产品与市场 Agent</strong></td>
+<td>SDGs 关联性、竞品提炼、商业可行性。</td>
+<td>辅助学生完善产品功能定义，提炼市场宣传 Slogan。</td>
+</tr>
+<tr>
+<td><strong>💰 商业与成本 Agent</strong></td>
+<td>供应链成本优化、盈亏平衡分析。</td>
+<td>核算标准件采购成本，生成单车经济性分析报告。</td>
+</tr>
+<tr>
+<td><strong>🔬 研发与创新 Agent</strong></td>
+<td>前沿技术追踪、专利检索与技术壁垒分析。</td>
+<td>协助学生利用大模型进行专利查新，撰写创新点描述。</td>
+</tr>
+<tr>
+<td><strong>🎓 教育专家 Agent</strong></td>
+<td>学习效果评估、心理与情绪监测、预警干涉。</td>
+<td>基于北师大评价体系，全程记录学生表现，生成动态雷达图。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-state-based-orchestration">3.2 智能体底层逻辑 — "基于状态的编排" (State-Based Orchestration)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">TD</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="err">学生输入造物需求</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">Orchestrator</span><span class="w"> </span><span class="err">任务拆解</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">{</span><span class="n">Sophi</span><span class="o">-</span><span class="n">Omni</span><span class="w"> </span><span class="err">知识检索</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">案例与原理</span><span class="o">|</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="err">机械设计</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">生成底座</span><span class="w"> </span><span class="n">CAD</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="err">嵌入式硬件</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">推荐引脚与器件</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="err">嵌入式软件</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">编译驱动</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="err">算法</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">输出差速</span><span class="o">/</span><span class="err">避障逻辑</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="err">系统集成</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">物理联调校验</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="err">教育专家</span><span class="w"> </span><span class="n">Agent</span><span class="w"> </span><span class="err">评估输出雷达图</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">反馈修正</span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
+</code></pre></div>
+
+<ul>
+<li><strong>知识底座 Sophi-Omni</strong> 采用：<code>自动采集 &amp;rarr; AI 初筛 &amp;rarr; 人工审核 &amp;rarr; 注入 RAG</code> 的漏斗式更新逻辑，保证提供最前沿的 ROS2 与 AI 代码示例。</li>
+<li><strong>教育专家 Agent</strong> 采用：<code>标准共建（北师大评价体系） &amp;rarr; AI 初评 &amp;rarr; 专家审计 &amp;rarr; 动态课表调度 &amp;rarr; 情绪与压力监测 &amp;rarr; 综合能力评估 &amp;rarr; 人机协作触发器</code> 闭环。</li>
+</ul>
+<hr />
+<h2 id="4">🏆 4. 课程产出与评估</h2>
+<h3 id="41">4.1 核心交付物说明</h3>
+<ul>
+<li><strong>实物项目</strong>：学生亲手组装、接线、烧录并调试成功的第一台物理 AI 移动机器人（底盘 + 传感器套件）。</li>
+<li><strong>开源仓库</strong>：规范的 GitHub/Gitee 开源资产，内含差速控制代码、Prompt 系统提示词配置、网页端交互源码及 3D 打印 <code>.STL</code> 结构文件。</li>
+<li><strong>学术工程日志</strong>：<strong>严禁流水账</strong>。必须遵循科学记录格式：
+  $$\text{[面对的工程问题]} \rightarrow \text{[原始数据/Bug 表现]} \rightarrow \text{[给 AI 的 Prompt 迭代]} \rightarrow \text{[AI 提供的解决方案]} \rightarrow \text{[物理世界验证结果与反思]}$$</li>
+<li><strong>Kickstarter 演示视频</strong>：全英文/中文出镜讲解，阐述机器人的创新设计、核心算法推导逻辑以及多模态具身智能的演示。</li>
+<li><strong>学术型作品集</strong>：包含详细数理公式推导（如运动学雅可比矩阵）及定量分析图表，支持 Git Commit 全留痕证据链。</li>
+</ul>
+<h3 id="42-pbl-role-mapping">4.2 团队角色理解 (PBL Role Mapping)</h3>
+<p>每个精锐双人组需明确以下分工与角色定位：
+* <strong>产品经理 (PM)</strong>：负责场景定义、人机交互与功能定义。利用提示词工程撰写工业级 PRD，使用 AI 渲染工具进行外观迭代。
+* <strong>前端/交互工程师</strong>：使用 HTML5/CSS/JavaScript 零代码生成器开发 Web 交互控制终端，部署长连接。
+* <strong>后端与算法工程师</strong>：负责运动控制、路径规划算法调试，打通大模型 Agent 与小车底层硬件的通信接口。
+* <strong>嵌入式软硬件工程师</strong>：主导硬件选型、接线 Wokwi 仿真验证，执行底盘物理接线与固件烧录。
+* <strong>机械工程师</strong>：使用 AI 辅助设计物理底盘结构，操作 3D 打印与激光切割机，对齐传感器物理支架。
+* <strong>项目经理 (PJM) / 系统集成师</strong>：维护飞书看板与甘特图进度，主导全系统软硬件集成联调，撰写排故日志。</p>
+<h3 id="43">4.3 评估报告维度与权重</h3>
+<p>课程采用多维度综合性评价体系，结营时输出详尽的评估雷达图：</p>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>权重 (Weight)</th>
+<th>详细评估标准 (Criteria)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI 工具使用能力</strong></td>
+<td><strong>25%</strong></td>
+<td>AI 工具的使用深度与广度、提示词工程技巧、AI 辅助开发及 Debug 效率、生成内容的创新性。</td>
+</tr>
+<tr>
+<td><strong>FabLab 制造能力</strong></td>
+<td><strong>25%</strong></td>
+<td>三维设计参数合理性、数字化加工设备操作熟练度、CMF/DFM 规范掌握、原型迭代速度与工艺品质。</td>
+</tr>
+<tr>
+<td><strong>项目完成度与创新性</strong></td>
+<td><strong>30%</strong></td>
+<td>机器人的运动控制性能、多模态交互稳定性、解决真实痛点的实用价值、系统集成可靠度。</td>
+</tr>
+<tr>
+<td><strong>开源与协作精神</strong></td>
+<td><strong>20%</strong></td>
+<td>技术文档及 PRD 完整性、代码注释与规范、Gitee/GitHub 仓库活跃度、Git Commit 提交留痕、团队协作表现。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">🏛️ 5. 政策、比赛与场景应用</h2>
+<h3 id="51">5.1 政策切入点</h3>
+<ul>
+<li><strong>北京政策环境</strong>：对接<strong>高中综合素质评价（综评）</strong>与<strong>强基计划</strong>。北京营联合北师大二级学院盖章颁发评估报告，内含量化雷达图、数理公式推导及专家二次审计，可直接对应高中综评系统中的“研究性学习记录”。</li>
+<li><strong>浙江政策环境</strong>：对接<strong>三位一体招生（综评）</strong>。宁波营由联合国科创实验室（UNNC-BDO）组织，利用 UNNC-FabLab 印章背书，重点强调“算法到实物的闭环转化（Sim-to-Real）”和“Git 工业级版本控制”，极大提升面试含金量。</li>
+</ul>
+<h3 id="52">5.2 白名单赛事对接</h3>
+<p>课程产出可直接用于申报和参与以下教育部白名单及主流科创竞赛：
+* <strong>第九届全国青少年人工智能创新挑战赛</strong>（教育部 2025-2028 学年白名单竞赛）
+* 青少年科技创新大赛 / 全国青少年信息技术创新实践大赛（NOC）
+* 全国大学生机器人大赛（RoboMaster/RoboCon，高校延伸段）
+* “挑战杯”与“互联网+”大学生创新创业大赛（学术作品集积累）</p>
+<hr />
+<h2 id="vitepress">📚 技术文档章节（VitePress 详情页入口）</h2>
+<p>点击以下章节即可跳转查看技术文档细节及实验指南：</p>
+<h3 id="_4"><a href="./theory.md">第一章：机器人运动学与动力学建模</a></h3>
+<ul>
+<li><strong>核心理论</strong>: 深入推导双轮差速底盘及麦克纳姆全向轮底盘的正逆解运动矩阵，理解航向估计（Odometry）和 Pure Pursuit 路径追踪。</li>
+<li><a href="./theory.md">点击查看运动学细节文档 &rarr;</a></li>
+</ul>
+<h3 id="_5"><a href="./hardware.md">第二章：底盘控制链与微处理器集成</a></h3>
+<ul>
+<li><strong>底层执行</strong>: 学习增量式 PID 电机闭环控制原理，掌握算能 SophiGo Duo 的 GPIO/PWM/UART 引脚分配与防干扰电机驱动硬件设计。</li>
+<li><a href="./hardware.md">点击查看控制与硬件集成细节 &rarr;</a></li>
+</ul>
+<h3 id="ros2"><a href="./ros2.md">第三章：ROS2 导航与感知系统</a></h3>
+<ul>
+<li><strong>中枢大脑</strong>: 部署 ROS2 通信节点，广播车体 TF2 坐标变换，接入激光雷达并通过 Nav2 导航堆栈实现 SLAM 建图及自主避障规划。</li>
+<li><a href="./ros2.md">点击查看ROS2导航系统细节 &rarr;</a></li>
+</ul>
+<h3 id="sophicar-3d"><a href="./simulation.md">第四章：Sophicar 3D 在线仿真</a></h3>
+<ul>
+<li><strong>仿真演练</strong>: 利用 WebGL (Three.js) 在线渲染 Sophicar 精准车身 CAD 结构，通过网页虚拟遥控器及虚拟传感器射线在零硬件条件下验证控制程序。</li>
+<li><a href="./simulation.md">点击查看Web 3D仿真细节 &rarr;</a></li>
+</ul>
+<hr />
+<h2 id="_6">💬 划词批注互动区</h2>
+<p>本平台已集成<strong>高保真本地划词评论系统</strong>。如果您对运动学矩阵推导、引脚连线图或者 ROS2 节点通信存在任何疑问：
+1. 请先在<a href="/">主站首页</a>注册并登录。
+2. 返回本页面，<strong>用鼠标直接划选目标文字</strong>，即可触发高亮批注面板进行提问或讨论。
+3. 您的疑问将会显示在对应文本行下，助您与社区极客共同进步！</p><div class="nav-pg"><div></div><div><a href="fab-course.html">Fab 课程</a> →</div></div></main></body></html>

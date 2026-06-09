@@ -48,7 +48,7 @@ class MockAuth {
             nickname: 'Bob',
             signature: 'AI时代，敏捷造物',
             phone: '13800000000',
-            team: 'Sophigo 开发团队',
+            team: 'SophiGo 开发团队',
             admission_year: 'Jun 6, 2026',
             avatar: '',
             course_permissions: ['Fab课程', 'AI应用基础', 'AI移动机器人', 'CMF应用'],

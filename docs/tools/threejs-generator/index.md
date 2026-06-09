@@ -1,6 +1,6 @@
 # 3D生成器
 
-ProFabX / Sophigo 的在线 3D 预览与报价分析工具，支持多格式导入、装配关系编辑、壁厚风险判断和制造报价估算。
+ProFabX / SophiGo 的在线 3D 预览与报价分析工具，支持多格式导入、装配关系编辑、壁厚风险判断和制造报价估算。
 
 <p>
   <a href="./app.html" target="_blank" rel="noreferrer">打开 3D生成器</a>

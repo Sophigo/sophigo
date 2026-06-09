@@ -18,7 +18,6 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
 
   const t = {
     zh: {
-      backBtn: "返回主页",
       title: "AI移动机器人",
       subtitle: "核心：需求提出与定义，AI工具使用与工程化，辩证思考与决策，了解AI能力边界，文档复盘；",
       
@@ -118,11 +117,11 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           num: "02",
           tag: "Hardware & MCU",
           title: "微控制器控制链与硬件集成",
-          desc: "动手搭建机器人大脑的神经元。我们从电机选型、H 桥闭环控制开始，一步步打通与算能 Sophigo Duo 开发板的硬件接线、中断输入与串行通信协议。",
+          desc: "动手搭建机器人大脑的神经元。我们从电机选型、H 桥闭环控制开始，一步步打通与算能 SophiGo Duo 开发板的硬件接线、中断输入与串行通信协议。",
           points: [
             "霍尔编码器正交脉冲输入与增量式 PID 闭环调速",
             "电机驱动 H 桥芯片原理及 PWM 信号调节",
-            "Sophigo Duo 微处理器 GPIO、PWM、UART 接口分配与外围电路设计",
+            "SophiGo Duo 微处理器 GPIO、PWM、UART 接口分配与外围电路设计",
             "主控板通信协议：底盘驱动器与上位机 ROS 节点间的数据打包传输"
           ],
           link: "/docs/courses/mobile-robot/hardware.html"
@@ -144,7 +143,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           num: "04",
           tag: "3D Web Simulation",
           title: "Sophicar 3D 在线仿真与联合调试",
-          desc: "云端一体化实战。Sophigo 平台内置了基于 WebGL (Three.js) 的 3D 底盘虚拟调试环境。您可以在没有实体小车的情况下，直接利用网页终端仿真控制指令。",
+          desc: "云端一体化实战。SophiGo 平台内置了基于 WebGL (Three.js) 的 3D 底盘虚拟调试环境。您可以在没有实体小车的情况下，直接利用网页终端仿真控制指令。",
           points: [
             "在 Web 浏览器中直接加载 Sophicar 3D CAD 精准车身模型",
             "虚拟遥控器驱动车体运动，观察 3D 轨迹及虚拟声呐/雷达扫描特征",
@@ -286,7 +285,6 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       ]
     },
     en: {
-      backBtn: "Back to Home",
       title: "AI Mobile Robot Hardware-Software Course",
       subtitle: "From motor control, kinematics modeling, to ROS2 navigation and Web 3D simulation. Master the entire robotics integration chain.",
       
@@ -386,11 +384,11 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           num: "02",
           tag: "Hardware & MCU",
           title: "Microcontroller Control & Hardware Integration",
-          desc: "Construct the neural network of your robot chassis. Start from motor driver setups and PID velocity loops, linking them with Sophigo Duo board pinouts, interrupts, and serial communication.",
+          desc: "Construct the neural network of your robot chassis. Start from motor driver setups and PID velocity loops, linking them with SophiGo Duo board pinouts, interrupts, and serial communication.",
           points: [
             "Hall encoder quadrature signal decoding and incremental PID loop control",
             "Motor driver H-bridge theory and PWM speed modulation",
-            "Sophigo Duo pin mapping (GPIO, PWM, UART) and peripheral circuit design",
+            "SophiGo Duo pin mapping (GPIO, PWM, UART) and peripheral circuit design",
             "Board communication protocol: Data serialization between chassis and ROS node"
           ],
           link: "/docs/courses/mobile-robot/hardware.html"
@@ -412,7 +410,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
           num: "04",
           tag: "3D Web Simulation",
           title: "Sophicar 3D Online Web Simulation",
-          desc: "Seamless cloud-hardware ecosystem. Sophigo incorporates a WebGL (Three.js) 3D simulation environment. Program and test your steering algorithms in your browser without hardware.",
+          desc: "Seamless cloud-hardware ecosystem. SophiGo incorporates a WebGL (Three.js) 3D simulation environment. Program and test your steering algorithms in your browser without hardware.",
           points: [
             "Load accurate Sophicar 3D CAD model directly inside standard browsers",
             "Interact with virtual joystick to inspect trajectories and simulated radar scans",
@@ -481,7 +479,7 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       seniorCampOutline: [
         { phase: "Day 1-2", theme: "Need Analysis & Patent Query", desc: "Align with UN SDGs. Search patents using AI tools to find technical barriers and draft comprehensive market viability assessments." },
         { phase: "Day 3-4", theme: "BOM & DFM Industrial Audits", desc: "Deploy AI Agents to audit 3D model mechanical strength and draft DFM reports. Generate multi-level BOMs and negotiate components costs." },
-        { phase: "Day 5-6", theme: "Kinematics Analysis & Bus Protocol", desc: "Derive Mecanum kinematics matrices on ESP32-S3 & Sophigo Duo. Verify signals in Wokwi. Program multi-axis robotic arms over CAN." },
+        { phase: "Day 5-6", theme: "Kinematics Analysis & Bus Protocol", desc: "Derive Mecanum kinematics matrices on ESP32-S3 & SophiGo Duo. Verify signals in Wokwi. Program multi-axis robotic arms over CAN." },
         { phase: "Day 7-8", theme: "Websocket Control & Edge VLM", desc: "Establish low-latency MQTT/WiFi channels. Program vision language models (Qwen VLM / YOLO) to compile multi-modal inputs into action vectors." },
         { phase: "Day 9-10", theme: "WebGL Digital Twins & Topology Design", desc: "Build Three.js twin panels for real-time tracking. Run Fusion 360 generative algorithms to shave structural weight." },
         { phase: "Day 11-12", theme: "Defense & Open-source Release", desc: "Publish structural drawings, README files, circuit layouts. Perform full system stress tests and pitch project in English." }
@@ -558,16 +556,6 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
   return (
     <div style={containerStyle}>
       <div className="container-custom">
-        
-        {/* Back navigation */}
-        <button 
-          onClick={onBack}
-          style={backBtnStyle}
-          className="btn-secondary"
-        >
-          <ArrowLeft size={16} />
-          {t.backBtn}
-        </button>
 
         {/* Hero Area */}
         <div style={heroWrapperStyle}>

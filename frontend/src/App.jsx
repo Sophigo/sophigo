@@ -34,7 +34,7 @@ const contentTranslations = {
     toolsSubtitle: "Developer Tools",
     toolsTitle: "社区辅助设计工具箱",
     toolsDesc: "精简实用的 Web 工具，加速您的快速原型验证。",
-    footerCopy: "© 2026 Sophigo Platform. Built for the next-generation engineers.",
+    footerCopy: "© 2026 SophiGo Platform. Built for the next-generation engineers.",
     aiSearchBtn: "AI 搜索",
     aiSearchLoading: "AI 正在分析并生成解答...",
     aiSearchReset: "清空",
@@ -60,7 +60,7 @@ const contentTranslations = {
     toolsSubtitle: "Developer Tools",
     toolsTitle: "Community Design Toolbox",
     toolsDesc: "Clean and practical Web tools to accelerate your rapid prototype verification.",
-    footerCopy: "© 2026 Sophigo Platform. Built for the next-generation engineers.",
+    footerCopy: "© 2026 SophiGo Platform. Built for the next-generation engineers.",
     aiSearchBtn: "AI Search",
     aiSearchLoading: "AI is analyzing and generating response...",
     aiSearchReset: "Clear",
@@ -206,8 +206,8 @@ export default function App() {
           messages: [
             {
               role: 'system',
-              content: `You are Sophigo AI Assistant, a helpful assistant for Sophigo - a next-generation engineering education and digital prototyping platform. 
-              Sophigo integrates:
+              content: `You are SophiGo AI Assistant, a helpful assistant for SophiGo - a next-generation engineering education and digital prototyping platform. 
+              SophiGo integrates:
               - Mobile Robots (ROS2, motion control, physical vehicle simulation)
               - Fab digital manufacturing (3D printing, laser cutting, CNC milling)
               - CMF industrial aesthetics (anodizing thickness 8μm-12μm, sandblasting #120/#180, Klein Blue #002FA7)
@@ -299,7 +299,11 @@ export default function App() {
     <div style={{ minHeight: '100vh', position: 'relative' }}>
       
       {/* 3D Background - Hidden in dashboard view */}
-      {currentRoute !== 'profile' && <AntiGravityBackground />}
+      {currentRoute !== 'profile' && (
+        <div style={{ opacity: (currentRoute === 'join-us' || currentRoute === 'ai-basics') ? 0.4 : 1.0, transition: 'opacity 0.3s ease' }}>
+          <AntiGravityBackground />
+        </div>
+      )}
 
       {/* Glassmorphic Navbar */}
       <Navbar 
@@ -318,7 +322,7 @@ export default function App() {
         {currentRoute === 'mobile-robot-course' ? (
           <MobileRobotCourse lang={lang} onBack={() => onNavigate('home')} />
         ) : currentRoute === 'fab-course' ? (
-          <FabCourse onBack={() => onNavigate('home')} />
+          <FabCourse lang={lang} onBack={() => onNavigate('home')} />
         ) : currentRoute === 'ai-basics' ? (
           <AiBasics onBack={() => onNavigate('home')} />
         ) : currentRoute === 'cmf' ? (
@@ -345,7 +349,7 @@ export default function App() {
               position: 'relative'
             }}>
               <div className="container-custom">
-                {/* Note: Sparkles header element removed (Item 3: Sophigo Platform tag moved to bottom) */}
+                {/* Note: Sparkles header element removed (Item 3: SophiGo Platform tag moved to bottom) */}
 
                 <h1 className="title-hero text-gradient">
                   {typedTitle}
@@ -583,9 +587,35 @@ export default function App() {
                 </div>
 
                 {/* Modified Tools list layout (Item 9) */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '1.5rem' }}>
                   
-                  {/* Tool 1: Sophicar */}
+                  {/* Tool 1: CMF Applications */}
+                  <a 
+                    href="#/courses/cmf" 
+                    className="glassmorphism-card tool-card-link" 
+                    style={{ 
+                      padding: '2rem', 
+                      borderRadius: '16px', 
+                      border: '1px solid var(--border-color)',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <Sparkles size={24} style={{ color: 'var(--klein-blue)', marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      CMF应用
+                      <ArrowRight size={14} className="arrow-icon" style={{ transform: 'translateX(-4px)', opacity: 0, transition: 'all 0.2s' }} />
+                    </h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', flexGrow: 1 }}>
+                      材料、色彩与表面处理工艺卡片库，帮助快速判断原型制造中的材料路径与质感方案。
+                    </p>
+                  </a>
+
+                  {/* Tool 2: Sophicar */}
                   <a 
                     href="https://sophicar.com/" 
                     target="_blank" 
@@ -613,7 +643,7 @@ export default function App() {
                     </p>
                   </a>
 
-                  {/* Tool 2: Threejs Generator */}
+                  {/* Tool 3: Threejs Generator */}
                   <a 
                     href="/docs/tools/threejs-generator/app.html" 
                     className="glassmorphism-card tool-card-link" 
@@ -639,7 +669,7 @@ export default function App() {
                     </p>
                   </a>
 
-                  {/* Tool 3: Mods */}
+                  {/* Tool 4: Mods */}
                   <a 
                     href="https://modsproject.org/" 
                     target="_blank" 
@@ -699,7 +729,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Sophigo Platform Version Tag 置底 (Item 3) */}
+      {/* SophiGo Platform Version Tag 置底 (Item 3) */}
       <div style={{
         textAlign: 'center',
         paddingBottom: '2.5rem',
@@ -709,7 +739,7 @@ export default function App() {
         fontWeight: 500,
         letterSpacing: '0.05em'
       }}>
-        Sophigo Platform v1.0.0 Alpha
+        SophiGo Platform v1.0.0 Alpha
       </div>
 
       {/* Auth Modal Popup */}

@@ -210,7 +210,7 @@ graph TD
 - [点击查看运动学细节文档 &rarr;](./theory.md)
 
 ### [第二章：底盘控制链与微处理器集成](./hardware.md)
-- **底层执行**: 学习增量式 PID 电机闭环控制原理，掌握算能 Sophigo Duo 的 GPIO/PWM/UART 引脚分配与防干扰电机驱动硬件设计。
+- **底层执行**: 学习增量式 PID 电机闭环控制原理，掌握算能 SophiGo Duo 的 GPIO/PWM/UART 引脚分配与防干扰电机驱动硬件设计。
 - [点击查看控制与硬件集成细节 &rarr;](./hardware.md)
 
 ### [第三章：ROS2 导航与感知系统](./ros2.md)

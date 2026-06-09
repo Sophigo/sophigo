@@ -114,12 +114,12 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
           alignItems: 'center',
           gap: '0.75rem'
         }}>
-          <img src="/logo.png" alt="Sophigo Logo" style={{
+          <img src="/logo.png" alt="SophiGo Logo" style={{
             width: '36px',
             height: '36px',
             objectFit: 'contain'
           }} />
-          Sophigo
+          SophiGo
         </a>
 
         {/* Desktop Nav Items */}
@@ -180,7 +180,6 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
                 <a href="#/courses/fab-course" onClick={() => { onNavigate('fab-course'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.fabCourse}</a>
                 <a href="#/courses/ai-basics" onClick={() => { onNavigate('ai-basics'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.aiBasics}</a>
                 <a href="#/courses/mobile-robot" onClick={() => { onNavigate('mobile-robot-course'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.mobileRobot}</a>
-                <a href="#/courses/cmf" onClick={() => { onNavigate('cmf'); setIsCoursesDropdownOpen(false); }} style={dropdownItemStyle}>{t.cmf}</a>
               </div>
             )}
           </div>
@@ -232,6 +231,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
                 zIndex: 110,
                 animation: 'fadeIn 0.2s ease'
               }}>
+                <a href="#/courses/cmf" onClick={() => { onNavigate('cmf'); setIsToolsDropdownOpen(false); }} style={dropdownItemStyle}>{t.cmf}</a>
                 <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.sophicar}</a>
                 <a href="/docs/tools/threejs-generator/app.html" style={dropdownItemStyle}>{t.threejs}</a>
                 <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" style={dropdownItemStyle}>{t.mods}</a>
@@ -460,7 +460,6 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
               <a href="#/courses/fab-course" onClick={() => { setIsMobileMenuOpen(false); onNavigate('fab-course'); }} style={mobileSubNavLinkStyle}>{t.fabCourse}</a>
               <a href="#/courses/ai-basics" onClick={() => { setIsMobileMenuOpen(false); onNavigate('ai-basics'); }} style={mobileSubNavLinkStyle}>{t.aiBasics}</a>
               <a href="#/courses/mobile-robot" onClick={() => { onNavigate('mobile-robot-course'); setIsMobileMenuOpen(false); }} style={mobileSubNavLinkStyle}>{t.mobileRobot}</a>
-              <a href="#/courses/cmf" onClick={() => { setIsMobileMenuOpen(false); onNavigate('cmf'); }} style={mobileSubNavLinkStyle}>{t.cmf}</a>
             </div>
           </div>
           
@@ -469,6 +468,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
           <div>
             <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t.tools}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
+              <a href="#/courses/cmf" onClick={() => { setIsMobileMenuOpen(false); onNavigate('cmf'); }} style={mobileSubNavLinkStyle}>{t.cmf}</a>
               <a href="https://sophicar.com/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.sophicar}</a>
               <a href="/docs/tools/threejs-generator/app.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.threejs}</a>
               <a href="https://modsproject.org/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={mobileSubNavLinkStyle}>{t.mods}</a>
