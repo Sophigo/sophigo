@@ -88,7 +88,7 @@ export default function FeaturedGrid({ lang = 'zh', userPermissions = ['Fabè¯¾ç¨
   ];
 
   return (
-    <section id="showcase" className="container-custom" style={{ paddingBlock: '6rem 4rem' }}>
+    <section id="showcase" className="container-custom featured-section">
       <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
         <span style={{
           fontSize: '0.85rem',
@@ -105,7 +105,7 @@ export default function FeaturedGrid({ lang = 'zh', userPermissions = ['Fabè¯¾ç¨
           fontSize: '2.25rem',
           fontWeight: 700,
           marginBottom: '1rem',
-          letterSpacing: '-0.02em'
+          letterSpacing: 0
         }}>
           {t.title}
         </h2>
@@ -133,7 +133,7 @@ export default function FeaturedGrid({ lang = 'zh', userPermissions = ['Fabè¯¾ç¨
                 boxShadow: isPermitted ? '0 8px 30px rgba(0, 47, 167, 0.08)' : 'none',
                 opacity: isPermitted ? 1 : 0.85,
                 minWidth: 0,
-                height: '520px'
+                minHeight: '520px'
               }}
             >
               {/* SVG Media container */}
@@ -210,6 +210,13 @@ export default function FeaturedGrid({ lang = 'zh', userPermissions = ['Fabè¯¾ç¨
         @media (max-width: 768px) {
           .featured-course-grid {
             grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+          .featured-course-grid .sophigo-card {
+            min-height: auto !important;
+          }
+          .featured-course-grid .sophigo-card-media {
+            height: 176px !important;
           }
         }
         .course-visual-svg {

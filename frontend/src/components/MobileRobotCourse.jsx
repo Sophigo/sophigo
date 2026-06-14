@@ -169,23 +169,39 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       campTitle: "12 天线下实训营课程提纲",
       campSubtitle: "分为初中和高中两个独立版本，匹配对应阶段的认知水平和技术能力。",
       juniorTab: "初中组：AI 机器人产品体验营",
-      seniorTab: "高中组：AI 具身智能产品工程营",
+      seniorTab: "高中组：蓝暑2026：未来机器人系统级敏捷开发营",
       juniorConcept: "🟢 初中组核心理念：\"AI 做所有事，学生只做决策\"",
-      seniorConcept: "🔵 高中组核心理念：\"AI 做基础执行，学生做系统设计和深度决策\"",
-      
-      seniorDiffTitle: "💡 高中组与初中组的本质区别",
-      seniorDiffs: [
+      seniorConcept: "🔵 从自然语言到具身智能：高水平中学生物理 AI Agent 系统工程学术营",
+
+      juniorDiffTitle: "💡 初中组学习方式",
+      juniorDiffs: [
         {
-          title: "多智能体协同 (Multi-Agent)",
-          desc: "打破“输入提示词、生成单点结果”的线性体验，引入“专家智能体编排体系”，学生通过状态机编排协同调度多个专项 Agent。"
+          title: "产品体验驱动",
+          desc: "从校园、家庭和社区的真实不便出发，学生负责发现问题、选择方向和定义功能，AI 负责扩展案例与生成草案。"
         },
         {
-          title: "白盒机理剖析",
-          desc: "融合硬核数理公式与零代码工具。独创“AI 生成复杂要素 ➔ 学生进行白盒机理剖析 ➔ 仿真验证 ➔ 物理实操重构”逆向工程流。"
+          title: "低门槛 AI 造物",
+          desc: "不要求死记代码和电路细节，用自然语言完成 PRD、外观图、接线教程、控制网页和基础程序生成。"
+        },
+        {
+          title: "实物闭环交付",
+          desc: "每个小组完成一台能运行、能控制、能展示的 AI 移动机器人，并沉淀海报、视频、网页和基础工程文档。"
+        }
+      ],
+      
+      seniorDiffTitle: "💡 高中组学习方式",
+      seniorDiffs: [
+        {
+          title: "系统级敏捷开发",
+          desc: "以 Design Thinking 串联共情、定义、构思、原型、测试与迭代，学生不只是调用 AI，而是担任项目经理和系统架构师。"
+        },
+        {
+          title: "物理 AI Agent 闭环",
+          desc: "围绕云端大模型规划、本地 MaixCAM-Pro 视觉定位、ESP32 底盘执行、机械臂抓取和安全回退，完成真实具身智能链路。"
         },
         {
           title: "学术级诚实性交付",
-          desc: "拒绝流水账式日记。学生最终交付必须包含数理公式推导、定量分析图表、Git Commit 全留痕证据链的学术型开源作品集。"
+          desc: "完整保留 Prompt、Token、Git Commit、测试数据、故障日志和个人反思，形成可用于综评/作品集的开源证据链。"
         }
       ],
 
@@ -198,26 +214,33 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       },
 
       juniorDays: [
-        { day: "第一天", theme: "问题挖掘", morning: "FabLab 精神、AI 时代软硬件开发流程与产品经理思维定义小车。", afternoon: "构建“双人精锐组”，飞书看板项目管理入门。定义产品核心功能，AI 辅助起名、Slogan 与文生图脑暴。", tools: "DeepSeek/通义千问/飞书看板", deliverable: "小组问题分析报告、创意海报、基础 PRD 草稿" },
-        { day: "第二天", theme: "功能定义", morning: "概念设计：模块化部件认知（学生做 100% 决策）。提示词工程：学习目标-要求-约束三要素向 AI 提需求。", afternoon: "行为流定义：AI 生成交互逻辑图。软硬件选型：AI 推荐硬件清单。Vibe Coding：AI 指导部署 VSCode 并生成项目网页。", tools: "VSCode/Gitee/文生图工具", deliverable: "工业标准 PRD 文档、硬件选型清单、项目发布网页" },
-        { day: "第三天", theme: "参数化设计", morning: "学习工业级 CMF 与 DFM（可制造性设计）规范，理解“为加工而设计”。", afternoon: "模型终审：通过 sophicar.com 网页端进行参数化底盘滑块设计与评估。数字化加工：操作 3D 打印机/激光切割机加工实物。", tools: "sophicar.com / Fusion 360 AI / MakerLab", deliverable: ".stl 格式三维结构模型、加工参数文档、物理底盘零件" },
-        { day: "第四天", theme: "嵌入式基础", morning: "引脚认知：建立对 ESP32-S3 开源硬件全局认知，专注于懂逻辑而不死记硬背。", afternoon: "虚拟仿真：在 Wokwi 平台完成接线验证。自然语言编程：用自然语言描述运动需求，AI 自动生成控制逻辑与固件烧录。", tools: "Wokwi 仿真平台 / Aily Blockly / ESP32-S3", deliverable: "Wokwi 仿真模型、ESP32-S3 控制代码、第一台通电物理样机" },
-        { day: "第五、六天", theme: "软硬件调试", morning: "整机总装：动手组装外壳与传感器支架，指挥 AI 生成数字化装配步骤教程。工艺优化：理线与规避“飞线”，AI 生成布线规范。", afternoon: "控制重构：用自然语言描述避障、传感器融合逻辑并由 AI 编译。总线调优：调试主控板与电机、舵机间的 CAN 总线/串口通信。", tools: "VSCode / 万用表 / CAN 总线扩展模块", deliverable: "车辆避障算法代码、硬件测试报告、工业级布线避障机器人" },
-        { day: "第七天", theme: "全栈 Vibe Coding", morning: "零代码界面：跳过前端 UI 代码，通过纯自然语言与 AI 对话编译出美观的 HTML 网页交互控制面板。", afternoon: "跨网控制：配置 Wi-Fi/蓝牙协议，将网页端控制面板与小车主控板长连接跨网桥接。", tools: "HTML5/CSS/JS 零代码生成器 / 本地 Wi-Fi 模块", deliverable: "跨平台前端控制网页源码、AI 交互控制接口文档、无线交互终端" },
-        { day: "第八天", theme: "多模态交互", morning: "交互赋能：描述多模态工作流需求，指挥 AI 将语音控制、视觉识别与避障算法合并，全自动生成集成系统代码。", afternoon: "联调测试：实现“听到指令出发、看到特定障碍物精准刹车/倒垃圾”的智能化逻辑。", tools: "Qwen VLM / Hugging Face / Aily Blockly", deliverable: "完整合并的交互控制逻辑代码包、全功能集成演示视频" },
-        { day: "第九天", theme: "数字孪生", morning: "孪生认知：理解“虚拟仿真 ➔ 实体部署”系统集成，由 AI 辅助驱动 3D 虚拟车物理引擎。", afternoon: "虚实联动：高频双向同步逻辑部署，实现“滑块调整/物理移动 ➔ 虚拟 3D 屏幕车动画同步”。", tools: "Three.js 3D 渲染引擎 / 数据双向同步智能体", deliverable: "3D 数字孪生仿真控制系统源码、端-网-云-虚拟仿真演示系统" },
-        { day: "第十天", theme: "轻量化优化", morning: "系统集成：全功能饱和压力测试，优化控制参数。结构优化：向 AI 提出轻量化拓扑需求，进行减重应力分析并微调机械结构。", afternoon: "工艺定型：最后一轮理线与质检，AI 辅助撰写产品说明书。", tools: "VSCode / Autodesk Fusion 360", deliverable: "最终版多模态综合控制代码、产品拓扑优化说明书、终极物理原型机" },
-        { day: "第十一天", theme: "包装测试", morning: "系统压测：开展“端-网-云-虚拟仿真”完整闭环压力测试，优化文档与日志。", afternoon: "开源整理：整理 Gitee/GitHub 代码仓库，规范文档（README）与演示视频。", tools: "Git/GitHub Pages / Markdown 编辑器", deliverable: "规范开源的 GitHub 技术仓库、定量分析图表、学术型技术报告" },
-        { day: "第十二天", theme: "产品发布", morning: "正式举办产品发布会，各小组轮流进行 5 分钟技术路演 + 5 分钟评审团 Q&A。", afternoon: "企业参访：企业专家演讲与答辩证书颁发。", tools: "投影仪 / 路演 PPT", deliverable: "创新技术讲解视频、联合认证结营证书、带走个人物理机器人" }
+        { day: "1", theme: "问题挖掘", desc: "理解 FabLab 精神、AI Native 开发流程与产品经理思维，组建双人团队，用 AI 扩展真实问题、命名产品并形成基础 PRD 草稿。", link: "/docs/courses/mobile-robot/middle-school/1.html" },
+        { day: "2", theme: "功能定义", desc: "认识机器人模块与提示词三要素，用 AI 生成行为流、硬件清单和项目介绍网页，完成从创意到可执行方案的第一次收敛。", link: "/docs/courses/mobile-robot/middle-school/2.html" },
+        { day: "3", theme: "参数化结构设计与数字制造", desc: "学习 CMF、DFM 和“为加工而设计”的基础规范，通过 sophicar.com 与 Fusion 360 辅助生成底盘结构，并完成数字化加工准备。", link: "/docs/courses/mobile-robot/middle-school/3.html" },
+        { day: "4", theme: "嵌入式基础", desc: "建立 ESP32-S3、引脚、电路和虚拟仿真的直观认知，用自然语言生成控制逻辑，在 Wokwi/Aily Blockly 中完成验证和烧录。", link: "/docs/courses/mobile-robot/middle-school/4.html" },
+        { day: "5", theme: "基础软硬件调试（一）", desc: "完成外壳、传感器、线路和主控板的整机装配，借助 AI 生成装配教程与工业级理线规范。", link: "/docs/courses/mobile-robot/middle-school/5.html" },
+        { day: "6", theme: "基础软硬件调试（二）", desc: "推进避障逻辑、多总线通信和串口调试，形成可复盘的硬件测试报告与故障排查记录。", link: "/docs/courses/mobile-robot/middle-school/6.html" },
+        { day: "7", theme: "全栈 Vibe Coding", desc: "用自然语言生成网页控制面板，配置 Wi-Fi/蓝牙连接，让前端控制界面与机器人主控板建立可演示的无线交互链路。", link: "/docs/courses/mobile-robot/middle-school/7.html" },
+        { day: "8", theme: "交互", desc: "整合语音控制、网页控制和避障算法，让机器人具备听指令、响应动作和安全停机的多模态交互能力。", link: "/docs/courses/mobile-robot/middle-school/8.html" },
+        { day: "9", theme: "多模态语音交互集成与轻量化结构优化（一）", desc: "测试完整系统，记录 Bug，分析语音、网络、结构和续航瓶颈，完成第一轮控制逻辑优化。", link: "/docs/courses/mobile-robot/middle-school/9.html" },
+        { day: "10", theme: "多模态语音交互集成与轻量化结构优化（二）", desc: "完成轻量化结构优化、产品化工艺定型、全功能回归测试和终极原型机封样。", link: "/docs/courses/mobile-robot/middle-school/10.html" },
+        { day: "11", theme: "包装", desc: "整理系统压测结果、日志、代码仓库、README、海报和演示视频，把项目沉淀为可展示的开源作品集。", link: "/docs/courses/mobile-robot/middle-school/11.html" },
+        { day: "12", theme: "发布", desc: "完成正式产品发布会、技术路演、评审 Q&A、企业参访和证书交付，每位学生带走自己的物理 AI 机器人。", link: "/docs/courses/mobile-robot/middle-school/12.html" }
       ],
 
       seniorCampOutline: [
-        { phase: "第一、二天 (Day 1-2)", theme: "痛点深度挖掘与专利分析", desc: "引入联合国可持续发展目标（SDGs），利用 AI 进行行业级专利检索与分析，从现有竞品中提炼技术壁垒，形成高级商业可行性与市场规模分析报告。" },
-        { phase: "第三、四天 (Day 3-4)", theme: "工业级 BOM 与 DFM 深度审查", desc: "引导学生利用 AI 智能体对机械底盘进行三维模型多维度纵向评估，编写结构优化与应力分析文档；自动生成多级 BOM（物料清单）并进行供应链采购成本优化。" },
-        { phase: "第五、六天 (Day 5-6)", theme: "运动学反解推导与多路总线通信", desc: "深入 ESP32-S3 与算能 Duo 芯片架构，推导双轮差速/麦轮运动学矩阵，在 Wokwi 中进行逻辑校验；打通 CAN 总线与串口通信，实现机械臂多轴协同控制。" },
-        { phase: "第七、八天 (Day 7-8)", theme: "跨网控制与边缘视觉 VLM 部署", desc: "基于 MQTT/WiFi 部署高频双向通信，利用视觉语言模型（Qwen VLM / YOLO）将多模态提问（语音、画面）深度转化为机器人的结构化 JSON 动作指令流。" },
-        { phase: "第九、十天 (Day 9-10)", theme: "三维数字孪生与生成式拓扑优化", desc: "基于 Three.js 自主设计双向虚实联动仿真控制面板，配合 Fusion 360 Generative Design 进行车身结构轻量化迭代。" },
-        { phase: "第十一、十二天 (Day 11-12)", theme: "学术答辩与开源发布", desc: "生成规范的 README、技术拓扑图，进行系统级端-网-云压力测试，举行全英文学术路演。" }
+        { day: "1", theme: "开营与社会痛点问题定义", desc: "完成新工科/FabLab 导入、需求头脑风暴、项目分析、SDG 对齐和 PRD 初稿。", link: "/docs/courses/mobile-robot/high-school/1.html" },
+        { day: "2", theme: "功能定义", desc: "导入 AI Native 工程思维，完成提示词进阶、技术拓扑、外观迭代和项目网页。", link: "/docs/courses/mobile-robot/high-school/2.html" },
+        { day: "3", theme: "参数化结构设计", desc: "学习机器人结构、CMF、DFM、公差和参数化建模逻辑，使用 sophicar.com 与 Fusion 360 API 脚本生成底盘方案。", link: "/docs/courses/mobile-robot/high-school/3.html" },
+        { day: "4", theme: "数字制造", desc: "完成实验室安全、3D 打印/激光切割工艺、材料选择、切片策略、BOM Agent 和基础零件加工。", link: "/docs/courses/mobile-robot/high-school/4.html" },
+        { day: "5", theme: "嵌入式基础", desc: "理解开源硬件协议、ESP32-S3、电路基础和引脚定义，用自然语言生成接线图与基础控制代码。", link: "/docs/courses/mobile-robot/high-school/5.html" },
+        { day: "6", theme: "机械臂与底盘控制", desc: "打通底盘运动、机械臂逻辑、CAN/UART 通信和遥控器控制，完成物理接线、理线和 AI 调试日志。", link: "/docs/courses/mobile-robot/high-school/6.html" },
+        { day: "7", theme: "全栈 Vibe Coding", desc: "用自然语言生成 HTML 控制台，基于 MQTT/WiFi 配置前端网页与机器人主控板的长连接跨网控制链。", link: "/docs/courses/mobile-robot/high-school/7.html" },
+        { day: "8", theme: "具身智能控制落地：基于边缘视觉的端云协同抓取", desc: "构建语音/文本、云端 LLM、本地 MaixCAM-Pro 视觉、ESP32 底盘与机械臂抓取的物理 Agent 闭环。", link: "/docs/courses/mobile-robot/high-school/8.html" },
+        { day: "9", theme: "数字孪生", desc: "使用 Three.js 与 Cannon.js 开发 3D 数字孪生控制系统，实现虚拟车位姿与实体运动的双向同步。", link: "/docs/courses/mobile-robot/high-school/9.html" },
+        { day: "10", theme: "系统集成与包装（一）", desc: "进行全链路测试、网络抖动、光照变化、电机堵转和传感误差等压力测试，完成控制逻辑优化。", link: "/docs/courses/mobile-robot/high-school/10.html" },
+        { day: "11", theme: "系统集成与包装（二）", desc: "完成轻量化优化、线束整理、README、Prompt 汇编、Token 统计、个人反思和开源仓库。", link: "/docs/courses/mobile-robot/high-school/11.html" },
+        { day: "12", theme: "发布", desc: "举行技术路演与评审 Q&A，现场演示数字孪生与实物协同，完成企业参访、证书和个人物理 AI 机器人交付。", link: "/docs/courses/mobile-robot/high-school/12.html" }
       ],
 
       // Multi-Agent Section
@@ -436,23 +459,39 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       campTitle: "12-Day Hands-on Camp Syllabus",
       campSubtitle: "Separate options for middle school and high school groups aligned to cognitive capability.",
       juniorTab: "Middle School: AI Robot Product Camp",
-      seniorTab: "High School: AI Embodied Product Engineering Camp",
+      seniorTab: "High School: Blue Summer 2026 Future Robotics Agile Systems Camp",
       juniorConcept: "🟢 Middle School Focus: \"AI executes all tasks, students make decisions\"",
-      seniorConcept: "🔵 High School Focus: \"AI handles basic execution, students design and deduce systems\"",
+      seniorConcept: "🔵 From natural language to embodied intelligence: a physical AI Agent systems engineering camp for advanced high school students",
+
+      juniorDiffTitle: "💡 Middle School Learning Mode",
+      juniorDiffs: [
+        {
+          title: "Product Experience First",
+          desc: "Students start from real campus, family, or community inconveniences, choose the direction, and define features while AI expands cases and drafts materials."
+        },
+        {
+          title: "Accessible AI Making",
+          desc: "No memorization-heavy coding or circuit drills. Natural language drives PRDs, concept visuals, wiring guides, control webpages, and basic programs."
+        },
+        {
+          title: "Physical Closed-loop Delivery",
+          desc: "Each team completes a runnable, controllable, and presentable AI mobile robot with posters, videos, webpages, and basic engineering documents."
+        }
+      ],
       
-      seniorDiffTitle: "💡 High School vs Middle School Differences",
+      seniorDiffTitle: "💡 High School Learning Mode",
       seniorDiffs: [
         {
-          title: "Multi-Agent Orchestration",
-          desc: "Moves beyond simple one-shot prompts. Introduces expert Agent state-machine orchestration where students direct multiple AI agents."
+          title: "Agile Systems Development",
+          desc: "Uses Design Thinking across empathy, definition, ideation, prototyping, testing, and iteration. Students act as project managers and system architects, not just AI users."
         },
         {
-          title: "White-box Analytical Physics",
-          desc: "Derive actual kinematics formulas (chassis Jacobian matrices) and link them to zero-code controllers via simulation validation."
+          title: "Physical AI Agent Loop",
+          desc: "Builds a real loop across cloud LLM planning, MaixCAM-Pro edge vision, ESP32 chassis execution, robotic arm pickup, sensor fusion, and fail-safe fallback."
         },
         {
-          title: "Academic-level Portfolios",
-          desc: "Outcome is structured as open-source code repositories with math deductions, Git logs, and quantitative graphs matching college standards."
+          title: "Academic Integrity Deliverables",
+          desc: "Keeps Prompt, Token, Git commit, testing data, debugging logs, and reflection evidence for a rigorous open-source portfolio."
         }
       ],
 
@@ -465,26 +504,33 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
       },
 
       juniorDays: [
-        { day: "Day 1", theme: "Define Needs", morning: "FabLab principles, product mindset, and AI-native hardware agile workflows.", afternoon: "Team formation (duos). Feishu board setups. Slogan brainstorming and text-to-image concepts.", tools: "DeepSeek / Feishu Boards / Midjourney", deliverable: "Needs Analysis, Brand poster, PRD draft" },
-        { day: "Day 2", theme: "Specifications", morning: "Module catalog learning. Prompt engineering: Target-Request-Constraint technique.", afternoon: "AI-based flowcharts. Bill of Materials (BOM) creation. Deploy VSCode and generate landing web pages via AI.", tools: "VSCode / Gitee / LLM Agents", deliverable: "Industrial PRD, Hardware BOM, Project web page" },
-        { day: "Day 3", theme: "Parametric Design", morning: "CMF and DFM (Design for Manufacturability) guidelines.", afternoon: "Chassis review via sophicar.com parameters. Manufacturing: 3D printing and laser cutting chassis parts.", tools: "sophicar.com / Fusion 360 / Laser cutters", deliverable: "3D CAD model (.stl), physical chassis parts" },
-        { day: "Day 4", theme: "MCU Basics", morning: "ESP32-S3 pinouts and architecture basics without memorizing register tables.", afternoon: "Virtual prototyping in Wokwi. natural-language programming: AI compiles code for steering motors.", tools: "Wokwi Simulator / Blockly / ESP32-S3", deliverable: "Wokwi model, board code, first powered prototype" },
-        { day: "Day 5-6", theme: "System Debugging", morning: "Enclosure and sensor assembly. Wiring optimization: clean wiring standard guide generated by AI.", afternoon: "Natural language compilation for sensor loops. Tuning CAN bus / serial communications.", tools: "VSCode / Multimeters / CAN Bus Modules", deliverable: "Avoidance code, hardware test logs, wired physical vehicle" },
-        { day: "Day 7", theme: "Full Vibe Coding", morning: "Zero-code frontend: Compile gorgeous HTML control panels simply by conversing with AI.", afternoon: "Set up local Wi-Fi connection from dashboard to ESP32 board.", tools: "HTML5/CSS/JS generator / Wi-Fi routers", deliverable: "Web control interface, web APIs documentation" },
-        { day: "Day 8", theme: "VLM Interaction", morning: "Specify multi-modal workflows to integrate voice commands and camera inputs.", afternoon: "Verify action sequences: commands triggering specific mechanics via VLM.", tools: "Qwen VLM / Hugging Face / Blockly", deliverable: "Integrated multimodal code, prototype demo video" },
-        { day: "Day 9", theme: "Digital Twin", morning: "Concept of virtual-to-real workflows. Control 3D viewport objects using physical boards.", afternoon: "Deploy WebSocket synchronizer. Physical movement mirror to Web 3D canvas.", tools: "Three.js / WebSockets / Synchronization Agent", deliverable: "3D Digital Twin source code, cloud-web synchronizer" },
-        { day: "Day 10", theme: "Optimization", morning: "Stress test and control tuning. Ask AI for generative topology weight optimization.", afternoon: "Final wiring QA. AI writes user documentation and manuals.", tools: "VSCode / Autodesk Fusion 360", deliverable: "Optimized control code, manual, completed physical robot" },
-        { day: "Day 11", theme: "Release Prep", morning: "System verification under load. Format logs and git history.", afternoon: "Open-source codebase setup on Gitee/GitHub. Film high-quality demonstration video.", tools: "Git / GitHub Pages / Markdown editors", deliverable: "Clean GitHub repository, analysis charts, tech report" },
-        { day: "Day 12", theme: "Demo & Pitch", morning: "Formal product release pitch (5 min demo + 5 min review Q&A).", afternoon: "Industrial guest reviews, certification award, keep your robot.", tools: "Projector / Pitch decks", deliverable: "Pitch video, joint certificate, physical robot" }
+        { day: "1", theme: "Define Needs", desc: "Learn FabLab principles, AI-native workflows, product thinking, and use AI to expand real problems into a starter PRD.", link: "/docs/courses/mobile-robot/middle-school/1.html" },
+        { day: "2", theme: "Specifications", desc: "Explore robot modules and prompt structure, generate user flows, hardware lists, and a project webpage.", link: "/docs/courses/mobile-robot/middle-school/2.html" },
+        { day: "3", theme: "Parametric Design & Fabrication", desc: "Practice CMF, DFM, and design-for-fabrication basics, then prepare chassis models for making.", link: "/docs/courses/mobile-robot/middle-school/3.html" },
+        { day: "4", theme: "MCU Basics", desc: "Understand ESP32-S3, pins, circuits, and virtual simulation, then verify generated control logic.", link: "/docs/courses/mobile-robot/middle-school/4.html" },
+        { day: "5", theme: "Hardware Debugging I", desc: "Assemble chassis, sensors, wiring, and controller with AI-generated assembly guides and wiring standards.", link: "/docs/courses/mobile-robot/middle-school/5.html" },
+        { day: "6", theme: "Hardware Debugging II", desc: "Tune obstacle logic, communication buses, serial debugging, and complete traceable test records.", link: "/docs/courses/mobile-robot/middle-school/6.html" },
+        { day: "7", theme: "Full Vibe Coding", desc: "Generate a web control panel through natural language and connect it to the robot controller.", link: "/docs/courses/mobile-robot/middle-school/7.html" },
+        { day: "8", theme: "Interaction", desc: "Combine voice control, web control, and obstacle avoidance into a safe multimodal demo.", link: "/docs/courses/mobile-robot/middle-school/8.html" },
+        { day: "9", theme: "Multimodal Integration I", desc: "Run system tests, log bugs, and complete the first control and structure optimization pass.", link: "/docs/courses/mobile-robot/middle-school/9.html" },
+        { day: "10", theme: "Multimodal Integration II", desc: "Finalize lightweight structure, productization details, regression tests, and the final prototype.", link: "/docs/courses/mobile-robot/middle-school/10.html" },
+        { day: "11", theme: "Packaging", desc: "Package logs, source code, README files, posters, demo video, and test evidence into a portfolio.", link: "/docs/courses/mobile-robot/middle-school/11.html" },
+        { day: "12", theme: "Release", desc: "Deliver the final product launch, technical pitch, review Q&A, enterprise visit, and take-home robot.", link: "/docs/courses/mobile-robot/middle-school/12.html" }
       ],
 
       seniorCampOutline: [
-        { phase: "Day 1-2", theme: "Need Analysis & Patent Query", desc: "Align with UN SDGs. Search patents using AI tools to find technical barriers and draft comprehensive market viability assessments." },
-        { phase: "Day 3-4", theme: "BOM & DFM Industrial Audits", desc: "Deploy AI Agents to audit 3D model mechanical strength and draft DFM reports. Generate multi-level BOMs and negotiate components costs." },
-        { phase: "Day 5-6", theme: "Kinematics Analysis & Bus Protocol", desc: "Derive Mecanum kinematics matrices on ESP32-S3 & SophiGo Duo. Verify signals in Wokwi. Program multi-axis robotic arms over CAN." },
-        { phase: "Day 7-8", theme: "Websocket Control & Edge VLM", desc: "Establish low-latency MQTT/WiFi channels. Program vision language models (Qwen VLM / YOLO) to compile multi-modal inputs into action vectors." },
-        { phase: "Day 9-10", theme: "WebGL Digital Twins & Topology Design", desc: "Build Three.js twin panels for real-time tracking. Run Fusion 360 generative algorithms to shave structural weight." },
-        { phase: "Day 11-12", theme: "Defense & Open-source Release", desc: "Publish structural drawings, README files, circuit layouts. Perform full system stress tests and pitch project in English." }
+        { day: "1", theme: "Opening & Social Pain Point Definition", desc: "Introduce FabLab and new engineering, define pain points, SDG links, competitor research, and the first PRD draft.", link: "/docs/courses/mobile-robot/high-school/1.html" },
+        { day: "2", theme: "Function Definition", desc: "Advance AI Native engineering prompts, technical topology, appearance iteration, and project webpage setup.", link: "/docs/courses/mobile-robot/high-school/2.html" },
+        { day: "3", theme: "Parametric Structure Design", desc: "Use sophicar.com and Fusion 360 API scripts to generate and evaluate chassis structures.", link: "/docs/courses/mobile-robot/high-school/3.html" },
+        { day: "4", theme: "Digital Fabrication", desc: "Practice lab safety, 3D printing, laser cutting, materials, slicing strategy, and BOM Agent decisions.", link: "/docs/courses/mobile-robot/high-school/4.html" },
+        { day: "5", theme: "Embedded Basics", desc: "Understand ESP32-S3, circuits, pins, and generate wiring plus baseline motion control code.", link: "/docs/courses/mobile-robot/high-school/5.html" },
+        { day: "6", theme: "Robotic Arm & Chassis Control", desc: "Connect chassis motion, robotic arm logic, CAN/UART communication, wiring, and AI debug logs.", link: "/docs/courses/mobile-robot/high-school/6.html" },
+        { day: "7", theme: "Full-stack Vibe Coding", desc: "Generate an HTML control console and connect the frontend dashboard over MQTT/WiFi.", link: "/docs/courses/mobile-robot/high-school/7.html" },
+        { day: "8", theme: "Embodied Control With Edge Vision", desc: "Build the cloud LLM, MaixCAM-Pro vision, ESP32 chassis, and robotic arm physical Agent loop.", link: "/docs/courses/mobile-robot/high-school/8.html" },
+        { day: "9", theme: "Digital Twin", desc: "Use Three.js and Cannon.js to synchronize virtual pose and physical motion.", link: "/docs/courses/mobile-robot/high-school/9.html" },
+        { day: "10", theme: "Integration & Packaging I", desc: "Run full-chain stress tests for network, lighting, motor, sensor, and structural risks.", link: "/docs/courses/mobile-robot/high-school/10.html" },
+        { day: "11", theme: "Integration & Packaging II", desc: "Finalize topology optimization, wiring, README, prompt archive, token statistics, reflections, and repository.", link: "/docs/courses/mobile-robot/high-school/11.html" },
+        { day: "12", theme: "Release", desc: "Run the technical pitch, expert review, digital-twin demo, enterprise visit, certificate, and final delivery.", link: "/docs/courses/mobile-robot/high-school/12.html" }
       ],
 
       // Multi-Agent Section
@@ -717,33 +763,42 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
                   />
                 </div>
 
-                {/* Mobile Responsive Layout / Table */}
-                <div style={{ overflowX: 'auto' }}>
-                  <table style={campTableStyle}>
-                    <thead>
-                      <tr style={campTableHeaderRowStyle}>
-                        <th style={{ ...campTableHeaderStyle, width: '12%' }}>{t.juniorTableHeaders.day}</th>
-                        <th style={{ ...campTableHeaderStyle, width: '28%' }}>{t.juniorTableHeaders.morning}</th>
-                        <th style={{ ...campTableHeaderStyle, width: '28%' }}>{t.juniorTableHeaders.afternoon}</th>
-                        <th style={{ ...campTableHeaderStyle, width: '16%' }}>{t.juniorTableHeaders.tools}</th>
-                        <th style={{ ...campTableHeaderStyle, width: '16%' }}>{t.juniorTableHeaders.deliverable}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {t.juniorDays.map((day, idx) => (
-                        <tr key={idx} style={campTableRowStyle(idx)}>
-                          <td style={campTableDayCellStyle}>
-                            <span style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '0.9rem' }}>{day.day}</span>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--klein-blue)', display: 'block', marginTop: '0.15rem' }}>{day.theme}</span>
-                          </td>
-                          <td style={campTableCellStyle}>{day.morning}</td>
-                          <td style={campTableCellStyle}>{day.afternoon}</td>
-                          <td style={campTableToolsCellStyle}>{day.tools}</td>
-                          <td style={campTableDeliverableCellStyle}>{day.deliverable}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                {/* Learning Mode Grid */}
+                <div style={{ marginBottom: '3rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '1.25rem' }}>{t.juniorDiffTitle}</h3>
+                  <div className="grid-featured" style={{ gap: '1.5rem' }}>
+                    {t.juniorDiffs.map((diff, idx) => (
+                      <div key={idx} className="grid-col-4 glassmorphism-card" style={diffCardStyle}>
+                        <h4 style={{ fontSize: '1rem', fontWeight: '700', color: '#30d158', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <Award size={16} />
+                          {diff.title}
+                        </h4>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{diff.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Chronological Day Listing */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {t.juniorDays.map((day, idx) => (
+                    <a
+                      key={idx}
+                      href={day.link}
+                      className="glassmorphism-card course-day-link-card"
+                      data-course-track="junior"
+                      style={phaseCardLinkStyle}
+                      aria-label={`打开初中组第 ${day.day} 天：${day.theme}`}
+                    >
+                      <div style={phaseHeaderStyle}>
+                        <Calendar size={18} style={{ color: '#30d158', flexShrink: 0 }} />
+                        <span style={{ ...phaseTimeStyle, backgroundColor: '#30d158', color: '#06130a' }}>{day.day}</span>
+                        <h4 style={phaseTitleStyle}>{day.theme}</h4>
+                        <ExternalLink size={16} style={phaseExternalIconStyle} />
+                      </div>
+                      <p style={phaseDescStyle}>{day.desc}</p>
+                    </a>
+                  ))}
                 </div>
               </div>
             )}
@@ -787,14 +842,22 @@ export default function MobileRobotCourse({ lang = 'zh', onBack }) {
                 {/* Chronological Phase Listing */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   {t.seniorCampOutline.map((phase, idx) => (
-                    <div key={idx} className="glassmorphism-card" style={phaseCardStyle}>
+                    <a
+                      key={idx}
+                      href={phase.link}
+                      className="glassmorphism-card course-day-link-card"
+                      data-course-track="senior"
+                      style={phaseCardLinkStyle}
+                      aria-label={`打开高中组第 ${phase.day} 天：${phase.theme}`}
+                    >
                       <div style={phaseHeaderStyle}>
                         <Calendar size={18} style={{ color: 'var(--klein-blue)', flexShrink: 0 }} />
-                        <span style={phaseTimeStyle}>{phase.phase}</span>
+                        <span style={phaseTimeStyle}>{phase.day}</span>
                         <h4 style={phaseTitleStyle}>{phase.theme}</h4>
+                        <ExternalLink size={16} style={phaseExternalIconStyle} />
                       </div>
                       <p style={phaseDescStyle}>{phase.desc}</p>
-                    </div>
+                    </a>
                   ))}
                 </div>
 
@@ -1549,7 +1612,7 @@ const campTabActiveStyle = {
   ...campTabStyle,
   background: 'var(--text-primary)',
   color: 'var(--bg-primary)',
-  borderColor: 'var(--text-primary)'
+  border: '1px solid var(--text-primary)'
 };
 
 const campContentStyle = {
@@ -1628,6 +1691,15 @@ const phaseCardStyle = {
   border: '1px solid var(--border-color)'
 };
 
+const phaseCardLinkStyle = {
+  ...phaseCardStyle,
+  display: 'block',
+  color: 'inherit',
+  textDecoration: 'none',
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease'
+};
+
 const phaseHeaderStyle = {
   display: 'flex',
   alignItems: 'center',
@@ -1648,14 +1720,80 @@ const phaseTimeStyle = {
 
 const phaseTitleStyle = {
   fontSize: '1.1rem',
-  fontWeight: '700'
+  fontWeight: '700',
+  margin: 0
+};
+
+const phaseExternalIconStyle = {
+  marginLeft: 'auto',
+  color: 'var(--text-muted)',
+  flexShrink: 0
 };
 
 const phaseDescStyle = {
   fontSize: '0.9rem',
   color: 'var(--text-secondary)',
   lineHeight: '1.6',
-  paddingLeft: '1.5rem'
+  paddingLeft: '1.5rem',
+  margin: 0
+};
+
+const campDetailGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+  gap: '1rem',
+  marginTop: '1rem'
+};
+
+const campDetailBlockStyle = {
+  padding: '1rem',
+  borderRadius: '12px',
+  backgroundColor: 'rgba(0,0,0,0.018)',
+  border: '1px solid var(--border-color)'
+};
+
+const campDetailLabelStyle = {
+  display: 'block',
+  fontSize: '0.72rem',
+  fontWeight: '700',
+  color: 'var(--text-muted)',
+  textTransform: 'uppercase',
+  marginBottom: '0.45rem',
+  letterSpacing: 0
+};
+
+const campDetailTextStyle = {
+  fontSize: '0.86rem',
+  color: 'var(--text-secondary)',
+  lineHeight: '1.55',
+  margin: 0
+};
+
+const campMetaGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+  gap: '1rem',
+  marginTop: '1rem'
+};
+
+const campMetaStyle = {
+  padding: '0.9rem 1rem',
+  borderRadius: '12px',
+  backgroundColor: 'rgba(0, 47, 167, 0.035)',
+  border: '1px solid var(--border-color)'
+};
+
+const campToolTextStyle = {
+  ...campDetailTextStyle,
+  fontFamily: 'var(--font-mono)',
+  color: 'var(--text-muted)',
+  fontSize: '0.8rem'
+};
+
+const campDeliverableTextStyle = {
+  ...campDetailTextStyle,
+  color: 'var(--text-primary)',
+  fontWeight: '600'
 };
 
 const agentVisualFrameStyle = {

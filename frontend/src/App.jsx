@@ -36,6 +36,7 @@ const contentTranslations = {
     toolsDesc: "精简实用的 Web 工具，加速您的快速原型验证。",
     footerCopy: "© 2026 SophiGo Platform. Built for the next-generation engineers.",
     aiSearchBtn: "AI 搜索",
+    aiSearchPlaceholder: "输入课程、工程或原型问题",
     aiSearchLoading: "AI 正在分析并生成解答...",
     aiSearchReset: "清空",
   },
@@ -62,6 +63,7 @@ const contentTranslations = {
     toolsDesc: "Clean and practical Web tools to accelerate your rapid prototype verification.",
     footerCopy: "© 2026 SophiGo Platform. Built for the next-generation engineers.",
     aiSearchBtn: "AI Search",
+    aiSearchPlaceholder: "Ask about courses or prototypes",
     aiSearchLoading: "AI is analyzing and generating response...",
     aiSearchReset: "Clear",
   }
@@ -343,11 +345,7 @@ export default function App() {
         ) : (
           <>
             {/* Hero Section */}
-            <section style={{
-              paddingBlock: '8rem 6rem',
-              textAlign: 'center',
-              position: 'relative'
-            }}>
+            <section className="home-hero">
               <div className="container-custom">
                 {/* Note: Sparkles header element removed (Item 3: SophiGo Platform tag moved to bottom) */}
 
@@ -363,55 +361,20 @@ export default function App() {
                 {/* Note: Docs and Browse buttons deleted (Item 6) */}
 
                 {/* AIGC Search Box - Expanded 1.5x width (Item 7) */}
-                <div style={{
-                  maxWidth: '960px', // 1.5x of 640px
-                  margin: '3rem auto 0',
-                  padding: '1.5rem',
-                  borderRadius: '20px',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  backdropFilter: 'blur(12px)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.05)',
-                  textAlign: 'left'
-                }}>
+                <div className="ai-search-panel">
                   {/* Note: Top Label AIGC Search title deleted (Item 7) */}
-                  <form onSubmit={handleAISearchSubmit} style={{ display: 'flex', gap: '0.75rem' }}>
+                  <form onSubmit={handleAISearchSubmit} className="ai-search-form">
                     <input 
                       type="text" 
                       value={aiQuery}
                       onChange={(e) => setAiQuery(e.target.value)}
-                      placeholder="" // Empty placeholder (Item 7)
-                      style={{
-                        flex: 1,
-                        padding: '0.75rem 1.25rem',
-                        borderRadius: '12px',
-                        border: '1px solid var(--border-color)',
-                        background: 'var(--bg-secondary)',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
-                        outline: 'none',
-                        transition: 'border-color 0.2s',
-                        fontFamily: 'var(--font-sans)'
-                      }}
+                      placeholder={t.aiSearchPlaceholder}
+                      className="ai-search-input"
                     />
                     <button 
                       type="submit" 
                       disabled={aiLoading}
-                      style={{
-                        padding: '0.75rem 1.5rem',
-                        borderRadius: '12px',
-                        backgroundColor: 'var(--klein-blue)',
-                        color: '#ffffff',
-                        border: 'none',
-                        fontWeight: 600,
-                        fontSize: '0.9rem',
-                        cursor: aiLoading ? 'not-allowed' : 'pointer',
-                        transition: 'all 0.2s',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        boxShadow: '0 4px 12px var(--klein-blue-glow)'
-                      }}
+                      className="ai-search-button"
                     >
                       {t.aiSearchBtn}
                     </button>
@@ -419,19 +382,7 @@ export default function App() {
 
                   {/* Response output container */}
                   {(aiLoading || aiResponse || aiError) && (
-                    <div style={{
-                      marginTop: '1.25rem',
-                      padding: '1.25rem',
-                      borderRadius: '12px',
-                      background: 'rgba(0,0,0,0.03)',
-                      border: '1px dashed var(--border-color)',
-                      fontSize: '0.9rem',
-                      lineHeight: '1.6',
-                      color: 'var(--text-primary)',
-                      maxHeight: '300px',
-                      overflowY: 'auto',
-                      fontFamily: 'var(--font-sans)'
-                    }}>
+                    <div className="ai-search-response">
                       {aiLoading && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
                           <div className="search-spinner" />
@@ -587,7 +538,7 @@ export default function App() {
                 </div>
 
                 {/* Modified Tools list layout (Item 9) */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '1.5rem' }}>
+                <div className="tool-grid">
                   
                   {/* Tool 1: CMF Applications */}
                   <a 
@@ -780,14 +731,6 @@ export default function App() {
           margin-left: 4px;
           color: var(--klein-blue);
           animation: blink 0.8s infinite;
-        }
-        @media (max-width: 900px) {
-          #tools div[style*="grid-template-columns"] {
-            grid-template-columns: 1fr !important;
-          }
-          #tools a[style*="grid-column"] {
-            grid-column: span 1 !important;
-          }
         }
       `}</style>
     </div>

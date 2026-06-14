@@ -10,11 +10,12 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       whoDesc1: "“Sophi”源自拉丁语“Sophia”，代表智慧与精致；“Go”则代表探索与前行。SophiGo 致力于打破传统工科与软硬件开发的边界，构建集硬件、算法与 CMF 极简美学于一体的工程创新数字化平台。我们是由一群来自全球多所顶尖高校、具备跨学科背景的极客与创客组成的敏捷造物团队。",
       whoDesc2: "在 SophiGo，我们相信“代码构筑物理实体”。团队汇聚了软件算法、机械结构、CMF 表面处理以及数字制造等领域的顶尖人才。我们从第一性原理出发，重构人、代码与智能实体之间的协作模型，赋能下一代工程师与创造者。",
       whatTitle: "我们做什么 · WHAT WE DO",
-      whatDesc: "我们深耕 AI Native 时代下的敏捷硬件开发与新工科教育，致力于将复杂算法与物理底盘解算无缝结合，开发从参数化交通工具生成器、仿真运动链、到物理实体装配的完整闭环流程。",
+      whatDesc: "我们深耕 AI Native 时代下的敏捷硬件开发与新工科教育，致力于将人工智能、数字制造与工程实践深度融合。围绕 Fab Academy、AI 基础应用、AI 移动机器人及 CMF 数字化设计等核心方向，构建从知识学习、项目实践到创新落地的完整课程体系，赋能下一代工程师与创新创造者。",
       pillars: [
-        { title: "参数化造物平台", desc: "开发大语言模型友好的 3D CAD SDK，让 AI 编写几何参数，利用受限沙箱物理编译器进行几何与关节运动范围的验证与微调。" },
-        { title: "线控底盘与仿真", desc: "设计软硬件一体的 ROS2 机器人移动底盘，打通从 Web 粒子流仿真、底盘 kinematics 逆解、到现场电机的控制管线。" },
-        { title: "CMF 工艺数字化", desc: "建立标准的阳极氧化、喷砂表面处理色卡配方参数，为物理零件设计提供极致触觉与极简美学的量化保障。" }
+        { title: "Fab Academy", desc: "对接全球 Fab Academy 网络，系统培养数字制造与快速原型能力，涵盖激光切割、3D 打印、PCB 设计及嵌入式编程等全链路造物技能。", link: "/docs/courses/fab-course/" },
+        { title: "AI 基础应用", desc: "从大语言模型原理到实际工程落地，构建面向工程师的 AI 工具链课程，让学员掌握 AI 辅助设计、代码生成与智能决策的实战能力。", link: "/docs/courses/ai-basics/" },
+        { title: "AI 移动机器人", desc: "以 ROS2 为核心，贯通从运动学建模、路径规划到多传感器融合的完整机器人开发链路，结合实物底盘进行项目化实训。", link: "/docs/courses/mobile-robot/" },
+        { title: "CMF 数字化设计", desc: "将色彩、材料与工艺（CMF）融入数字化工作流，建立表面处理参数标准，培养兼具工程思维与极简美学的新一代产品设计能力。", link: "/docs/courses/cmf/" }
       ],
       joinTitle: "希望你的加入 · OPEN ROLES",
       joinDesc: "我们寻找敢于打破常规、热衷于将代码转化为物理现实的探险家。不论你是软件极客、机器人专家，还是工业设计美学家，这里都有你的舞台。",
@@ -34,11 +35,12 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
       whoDesc1: "'Sophi' originates from Latin 'Sophia', representing wisdom and refinement; 'Go' signifies exploration and progress. SophiGo is dedicated to breaking the boundary of traditional engineering and hardware development, building a digital platform integrating hardware, algorithms, and CMF minimalist aesthetics. We are an agile fabrication team of cross-disciplinary makers from global leading universities.",
       whoDesc2: "At SophiGo, we believe in 'Code defining physical entities'. We gather talents from software algorithms, mechanical structures, CMF surface finishes, and digital manufacturing. Guided by first principles, we reshape the collaboration model between humans, code, and smart entities, empowering the next-generation engineers.",
       whatTitle: "WHAT WE DO",
-      whatDesc: "We specialize in agile hardware R&D and 'New Engineering' education in the AI Native era, seamlessly integrating complex kinematics with mechanical chassis, creating closed-loop pipelines from parametric design models to physical assemblies.",
+      whatDesc: "We specialize in agile hardware development and new engineering education in the AI Native era, deeply integrating artificial intelligence, digital fabrication, and engineering practice. Built around four core tracks — Fab Academy, AI Fundamentals, AI Mobile Robots, and CMF Digital Design — we deliver a complete learning ecosystem from foundational knowledge to hands-on innovation, empowering the next generation of engineers and creators.",
       pillars: [
-        { title: "Parametric Design SDK", desc: "Develop LLM-friendly 3D CAD SDKs for AI agents to write geometric scripts, verified within simulated sandboxes." },
-        { title: "ROS2 & 3D Simulation", desc: "Build integrated ROS2 robot platforms, bridging Web 3D particle simulation and physical motor controllers." },
-        { title: "Digital CMF Standards", desc: "Establish color recipes and anodizing thickness parameters to ensure tactile and minimalist aesthetic quality." }
+        { title: "Fab Academy", desc: "Connected to the global Fab Academy network, cultivating digital fabrication skills across laser cutting, 3D printing, PCB design, and embedded programming.", link: "/docs/courses/fab-course/" },
+        { title: "AI Fundamentals", desc: "From LLM principles to real engineering workflows — AI-assisted design, code generation, and intelligent decision-making for engineers.", link: "/docs/courses/ai-basics/" },
+        { title: "AI Mobile Robots", desc: "ROS2-centered curriculum spanning kinematics modeling, path planning, and multi-sensor fusion, with physical robot hardware projects.", link: "/docs/courses/mobile-robot/" },
+        { title: "CMF Digital Design", desc: "Integrate Color, Material & Finish (CMF) into digital workflows, building surface finish parameter standards for the next-generation of product designers.", link: "/docs/courses/cmf/" }
       ],
       joinTitle: "OPEN ROLES",
       joinDesc: "We look for explorers who dare to challenge boundaries and turn lines of code into physical reality. Whether you are a hacker, roboticist, or CMF artist, welcome home.",
@@ -138,22 +140,31 @@ export default function JoinUs({ onBack, lang = 'zh' }) {
             {/* Pillars Grid */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {t.pillars.map((pillar, idx) => (
-                <div 
-                  key={idx} 
+                <a
+                  key={idx}
+                  href={pillar.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
+                    display: 'block',
+                    textDecoration: 'none',
                     backgroundColor: 'rgba(5, 13, 26, 0.6)',
                     border: '1px solid rgba(26, 141, 217, 0.15)',
                     borderRadius: '12px',
                     padding: '1.25rem',
-                    transition: 'border-color 0.3s, transform 0.3s'
+                    transition: 'border-color 0.3s, transform 0.3s, background-color 0.3s',
+                    cursor: 'pointer'
                   }}
                   className="pillar-card-hover"
                 >
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ color: '#1a8dd9' }}>0{idx + 1}.</span> {pillar.title}
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ color: '#1a8dd9' }}>0{idx + 1}.</span> {pillar.title}
+                    </span>
+                    <span style={{ color: '#1a8dd9', fontSize: '0.8rem', opacity: 0.7 }}>→</span>
                   </h3>
-                  <p style={{ color: '#90a8c5', fontSize: '0.9rem', lineHeight: '1.5' }}>{pillar.desc}</p>
-                </div>
+                  <p style={{ color: '#90a8c5', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>{pillar.desc}</p>
+                </a>
               ))}
             </div>
           </section>

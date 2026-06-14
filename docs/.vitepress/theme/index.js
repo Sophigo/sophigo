@@ -44,11 +44,13 @@ export default {
         setupLocalComments();
         setupSidebarLinks();
         setupHomeLinks();
+        patchHomeBrandLinks();
         fixProductionLinks();
       });
     });
     watch(() => route.path, () => {
       nextTick(() => {
+        patchHomeBrandLinks();
         fixProductionLinks();
       });
     });
@@ -280,13 +282,13 @@ function getHomepageUrl() {
   const hostname = window.location.hostname;
   const port = window.location.port;
 
-  // Case 1: Local development with separate dev ports (VitePress running on port 5174)
-  if ((hostname === 'localhost' || hostname === '127.0.0.1') && port === '5174') {
-    return 'http://localhost:5173/';
-  }
-
-  // Case 2: Local preview mode (running on port 4173 or other local ports besides 5174)
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    // VitePress may move to 5174/5175/5176 when the frontend is on 5173.
+    if (port && port !== '5173' && port !== '4173') {
+      return 'http://localhost:5173/';
+    }
+
+    // Frontend dev/preview serves the main site at its own root.
     return `http://${hostname}:${port || '4173'}/`;
   }
 
@@ -301,7 +303,7 @@ function setupHomeLinks() {
     const anchor = event.target.closest('a');
     if (!anchor) return;
 
-    const isLogo = anchor.classList.contains('title') && anchor.closest('.VPNavBarTitle');
+    const isLogo = anchor.dataset.homeLink === 'main-site' || (anchor.classList.contains('title') && anchor.closest('.VPNavBarTitle'));
     const isBackButton = anchor.classList.contains('VPButton') && anchor.textContent.includes('返回主站');
 
     if (isLogo || isBackButton) {
@@ -310,6 +312,16 @@ function setupHomeLinks() {
       window.location.href = getHomepageUrl();
     }
   }, true); // useCapture = true to execute before Vue router intercepts the click
+}
+
+function patchHomeBrandLinks() {
+  const targetHome = getHomepageUrl();
+
+  document.querySelectorAll('.VPNavBarTitle a.title, .VPNavBarTitle a').forEach(link => {
+    link.setAttribute('href', targetHome);
+    link.setAttribute('data-home-link', 'main-site');
+    link.setAttribute('aria-label', '返回 SophiGo 首页');
+  });
 }
 
 // Adjust links dynamically in the document to point to the correct main site homepage
@@ -340,9 +352,11 @@ function fixProductionLinks() {
 
     // 2. Force logo + "返回主站" links to go to the correct homepage (targetHome).
     // Keep the visible "首页" nav item on /docs/.
+    patchHomeBrandLinks();
     document.querySelectorAll('.VPNavBarMenuLink, .VPNavScreenMenuLink, .VPNavBarTitle a, .VPNavBarTitle a.title, a.logo, a.VPButton').forEach(link => {
       const text = link.textContent.trim();
       if (text.includes('返回主站') || 
+          link.dataset.homeLink === 'main-site' ||
           link.classList.contains('title') || 
           link.classList.contains('logo') || 
           link.querySelector('.logo')) {

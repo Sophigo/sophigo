@@ -18,6 +18,7 @@ export default defineConfig({
       { text: 'Fab 课程', link: '/courses/fab-course/' },
       { text: 'AI 基础应用', link: '/courses/ai-basics/' },
       { text: '移动机器人', link: '/courses/mobile-robot/' },
+      { text: 'CMF 数字化设计', link: '/courses/cmf/' },
       { text: '探讨', link: '/news/index.html' }
     ],
 
@@ -27,7 +28,8 @@ export default defineConfig({
         {
           text: 'AI 基础应用',
           items: [
-            { text: 'AI 基础应用课程', link: '/courses/ai-basics/' }
+            { text: 'AI 基础应用课程', link: '/courses/ai-basics/' },
+            { text: '课程详细方案', link: '/courses/ai-basics/aibasic' }
           ]
         }
       ],
@@ -35,11 +37,61 @@ export default defineConfig({
         {
           text: 'AI 移动机器人',
           items: [
-            { text: '课程概览', link: '/courses/mobile-robot/' },
-            { text: '机器人运动学与动力学建模', link: '/courses/mobile-robot/theory' },
-            { text: '底盘控制链与微处理器集成', link: '/courses/mobile-robot/hardware' },
-            { text: 'ROS2 导航与感知系统', link: '/courses/mobile-robot/ros2' },
-            { text: 'Sophicar 3D 底盘在线仿真', link: '/courses/mobile-robot/simulation' }
+            { text: '课程概况', link: '/courses/mobile-robot/' },
+            {
+              text: '初中组',
+              link: '/courses/mobile-robot/middle-school/',
+              collapsed: false,
+              items: [
+                { text: '1 问题挖掘', link: '/courses/mobile-robot/middle-school/1' },
+                { text: '2 功能定义', link: '/courses/mobile-robot/middle-school/2' },
+                { text: '3 参数化结构设计与数字制造', link: '/courses/mobile-robot/middle-school/3' },
+                { text: '4 嵌入式基础', link: '/courses/mobile-robot/middle-school/4' },
+                { text: '5 基础软硬件调试（一）', link: '/courses/mobile-robot/middle-school/5' },
+                { text: '6 基础软硬件调试（二）', link: '/courses/mobile-robot/middle-school/6' },
+                { text: '7 全栈 Vibe Coding', link: '/courses/mobile-robot/middle-school/7' },
+                { text: '8 交互', link: '/courses/mobile-robot/middle-school/8' },
+                { text: '9 多模态语音交互集成与轻量化结构优化（一）', link: '/courses/mobile-robot/middle-school/9' },
+                { text: '10 多模态语音交互集成与轻量化结构优化（二）', link: '/courses/mobile-robot/middle-school/10' },
+                { text: '11 包装', link: '/courses/mobile-robot/middle-school/11' },
+                { text: '12 发布', link: '/courses/mobile-robot/middle-school/12' }
+              ]
+            },
+            {
+              text: '高中组',
+              link: '/courses/mobile-robot/high-school/',
+              collapsed: false,
+              items: [
+                { text: '1 开营与社会痛点问题定义', link: '/courses/mobile-robot/high-school/1' },
+                { text: '2 功能定义', link: '/courses/mobile-robot/high-school/2' },
+                { text: '3 参数化结构设计', link: '/courses/mobile-robot/high-school/3' },
+                { text: '4 数字制造', link: '/courses/mobile-robot/high-school/4' },
+                { text: '5 嵌入式基础', link: '/courses/mobile-robot/high-school/5' },
+                { text: '6 机械臂与底盘控制', link: '/courses/mobile-robot/high-school/6' },
+                { text: '7 全栈 Vibe Coding', link: '/courses/mobile-robot/high-school/7' },
+                { text: '8 具身智能控制落地：基于边缘视觉的端云协同抓取', link: '/courses/mobile-robot/high-school/8' },
+                { text: '9 数字孪生', link: '/courses/mobile-robot/high-school/9' },
+                { text: '10 系统集成与包装（一）', link: '/courses/mobile-robot/high-school/10' },
+                { text: '11 系统集成与包装（二）', link: '/courses/mobile-robot/high-school/11' },
+                { text: '12 发布', link: '/courses/mobile-robot/high-school/12' }
+              ]
+            },
+            {
+              text: '初中班级',
+              collapsed: false,
+              items: [
+                { text: 'J0601', link: '/courses/mobile-robot/classes/j0601/' },
+                { text: 'J0602', link: '/courses/mobile-robot/classes/j0602/' }
+              ]
+            },
+            {
+              text: '高中班级',
+              collapsed: false,
+              items: [
+                { text: 'S0601', link: '/courses/mobile-robot/classes/s0601/' },
+                { text: 'S0602', link: '/courses/mobile-robot/classes/s0602/' }
+              ]
+            }
           ]
         }
       ],

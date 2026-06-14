@@ -37,6 +37,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
       stlQuote: 'stl分析仪',
       mods: 'Mods',
       matting: '抠图工具',
+      docs: '文档',
       news: '资讯',
       aboutUs: '加入我们',
       register: '注册 / 登录',
@@ -58,6 +59,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
       stlQuote: 'STL Analyzer',
       mods: 'Mods',
       matting: 'Matting Tool',
+      docs: 'Docs',
       news: 'News',
       aboutUs: 'Join Us',
       register: 'Register / Login',
@@ -79,6 +81,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
     stlQuote: 'stl分析仪',
     mods: 'Mods',
     matting: '抠图工具',
+    docs: '文档',
     news: '资讯',
     aboutUs: '加入我们',
     register: '注册 / 登录',
@@ -104,12 +107,12 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
         height: '72px'
       }}>
         {/* Brand Logo - 1.5x larger font & logo size (Item 4) */}
-        <a href="#/" onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }} style={{
+        <a href="#/" className="brand-link" onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }} style={{
           fontSize: '1.875rem',
           fontWeight: 700,
           textDecoration: 'none',
           color: 'var(--text-primary)',
-          letterSpacing: '-0.02em',
+          letterSpacing: 0,
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem'
@@ -239,6 +242,8 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
             )}
           </div>
 
+          <a href="/docs/" style={navLinkStyle}>{t.docs}</a>
+
           <a href="/docs/news/index.html" style={navLinkStyle}>{t.news}</a>
 
           {/* Join Us Link (Item 13) */}
@@ -246,7 +251,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
         </div>
 
         {/* Right Action controls */}
-        <div style={{
+        <div className="nav-actions" style={{
           display: 'flex',
           alignItems: 'center',
           gap: '1rem'
@@ -269,6 +274,8 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
               border: '1px solid var(--border-color)'
             }}
             className="theme-toggle-btn"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -280,7 +287,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
               onMouseEnter={() => setIsProfileDropdownOpen(true)}
               onMouseLeave={() => setIsProfileDropdownOpen(false)}
             >
-              <button style={{
+              <button className="profile-menu-btn" style={{
                 background: 'var(--bg-secondary)',
                 border: '1px solid var(--border-color)',
                 color: 'var(--text-primary)',
@@ -309,7 +316,7 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
                 }}>
                   {username.charAt(0).toUpperCase()}
                 </div>
-                <span>{username}</span>
+                <span className="profile-username">{username}</span>
                 <ChevronDown size={12} />
               </button>
 
@@ -380,14 +387,18 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
           ) : (
             <button 
               onClick={onOpenAuthModal}
-              className="btn-cta"
+              className="btn-cta navbar-auth-btn"
+              aria-label={t.register}
+              title={t.register}
               style={{
                 fontSize: '0.85rem',
                 padding: '0.5rem 1.25rem',
-                fontWeight: 500
+                fontWeight: 500,
+                whiteSpace: 'nowrap'
               }}
             >
-              {t.register}
+              <User size={16} className="navbar-auth-icon" />
+              <span className="navbar-auth-text">{t.register}</span>
             </button>
           )}
 
@@ -452,6 +463,12 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
           animation: 'slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
           <a href="#/" onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }} style={mobileNavLinkStyle}>{t.home}</a>
+          {!userSession && (
+            <button onClick={() => { onOpenAuthModal(); setIsMobileMenuOpen(false); }} style={mobileAuthButtonStyle}>
+              <User size={16} />
+              {t.register}
+            </button>
+          )}
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
           
           <div>
@@ -477,6 +494,10 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
 
+          <a href="/docs/" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.docs}</a>
+
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
+
           <a href="/docs/news/index.html" onClick={() => setIsMobileMenuOpen(false)} style={mobileNavLinkStyle}>{t.news}</a>
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
@@ -498,6 +519,9 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
         .hover-link:hover {
           color: var(--text-primary) !important;
         }
+        .navbar-auth-icon {
+          display: none;
+        }
         @media (min-width: 769px) {
           .mobile-menu-btn {
             display: none !important;
@@ -507,8 +531,50 @@ export default function Navbar({ onOpenAuthModal, userSession, onLogout, theme, 
           .desktop-nav {
             display: none !important;
           }
+          .brand-link {
+            font-size: 1.55rem !important;
+            gap: 0.5rem !important;
+          }
+          .brand-link img {
+            width: 30px !important;
+            height: 30px !important;
+          }
+          .nav-actions {
+            gap: 0.45rem !important;
+          }
+          .theme-toggle-btn,
+          .lang-toggle-btn,
+          .mobile-menu-btn,
+          .navbar-auth-btn {
+            width: 34px !important;
+            height: 34px !important;
+            min-width: 34px !important;
+            flex-shrink: 0 !important;
+          }
+          .navbar-auth-btn {
+            padding: 0 !important;
+            border-radius: 50% !important;
+          }
+          .navbar-auth-icon {
+            display: block;
+          }
+          .navbar-auth-text {
+            display: none;
+          }
+          .profile-menu-btn {
+            width: 36px !important;
+            height: 36px !important;
+            padding: 0 !important;
+            justify-content: center !important;
+          }
+          .profile-username,
+          .profile-menu-btn > svg {
+            display: none;
+          }
           .mobile-menu-btn {
             display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
           }
         }
       `}</style>
@@ -550,5 +616,21 @@ const mobileSubNavLinkStyle = {
   color: 'var(--text-secondary)',
   fontSize: '0.95rem',
   fontWeight: 500,
+  cursor: 'pointer'
+};
+
+const mobileAuthButtonStyle = {
+  width: '100%',
+  minHeight: '44px',
+  border: '1px solid var(--border-color)',
+  borderRadius: '12px',
+  background: 'var(--text-primary)',
+  color: 'var(--bg-primary)',
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.45rem',
   cursor: 'pointer'
 };
