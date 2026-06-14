@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高中组：AI具身智能移动机器人工程营 - 课程方案</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07080a;
+      --panel: rgba(14, 16, 20, 0.92);
+      --panel-2: rgba(18, 21, 27, 0.78);
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(255, 255, 255, 0.22);
+      --text: #edf2f7;
+      --muted: #9aa3ad;
+      --dim: #6f7883;
+      --green: #10f05b;
+      --blue: #2f8cff;
+      --cyan: #22d3ee;
+      --amber: #f3c969;
+      --danger: #ff6b6b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.34) 0 1.6px, transparent 1.7px) 0 0 / 40px 40px,
+        linear-gradient(180deg, #090a0d 0%, #050608 58%, #090b0e 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.68;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px) 0 0 / 120px 120px,
+        linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px) 0 0 / 120px 120px;
+      opacity: 0.54;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding: 8px 20px 30px;
+      background: linear-gradient(180deg, rgba(7, 8, 10, 0.96), rgba(7, 8, 10, 0.78) 70%, rgba(7, 8, 10, 0));
+      backdrop-filter: blur(14px);
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 270px;
+      min-height: 46px;
+      padding: 0 30px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.32);
+    }
+
+    .tab.active {
+      color: #06070a;
+      background: #f4f6fa;
+      border-color: #f4f6fa;
+    }
+
+    .shell {
+      width: min(1280px, calc(100% - 48px));
+      margin: 0 auto 88px;
+    }
+
+    .stage {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(17, 19, 25, 0.94), rgba(8, 9, 12, 0.94)),
+        radial-gradient(circle, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px) 0 0 / 18px 18px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) minmax(620px, 2fr);
+      gap: 34px;
+      min-height: 430px;
+      padding: 46px 34px 18px;
+      align-items: center;
+    }
+
+    .hero-copy,
+    .hero-visual {
+      min-width: 0;
+    }
+
+    .hero-copy {
+      align-self: center;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 460px;
+      font-size: clamp(42px, 4.9vw, 64px);
+      line-height: 1.02;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .title-line,
+    .title-sub {
+      display: block;
+    }
+
+    .title-sub {
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: clamp(30px, 3.25vw, 44px);
+      line-height: 1.08;
+      font-weight: 760;
+    }
+
+    .hero-subtitle {
+      max-width: 460px;
+      margin: 22px 0 0;
+      color: rgba(237, 242, 247, 0.78);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 650;
+    }
+
+    .robot {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      align-self: center;
+    }
+
+    .robot img {
+      width: auto;
+      max-width: 88%;
+      max-height: 430px;
+      height: auto;
+      display: block;
+      transform: none;
+      filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.72));
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 34px 34px;
+    }
+
+    .info-card {
+      min-height: 132px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.048);
+      outline: none;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .info-card:hover,
+    .info-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(16, 240, 91, 0.62);
+      background: rgba(16, 240, 91, 0.07);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+    }
+
+    .card-index {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-family: "SF Mono", Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .section {
+      padding: 48px 32px 0;
+    }
+
+    .section + .section {
+      padding-top: 70px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line-strong);
+      padding-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 410px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .basis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .card p,
+    .card li {
+      color: #bdc5cf;
+      font-size: 14px;
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .compare-table,
+    .course-table,
+    .rubric-table,
+    .source-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(8, 10, 13, 0.62);
+    }
+
+    th {
+      color: #a5adb7;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    td,
+    th {
+      padding: 20px 16px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      color: #c2c8d0;
+      font-size: 14px;
+    }
+
+    td strong {
+      color: #fff;
+    }
+
+    .course-table {
+      min-width: 1180px;
+    }
+
+    .course-table th:nth-child(1),
+    .course-table td:nth-child(1) {
+      width: 150px;
+    }
+
+    .course-table th:nth-child(2),
+    .course-table td:nth-child(2),
+    .course-table th:nth-child(3),
+    .course-table td:nth-child(3) {
+      width: 25%;
+    }
+
+    .course-table th:nth-child(4),
+    .course-table td:nth-child(4) {
+      width: 16%;
+    }
+
+    .course-table th:nth-child(5),
+    .course-table td:nth-child(5) {
+      width: 18%;
+    }
+
+    .day {
+      display: grid;
+      gap: 8px;
+    }
+
+    .day-number {
+      color: #fff;
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .day-theme {
+      color: var(--blue);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 750;
+    }
+
+    .cell-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .cell-list li {
+      margin: 0 0 8px;
+    }
+
+    .cell-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .deliverable {
+      color: #fff;
+      font-weight: 760;
+    }
+
+    .tool {
+      color: #aeb6c0;
+      font-family: "SF Mono", Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .goal {
+      min-height: 176px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .goal span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      color: #06110a;
+      background: var(--green);
+      font-weight: 850;
+    }
+
+    .goal h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+
+    .goal p {
+      margin: 0;
+      color: #b9c1ca;
+      font-size: 13px;
+    }
+
+    .compare-table {
+      min-width: 860px;
+    }
+
+    .compare-table th:nth-child(1),
+    .compare-table td:nth-child(1) {
+      width: 180px;
+    }
+
+    .rubric-table {
+      min-width: 920px;
+    }
+
+    .rubric-table th:nth-child(1),
+    .rubric-table td:nth-child(1) {
+      width: 180px;
+    }
+
+    .source-table {
+      min-width: 760px;
+    }
+
+    .source-table a {
+      color: #77b7ff;
+      font-weight: 700;
+    }
+
+    .note-bar {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      background: rgba(16, 240, 91, 0.075);
+      color: #d6ffdf;
+      font-weight: 720;
+    }
+
+    .footer {
+      padding: 56px 32px 34px;
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+        min-height: auto;
+      }
+
+      .robot {
+        min-height: 280px;
+      }
+
+      .robot img {
+        width: min(76vw, 520px);
+        max-width: 100%;
+        max-height: none;
+      }
+
+      .info-grid,
+      .basis-grid,
+      .goal-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .tabs {
+        gap: 10px;
+        padding: 8px 12px 22px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+
+      .tab {
+        min-width: 230px;
+        min-height: 42px;
+        padding: 0 18px;
+        font-size: 13px;
+      }
+
+      .shell {
+        width: min(100% - 24px, 1280px);
+        margin-bottom: 48px;
+      }
+
+      .hero,
+      .section,
+      .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 12px;
+      }
+
+      .info-grid,
+      .basis-grid,
+      .goal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        padding: 0 18px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="tabs" aria-label="课程组别切换">
+    <a class="tab" href="../mobile-robot.html">初中组：AI 机器人产品体验营</a>
+    <a class="tab active" href="./senior.html" aria-current="page">高中组：AI具身智能移动机器人工程营</a>
+  </nav>
+
+  <main class="shell">
+    <section class="stage">
+      <div class="hero">
+        <div class="hero-copy">
+          <h1>
+            <span class="title-line">AI具身智能</span>
+            <span class="title-line">移动机器人</span>
+            <span class="title-sub">工程营</span>
+          </h1>
+          <p class="hero-subtitle">12天，从一句 Prompt 到一台会跑、会看、会响应的智能机器人</p>
+        </div>
+        <div class="hero-visual">
+          <figure class="robot">
+            <img src="../frontend/public/senior_robot.png" alt="AI 具身智能移动底盘机器人主视觉">
+          </figure>
+        </div>
+      </div>
+
+      <div class="info-grid" aria-label="课程信息卡片">
+        <article class="info-card" tabindex="0">
+          <span class="card-index">01</span>
+          <h3>课程对象</h3>
+          <p>高一至高二，适合愿意把 AI、代码、硬件和产品表达放到同一个项目里验证的学生。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">02</span>
+          <h3>时间</h3>
+          <p>12 天，完成从真实需求、结构打样、控制开发到技术答辩的闭环。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">03</span>
+          <h3>教育落点</h3>
+          <p>连接信息科技、通用技术、研究性学习和校内科创项目，不把大学课硬塞给高中生。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">04</span>
+          <h3>AI 工作流</h3>
+          <p>说清问题 → 约束输出 → 生成草案 → 实物验证 → 记录取舍 → 迭代发布。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">05</span>
+          <h3>人机分工</h3>
+          <p>AI 负责生成草案和代码片段，学生负责目标、约束、机理解释、测试和最终取舍。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">06</span>
+          <h3>工程主线</h3>
+          <p>移动底盘、电机控制、传感器、网页控制、AI 视觉语音、数字孪生和测试报告。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">07</span>
+          <h3>闭环验证</h3>
+          <p>Prompt、仿真、实测、故障日志、Token 记录和复盘持续回流。</p>
+        </article>
+        <article class="info-card" tabindex="0">
+          <span class="card-index">08</span>
+          <h3>产出</h3>
+          <p>实物机器人、控制网页、开源仓库、技术报告、演示视频和个人 AI 助手 Skill。</p>
+        </article>
+      </div>
+
+      <section class="section" id="positioning">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">2.4 / Senior Program</p>
+            <h2>高中组：AI具身智能移动机器人工程营</h2>
+          </div>
+          <p class="section-note">课程不追求概念堆叠，而是让学生用 AI 把一个可运行、可解释、可复盘的移动机器人项目做出来。</p>
+        </div>
+
+        <div class="basis-grid">
+          <article class="card">
+            <h3>中国教育实际</h3>
+            <p>面向高中阶段的时间、知识基础和升学材料要求设计。内容对接信息科技、通用技术、研究性学习、综合实践、校内创新项目和科技社团，强调过程证据，不承诺竞赛或申请结果。</p>
+          </article>
+          <article class="card">
+            <h3>北京与宁波语境</h3>
+            <p>北京更关注 AI 通识、科创实践和高校资源衔接；宁波有港口物流、智能制造、园区服务和机器人应用场景。课程把这些转成校园巡检、自动配送、导览服务和无障碍辅助等可做任务。</p>
+          </article>
+          <article class="card">
+            <h3>新工科方法</h3>
+            <p>不把机器人拆成孤立知识点，而是按真实工程链条推进：问题定义、系统架构、软硬件开发、测试验证、文档开源和路演答辩。每一步都有交付物和评价标准。</p>
+          </article>
+        </div>
+
+        <div class="note-bar">一句话定位：AI 负责加速生成，学生负责提出问题、解释原理、验证现实、完成交付。</div>
+      </section>
+
+      <section class="section" id="capability">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">02 / Capability Map</p>
+            <h2>能力目标</h2>
+          </div>
+          <p class="section-note">用一个项目同时训练 AI 全栈开发工程师和 AI 产品经理的核心判断。</p>
+        </div>
+
+        <div class="goal-grid">
+          <article class="goal">
+            <span>1</span>
+            <h3>AI 产品经理</h3>
+            <p>能把真实场景转成 PRD、用户流程、功能优先级、验收指标和风险清单。</p>
+          </article>
+          <article class="goal">
+            <span>2</span>
+            <h3>软硬件取舍</h3>
+            <p>能看懂底盘、电机、传感器、主控板、BOM 成本和交互体验之间的关系。</p>
+          </article>
+          <article class="goal">
+            <span>3</span>
+            <h3>AI 全栈开发</h3>
+            <p>覆盖前端控制台、接口协议、MQTT/WebSocket、AI Agent、嵌入式固件和数据日志。</p>
+          </article>
+          <article class="goal">
+            <span>4</span>
+            <h3>机器人功能</h3>
+            <p>完成移动控制、避障、视觉/语音指令、路径任务、数字孪生和异常回退。</p>
+          </article>
+          <article class="goal">
+            <span>5</span>
+            <h3>学术诚信</h3>
+            <p>保留 Prompt、Token、Git Commit、测试数据和修改记录，证明不是复制 AI 答案。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="schedule">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">03 / 12-Day Program</p>
+            <h2>12 天高中课程方案</h2>
+          </div>
+          <p class="section-note">每天按“任务、工具、证据、复盘”推进，保证学生知道自己做了什么、为什么这样做、哪里由 AI 辅助、哪里由自己判断。</p>
+        </div>
+
+        <div class="table-wrap">
+          <table class="course-table">
+            <thead>
+              <tr>
+                <th>主题</th>
+                <th>上午内容</th>
+                <th>下午内容</th>
+                <th>核心工具</th>
+                <th>交付产出</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">1</span>
+                    <span class="day-theme">真实场景与问题定义</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>说明课程与高中信息科技、通用技术、研究性学习、综合实践和校内科创项目的关系。</li>
+                    <li>从校园、社区、园区和城市服务中选择可做场景：巡检、配送、导览、陪伴、无障碍辅助等。</li>
+                    <li>学习“用户-场景-痛点-约束-可验证指标”模板，把一句想法改成可开发需求。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>双人组建项目小队，明确产品、全栈、嵌入式、结构和测试角色。</li>
+                    <li>用 AI 扩展案例和问题清单，学生核验来源、删除不可实现或没有价值的方向。</li>
+                    <li>确定项目边界：场地大小、载重、续航、避障距离、响应时间、预算和安全限制。</li>
+                  </ul>
+                </td>
+                <td class="tool">DeepSeek / Qwen / Kimi / 飞书文档 / 资料核验</td>
+                <td class="deliverable">PRD v0.1、场景证据表、问题优先级矩阵、AI 使用记录表</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">2</span>
+                    <span class="day-theme">产品架构与AI提问</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>训练 Prompt 基本格式：目标、背景、输入、约束、输出格式、验收标准和拒绝条件。</li>
+                    <li>用 AI 产品经理视角拆解软硬件：用户流程、功能优先级、BOM 成本、交互体验和风险。</li>
+                    <li>把机器人拆成底盘、传感器、主控、网页控制、AI Agent、数据日志和数字孪生模块。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>确认 PRD v1.0，画出系统架构图和接口草案。</li>
+                    <li>初始化 GitHub/Gitee 仓库，建立 Prompt、代码、测试、文档和 Token 记录目录。</li>
+                    <li>搭建项目主页骨架，预留控制台、摄像头、状态面板和 3D 视窗位置。</li>
+                  </ul>
+                </td>
+                <td class="tool">VSCode / GitHub / Gitee / Mermaid / 飞书看板 / Prompt 模板</td>
+                <td class="deliverable">PRD v1.0、系统架构图、Agent 任务树、仓库脚手架、首次 Commit</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">3</span>
+                    <span class="day-theme">底盘结构与制造约束</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>实验室安全培训。</li>
+                    <li>学习为制造而设计：孔位、公差、重心、走线、传感器视场、维修空间和外观一致性。</li>
+                    <li>让机械 Agent 生成 2-3 个底盘方案，学生用决策矩阵比较稳定性、成本、重量和可加工性。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>通过 sophicar.com 与 Fusion 360 网页端进行移动机器人参数化设计。</li>
+                    <li>AI 辅助生成安装支架、传感器位和外壳草案，学生检查孔位、装配顺序和线束路径。</li>
+                    <li>导出可加工文件，完成第一版底盘和外壳打样准备。</li>
+                  </ul>
+                </td>
+                <td class="tool">sophicar.com / Fusion 360 / Tripo 3D / DFM 检查表</td>
+                <td class="deliverable">STL/STEP 文件、结构决策矩阵、DFM 检查表、设计变更记录</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">4</span>
+                    <span class="day-theme">数字制造与BOM</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>根据 CAD 文件设置切片、材料、加工时间和支撑方案。</li>
+                    <li>理解 3D 打印、激光切割和手工装配会带来的误差，提前预留调整空间。</li>
+                    <li>用 BOM 表把电机、轮子、主控、传感器、线材、紧固件和备件列清楚。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>加工底盘、外壳和传感器支架，完成初版物理装配。</li>
+                    <li>用 AI 辅助核算成本和替代料，学生决定哪些地方省钱、哪些地方不能省。</li>
+                    <li>记录加工偏差并回写到结构文件。</li>
+                  </ul>
+                </td>
+                <td class="tool">Cura / PrusaSlicer / 3D 打印机 / 激光切割机 / BOM Agent</td>
+                <td class="deliverable">物理底盘 v1、BOM 表、制造日志、加工偏差记录、成本取舍说明</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">5</span>
+                    <span class="day-theme">嵌入式与底层控制</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>认识 ESP32-S3、供电、电机驱动、PWM、编码器、I/O 引脚和通电安全。</li>
+                    <li>让 AI 生成引脚表、接线检查表和控制代码草案，学生逐行解释关键逻辑。</li>
+                    <li>建立“AI 生成可以用，学生必须解释清楚才能烧录”的规则。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>在 Wokwi 中先跑通前进、后退、转向、停止和急停逻辑。</li>
+                    <li>烧录到物理底盘，完成第一次直线、转向和速度控制。</li>
+                    <li>把失败现象写成“现象-可能原因-验证方法-修正结果”的调试记录。</li>
+                  </ul>
+                </td>
+                <td class="tool">ESP32-S3 / Wokwi / VSCode / Arduino / 万用表</td>
+                <td class="deliverable">引脚表、Wokwi 仿真、底层控制固件、第一次运动测试日志</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">6</span>
+                    <span class="day-theme">运动学与传感器</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>用高中可理解的方式推导双轮差速或麦克纳姆轮的速度、转向和轮速关系。</li>
+                    <li>学习超声波、IMU、编码器、摄像头的作用、采样频率、误差来源和适用边界。</li>
+                    <li>设计机器人状态机：待机、手动、自动、避障、错误、急停。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>接入传感器并完成基本读数，检查异常值和噪声。</li>
+                    <li>用实测距离、时间、角度和日志校准速度、转向和避障参数。</li>
+                    <li>完成线束整理，给每条线和接口贴标签，降低后续调试成本。</li>
+                  </ul>
+                </td>
+                <td class="tool">MaixCAM-Pro / IMU / 编码器 / 超声波 / 逻辑分析仪</td>
+                <td class="deliverable">运动学说明页、FSM 状态图、传感器读数表、避障测试日志</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">7</span>
+                    <span class="day-theme">AI全栈控制台</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>从 AI 全栈开发工程师视角拆分前端页面、接口协议、通信网关、机器人固件和数据日志。</li>
+                    <li>定义控制端需求：按钮、摇杆、状态灯、摄像头区域、日志面板、急停和错误提示。</li>
+                    <li>设计 MQTT/WebSocket Topic、JSON 字段、单位、取值范围和安全回退。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>用 Vibe Coding 生成 HTML/CSS/JavaScript 控制网页，学生检查交互和状态反馈。</li>
+                    <li>把网页和物理底盘通过 MQTT/Wi-Fi 打通，记录延迟、丢包和异常动作。</li>
+                    <li>补齐接口文档和安全停机规则。</li>
+                  </ul>
+                </td>
+                <td class="tool">HTML / CSS / JavaScript / MQTT.js / WebSocket / Chrome DevTools</td>
+                <td class="deliverable">控制网页源码、接口说明、无线控制演示、延迟与丢包测试表</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">8</span>
+                    <span class="day-theme">视觉语音与AI动作协议</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>学习 VLM、YOLO、语音输入和本地摄像头在机器人里的真实作用。</li>
+                    <li>把“帮我去门口”“看到红色障碍物停下”等自然语言任务改写成机器人可执行的动作 JSON。</li>
+                    <li>规定安全边界：最大速度、禁止动作、失败回退、断网策略和人工接管。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>跑通“语音/文本/画面输入 → AI 解析 → JSON 指令 → ESP32 执行”的链路。</li>
+                    <li>用小测试集记录识别准确率、响应延迟、错误动作和人工纠正次数。</li>
+                    <li>把 AI 输出错误的案例写入反例库，作为后续迭代依据。</li>
+                  </ul>
+                </td>
+                <td class="tool">Qwen VLM / DeepSeek-VL / YOLO / MaixCAM-Pro / Web Speech API / MQTT</td>
+                <td class="deliverable">动作 JSON 协议、VLM Prompt、端云控制代码、准确率和延迟测试表</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">9</span>
+                    <span class="day-theme">数据面板与数字孪生</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>把数字孪生定义为“可观察、可调试、可解释”的数据面板，而不是炫技动画。</li>
+                    <li>学习坐标系、比例尺、位姿、速度、传感器数据和时间戳的基本关系。</li>
+                    <li>让 AI 生成 Three.js 场景草案，学生校准模型比例和场地坐标。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>把物理车速度、姿态、传感器读数同步到网页。</li>
+                    <li>用图表展示测试数据，定位延迟、漂移和异常点。</li>
+                    <li>实现网页目标点或滑块反向控制实体车，完成虚实联动演示。</li>
+                  </ul>
+                </td>
+                <td class="tool">Three.js / Chart.js / WebSocket / MQTT / 遥测 Agent</td>
+                <td class="deliverable">数字孪生网页、遥测数据日志、虚实联动协议、异常数据分析页</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">10</span>
+                    <span class="day-theme">路径任务与场景验证</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>围绕 Day 1 选定场景设计可执行任务，例如校园巡检、定点配送、AI 导览或无障碍辅助。</li>
+                    <li>画出简化场地地图、关键点、障碍物、任务路线和失败条件。</li>
+                    <li>对比手动控制、规则路径、AI 规划三种方案的优缺点。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>跑通 1 条完整任务链：发出任务、执行路线、避开障碍、记录结果、回到初始状态。</li>
+                    <li>做 5-10 次重复测试，统计成功率、平均耗时、失败原因和改进项。</li>
+                    <li>根据测试数据调整结构、速度、避障阈值或交互提示。</li>
+                  </ul>
+                </td>
+                <td class="tool">OpenCV / YOLO / MQTT / 测试场地 / 飞书表格</td>
+                <td class="deliverable">场景任务脚本、路径测试报告、成功率统计、最终优化清单</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">11</span>
+                    <span class="day-theme">系统联调与作品集</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>开展全系统压力测试：断网、弱光、障碍物、低电量、线松动、传感器误差和误触发。</li>
+                    <li>建立 Bug 清单，按严重程度排序，先解决会影响安全和演示稳定性的问题。</li>
+                    <li>整理 AI 使用记录，补齐每次 Prompt、输入 Token、输出 Token、学生修改和验证结果。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>整理 README、系统架构图、BOM、代码注释、测试报告、演示视频脚本和路演 PPT。</li>
+                    <li>完成个人 AI 助手 Skill 文档，说明角色、输入输出、能力边界、禁用行为和验证规则。</li>
+                    <li>准备离线演示方案，确保没有网络或 AI 服务时仍能展示核心功能。</li>
+                  </ul>
+                </td>
+                <td class="tool">Git / GitHub / Markdown / 飞书文档 / 剪映 / Token 记录表</td>
+                <td class="deliverable">开源仓库、技术报告、AI 协作与 Token 记录、个人 Skill、3 分钟演示视频</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="day">
+                    <span class="day-number">12</span>
+                    <span class="day-theme">路演答辩与后续路径</span>
+                  </div>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>进行“5 分钟技术路演 + 5 分钟 Q&A”：问题、方案、架构、实测数据、失败与改进。</li>
+                    <li>现场演示实物机器人、网页控制台、AI 指令链路和数字孪生数据面板。</li>
+                    <li>评审查看代码仓库、Prompt/Token 记录、测试报告和学生个人贡献说明。</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="cell-list">
+                    <li>进行企业参访或工程师讲座，了解机器人、智能制造和 AI 全栈岗位的真实分工。</li>
+                    <li>给出后续迭代建议：校内创新项目、Maker/Hackathon、白名单赛事、科研启蒙或作品集整理。</li>
+                    <li>完成个人复盘：AI 帮了什么、AI 没帮上什么、自己下一步要补什么。</li>
+                  </ul>
+                </td>
+                <td class="tool">路演 PPT / 实物场地 / 评估量表 / 开源仓库 / 演示视频</td>
+                <td class="deliverable">答辩视频、项目评估报告、后续迭代清单、结营证书、可带走机器人</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">
+        senior.html / SophiGo AI Native Mobile Robot Course / 高中组课程方案
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

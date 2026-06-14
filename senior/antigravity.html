@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高中人工智能与通用技术融合课程：AI具身智能与车联网数字孪生工程实践方案</title>
+    <meta name="description" content="北京师范大学创新教育研究中心 & 宁波诺丁汉大学数字制造实验室联合开发，面向高一、高二科创特长生的融合创新课程方案。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0814;
+            --bg-secondary: #120e25;
+            --bg-tertiary: #191433;
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-secondary: #a855f7; /* Purple */
+            --accent-tertiary: #06b6d4; /* Cyan */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dark: #0f172a;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glow-indigo: rgba(99, 102, 241, 0.15);
+            --glow-purple: rgba(168, 85, 247, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Header / Hero Section */
+        .header {
+            background: radial-gradient(circle at 50% 30%, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header-policy-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #d8b4fe;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.25;
+            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 70%, #d8b4fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 12px;
+            font-weight: 300;
+        }
+
+        .header .joint-institutions {
+            font-size: 0.95rem;
+            color: var(--accent-tertiary);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header .meta-item span {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            border-color: var(--accent-primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(18, 14, 37, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+
+        .nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 18px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--text-main);
+            border-bottom-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Content Area */
+        .content {
+            padding: 60px;
+        }
+
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-tertiary);
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* Policy-focused callouts */
+        .policy-quote {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
+            border-left: 4px solid var(--accent-primary);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .policy-quote h4 {
+            color: #ffffff;
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .policy-quote p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Card grids */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, transparent);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .glass-card:hover::before {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .glass-card h4 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .glass-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-muted);
+        }
+
+        .glass-card .icon-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(99, 102, 241, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Timeline styles */
+        .timeline {
+            position: relative;
+            padding-left: 35px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 3px solid var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 10px var(--accent-secondary);
+        }
+
+        .timeline-item h4 {
+            margin: 0 0 10px;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* 12-Day Interactive Syllabus Tabs */
+        .tabs-container {
+            margin: 40px 0;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .tabs-header {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-muted);
+            padding: 20px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-tertiary);
+            border-bottom-color: var(--accent-tertiary);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Day Outline Table inside Tabs */
+        .day-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.92rem;
+        }
+
+        .day-table th {
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 14px 18px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .day-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: top;
+            color: var(--text-muted);
+        }
+
+        .day-table tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: var(--text-main);
+        }
+
+        .day-table strong {
+            color: #ffffff;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+
+        .tag-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .tag-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tag-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .tag-cyan { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+        .day-highlight {
+            font-weight: 700;
+            color: var(--accent-tertiary) !important;
+            font-size: 1.1rem;
+        }
+
+        /* Evaluation Table styling */
+        .assessment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .assessment-table th {
+            background: rgba(99, 102, 241, 0.1);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 2px solid var(--accent-primary);
+        }
+
+        .assessment-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.93rem;
+        }
+
+        .assessment-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .assessment-table tr:hover td {
+            background: rgba(99, 102, 241, 0.03);
+            color: var(--text-main);
+        }
+
+        /* Comparison Table styling */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            padding: 16px 20px;
+            font-weight: 600;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th.jhs {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+        }
+
+        .comparison-table th.shs {
+            background: rgba(168, 85, 247, 0.1);
+            color: #c084fc;
+        }
+
+        .comparison-table th.dim {
+            background: rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+        }
+
+        .comparison-table td {
+            padding: 16px 20px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            vertical-align: top;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255,255,255,0.01);
+            color: var(--text-main);
+        }
+
+        .comparison-table .dim-label {
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        .footer {
+            background: #07050e;
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer p {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .footer .license {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* Print styling rules */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                background: #ffffff !important;
+            }
+
+            .header {
+                background: none !important;
+                padding: 30px 0 !important;
+                border-bottom: 2px solid #000000 !important;
+            }
+
+            .header h1 {
+                background: none !important;
+                -webkit-text-fill-color: initial !important;
+                color: #000000 !important;
+            }
+
+            .header-policy-badge {
+                border: 1px solid #000000 !important;
+                color: #000000 !important;
+                box-shadow: none !important;
+            }
+
+            .nav {
+                display: none !important;
+            }
+
+            .content {
+                padding: 20px 0 !important;
+            }
+
+            section {
+                page-break-inside: avoid;
+                margin-bottom: 40px !important;
+            }
+
+            h2 {
+                color: #000000 !important;
+                border-bottom: 2px solid #000000 !important;
+            }
+
+            h2::after {
+                display: none;
+            }
+
+            h3, h4 {
+                color: #000000 !important;
+            }
+
+            p {
+                color: #222222 !important;
+            }
+
+            .policy-quote {
+                background: none !important;
+                border: 1px solid #999 !important;
+                color: #000000 !important;
+                box-shadow: none !important;
+            }
+
+            .glass-card {
+                background: none !important;
+                border: 1px solid #999 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            .glass-card:hover {
+                transform: none !important;
+            }
+
+            .tabs-header {
+                display: none !important;
+            }
+
+            .tab-content {
+                display: block !important;
+                padding: 0 !important;
+                margin-bottom: 30px;
+                page-break-inside: avoid;
+            }
+
+            .day-table, .assessment-table, .comparison-table {
+                font-size: 0.85rem !important;
+            }
+
+            .day-table td, .assessment-table td, .comparison-table td {
+                color: #111111 !important;
+                border: 1px solid #999999 !important;
+            }
+
+            .day-table th, .assessment-table th, .comparison-table th {
+                background: #eaeaea !important;
+                color: #000000 !important;
+                border: 1px solid #999999 !important;
+            }
+
+            .tag {
+                background: none !important;
+                color: #000000 !important;
+                border: 1px solid #000000 !important;
+            }
+
+            .footer {
+                background: none !important;
+                color: #555555 !important;
+                border-top: 1px solid #000000 !important;
+            }
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .header {
+                padding: 50px 20px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .content {
+                padding: 25px;
+            }
+            .nav a {
+                padding: 14px 16px;
+                font-size: 0.8rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+            .tab-btn {
+                padding: 15px 10px;
+                font-size: 0.85rem;
+            }
+            .day-table th, .day-table td {
+                padding: 10px;
+            }
+            .day-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ============ HEADER / HERO ============ -->
+    <div class="header">
+        <div class="header-policy-badge">高中通用技术与信息技术融合性选修课程标准样板</div>
+        <h1>AI 具身智能与车联网数字孪生工程实践</h1>
+        <div class="subtitle">面向普通高中高素质科创后备人才的 12 天项目制课程（PBL）顶层设计方案</div>
+        <div class="joint-institutions">北京师范大学创新教育研究中心 &amp; 宁波诺丁汉大学数字制造实验室 联合开发</div>
+        
+        <div class="meta">
+            <div class="meta-item">版本：<span>V3.0 (高规格重塑版)</span></div>
+            <div class="meta-item">适用阶段：<span>普通高中（高一/高二特长班、强基计划后备梯队）</span></div>
+            <div class="meta-item">时数：<span>12天 (96学时)</span></div>
+            <div class="meta-item">技术范式：<span>新工科贯通培养 / 数实融合 / 群体智能</span></div>
+        </div>
+
+        <div class="badge-row">
+            <span class="badge">V模型工程设计</span>
+            <span class="badge">数字孪生(Digital Twin)</span>
+            <span class="badge">车联网与V2X通信</span>
+            <span class="badge">工业级CAN总线</span>
+            <span class="badge">学术合规性审计</span>
+            <span class="badge">高校强基/综评对接</span>
+        </div>
+    </div>
+
+    <!-- ============ STICKY NAV ============ -->
+    <nav class="nav" id="topNav">
+        <a href="#intro">政策背景</a>
+        <a href="#philosophy">核心理念</a>
+        <a href="#overview">课程总览</a>
+        <a href="#syllabus">12天课程大纲</a>
+        <a href="#assessment">评估体系</a>
+        <a href="#comparison">初高中学术鸿沟</a>
+    </nav>
+
+    <!-- ============ CONTENT ============ -->
+    <div class="content">
+
+        <!-- ===== Section 1: 政策背景 ===== -->
+        <section id="intro">
+            <h2>课程背景</h2>
+            
+            <p>2026年，以通用人工智能（AGI）和具身智能（Embodied AI）为核心的新一轮科技革命正全方位重塑工业生态。教育部等十八部门联合印发的《关于加强新时代中小学科学教育工作的意见》明确指出，要在教育双减中做好科学教育加法，一体化推进教育、科技、人才协同发展。高中阶段作为创新思维形成、工程认知深化和拔尖创新人才甄别的黄金窗口期，面临着课程内容升级的迫切需求。</p>
+            
+            <div class="policy-quote">
+                <h4>国家课程标准与拔尖人才战略的呼应</h4>
+                <p>“当前普通高中的信息技术与通用技术教育正从传统的‘离散技术工具体验’向‘系统工程认知与多学科整合’转化。高中课程需要提供具备真实工业级约束和前沿科研范式的实训载体，以对接高校强基计划和综合评价招生的拔尖人才选拔需求。” —— 创新教育课题组政策建言</p>
+            </div>
+
+            <p>本课程方案立足于**通用技术**与**信息技术**的深度交叉领域，以自主移动机器人为实体承载，前瞻性引入了<strong>工程认知、数字孪生、车联网（IoV）</strong>三大核心增量，旨在探索出一条适合我国高中阶段科技创新实验室、科创特长班的高端科技教育落地路径。</p>
+            
+            <div class="grid-cards">
+                <div class="glass-card">
+                    <div class="icon-placeholder">01</div>
+                    <h4>车联网（IoV）的协同价值</h4>
+                    <p>将单机智能的“个体闭环”提升至分布式网络协同的“群体智能”。通过构建车对车（V2V）、车对基础设施（V2I）通信，使学生理解分布式系统、网络协议与交通智能调度的底层逻辑，培育面向智能网联汽车时代的战略视野。</p>
+                </div>
+                <div class="glass-card">
+                    <div class="icon-placeholder">02</div>
+                    <h4>数字孪生（Digital Twin）</h4>
+                    <p>打破物理与数字世界的绝对藩篱。利用WebGL与高频网关建立实体机器人与虚拟仿真实体的1:1双向毫秒级映射，教导学生在“虚拟沙盒”中模拟计算、验证算法，再将其部署至物理实体的现代工业开发方法。</p>
+                </div>
+                <div class="glass-card">
+                    <div class="icon-placeholder">03</div>
+                    <h4>系统工程与工程认知</h4>
+                    <p>克服以往科创教育“无视约束、只求跑通”的局限。引导学生认知工业制造中的DFM（为制造而设计）规范、BOM成本优化和FMEA（失效模式与效应分析），在真实约束（如摩擦力、信号延迟、功耗及财务支出）中进行系统级折衷决策。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Section 2: 核心理念 ===== -->
+        <section id="philosophy">
+            <h2>课程理念</h2>
+            <p>本课程围绕“系统工程认知与数实融通”的逻辑展开，彻底抛弃传统的线性讲授路径，构建以学生为创新主体的五大教学主轴：</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>1. 遵循系统工程的“V模型”研发全周期</h4>
+                    <p>课程设计严格对接工业界标准的“V模型”开发范式。学生从顶层PRD（产品需求文档）定义与系统架构拓扑设计出发（Top-Down），历经参数化三维设计、运动学正逆解推导、工业CAN总线构建、虚拟仿真验证，最终在物理实体上集成联调，完成自底向上的层层验证（Bottom-Up）。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2. “以虚控实，以实证虚”的数实孪生方法论</h4>
+                    <p>数字空间不仅是可视化的仪表盘，更是高效率的安全验证沙盒。学生利用物理引擎（Cannon.js）在虚拟场景中进行极限速度、边界碰撞测试，排除潜在硬件损坏风险；再通过高频遥测（Telemetry）协议，实现物理实体运动数据实时反驱数字模型，体悟现代工业“数实一体”的演进路线。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>3. V2X（Vehicle-to-Everything）车联网分布式决策</h4>
+                    <p>机器人不是孤立的信息孤岛。引入基于MQTT/EMQX云端中继的广域网络通信架构，要求学生在微秒级通信约束下，设计车队队列控制（Platooning）算法与分布式一致性协议，理解宏观群体智能行为如何由微观通信报文规则所决定。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>4. 真实约束条件下的“折衷（Trade-off）”辩证思维</h4>
+                    <p>培养学生严谨的工程科学素养。不提供唯一标准件和绝对化方案，学生必须在“机械刚度与自重”、“总线速率与数据稳定性”、“电机性能与BOM预算成本”等冲突指标中，进行定量计算与系统折衷，寻找特定应用场景下的最佳工程平衡点。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>5. AI原生开发（AI-Native）与专家智能体流程编排</h4>
+                    <p>在全栈Vibe Coding开发流程中，AI的角色由初中阶段的代码生成工具，升级为具备特定工程职能（如结构拓扑Agent、控制算法Agent、Telemetry中继Agent）的协作专家团队。学生充当“总架构师”，定义人机协同流程并执行白盒代码核验，确保学术合规性与可追溯性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Section 3: 课程总览 ===== -->
+        <section id="overview">
+            <h2>课程总览</h2>
+            
+            <p>本课程以“完成一组支持数字孪生同步与网络协同的物理车联网移动底盘系统”为贯穿项目，将信息技术的核心算法与通用技术的物理物化紧密粘合。课程的核心技术栈、硬件平台及学习成果输出指标如下：</p>
+
+            <div class="grid-cards">
+                <div class="glass-card">
+                    <h4>课程定位与目标</h4>
+                    <p>培养具备跨学科工程思维的复合型青年科学家。学生将系统学习麦克纳姆轮运动学推导、CAN差分通信总线、V2X网络架构、数字孪生双向映射与FMEA容错决策，培养面向强基评价和学术论文转化的深层素养。</p>
+                </div>
+                <div class="glass-card">
+                    <h4>硬件平台：SophiCar Pro</h4>
+                    <p>提供支持工业级总线的AI具身实训底座：采用ESP32-S3双核控制核心，板载CAN通信控制器，4路大功率编码器直流减速电机，六轴高精度IMU，超声波防撞阵列，外置 MaixCAM-Pro 本地NPU视觉计算单元。</p>
+                </div>
+                <div class="glass-card">
+                    <h4>软件技术栈与工具链</h4>
+                    <p>Fusion 360 (CAD/参数化脚本), VSCode, WebGL/Three.js 3D渲染引擎, Cannon.js 物理引擎, EMQX 云端 MQTT 代理, Git/GitHub 版本控制系统, C++/Python 混合编程。</p>
+                </div>
+            </div>
+
+            <div class="policy-quote" style="border-left-color: var(--accent-tertiary);">
+                <h4>多学科知识图谱融合（STEAM Matrix）</h4>
+                <p><strong>数学</strong>（运动学逆解逆矩阵、卡尔曼滤波、三维空间矩阵变换） ｜ <strong>计算机科学</strong>（有限状态机、WebSocket全双工通信、MQTT网络路由、异步编程） ｜ <strong>电子工程</strong>（CAN总线电气特性、示波器差分信号捕获、电源冗余管理） ｜ <strong>通用技术与制造</strong>（参数化DFM设计、力学应力拓扑结构优化、供应链BOM管理）。</p>
+            </div>
+        </section>
+
+        <!-- ===== Section 4: 课程大纲 ===== -->
+        <section id="syllabus">
+            <h2>12天详细课程大纲</h2>
+            <p>12天的项目开发流程分为四个能力进阶阶段。请选择下方标签页查看对应阶段的每日教学重点、学生决策点与学术产出物：</p>
+
+            <div class="tabs-container">
+                <!-- Tabs Navigation -->
+                <div class="tabs-header" id="syllabusTabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'phase1')">第一阶段：工程认知与产品定义 (D1-D3)</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'phase2')">第二阶段：嵌入式控制与数字孪生 (D4-D7)</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'phase3')">第三阶段：车联网（IoV）与协同智能 (D8-D9)</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'phase4')">第四阶段：系统联调与学术级交付 (D10-D12)</button>
+                </div>
+
+                <!-- Phase 1 Content -->
+                <div id="phase1" class="tab-content active">
+                    <h4 style="margin-top:0;">第一阶段：工程认知与产品定义 (D1-D3) ——— 贯穿框架：V模型系统需求与参数化制造</h4>
+                    <p>在此阶段，学生将从需求和政策导向切入，学习工业级产品需求文档（PRD）撰写，完成参数化机构设计与供应链核算，建立可追溯的Git开源仓库。</p>
+                    
+                                                            <table class="day-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">天数</th>
+                                <th style="width: 15%;">核心主题</th>
+                                <th style="width: 45%;">教学要点与实践内容</th>
+                                <th style="width: 15%;">工具链与协议</th>
+                                <th style="width: 17%;">学术型产出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="day-highlight">D1</td>
+                                <td><strong>需求与车联网场景</strong></td>
+                                <td>
+                                    <strong>上午：问题挖掘与前沿引入</strong><br>
+                                    - 新工科教育、FabLab造物方法与车联网V2X（车路云一体化）行业前沿引入。<br>
+                                    - 学生围绕联合国 SDGs 自主定义10个真实物流或交通问题。<br>
+                                    <strong>下午：商业可行性与定义</strong><br>
+                                    - 双人精锐组组建，建立飞书看板项目分解。<br>
+                                    - 针对选定场景（如智能园区无人物流、车路协同避障）定义技术边界与指标。<br>
+                                    - AI辅助编写商业可行性分析，完成PRD v0.1及技术可行性拓扑图。
+                                </td>
+                                <td>DeepSeek / Qwen / Kimi / 专利检索 / 飞书看板</td>
+                                <td>高级PRD v0.1、V2X应用场景地图、竞品与专利分析报告</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D2</td>
+                                <td><strong>Prompt与网络拓扑</strong></td>
+                                <td>
+                                    <strong>上午：系统架构与报文协议</strong><br>
+                                    - 建立Prompt Ops标准框架（角色、上下文、约束、Schema与回退方式）。<br>
+                                    - 将车载主控、云端大脑、数字孪生及路侧传感器拆解为九维专家Agent任务树。<br>
+                                    - 分析并设计“端-网-云-物理仿真-路侧协同”车联网拓扑系统图，评估网络延迟。<br>
+                                    <strong>下午：静态网页与版本控制</strong><br>
+                                    - 确认 PRD v1.0，初始化 GitHub/Gitee 仓库，建立规范 Commit 留痕政策。<br>
+                                    - AI 辅助编写项目展示网页，预留 WebGL 3D 视窗（Three.js）和遥测监听占位符。
+                                </td>
+                                <td>VSCode / GitHub / Gitee / Three.js / Chrome DevTools</td>
+                                <td>项目展示网页、IoV技术拓扑图、GitHub仓库脚手架、首次Git Commit</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D3</td>
+                                <td><strong>参数化结构设计</strong></td>
+                                <td>
+                                    <strong>上午：设计规范与空间约束</strong><br>
+                                    - 实验室安全培训与工业级CMF与DFM规范学习。<br>
+                                    - 理解车辆结构刚度、重心高低对PID控制的影响，评估传感器视场（FoV）及走线空间约束。<br>
+                                    <strong>下午：建模打样与拼装</strong><br>
+                                    - 通过 sophicar.com 与 Fusion 360 网页端进行参数化设计。<br>
+                                    - 利用 AI 辅助编写 API 脚本，实现底盘 3D 机械模型算法自动生成与装配。<br>
+                                    - 方案终审，使用 FDM 3D打印/激光切割加工物理底盘件并拼装样机。
+                                </td>
+                                <td>sophicar.com / Fusion 360 / Tripo 3D / 3D打印机 / 激光切割机</td>
+                                <td>底盘设计图（.stl/.step）、结构分析报告、第一版物理车身</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Phase 2 Content -->
+                <div id="phase2" class="tab-content">
+                    <h4 style="margin-top:0;">第二阶段：嵌入式控制与数字孪生 (D4-D7) ——— 贯穿框架：物理计算与数实双向映射</h4>
+                    <p>此阶段为课程的核心技术深水区，学生将自主进行运动学雅可比矩阵推导，打通工业级CAN总线通信，并在浏览器端搭建基于Three.js+Cannon.js的3D数字孪生物理沙盒，实现Telemetry双向高频映射。</p>
+                    
+                                                            <table class="day-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">天数</th>
+                                <th style="width: 15%;">核心主题</th>
+                                <th style="width: 45%;">教学要点与实践内容</th>
+                                <th style="width: 15%;">工具链与协议</th>
+                                <th style="width: 17%;">学术型产出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="day-highlight">D4</td>
+                                <td><strong>数字制造与BOM</strong></td>
+                                <td>
+                                    <strong>上午：制造工艺优化</strong><br>
+                                    - 制造 Agent 根据 CAD 文件生成分层切片工艺参数，识别悬空及应力集中区域。<br>
+                                    - 理解物理装配公差与加工热偏差的 AI 修正策略。<br>
+                                    <strong>下午：供应链物料优化</strong><br>
+                                    - 物理打样装配底盘与支架，记录加工偏差。<br>
+                                    - 利用 AI BOM Agent 对物料清单（BOM）进行成本核算与价格优化，分析替代芯片并定型装配。
+                                </td>
+                                <td>Cura / PrusaSlicer / BOM 优化 Agent / 供应链平台</td>
+                                <td>物料BOM表、制造工艺日志、加工偏差记录、供应链优化报告</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D5</td>
+                                <td><strong>运动控制与动力学</strong></td>
+                                <td>
+                                    <strong>上午：引脚配置与动力学</strong><br>
+                                    - 深入分析 ESP32-S3 及算能 Duo 控制板引脚分配与电路保护。<br>
+                                    - 推导麦克纳姆轮/双轮差速底盘的速度与角速度映射矩阵（雅可比矩阵），建立白盒运动学反解模型。<br>
+                                    <strong>下午：虚拟仿真与底层控制</strong><br>
+                                    - AI协助生成控制 C++/Python 固件，在 Wokwi 虚拟仿真平台跑通运动闭环并进行接线验证。<br>
+                                    - 随后烧录至物理底盘，完成高精度移动速度与转向偏角校准（Sim-to-Real）。
+                                </td>
+                                <td>ESP32-S3 / Wokwi / VSCode / 万用表 / 示波器</td>
+                                <td>底层控制固件、运动学逆解推导文档、Wokwi在线接线模型</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D6</td>
+                                <td><strong>车载总线与传感融合</strong></td>
+                                <td>
+                                    <strong>上午：总线通信与有限状态机</strong><br>
+                                    - 分析车载 CAN 总线与 UART 串口协议。<br>
+                                    - 使用状态机（FSM）构建机器人状态流转逻辑（IDLE、MANUAL、AUTO、AVOID、IoV-DISPATCH、ERROR）。<br>
+                                    <strong>下午：线束收纳与传感滤波</strong><br>
+                                    - 打通ESP32与电机驱动、主控摄像头（MaixCAM-Pro）及传感器通信并进行理线收纳。<br>
+                                    - 利用卡尔曼滤波/互补滤波处理IMU陀螺仪漂移与编码器累计误差，实现位姿解算。
+                                </td>
+                                <td>CAN总线模块 / MaixCAM-Pro / IMU / 编码器 / 逻辑分析仪</td>
+                                <td>CAN协议Schema定义、FSM状态图、位姿算法代码、无飞线整机原型</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D7</td>
+                                <td><strong>网页长连接与通信桥接</strong></td>
+                                <td>
+                                    <strong>上午：车联网通信交互设计</strong><br>
+                                    - 对比 MQTT、WebSockets 与 HTTP 通信时延与带宽开销。<br>
+                                    - 针对车联网设计数据上报 Topic 命名树与 JSON 数据交互Schema规范。<br>
+                                    <strong>下午：控制端全栈 Vibe Coding</strong><br>
+                                    - 通过 Vibe Coding 编写前端 HTML5/WebSocket 控制网页（含流媒体视窗、遥测仪表盘）。<br>
+                                    - 配置 MQTT Broker 并与物理小车桥接，实现车-云-网页全链路低时延长连接。
+                                </td>
+                                <td>HTML5 / JS / MQTT.js / WebSocket / EMQX Broker</td>
+                                <td>控制网页源码、MQTT Topic 交互协议书、无线控制演示系统</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Phase 3 Content -->
+                <div id="phase3" class="tab-content">
+                    <h4 style="margin-top:0;">第三阶段：车联网（IoV）与协同智能 (D8-D9) ——— 贯穿框架：分布式V2X通信与群体智能算法</h4>
+                    <p>此阶段引入车联网（IoV）增量，学生将把视角从单一的机器人控制拓展到分布式的智能网络架构，在公有云部署MQTT代理，编写多车协同队列跟随（Platooning）算法与避障调度策略。</p>
+                    
+                                                            <table class="day-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">天数</th>
+                                <th style="width: 15%;">核心主题</th>
+                                <th style="width: 45%;">教学要点与实践内容</th>
+                                <th style="width: 15%;">工具链与协议</th>
+                                <th style="width: 17%;">学术型产出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="day-highlight">D8</td>
+                                <td><strong>具身智能云边协同</strong></td>
+                                <td>
+                                    <strong>上午：云端大模型推理</strong><br>
+                                    - 学习视觉语言模型（Qwen VLM / DeepSeek-VL）和 YOLO 检测。<br>
+                                    - 设计“云端 VLM 决策 - 边缘视觉提取定位 - 底层 ESP32 运动”多 Agent 协作回路。<br>
+                                    <strong>下午：多模态多智能体联调</strong><br>
+                                    - 编写脚本跑通“小车摄像头捕获 ➔ 上传云端 VLM ➔ 大模型解算意图并下发动作 JSON ➔ ESP32 解析执行”，测试响应时延。
+                                </td>
+                                <td>Qwen VLM / DeepSeek-VL / YOLO v8 / MaixCAM-Pro / MQTT</td>
+                                <td>VLM系统Prompt模板、JSON动作原语指令集、云边协同代码、延迟分析表</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D9</td>
+                                <td><strong>WebGL数字孪生</strong></td>
+                                <td>
+                                    <strong>上午：三维虚拟建模</strong><br>
+                                    - 学习数字孪生同步机理。在网页端基于 Three.js 搭建 1:1 虚拟场地，加载高精度 3D 小车模型。<br>
+                                    <strong>下午：虚实联动与碰撞仿真</strong><br>
+                                    - 实现物理车状态（IMU与编码器）向 3D 孪生车的高频 WebSocket 同步（Physical-to-Virtual）与反向控制（Virtual-to-Physical）。<br>
+                                    - 引入 Cannon.js 实现碰撞盒物理仿真与碰撞校验。
+                                </td>
+                                <td>Three.js / Cannon.js / WebSocket / 遥测 Agent</td>
+                                <td>Web 3D数字孪生控制台代码、双向联动协议、虚实碰撞测试报告</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Phase 4 Content -->
+                <div id="phase4" class="tab-content">
+                    <h4 style="margin-top:0;">第四阶段：系统联调与学术级交付 (D10-D12) ——— 贯穿框架：FMEA失效分析与开源合规性审计</h4>
+                    <p>此阶段聚焦于工程的严肃性与交付的学术性。学生需建立故障降级应急响应方案，接受Git Commit技术源头可追溯性审计，汇编AI使用日志，并进行面向知名高校和科研院所学术专家的现场技术答辩与数实协同演示。</p>
+                    
+                                                            <table class="day-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">天数</th>
+                                <th style="width: 15%;">核心主题</th>
+                                <th style="width: 45%;">教学要点与实践内容</th>
+                                <th style="width: 15%;">工具链与协议</th>
+                                <th style="width: 17%;">学术型产出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="day-highlight">D10</td>
+                                <td><strong>车路协同与智能调度</strong></td>
+                                <td>
+                                    <strong>上午：路侧感知与路车协同</strong><br>
+                                    - 引入车路协同（V2I）概念。部署智能路侧单元（RSU，由高悬摄像头组成）进行车道线与障碍物感知。<br><br>
+                                    <strong>下午：全局路侧协同调度</strong><br>
+                                    - YOLO 识别 RSU 场景目标并转换为世界坐标。RSU 计算最优路径并通过 MQTT 广播给小车。<br>
+                                    - 联调跑通路端感知调度到小车自主规避的车路协同闭环。
+                                </td>
+                                <td>OpenCV / YOLO / MaixCAM-Pro (RSU 单元) / MQTT广播</td>
+                                <td>RSU路侧协同设计图、全局检测调度脚本、车路协同控制代码、V2I实测日志</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D11</td>
+                                <td><strong>自愈容错与开源发布</strong></td>
+                                <td>
+                                    <strong>上午：系统自愈与视觉校准</strong><br>
+                                    - 编写 MQTT 断网重连保活与硬件看门狗复位固件。进行 HSV 视觉标定防环境光干扰。<br><br>
+                                    <strong>下午：全链路压力测试与发布</strong><br>
+                                    - 进行车-路-网-云-数字孪生 2 小时无故障压力测试，分析丢包率与自愈时延。<br>
+                                    - 整理开源代码仓库与 Gitee/GitHub README 文档，录制3分钟演示视频。
+                                </td>
+                                <td>Git / GitHub / HSV 校准工具 / 压测脚本 / 备份摄像</td>
+                                <td>高容错底层自愈固件、全系统压测与校准报告、GitHub开源规范仓库、3分钟演示视频</td>
+                            </tr>
+                            <tr>
+                                <td class="day-highlight">D12</td>
+                                <td><strong>路演答辩与结营</strong></td>
+                                <td>
+                                    <strong>上午：正式发布与路演</strong><br>
+                                    - 举办发布会，各小组轮流进行“5分钟技术路演 + 5分钟评审团 Q&A”。<br>
+                                    - 演示车路协同与数字孪生双向控制任务，接受专家盲测与评审。<br><br>
+                                    <strong>下午：企业参访与展望</strong><br>
+                                    - 参访本地知名新能源车企、机器人公司真实产线。<br>
+                                    - 结营仪式：颁发联合认证证书，进行赛事与个人作品集延伸指导。
+                                </td>
+                                <td>投影仪 / 路演 PPT / 答辩评估量表</td>
+                                <td>结营技术答辩视频、联合认证结营证书、带走个人专属智能具身移动机器人</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Section 5: 评估体系 ===== -->
+        <section id="assessment">
+            <h2>评估体系</h2>
+            
+            <p>本课程评估指标偏向顶层人才甄别与学术规范，采用**真实性评价（Authentic Assessment）**与**过程性评价（Process-oriented Assessment）**双轨制。考核不以“产品是否能跑通”为唯一指标，而是侧重系统架构深度、工程严谨性与AI协同中的白盒反思意识。</p>
+
+            <table class="assessment-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">评估维度</th>
+                        <th style="width: 12%; text-align: center;">权重</th>
+                        <th style="width: 68%;">工业级评估标准与考量指标</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>系统工程与架构设计</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">20%</td>
+                        <td>考核“端-网-云-孪生”全局拓扑设计的逻辑合理性；V2X车联网网络报文协议（JSON Schema）设计的紧凑性；数字孪生中Web 3D仿真位移姿态数据与物理实体映射的同步精度（时延偏差）。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>算法开发与数学建模</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">20%</td>
+                        <td>考核麦克纳姆轮运动学逆解公式推导的数学正确性（是否具备雅可比矩阵物理机理理解）；车队自适应PID跟随控制算法在非线性摩擦阻力下的收敛速度；多机防碰撞安全制动距离控制逻辑。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工程物化与制造素养</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">20%</td>
+                        <td>CAD参数化设计的参数变量控制；DFM（为制造而设计）设计规范的践行度（如圆角、应力结构优化）；CAN总线高频通信布线的屏蔽干扰水平与高标准接线理线工艺度。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI协作与辩证思考力</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">15%</td>
+                        <td>提示词（Prompt）工程的进阶能力；对大模型输出代码的“白盒剖析”深度（即能准确找出并修改AI代码中的死锁、逻辑缺陷）；AI协作日志记录中对AI采纳或拒绝的判断理由。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>学术诚信与开源表达</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">15%</td>
+                        <td>技术报告是否符合LaTeX/Markdown学术论文排版规范（包含定量图表、数学公式推导）；GitHub开源仓库的目录树是否规范，Git Commit日志是否能够清晰反映代码全生命周期迭代过程。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>商业叙事与路演答辩</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: var(--accent-tertiary);">10%</td>
+                        <td>立项需求对齐联合国SDGs的可行性与社会责任感；路演讲解中逻辑结构严密性与工程图样呈现度；技术答辩（Expert Defense）环节面对评委专业质询的现场分析应变能力。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="policy-quote" style="border-left-color: var(--accent-secondary);">
+                <h4>强制性要求：AI协同透明度审计规范 (AI Transparency Audit)</h4>
+                <p>为防止学术抄袭，保证真实创新：每位学生必须保留完整的“人机对话透明度日志”。该日志详实记录：面对的工程痛点 -> 给大模型发送的Prompt -> 大模型生成的代码/结构 -> 物理世界实验检测发现的问题 -> 学生的修改决策与白盒代码剖析。任何无记录的直接黑盒代码粘贴，在评审中将被实施一票否决。</p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid var(--accent-tertiary);">
+                <h4>出口机制与成果认定 (Talent Progression Pathway)</h4>
+                <ul>
+                    <li style="margin-bottom: 12px; color: var(--text-muted);">
+                        <strong style="color: var(--accent-tertiary);">高校招录综评对接：</strong> 课程最终产出的“学术技术报告”及“过程性AI协同审计日志”可直接作为高中学生综合素质评价平台中的“创新性学习经历/研究性学习报告”佐证材料，为重点高校强基计划与综合评价招生提供实质性支撑。
+                    </li>
+                    <li style="margin-bottom: 12px; color: var(--text-muted);">
+                        <strong style="color: var(--accent-tertiary);">白名单科创竞赛直通：</strong> 12天工程底盘实物及其对应的车联网数字孪生软件系统，可直接报送参加教育部白名单赛事，包括《全国青少年科技创新大赛》、《全国青少年航天创新大赛》以及《AILD智能设计大赛》。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Section 6: 初高中学术鸿沟对比 ===== -->
+        <section id="comparison">
+            <h2>初高中学术鸿沟对比参考</h2>
+            
+            <p>为保证科学教育的层级连贯性与梯队区分度，以下对比清晰界定了初中组（体验探究级）与高中组（工程学术级）在人才培养定位上的差异特征：</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="dim" style="width: 15%;">对比维度</th>
+                        <th class="jhs" style="width: 40%;">初中组：AI机器人产品体验营 (SophiCar Junior)</th>
+                        <th class="shs" style="width: 45%;">高中组：AI具身智能与车联网数字孪生工程营 (SophiCar Pro)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dim-label"><strong>培养定位与目标</strong></td>
+                        <td><strong>体验探究导向</strong><br>以AI做所有事，学生做选型与应用决策；偏向于科普性认知、场景应用与STEAM兴趣萌芽。</td>
+                        <td><strong>系统工程与学术导向</strong><br>AI做基础模块，学生做系统架构、多Agent编排与白盒机理剖析；侧重于算法推导、系统集成与拔尖人才甄别。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>开发范式与语言</strong></td>
+                        <td><strong>图形化与黑盒编译</strong><br>使用Aily Blockly图形化逻辑搭积木，配合Vibe Coding进行零代码Web控制面板构建，重在“快速跑通效果”。</td>
+                        <td><strong>代码编写与白盒反思</strong><br>VSCode下开展C++/Python白盒编程，强调寄存器读写、底层数学运算库调用；自主推导逆运动学并编写CRC32通信校验。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>运动控制机理</strong></td>
+                        <td><strong>基础驱动逻辑</strong><br>通过简单的数字输出（High/Low）和PWM控制直流电机，使用超声波传感器进行单向线性避障逻辑。</td>
+                        <td><strong>雅可比逆解与工业CAN总线</strong><br>建立麦克纳姆轮三维逆运动学矩阵，利用CAN总线高频通信网络驱动多通道差分电机，进行阻抗与噪声分析。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>智能网联层级 (IoV)</strong></td>
+                        <td><strong>单机WiFi直连</strong><br>手机/电脑局域网点对点直连机器人ESP32热点，发送简单文本控制字，无广域路由与多节点交互。</td>
+                        <td><strong>V2X网联与多机协同</strong><br>部署EMQX公有云服务器，在V2X架构下设计多Topic发布订阅，实现多车协同自适应跟随巡航控制（CACC）。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>仿真与映射 (孪生)</strong></td>
+                        <td><strong>基础状态同步</strong><br>通过前端界面滑块（Slider）控制物理电机的运动，侧重于单向的网页控制演示。</td>
+                        <td><strong>双向高频数字孪生</strong><br>结合Three.js 3D视图与Cannon.js物理引擎，实现实体IMU+编码器高频遥测（Telemetry）反驱虚拟世界。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>物化设计与制造</strong></td>
+                        <td><strong>半标准件乐高插接</strong><br>采用统一提供的模块化插接底盘，使用预备好的3D打印外观件，注重外观美化与概念生图。</td>
+                        <td><strong>参数化设计与BOM折衷</strong><br>使用Fusion 360 API参数化定义尺寸，进行DFM（可制造性）约束分析、结构应力评估与供应链BOM优化。</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-label"><strong>技术交付物标准</strong></td>
+                        <td><strong>体验性网页与路演海报</strong><br>产出创意海报与科普讲解视频，技术文档以飞书记录为主，重在表达“创意点和故事”。</td>
+                        <td><strong>LaTeX技术报告与可追溯开源仓库</strong><br>产出严谨的学术论文、符合MIT License的GitHub仓库（规范README）、AI审计对话日志与FMEA失效诊断分析表。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div><!-- /content -->
+
+    <!-- ============ FOOTER ============ -->
+    <div class="footer">
+        <p>本课程设计方案依托于北京师范大学创新教育研究中心联合宁波诺丁汉大学数字制造实验室科研课题设计</p>
+        <p>旨在探索中国新工科教育（New Engineering Education）在K12拔尖创新人才早期贯通培养的落地模式</p>
+        <p>技术支持：SophiLab科创生态开发小组 &nbsp;|&nbsp; 课程总顾问：北京师范大学 &amp; UNNC 课题专家组</p>
+        <p class="license">© 2026 SophiGo Innovative Edu. 本课程方案采用CC BY-NC-SA 4.0协议开源，供中小学校科创实验室、创新中心建设参考</p>
+    </div>
+
+</div>
+
+<!-- JavaScript to handle Interactive Tabs -->
+<script>
+    function switchTab(evt, phaseId) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tab-content" and hide them
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+
+        // Get all elements with class="tab-btn" and remove the class "active"
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(phaseId).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Scroll Spy for sticky navigation
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav a');
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
