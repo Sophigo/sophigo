@@ -267,7 +267,7 @@
   * [Jowywlz](https://nexmaker-fab.github.io/zwu-2026-1-002/)
   * [ZwU-2026-1-003](https://nexmaker-fab.github.io/ZwU-2026-1-003/)
   * [AETHER STUDIO](https://nexmaker-fab.github.io/zwu-2026-1-004/) 
-* [ZWU-interactivesystem 2026A2](class/FAB-2026-ZWU-01.md)
+* [ZWU-interactivesystem 2026A2](class/FAB-2026-ZWU-02.md)
   * [ZWU-2026-2-001](https://nexmaker-fab.github.io/ZWU-2026-2-001/)
   * [V-JESH](https://nexmaker-fab.github.io/ZWU-2026-2-002/)
   * [ZWU-2026-2-003](https://nexmaker-fab.github.io/ZWU-2026-2-003/)

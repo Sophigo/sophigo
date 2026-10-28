@@ -517,7 +517,7 @@ export default [
       },
       {
         "text": "ZWU-interactivesystem 2026A2",
-        "link": "/courses/fab-course/class/FAB-2026-ZWU-01",
+        "link": "/courses/fab-course/class/FAB-2026-ZWU-02",
         "items": [
           {
             "text": "ZWU-2026-2-001",
